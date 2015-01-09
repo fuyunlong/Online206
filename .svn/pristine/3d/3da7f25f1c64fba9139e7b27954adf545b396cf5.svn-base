@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>压力等级</title>
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script type="text/javascript">
+            var objShowPreLevel = {
+                oComm:parent.Common,
+                fnLoad: function () {
+                    $("#OperArea").html("@Html.Raw(ViewBag.OperArea)").click(function (evt) {
+                        var target = evt.target || evt;
+                        if (target.name == "cancel")
+                            parent.Common.layoutClose();
+                        if (target.name == "add")
+                            objShowPreLevel.fnAddPreLevel();
+                    });
+                },
+                fnAddPreLevel: function () {
+                    var json = { Oper: null, ConfigId: null };
+                    json.Oper = PreLevelName.value;
+                    json.ConfigId = PreLevelDesc.value;
+                    if (!json.Oper || json.Oper.length == 0)
+                        return null;
+                    if (!json.ConfigId || json.ConfigId.length == 0)
+                        return null;
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "text",
+                        url: "/PreLevel/AddLevel",
+                        data: json,
+                        error: function (ex) { console.dir(ex); },
+                        success: function (back) { console.dir(back); }
+                    });
+                },
+                fnSetParms: function () {
+                    
+                }
+            };
+            window.onload = objShowPreLevel.fnLoad;
+        </script>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td>压力名称:</td>
+                    <td>
+                        <input type="text" id="PreLevelName" /></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">压力描述:</td>
+                    <td>
+                        <textarea style="width:800px; height:100px;max-height:100px;max-width:800px;" id="PreLevelDesc"></textarea></td>
+                </tr>
+            </table>
+            <div id="OperArea" style="text-align:center;padding:10px 0;"></div>
+        </div>
+    </body>
+</html>

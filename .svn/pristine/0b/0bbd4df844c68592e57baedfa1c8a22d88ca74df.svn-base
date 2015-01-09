@@ -1,0 +1,182 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.ServiceProxy;
+using Com.Winfotian.ServiceProxy.UserService;
+using Proxy;
+using WinfoToolSys.Pms;
+using Winfotian.Permission.Common;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserFeeController : Controller
+    {
+        //用户计费管理页面
+        public ActionResult Index()
+        {
+            List<Proxy.SmsService.T_SMS_Bill> list = new List<Proxy.SmsService.T_SMS_Bill>();
+            try
+            {
+                list = ServcieTool.SmsServiceInstance.GetBillConfigList(PmsMng.StaticKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            ViewBag.FeeList = list;
+            return View();
+        }
+
+        //添加页面
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        //修改页面
+        public ActionResult Edit(string billCode)
+        {
+            List<Proxy.SmsService.T_SMS_Bill> list = new List<Proxy.SmsService.T_SMS_Bill>();
+            try
+            {
+                list = ServcieTool.SmsServiceInstance.GetBillConfigList(PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            var model = (from row in list where row.BillCode == billCode select row).Single();
+            return View(model);
+        }
+
+        //详细页面
+        public ActionResult Detail(string billCode)
+        {
+            List<Proxy.SmsService.T_SMS_Bill> list = new List<Proxy.SmsService.T_SMS_Bill>();
+            try
+            {
+                list = ServcieTool.SmsServiceInstance.GetBillConfigList(PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            var model = (from row in list where row.BillCode == billCode select row).Single();
+            return View(model);
+        }
+
+        //添加方法
+        public string Insert(Proxy.SmsService.T_SMS_Bill model)
+        {
+            string result = "false";
+            string billCode = "" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond;
+            List<Proxy.SmsService.T_SMS_Bill> list = new List<Proxy.SmsService.T_SMS_Bill>();
+            list.Add(new Proxy.SmsService.T_SMS_Bill()
+            {
+                BillCode = billCode,
+                BillName = model.BillName,
+                AlertFee = model.AlertFee,
+                DataFee = model.DataFee,
+                BookFee = model.BookFee,
+                DayMax = model.DayMax,
+                MonthMax = model.MonthMax,
+                OtherFee = model.OtherFee,
+                RptFee = model.RptFee,
+                Status = 1,
+                UpdateFlag = 1,
+                ExtendFee = ""
+            });
+
+            try
+            {
+                if (ServcieTool.SmsServiceInstance.AddBillConfig(PmsMng.ActiveKey, list))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //修改方法
+        public string Update(Proxy.SmsService.T_SMS_Bill model)
+        {
+            string result = "false";
+            Proxy.SmsService.T_SMS_Bill bill = new Proxy.SmsService.T_SMS_Bill();
+            bill.BillCode = model.BillCode;
+            bill.BillName = model.BillName;
+            bill.AlertFee = model.AlertFee;
+            bill.DataFee = model.DataFee;
+            bill.BookFee = model.BookFee;
+            bill.DayMax = model.DayMax;
+            bill.MonthMax = model.MonthMax;
+            bill.OtherFee = model.OtherFee;
+            bill.RptFee = model.RptFee;
+            bill.Status = 1;
+            bill.UpdateFlag = 1;
+            bill.ExtendFee = "";
+
+            try
+            {
+                if (ServcieTool.SmsServiceInstance.UpdateBillConfig(PmsMng.ActiveKey, bill))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //删除分组
+        public string DeleteFee(string billCode)
+        {
+            string result = "false";
+            List<string> list = new List<string>();
+            list.Add(billCode);
+
+            try
+            {
+                int rows = ServcieTool.SmsServiceInstance.DeleteBillConfig(PmsMng.ActiveKey, list);
+                if (rows > 0)
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //获取计费列表
+        public JsonResult GetFeeList()
+        {
+            List<Proxy.SmsService.T_SMS_Bill> list = null;
+            try
+            {
+                list = ServcieTool.SmsServiceInstance.GetBillConfigList(PmsMng.StaticKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (list == null)
+            {
+                list = new List<Proxy.SmsService.T_SMS_Bill>();
+            }
+            return Json(list);
+        }
+    }
+}

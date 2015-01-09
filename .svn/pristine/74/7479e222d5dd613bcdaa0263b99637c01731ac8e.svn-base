@@ -1,0 +1,115 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class FieldInfoController : Controller
+    {
+        //
+        // GET: /FieldInfo/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+        //获取字段信息列表
+        public JsonResult GetFiledList(string Company, string Group, string SiteName)
+        {
+            var list = new List<Com.Winfotian.Model.T_DTU_FieldDesc>();
+            list = new ServiceProxyRead().GetProxy().GetFiledList(PmsMng.ActiveKey, Company, Group, SiteName);
+            return Json(list);
+        }
+        //获取字段信息详细
+        public ActionResult FieldInfoDetail(string Oper, string ComId, string FieldName)
+        {
+            T_DTU_FieldDescEX TE = new T_DTU_FieldDescEX();
+            StringBuilder OperStr = new StringBuilder();
+            try
+            {
+                TE = new ServiceProxyRead().GetProxy().GetFiledById(PmsMng.ActiveKey, ComId, FieldName);
+                switch(Oper)
+                {
+                    case "Show":
+                        TE.Oper = "Show";
+                        break;
+                    case "Edit":
+                        OperStr.Append("<input type='button' class='buttonVer2' value='修改' onclick='FiledMng.EditFiled()' />");
+                        TE.Oper = "Edit";
+                        break;
+                    case "Add":
+                        TE.Oper = "Add";
+                        OperStr.Append(@"""<input type='button' class='buttonVer2' value='添加' onclick='FiledMng.AddFiled()'/>""");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            OperStr.Insert(0, "\"");
+            OperStr.Append("\"");
+            //用户操作按钮
+            ViewBag.Oper = OperStr.ToString();
+            //用户添加配置权限
+            return View(TE);
+        }
+
+        //添加
+        public ActionResult ShowAddFiled(string CompanyId, string Group, string SiteName)
+        {
+            List<T_Dtu_Ex> list = new ServiceProxyRead().GetProxy().GetSite(PmsMng.ActiveKey, CompanyId, Group, SiteName, false);
+            ViewBag.DtuList = list;
+            return View();
+        }
+
+        public string AddFiled(T_DTU_FieldDesc TE)
+        {
+            string rlst = "添加失败";
+            try
+            {
+                if(new ServiceProxyWrite().GetProxy().AddFiled(PmsMng.ActiveKey, PmsMng.LogUser, TE))
+                {
+                    rlst = "添加成功";
+                }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        //编辑
+        public string EditFiled(T_DTU_FieldDesc TE)
+        {
+            string rlst = "修改失败";
+            try
+            {
+                if(new ServiceProxyWrite().GetProxy().EditFiled(Pms.PmsMng.ActiveKey, PmsMng.LogUser, TE))
+                {
+                    rlst = "修改成功";
+                }
+            }
+            catch(Exception ex)
+            {
+
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+    }
+}

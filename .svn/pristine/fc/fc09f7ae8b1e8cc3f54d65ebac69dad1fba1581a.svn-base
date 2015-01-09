@@ -1,0 +1,16 @@
+﻿var RemoteControl = {
+    getControlList: function ()
+    {
+        $.ajax({
+            type: "post",
+            url: "/UserInfo/GetDTUByGroupCode",
+            data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: $("#ddlSite").val() },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) { }
+        });
+    }
+
+}

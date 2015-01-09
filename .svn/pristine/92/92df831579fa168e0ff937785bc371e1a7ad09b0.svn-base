@@ -1,0 +1,319 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class FieldProvider
+    {
+        public List<T_DTU_FieldDesc> GetFiledList(string Company, string Group, string SiteName)
+        {
+            List<T_DTU_FieldDesc> DtuList = new List<T_DTU_FieldDesc>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT  c.*  FROM [Infa]..[T_DTU] as a left join [Infa]..[T_DTU_Group] as b ");
+            SqlStr.Append(" on a.GroupCode=b.GroupCode inner join [Infa]..[T_DTU_FieldDesc] as  c on a.Dtuid=c.Dtuid where 1=1 ");
+            if(Company != "0")
+            {
+                SqlStr.Append(" and b.CompanyId=@CompanyId ");
+            }
+            if(Group != "0")
+            {
+                SqlStr.Append(" and a.GroupCode=@GroupCode ");
+            }
+            if(SiteName.Length > 0)
+            {
+                SqlStr.Append(" and a.DtuidName like   @SiteName   ");
+            }
+            SqlParameter[] pars = { 
+                                new SqlParameter("@CompanyId",Company),
+                                new SqlParameter("@GroupCode",Group),
+                                new SqlParameter("@SiteName","%"+SiteName+"%")
+                                  };
+
+            using(IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+            {
+                while(dr.Read())
+                {
+                    var obj = IDataT_DTU_FieldDescReader(dr);
+                    if(obj != null)
+                    {
+                        DtuList.Add(obj);
+                    }
+                }
+            }
+            return DtuList;
+        }
+
+        private T_DTU_FieldDesc IDataT_DTU_FieldDescReader(IDataReader dr)
+        {
+            T_DTU_FieldDesc model = new T_DTU_FieldDesc();
+            try
+            {
+                model.Id = (dr["Id"] is DBNull) ? 0 : Convert.ToInt32(dr["Id"].ToString());
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.ColName = (dr["ColName"] is DBNull) ? string.Empty : dr["ColName"].ToString();
+                model.FieldName = (dr["FieldName"] is DBNull) ? string.Empty : dr["FieldName"].ToString();
+                model.FieldShortDesc = (dr["FieldShortDesc"] is DBNull) ? string.Empty : dr["FieldShortDesc"].ToString();
+                model.FieldDesc = (dr["FieldDesc"] is DBNull) ? string.Empty : dr["FieldDesc"].ToString();
+                model.FieldUnit = (dr["FieldUnit"] is DBNull) ? string.Empty : dr["FieldUnit"].ToString();
+                model.ValueMin = (dr["ValueMin"] is DBNull) ? 0 : Convert.ToDecimal(dr["ValueMin"].ToString());
+                model.ValueMax = (dr["ValueMax"] is DBNull) ? 0 : Convert.ToDecimal(dr["ValueMax"].ToString());
+                model.Lowlimit = (dr["Lowlimit"] is DBNull) ? 0 : Convert.ToDecimal(dr["Lowlimit"].ToString());
+                model.Highlimit = (dr["Highlimit"] is DBNull) ? 0 : Convert.ToDecimal(dr["Highlimit"].ToString());
+                model.Lololimit = (dr["Lololimit"] is DBNull) ? 0 : Convert.ToDecimal(dr["Lololimit"].ToString());
+                model.Hihilimit = (dr["Hihilimit"] is DBNull) ? 0 : Convert.ToDecimal(dr["Hihilimit"].ToString());
+                model.ValueInOrOut = (dr["ValueInOrOut"] is DBNull) ? 0 : Convert.ToInt32(dr["ValueInOrOut"].ToString());
+                model.IsAlert = (dr["IsAlert"] is DBNull) ? 0 : Convert.ToInt32(dr["IsAlert"].ToString());
+                model.IsCollect = (dr["IsCollect"] is DBNull) ? 0 : Convert.ToInt32(dr["IsCollect"].ToString());
+                model.IsShow = (dr["IsShow"] is DBNull) ? 0 : Convert.ToInt32(dr["IsShow"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+                model.OrderId = (dr["OrderId"] is DBNull) ? 0 : Convert.ToInt32(dr["OrderId"].ToString());
+                model.ParentId = (dr["ParentId"] is DBNull) ? 0 : Convert.ToInt32(dr["ParentId"].ToString());
+                model.KeyValues = (dr["KeyValues"] is DBNull) ? string.Empty : dr["KeyValues"].ToString();
+                model.FieldType = (dr["FieldType"] is DBNull) ? 0 : Convert.ToInt32(dr["FieldType"].ToString());
+            }
+            catch(Exception ex)
+            {
+                //WebLog.WSLogger.Error(ex.Message);//Please add references(log4net.dll)
+                return null;
+            }
+            return model;
+        }
+
+        public T_DTU_FieldDesc GetFiledById(string ID, string FieldName)
+        {
+            T_DTU_FieldDesc td = new T_DTU_FieldDesc();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT   * FROM [Infa]..[T_DTU_FieldDesc] where Dtuid=@Dtuid and FieldName=@FieldName ");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@Dtuid",ID),
+                                  new SqlParameter("@FieldName",FieldName)
+                                  };
+            using(var reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if(reader != null)
+                {
+                    while(reader.Read())
+                    {
+                        var obj = IDataT_DTU_FieldDescReader(reader);
+                        if(obj != null)
+                        {
+                            td = obj;
+                        }
+                    }
+                }
+            }
+            return td;
+        }
+
+
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public int Add(T_DTU_FieldDesc model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into [Infa]..[T_DTU_FieldDesc](");
+            strSql.Append("Dtuid,ColName,FieldName,FieldShortDesc,FieldDesc,FieldUnit,ValueMin,ValueMax,Lowlimit,Highlimit,Lololimit,Hihilimit,ValueInOrOut,IsAlert,IsCollect,IsShow,UpdateFlag,OrderId,ParentId,KeyValues,FieldType)");
+            strSql.Append(" values (");
+            strSql.Append("@Dtuid,@ColName,@FieldName,@FieldShortDesc,@FieldDesc,@FieldUnit,@ValueMin,@ValueMax,@Lowlimit,@Highlimit,@Lololimit,@Hihilimit,@ValueInOrOut,@IsAlert,@IsCollect,@IsShow,@UpdateFlag,@OrderId,@ParentId,@KeyValues,@FieldType)");
+            strSql.Append(";select @@IDENTITY");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@ColName", SqlDbType.VarChar,80),
+					new SqlParameter("@FieldName", SqlDbType.VarChar,30),
+					new SqlParameter("@FieldShortDesc", SqlDbType.VarChar,30),
+					new SqlParameter("@FieldDesc", SqlDbType.NVarChar,50),
+					new SqlParameter("@FieldUnit", SqlDbType.VarChar,30),
+					new SqlParameter("@ValueMin", SqlDbType.Float,8),
+					new SqlParameter("@ValueMax", SqlDbType.Float,8),
+					new SqlParameter("@Lowlimit", SqlDbType.Float,8),
+					new SqlParameter("@Highlimit", SqlDbType.Float,8),
+					new SqlParameter("@Lololimit", SqlDbType.Float,8),
+					new SqlParameter("@Hihilimit", SqlDbType.Float,8),
+					new SqlParameter("@ValueInOrOut", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsAlert", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsCollect", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsShow", SqlDbType.SmallInt,2),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@OrderId", SqlDbType.SmallInt,2),
+					new SqlParameter("@ParentId", SqlDbType.Int,4),
+					new SqlParameter("@KeyValues", SqlDbType.NVarChar,20),
+					new SqlParameter("@FieldType", SqlDbType.SmallInt,2)};
+            parameters[0].Value = model.Dtuid;
+            parameters[1].Value = model.ColName;
+            parameters[2].Value = model.FieldName;
+            parameters[3].Value = model.FieldShortDesc;
+            parameters[4].Value = model.FieldDesc;
+            parameters[5].Value = model.FieldUnit;
+            parameters[6].Value = model.ValueMin;
+            parameters[7].Value = model.ValueMax;
+            parameters[8].Value = model.Lowlimit;
+            parameters[9].Value = model.Highlimit;
+            parameters[10].Value = model.Lololimit;
+            parameters[11].Value = model.Hihilimit;
+            parameters[12].Value = model.ValueInOrOut;
+            parameters[13].Value = model.IsAlert;
+            parameters[14].Value = model.IsCollect;
+            parameters[15].Value = model.IsShow;
+            parameters[16].Value = model.UpdateFlag;
+            parameters[17].Value = model.OrderId;
+            parameters[18].Value = model.ParentId;
+            parameters[19].Value = model.KeyValues;
+            parameters[20].Value = model.FieldType;
+
+            object obj = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if(obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(T_DTU_FieldDesc model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_DTU_FieldDesc] set ");
+            strSql.Append("Dtuid=@Dtuid,");
+            strSql.Append("ColName=@ColName,");
+            strSql.Append("FieldName=@FieldName,");
+            strSql.Append("FieldShortDesc=@FieldShortDesc,");
+            strSql.Append("FieldDesc=@FieldDesc,");
+            strSql.Append("FieldUnit=@FieldUnit,");
+            strSql.Append("ValueMin=@ValueMin,");
+            strSql.Append("ValueMax=@ValueMax,");
+            strSql.Append("Lowlimit=@Lowlimit,");
+            strSql.Append("Highlimit=@Highlimit,");
+            strSql.Append("Lololimit=@Lololimit,");
+            strSql.Append("Hihilimit=@Hihilimit,");
+            strSql.Append("ValueInOrOut=@ValueInOrOut,");
+            strSql.Append("IsAlert=@IsAlert,");
+            strSql.Append("IsCollect=@IsCollect,");
+            strSql.Append("IsShow=@IsShow,");
+            strSql.Append("UpdateFlag=@UpdateFlag,");
+            strSql.Append("OrderId=@OrderId,");
+            strSql.Append("ParentId=@ParentId,");
+            strSql.Append("KeyValues=@KeyValues,");
+            strSql.Append("FieldType=@FieldType");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@ColName", SqlDbType.VarChar,80),
+					new SqlParameter("@FieldName", SqlDbType.VarChar,30),
+					new SqlParameter("@FieldShortDesc", SqlDbType.VarChar,30),
+					new SqlParameter("@FieldDesc", SqlDbType.NVarChar,50),
+					new SqlParameter("@FieldUnit", SqlDbType.VarChar,30),
+					new SqlParameter("@ValueMin", SqlDbType.Float,8),
+					new SqlParameter("@ValueMax", SqlDbType.Float,8),
+					new SqlParameter("@Lowlimit", SqlDbType.Float,8),
+					new SqlParameter("@Highlimit", SqlDbType.Float,8),
+					new SqlParameter("@Lololimit", SqlDbType.Float,8),
+					new SqlParameter("@Hihilimit", SqlDbType.Float,8),
+					new SqlParameter("@ValueInOrOut", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsAlert", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsCollect", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsShow", SqlDbType.SmallInt,2),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@OrderId", SqlDbType.SmallInt,2),
+					new SqlParameter("@ParentId", SqlDbType.Int,4),
+					new SqlParameter("@KeyValues", SqlDbType.NVarChar,20),
+					new SqlParameter("@FieldType", SqlDbType.SmallInt,2),
+					new SqlParameter("@Id", SqlDbType.Int,4)};
+            parameters[0].Value = model.Dtuid;
+            parameters[1].Value = model.ColName;
+            parameters[2].Value = model.FieldName;
+            parameters[3].Value = model.FieldShortDesc;
+            parameters[4].Value = model.FieldDesc;
+            parameters[5].Value = model.FieldUnit;
+            parameters[6].Value = model.ValueMin;
+            parameters[7].Value = model.ValueMax;
+            parameters[8].Value = model.Lowlimit;
+            parameters[9].Value = model.Highlimit;
+            parameters[10].Value = model.Lololimit;
+            parameters[11].Value = model.Hihilimit;
+            parameters[12].Value = model.ValueInOrOut;
+            parameters[13].Value = model.IsAlert;
+            parameters[14].Value = model.IsCollect;
+            parameters[15].Value = model.IsShow;
+            parameters[16].Value = model.UpdateFlag;
+            parameters[17].Value = model.OrderId;
+            parameters[18].Value = model.ParentId;
+            parameters[19].Value = model.KeyValues;
+            parameters[20].Value = model.FieldType;
+            parameters[21].Value = model.Id;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if(rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(int Id)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from [Infa]..[T_DTU_FieldDesc] ");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+};
+            parameters[0].Value = Id;
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if(rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public T_DTU_FieldDesc GetModel(int Id)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,Dtuid,ColName,FieldName,FieldShortDesc,FieldDesc,FieldUnit,ValueMin,ValueMax,Lowlimit,Highlimit,Lololimit,Hihilimit,ValueInOrOut,IsAlert,IsCollect,IsShow,UpdateFlag,OrderId,ParentId,KeyValues,FieldType from [Infa]..[T_DTU_FieldDesc] ");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+};
+            parameters[0].Value = Id;
+
+            T_DTU_FieldDesc model = null;
+            using(IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if(dr.Read())
+                {
+                    model = IDataT_DTU_FieldDescReader(dr);
+                }
+            }
+            return model;
+        }
+
+
+    }
+}

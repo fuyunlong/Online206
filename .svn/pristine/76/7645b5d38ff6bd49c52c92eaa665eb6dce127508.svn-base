@@ -1,0 +1,151 @@
+﻿var Common = {
+    //添加一个tab页面
+    AddTab: function (title, src) {
+        $('#mytab').tabs('add', {
+            title: title,
+            content: " <iframe src=" + src + " width='99%' height='98.5%' over-flow:hidden ></iframe>",
+            closable: true
+        });
+    },
+    //获取城市
+    GetCity: function () {
+        var Str = "";
+        var province = $('#ddlProvice').val() || "";
+        $.ajax({
+            async: false,
+            type: "post",
+            data: "Province=" + province,
+            url: "/company/GetCity",
+            datatype: "json",
+            error: function (xhr) {
+                Common.MsgBox("加载失败，请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option value=" + data[i].CityId + ">" + data[i].CityName + "</option>"
+                }
+                $("#ddlCity").html(Str);
+            }
+        });
+    },
+    //获取省份
+    GetProvince: function () {
+        var Str = "";
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "/Company/GetProvince",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option>" + data[i] + "</option>"
+                }
+                $("#ddlProvice").append(Str);
+            }
+        });
+    },
+    //查询站点
+    SerarchSite: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: $("#SiteName").val() },
+            url: "/SiteInfo/GetSite",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w10pen com_TextCenter com_disnote'>" + data[i].dtu.Dtuid + "</td>";
+                    Str += "<td class='com_w25pen com_TextCenter com_disnote' title='" + data[i].dtu.DtuidName + "'>" + data[i].dtu.DtuidName + "</td><td class=' com_disnote com_TextCenter' title='" + data[i].dtu.Skidbrand + "'>" + data[i].dtu.Skidbrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].dtu.Supplier + "'>" + data[i].dtu.Supplier + "</td><td class=' com_disnote' title='" + data[i].dtu.FlowBrand + "'>" + data[i].dtu.FlowBrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].dtu.FlowType + "'>" + data[i].dtu.FlowType + "</td>";
+                    Str += "<td class='com_TextCenter com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看',0.8,0.8,'ClientInfo/ClientDetail/Show/" + data[i].CompanyId + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改',0.8,0.8,'SiteInfo/SiteDetail/Edit/" + data[i].dtu.Dtuid + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.DeleteCompany(" + data[i].CompanyId + ")>删除|</a> ";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    DeleteCompany: function (ComId) {
+        if (confirm("确定要删除该公司信息？？？")) {
+
+        }
+    },
+    //提示框
+    MsgBox: function (msg, width, height) {
+        $('#dd').dialog({
+            buttons: [{
+                text: 'Ok',
+                iconCls: 'icon-ok',
+                handler: function () {
+                    alert('ok');
+                }
+            }, {
+                text: 'Cancel',
+                handler: function () {
+                    $('#dd').dialog('close');
+                }
+            }]
+        });
+    },
+    //弹出窗体
+    WindowBox: function (title, widthPercent, heightPercent, url) {
+        $("#ifrHTML", parent.document).attr("src", url);
+        $("#meLayout", parent.document).css({ "width": "80%", "height": "80%" }).find(".dialog-header-title").text(title);
+        $('.msbgs', parent.document).show();
+        $('.msbgs .myBG', parent.document).fadeTo("slow", 0.9);
+    },
+    //弹出顶层窗口
+    WinTopBox: function (title, widthPercent, heightPercent, top, left, url) {
+        $("#ifrHTMLTop", parent.document).attr("src", url);
+        $("#WinTop", parent.document).css({ "width": widthPercent, "height": heightPercent, "left": left, "top": top, "z-index": "10010" }).show().find(".dialog-header-title").text(title);
+        $('.myBGTop', parent.document).fadeTo("slow", 0.9).css("z-index", "10009");
+    },
+    //加载所有公司配置信息
+    LoadConfig: function () {
+        $.ajax({
+            type: "POST",
+            url: "/Config/GetConfigList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("查询公司配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<input class='oper' type=checkbox value=" + data[i].ConfigId + ">" + data[i].ConfigName + "<br/>";
+                }
+                $("#divComCoinfig").html(Str);
+            }
+        });
+    },
+    //加载指定公司的配置信息
+    GetCompanyConfig: function (CompanyId) {
+        $.ajax({
+            type: "POST",
+            url: "/Config/GetCompanyConfig",
+            dataType: "json",
+            data: "CompanyId=" + CompanyId,
+            error: function (xhr) {
+                Common.MsgBox("查询当前公司配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++)
+                    for (var j = 0; j < $("#divComCoinfig input[type=checkbox]").length; j++) {
+                        if (data[i].ConfigId == $("#divComCoinfig input[type=checkbox]")[j].value) {
+                            $("#divComCoinfig input[type=checkbox]")[j].checked = true;
+                            continue;
+                        }
+                    }
+            }
+        });
+    }
+}

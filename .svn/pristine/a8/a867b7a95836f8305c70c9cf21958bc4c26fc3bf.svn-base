@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色详细</title>
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <script src="~/Scripts/UserMng/UserRole.js"></script>
+</head>
+<body>
+
+    <div>
+        <table class="ui-com-tabFrm">
+            <tbody>
+                <tr>
+                    <td>角色编号</td>
+                    <td>
+                        <input type="text" id="RoleCode" value="@ViewBag.RoleObj.RoleCode" /></td>
+                    <td>角色名称</td>
+                    <td>
+                        <input type="text" id="RoleName"  value="@ViewBag.RoleObj.RoleName"/></td>
+                </tr>
+                <tr>
+                    <td>角色描述</td>
+                    <td colspan="3">
+                        <textarea id="RoleDesc" style="width:90%; height: 90px;" >@ViewBag.RoleObj.RoleDesc</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td  colspan="4" class="com_TextCenter">
+                       @Html.Raw(ViewBag.Oper)
+                    </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

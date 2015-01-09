@@ -1,0 +1,82 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.ServiceProxy;
+using Com.Winfotian.ServiceProxy.UserService;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserFeeController : Controller
+    {
+        //
+        // GET: /UserFee/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        //根据名称查询
+        public JsonResult GetFeeList(string feeName)
+        {
+            List<T_SMS_Bill> list = UserServiceProxy.GetSMSBillsByName(WinManager.GetPublicIP(), feeName);
+            return Json(list);
+        }
+
+        //详细、修改、添加
+        public ActionResult Operation(string Oper, string ConfigId)
+        {
+            StringBuilder sb = new StringBuilder();
+            //T_SMS_Bill model = UserServiceProxy.get
+
+            switch (Oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='Group.UpdateGroup()' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='Group.AddGroup()' />");
+                    break;
+                default:
+                    break;
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            ViewBag.Button = sb.ToString();
+            return View();
+        }
+
+        //添加
+        public void Add(T_SMS_Bill model)
+        {
+            T_SMS_Bill bill = new T_SMS_Bill();
+            UserServiceProxy.AddSMSBill(WinManager.GetPublicIP(), bill);
+        }
+
+        //修改分组
+        public void Update(T_User_Group model)
+        {
+            T_SMS_Bill bill = new T_SMS_Bill();
+            UserServiceProxy.UpdateSMSBill(WinManager.GetPublicIP(), bill);
+        }
+
+        //删除分组
+        public string Delete(string billCode)
+        {
+            string result = "false";
+            if (UserServiceProxy.DeleteSMSBillById(WinManager.GetPublicIP(), billCode))
+            {
+                result = "true";
+            }
+            return result;
+        }
+    }
+}

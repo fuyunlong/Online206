@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.Service
+{
+    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码和配置文件中的接口名“IWinfoToolServiceWrite”。
+    [ServiceContract]
+    public interface IWinfoToolServiceWrite
+    {
+        [OperationContract]
+        void DoWork();
+
+        #region 站点管理
+        [OperationContract]
+        bool UpdateSite(string ActiveKey, string UserId, T_DTU dtu);
+        [OperationContract]
+        bool AddSite(string ActiveKey, string UserId, T_DTU dtu);
+
+        [OperationContract]
+        List<string> GenerateSiteCode(string ActiveKey, string UserId, string CompanyId, int Num);
+        #endregion
+
+        [OperationContract]
+        EmReStatus AddLevel(string ActiveKey, string UserId, T_DTU_PressureLevel model);
+
+        #region 字段管理
+        //添加字段
+        [OperationContract]
+        bool AddFiled(string ActiveKey, string UserId, T_DTU_FieldDesc model);
+
+        //更改字段
+        [OperationContract]
+        bool EditFiled(string ActiveKey, string UserId, T_DTU_FieldDesc model);
+        #endregion
+
+        #region 阀门管理
+        [OperationContract]
+        bool AddInfluence(string ActiveKey, T_DTU_ValveEffect Tdv);
+        [OperationContract]
+        bool UpdateInfluence(string ActiveKey, T_DTU_ValveEffect Tdv, string UserId);
+        [OperationContract]
+        bool DeleteInfluence(string ActiveKey, string ValveCode, string UserId);
+        #endregion
+
+        #region 用户分组管理
+        //添加用户分组
+        [OperationContract]
+        bool AddGroup(string ActiveKey, T_User_Group model);
+        //修改用户分组
+        [OperationContract]
+        bool UpdateGroup(string ActiveKey, T_User_Group model);
+        //删除分组
+        [OperationContract]
+        bool DeleteGroup(string ActiveKey, string groupCode);
+        #endregion
+
+        #region 用户配置管理
+        [OperationContract]
+        bool AddUserConfig(string ActiveKey, T_User_Config model);
+
+        [OperationContract]
+        bool UpdateUserConfig(string ActiveKey, T_User_Config model);
+
+        [OperationContract]
+        bool DeleteUserConfig(string ActiveKey, string CCode);
+        #endregion
+
+        #region 站点用户管理
+        [OperationContract]
+        bool AddDTUUser(string ActiveKey, T_User_UserDtuid model);
+        [OperationContract]
+        public bool DeleteDTUUser(string ActiveKey, string UserId, string Dtuid);
+        #endregion
+    }
+}

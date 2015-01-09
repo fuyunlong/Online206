@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_LoginService" />
+                <binding name="BasicHttpBinding_ICRMSGet" />
+                <binding name="BasicHttpBinding_ICRMSPost" />
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://crm.scadacn.com/Service/UserLoginService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_LoginService"
+                contract="LoginService.LoginService" name="BasicHttpBinding_LoginService" />
+            <endpoint address="http://crm.scadacn.com/Service/CrmsGetService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ICRMSGet"
+                contract="CrmGetService.ICRMSGet" name="BasicHttpBinding_ICRMSGet" />
+            <endpoint address="http://crm.scadacn.com/Service/CrmsPostService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ICRMSPost"
+                contract="CrmPostService.ICRMSPost" name="BasicHttpBinding_ICRMSPost" />
+        </client>
+    </system.serviceModel>
+</configuration>

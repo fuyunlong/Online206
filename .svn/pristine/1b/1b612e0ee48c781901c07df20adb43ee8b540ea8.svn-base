@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点管理</title>
+        <script src="~/Scripts/SiteGropMng/SiteGrop.js"></script>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+        <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $("#filedComList").css("height", $("#divRight").css("height"));
+                $("#tbDiv").css("height", $(window).height() * 0.87);
+                Common.GetProvince();
+                new comTab().fnInit();
+            });
+        </script>
+    </head>
+    <body>
+        <div class=" com_TextCenter com_font13Px com_DivBorderGray" style='height: 26px;'>
+            所属公司:<select class="com_w15pen" id="Company" onchange="Common.GetGroupsByComId(this.value)">
+                @{
+                    foreach(var a in ViewBag.CompanyList)
+                    {
+                    <option value=@a.CompanyId>@a.CompanyName</option>
+                    }
+                }
+            </select>
+            <input type="button" value="查询" class="buttonVer2" onclick="SiteGroup.SerarchGroup()" />
+            <input type="button" class="buttonVer2" value="添加" onclick="SiteGroup.ShowAddGroup()" />
+        </div>
+        <div id="tbDiv" class="com_fl   com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+            <table id="ComList" class="ui-com-tab" rules="all">
+                    <thead>
+                        <tr align="left" class="panel-header">
+                            <th class=' com_TextCenter'>
+                                分组名称
+                            </th>
+                            <th class="com_TextCenter">
+                                分组描述
+                            </th>
+                            <th class='com_TextCenter'>
+                                父级分组
+                            </th>
+                            <th class='com_TextCenter com_w15pen'>
+                                操作
+                            </th>
+                            </tr>
+                    </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="w">
+            <table border="1">
+                <tr>
+                    <td>分组编号:</td>
+                    <td>
+                        <input type="text" id="txtGroupCode">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>分组名称:</td>
+                    <td>
+                        <input type="text" id="txtGroupName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>父级目录:</td>
+                    <td>
+                        @Html.TextBox("txtParentName")
+                    </td>
+                </tr>
+                <tr>
+                    <td>分组描述:</td>
+                    <td>
+                        <textarea id="txtGroupDesc" style="height:115px;  width:70%;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="OperArea" colspan="2">
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div id="loading"></div>
+    </body>
+</html>

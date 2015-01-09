@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<head runat="server">
+    <title></title>
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+     <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+    <script src="~/Scripts/layer/layer.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://api.amap.com/Public/css/demo.Default.css" />
+    <script src="http://webapi.amap.com/maps?v=1.2&key=cafee8128684017b5c59a3dfd81e0560"></script>
+    <script src="~/Scripts/Gis/Amap.js"></script>
+    <script src="~/Scripts/GlobalLoading.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#loading").show();
+            Amap.InitMap();
+            AMap.event.addListener(Amap.mapObj, 'complete', function (e) {
+                $("#loading").hide();
+               
+                if (getQueryString("Xmap") != null && getQueryString("Ymap") != null) {
+                    $("#mapX").val(getQueryString("Ymap"));
+                    $("#mapY").val(getQueryString("Xmap"));
+                    var X = getQueryString("Xmap");
+                    var Y = getQueryString("Ymap");
+                    var id = X + Y;
+                    marker = new AMap.Marker({
+                        position: new AMap.LngLat(X, Y),
+                        icon: "http://code.mapabc.com/images/lan_1.png",
+                        draggable: true,
+                        raiseOnDrag: true
+                    });
+                    marker.setMap(Amap.mapObj);
+                    Amap.mapObj.setFitView(marker);
+                    AMap.event.addListener(marker, "dragend", function (param) {
+                        $("#mapX").val(param.lnglat.lat);
+                        $("#mapY").val(param.lnglat.lng);
+                    });
+                }
+                else {
+                    AMap.event.addListener(Amap.mapObj, "click", function (param) {
+                        $("#mapX").val(param.lnglat.lat);
+                        $("#mapY").val(param.lnglat.lng);
+                    });
+                }
+            });
+        });
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+
+        function ChoseOk()
+        {
+            var X =  $("#mapX").val();
+            var Y = $("#mapY").val();
+            if (!Validate.IsNumber(X) || !Validate.IsNumber(Y)) {
+                alert("经纬度必须为数字");
+                return;
+            }
+            $(parent[0].document).find("#Latitude").val(X);
+            $(parent[0].document).find("#Longitude").val(Y);
+            parent.parent.common.layoutTopClose();
+        }
+    </script>
+</head>
+<body   onload="$('#loading').hide()" style="background-color: #F5F3EF;">
+    <form id="form1" runat="server">
+        <div id="iCenter" style="width: 99.5%;">
+        </div>
+        <div style="background-color: #F5F3EF; position: absolute; bottom: 5%; left: 20%;">
+            纬度：<input type="text" readonly="readonly" id="mapX" />
+            经度：
+        <input readonly="readonly" type="text" id="mapY" />
+            <input type="button" id="btnOk" class="buttonVer2" value="确定" onclick="ChoseOk()" />
+        </div>
+     <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+    </form>
+</body>
+</html>

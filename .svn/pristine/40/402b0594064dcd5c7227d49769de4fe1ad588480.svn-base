@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C93407AE-F2DD-4B64-853C-CE0C09967FEE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.Winfotian.MngTool</RootNamespace>
+    <AssemblyName>SCADA系统管理工具</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ICON\Sander.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="InfaCommon">
+      <HintPath>..\Libs\InfaCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="InfaCompact">
+      <HintPath>..\Libs\InfaCompact.dll</HintPath>
+    </Reference>
+    <Reference Include="InfaComponents">
+      <HintPath>..\Libs\InfaComponents.dll</HintPath>
+    </Reference>
+    <Reference Include="InfaEncrypt">
+      <HintPath>..\Libs\InfaEncrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\Lib\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceProxy">
+      <HintPath>..\Libs\ServiceProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="SysUpdate">
+      <HintPath>..\Libs\SysUpdate.exe</HintPath>
+    </Reference>
+    <Reference Include="UpClear">
+      <HintPath>..\Libs\UpClear.exe</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CheckedListBoxItem.cs" />
+    <Compile Include="ClientMng\FrmRegisterClientKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMng\FrmRegisterClientKey.Designer.cs">
+      <DependentUpon>FrmRegisterClientKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DTU\FrmDTU_DOConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DTU\FrmDTU_DOConfig.Designer.cs">
+      <DependentUpon>FrmDTU_DOConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuUserAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuUserAdd.Designer.cs">
+      <DependentUpon>FrmDtuUserAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuUserManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuUserManager.Designer.cs">
+      <DependentUpon>FrmDtuUserManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTransDifConf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTransDifConf.Designer.cs">
+      <DependentUpon>FrmTransDifConf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTransDifData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTransDifData.Designer.cs">
+      <DependentUpon>FrmTransDifData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmValveEffect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmValveEffect.Designer.cs">
+      <DependentUpon>FrmValveEffect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_SysInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_SysInfo.Designer.cs">
+      <DependentUpon>Frm_SysInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocalModel.cs" />
+    <Compile Include="ClientMng\FrmClientAuthor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMng\FrmClientAuthor.Designer.cs">
+      <DependentUpon>FrmClientAuthor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientMng\FrmSNManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMng\FrmSNManager.Designer.cs">
+      <DependentUpon>FrmSNManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientMng\FrmSNProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMng\FrmSNProduct.Designer.cs">
+      <DependentUpon>FrmSNProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FrmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBase.Designer.cs">
+      <DependentUpon>FrmBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmBeatRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBeatRecord.Designer.cs">
+      <DependentUpon>FrmBeatRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCompanyConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCompanyConfig.Designer.cs">
+      <DependentUpon>FrmCompanyConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDelCompanyConfirm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDelCompanyConfirm.Designer.cs">
+      <DependentUpon>FrmDelCompanyConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDeviceAlarmDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDeviceAlarmDetail.Designer.cs">
+      <DependentUpon>FrmDeviceAlarmDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDeviceAlertRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDeviceAlertRecord.Designer.cs">
+      <DependentUpon>FrmDeviceAlertRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDTU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDTU.Designer.cs">
+      <DependentUpon>FrmDTU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuConfig.Designer.cs">
+      <DependentUpon>FrmDtuConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuFieldImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuFieldImport.Designer.cs">
+      <DependentUpon>FrmDtuFieldImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuFieldManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuFieldManager.Designer.cs">
+      <DependentUpon>FrmDtuFieldManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuGroup.Designer.cs">
+      <DependentUpon>FrmDtuGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDTULongiLati.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDTULongiLati.Designer.cs">
+      <DependentUpon>FrmDTULongiLati.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDTUPressureLevel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDTUPressureLevel.Designer.cs">
+      <DependentUpon>FrmDTUPressureLevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuUser.Designer.cs">
+      <DependentUpon>FrmDtuUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmImportantDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmImportantDevice.Designer.cs">
+      <DependentUpon>FrmImportantDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmProgressBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmProgressBar.Designer.cs">
+      <DependentUpon>FrmProgressBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSMSBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSMSBill.Designer.cs">
+      <DependentUpon>FrmSMSBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCompany.Designer.cs">
+      <DependentUpon>FrmCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuIDGenerate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuIDGenerate.Designer.cs">
+      <DependentUpon>FrmDtuIDGenerate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmDtuField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuField.Designer.cs">
+      <DependentUpon>FrmDtuField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain_Extend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain_Extend.Designer.cs">
+      <DependentUpon>FrmMain_Extend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTransmit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTransmit.Designer.cs">
+      <DependentUpon>FrmTransmit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUpLoadFlow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUpLoadFlow.Designer.cs">
+      <DependentUpon>FrmUpLoadFlow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUser.Designer.cs">
+      <DependentUpon>FrmUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUserConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserConfig.Designer.cs">
+      <DependentUpon>FrmUserConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUserGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserGroup.Designer.cs">
+      <DependentUpon>FrmUserGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUserRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserRole.Designer.cs">
+      <DependentUpon>FrmUserRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Login.designer.cs">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LogBLL.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgressBarHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FrmDtuFieldMana.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDtuFieldMana.Designer.cs">
+      <DependentUpon>FrmDtuFieldMana.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOdorDTU.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOdorDTU.Designer.cs">
+      <DependentUpon>FrmOdorDTU.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOdorDtuConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOdorDtuConfig.Designer.cs">
+      <DependentUpon>FrmOdorDtuConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmOdorDtuField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmOdorDtuField.Designer.cs">
+      <DependentUpon>FrmOdorDtuField.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ClientMng\FrmClientAuthor.resx">
+      <DependentUpon>FrmClientAuthor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientMng\FrmRegisterClientKey.resx">
+      <DependentUpon>FrmRegisterClientKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientMng\FrmSNManager.resx">
+      <DependentUpon>FrmSNManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientMng\FrmSNProduct.resx">
+      <DependentUpon>FrmSNProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DTU\FrmDTU_DOConfig.resx">
+      <DependentUpon>FrmDTU_DOConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBeatRecord.resx">
+      <DependentUpon>FrmBeatRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCompanyConfig.resx">
+      <DependentUpon>FrmCompanyConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDelCompanyConfirm.resx">
+      <DependentUpon>FrmDelCompanyConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDeviceAlarmDetail.resx">
+      <DependentUpon>FrmDeviceAlarmDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDeviceAlertRecord.resx">
+      <DependentUpon>FrmDeviceAlertRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDTU.resx">
+      <DependentUpon>FrmDTU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuConfig.resx">
+      <DependentUpon>FrmDtuConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuFieldImport.resx">
+      <DependentUpon>FrmDtuFieldImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuFieldManager.resx">
+      <DependentUpon>FrmDtuFieldManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuGroup.resx">
+      <DependentUpon>FrmDtuGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDTULongiLati.resx">
+      <DependentUpon>FrmDTULongiLati.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDTUPressureLevel.resx">
+      <DependentUpon>FrmDTUPressureLevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuUser.resx">
+      <DependentUpon>FrmDtuUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuUserAdd.resx">
+      <DependentUpon>FrmDtuUserAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuUserManager.resx">
+      <DependentUpon>FrmDtuUserManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmImportantDevice.resx">
+      <DependentUpon>FrmImportantDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmProgressBar.resx">
+      <DependentUpon>FrmProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSMSBill.resx">
+      <DependentUpon>FrmSMSBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCompany.resx">
+      <DependentUpon>FrmCompany.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuIDGenerate.resx">
+      <DependentUpon>FrmDtuIDGenerate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDtuField.resx">
+      <DependentUpon>FrmDtuField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain_Extend.resx">
+      <DependentUpon>FrmMain_Extend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTransDifConf.resx">
+      <DependentUpon>FrmTransDifConf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTransDifData.resx">
+      <DependentUpon>FrmTransDifData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTransmit.resx">
+      <DependentUpon>FrmTransmit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUpLoadFlow.resx">
+      <DependentUpon>FrmUpLoadFlow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUser.resx">
+      <DependentUpon>FrmUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserConfig.resx">
+      <DependentUpon>FrmUserConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserGroup.resx">
+      <DependentUpon>FrmUserGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserRole.resx">
+      <DependentUpon>FrmUserRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmValveEffect.resx">
+      <DependentUpon>FrmValveEffect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Login.resx">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_SysInfo.resx">
+      <DependentUpon>Frm_SysInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="FrmDtuFieldMana.resx">
+      <DependentUpon>FrmDtuFieldMana.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOdorDTU.resx">
+      <DependentUpon>FrmOdorDTU.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOdorDtuConfig.resx">
+      <DependentUpon>FrmOdorDtuConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmOdorDtuField.resx">
+      <DependentUpon>FrmOdorDtuField.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ICON\29.ICO" />
+    <Content Include="ICON\beat.ico" />
+    <Content Include="ICON\login.jpg" />
+    <Content Include="ICON\login08.jpg" />
+    <Content Include="ICON\login08_r2_c2.jpg" />
+    <Content Include="ICON\Main.jpg" />
+    <Content Include="ICON\Main_CusMng.jpg" />
+    <Content Include="ICON\Main_Generate.jpg" />
+    <Content Include="ICON\Main_Help.jpg" />
+    <Content Include="ICON\Main_Quit.jpg" />
+    <Content Include="ICON\Main_SiteMng.jpg" />
+    <Content Include="ICON\Main_UserMng.jpg" />
+    <Content Include="ICON\Sander.ico" />
+    <Content Include="ICON\time.ico" />
+    <None Include="Resources\logo.gif" />
+    <None Include="Resources\0504315.gif" />
+    <None Include="Resources\loading.jpg" />
+    <None Include="Resources\Progress.gif" />
+    <None Include="Resources\Main.jpg" />
+    <None Include="Resources\login08_r2_c2.jpg" />
+    <None Include="Resources\bg.jpg" />
+    <Content Include="ICON\winfotian.ico" />
+    <Content Include="Resources\login08.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

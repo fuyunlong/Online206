@@ -1,0 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.Model;
+using System.Text;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class ClientInfoController : Controller
+    {
+        //公司列表
+        public ActionResult ClientInfo()
+        {
+            return View();
+        }
+
+        //添加、详细、修改页面
+        public ActionResult ClientDetail(string oper, string companyId)
+        {
+            StringBuilder sb = new StringBuilder();
+            ServiceCrmGet.T_CompanyInfos model = new ServiceCrmGet.CRMSGetClient().GetCompanyInfoList(companyId, "");
+
+            switch (oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='ClientMng.UpdateCompany();' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='ClientMng.AddCompany();' />");
+                    break;
+                default:
+                    break;
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            ViewBag.Button = sb.ToString();
+            return View(model);
+        }
+
+        //添加
+        public string Add(ServiceCrmPost.T_Companys model)
+        {
+            string result = "";
+
+            ServiceCrmPost.T_Companys company = new ServiceCrmPost.T_Companys();
+            company.CompanyName = model.CompanyName;
+            company.LinkPerson = model.LinkPerson;
+            company.Telphone = model.Telphone;
+            company.Email = model.Email;
+            company.FaxTel = model.FaxTel;
+            company.CmpWebSite = model.CmpWebSite;
+            company.CmpAddress = model.CmpAddress;
+            company.MobilePhone = model.MobilePhone;
+            company.Remark = model.Remark;
+            company.ParentCompanyID = model.ParentCompanyID;
+            company.CityID = model.CityID;
+            company.CityName = model.CityName;
+            company.Status = true;
+
+            result = new ServiceCrmPost.CRMSPostClient().RegisterCompanyInfo(company, "");
+            if (result == "注册成功!")
+            {
+                new ServiceCrmPost.CRMSPostClient().AddCompanyConfig(model.CompanyName, model.Province.Split(','), "");
+            }
+
+            return result;
+        }
+
+        //修改
+        public string Update(ServiceCrmPost.T_Companys model)
+        {
+            string result = "";
+
+            ServiceCrmPost.T_Companys company = new ServiceCrmPost.T_Companys();
+            company.CompanyID = model.CompanyID;
+            company.CompanyName = model.CompanyName;
+            company.LinkPerson = model.LinkPerson;
+            company.Telphone = model.Telphone;
+            company.Email = model.Email;
+            company.FaxTel = model.FaxTel;
+            company.CmpWebSite = model.CmpWebSite;
+            company.CmpAddress = model.CmpAddress;
+            company.MobilePhone = model.MobilePhone;
+            company.Remark = model.Remark;
+            company.ParentCompanyID = model.ParentCompanyID;
+            company.CityID = model.CityID;
+            company.CityName = model.CityName;
+            company.Status = true;
+
+            result = new ServiceCrmPost.CRMSPostClient().ChangeCompanyInfo(company, "");
+            if (result == "更新成功")
+            {
+                //先删除再新增配置信息
+                new ServiceCrmPost.CRMSPostClient().DeleteCompanyConfig(model.CompanyID.ToString(), "");
+                new ServiceCrmPost.CRMSPostClient().AddCompanyConfig(model.CompanyName, model.Province.Split(','), "");
+            }
+            return result;
+        }
+
+        //删除
+        public string Delete(string companyID)
+        {
+            string result = "false";
+
+            if (new ServiceCrmPost.CRMSPostClient().ChangeCompanyStatus(companyID, 0, ""))
+            {
+                new ServiceCrmPost.CRMSPostClient().DeleteCompanyConfig(companyID, "");
+                result = "true";
+            }
+            return result;
+        }
+    }
+}

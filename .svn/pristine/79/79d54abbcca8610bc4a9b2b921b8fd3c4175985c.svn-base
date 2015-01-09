@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+@model WinfoToolSys.ServiceCrmGet.T_CompanyInfos
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>客户信息</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/Common/ui_common.js"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script>
+        $(function () {
+            Common.GetProvince();
+            Common.LoadConfig();
+
+            var oper = "@ViewBag.Oper";
+            var provice = "@Model.Province";
+            var cityID = "@Model.CityID";
+            if (oper != null && oper != "null" && oper.length > 0) {
+                for (var i = 0; i < $("#DetailProvice option").length; i++) {
+                    if (provice == $("#DetailProvice option")[i].text) {
+                        $("#DetailProvice option")[i].selected = true;
+                        ClientMng.GetCity();
+                        break;
+                    }
+                }
+                for (var i = 0; i < $("#DetailCity option").length; i++) {
+                    if (cityID == $("#DetailCity option")[i].value) {
+                        $("#DetailCity option")[i].selected = true;
+                        break;
+                    }
+                }
+                //详细
+                if (oper == "Show") {
+                    function SetInput() {
+                        var ipt = $("#divComCoinfig>input");
+                        if (ipt.length == 0) {
+                            setTimeout(SetInput, 50);
+                            return;
+                        }
+                        ipt.attr("disabled", "disabled");
+                    }
+                    ClientMng.LoadParentCompany("@Model.ParentCompanyID");
+                    $(".oper").attr("disabled", "disabled");
+                    $("#btnAddConfig").css("display", "none");
+                    SetInput();
+                }
+                //修改
+                if (oper == "Edit") {
+                    ClientMng.GetAllParentCompany();
+                    setTimeout(function () {
+                        for (var i = 0; i < $("#ddlMonCompany option").length ; i++) {
+                            if ("@Model.ParentCompanyID" == $("#ddlMonCompany option")[i].value) {
+                                $("#ddlMonCompany option")[i].selected = true;
+                                break;
+                            }
+                        }
+                    }, 50);
+                }
+                //添加
+                if (oper == "Add") {
+                    $("input[type=text]").val("");
+                    $("#ComDesc").val("");
+                    ClientMng.GetAllParentCompany();
+                    ClientMng.GetCity();
+                }
+            }
+            $("#OperArea").html(@Html.Raw(ViewBag.Button));
+            Common.GetCompanyConfig("@Model.CompanyID");
+        });
+    </script>
+    <style type="text/css">
+        table td
+        {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table class="ui-com-tabFrm">
+            <tr>
+                <td>公司名称</td>
+                <td colspan="3">
+                    <input id="txtCompanyName" type="text" class="oper" style="width:430px" value="@Model.CompanyName" name="@Model.CompanyID" />
+                </td>
+            </tr>
+            <tr>
+                <td>母公司</td>
+                <td colspan="3">
+                    <select id="ddlCompany" class="oper" style="border: thin solid #2DAAE2; border-radius: 3px; width: 432px;"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>公司联系人</td>
+                <td>
+                    <input id="txtLinkMan" type="text" class="oper" value="@Model.LinkPerson" style="width:172px;"/>
+                </td>
+                <td>联系电话 </td>
+                <td>
+                    <input id="txtPhone" type="text" class="oper" value="@Model.Telphone" style="width:172px;">
+                </td>
+            </tr>
+            <tr>
+                <td>移动电话</td>
+                <td>
+                    <input id="txtMobile" type="text" class="oper"  value="@Model.MobilePhone" style="width:172px;"/>
+                </td>
+                <td>公司邮箱</td>
+                <td>
+                    <input id="txtEmail" type="text" class="oper" value="@Model.Email" style="width:172px;">
+                </td>
+            </tr>
+            <tr>
+                <td>公司传真</td>
+                <td>
+                    <input id="txtFax" type="text" class="oper" value="@Model.FaxTel" style="width:172px;"/>
+                </td>
+                <td>公司网址</td>
+                <td>
+                    <input id="txtWebSite" type="text" class="oper" value="@Model.CmpWebSite" style="width:172px;">
+                </td>
+            </tr>
+            <tr>
+                <td>所属省份</td>
+                <td>
+                    <select id="ddlProvice" class="oper" onchange="ClientMng.GetCity();" style="border: thin solid #2DAAE2; border-radius: 3px; width: 174px;"></select>
+                </td>
+                <td>所属地市</td>
+                <td>
+                    <select id="ddlCity" class="oper" style="border: thin solid #2DAAE2; border-radius: 3px; width: 174px;"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>公司地址</td>
+                <td colspan="3">
+                    <input id="txtAddress" class="oper" type="text" value="@Model.CmpAddress" style="width:430px" />
+                </td>
+            </tr>
+            <tr>
+                <td>公司配置</td>
+                <td colspan="3">
+                    <div id="divComCoinfig" class="oper" style="height: 100px; background-color: white; width: 434px; overflow-y: scroll; overflow-x: hidden"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>公司描述</td>
+                <td colspan="3" style="padding-top: 3px;">
+                    <textarea id="txtComDesc" style="height: 130px; width: 426px; border: thin solid #2DAAE2; border-radius: 3px" class="oper">@Model.Remark</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="com_TextCenter" id="OperArea"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+using Com.Winfotian.ServiceProxy;
+
+namespace WinfoToolSys.Controllers.DataSearch
+{
+    public class HeartBeatController : Controller
+    {
+        //
+        // GET: /HeartBeat/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //查询所有站点
+        public JsonResult GetDTUList()
+        {
+            List<T_DTU> list = new ServiceProxyRead().GetProxy().GetDTUList("");
+            return Json(list);
+        }
+
+        //查询全部心跳记录
+        public JsonResult GetBeatRecordList()
+        {
+            List<Com.Winfotian.ServiceProxy.CommonService.BeatDataInfo> list = CommonServiceProxy.GetRecentlyBeatRecordList(WinManager.GetPublicIP());
+            return Json(list);
+        }
+
+        //根据站点查询心跳记录
+        public JsonResult GetBeatRecordListByDTUId(string dtuId, DateTime date)
+        {
+            List<string> list = CommonServiceProxy.GetBeatRecordList(WinManager.GetPublicIP(), dtuId, date);
+            return Json(list);
+        }
+    }
+}

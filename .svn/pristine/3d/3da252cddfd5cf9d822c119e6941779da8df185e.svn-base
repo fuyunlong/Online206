@@ -1,0 +1,684 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using Com.Winfotian.Model;
+using Com.Winfotian.Common;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class DtuProvider
+    {
+
+        public List<T_Dtu_Ex> GetSiteList(string Company, string Group, string SiteName, bool IsOdor)
+        {
+            List<T_Dtu_Ex> DtuList = new List<T_Dtu_Ex>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT  a.*,b.CompanyId  FROM [Infa]..[T_DTU] as a left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode    ");
+            SqlStr.Append(" left join [Infa]..[T_DTU_Config] as c  on c.ConfigCode=a.ConfigCode where a.Status=1 ");
+            if (Company.Length > 0 && Company != "0")
+            {
+                SqlStr.Append(" and b.CompanyId=@CompanyId ");
+            }
+            if (Group.Length > 0 && Group != "0")
+            {
+                SqlStr.Append(" and a.GroupCode=@GroupCode ");
+            }
+            if (IsOdor)
+            {
+                SqlStr.Append(" and c.CType=1 ");
+            }
+            else
+            {
+                SqlStr.Append(" and c.CType !=1 ");
+            }
+            if (SiteName.Length > 0)
+            {
+                SqlStr.Append(" and a.DtuidName like   @SiteName   ");
+            }
+
+            SqlParameter[] pars = { 
+                                new SqlParameter("@CompanyId",Company),
+                                new SqlParameter("@GroupCode",Group),
+                                new SqlParameter("@SiteName","%"+SiteName+"%")
+                                  };
+            using (IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+            {
+                while (dr.Read())
+                {
+                    try
+                    {
+                        DtuList.Add(IDataT_DTU_ExReader(dr));
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return DtuList;
+        }
+
+        public List<T_Dtu_Ex> GetSiteListByComId(string Company)
+        {
+            List<T_Dtu_Ex> DtuList = new List<T_Dtu_Ex>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT  a.*,b.CompanyId  FROM [Infa]..[T_DTU] as a left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode where 1=1 ");
+            if (Company != "0")
+            {
+                SqlStr.Append(" and b.CompanyId=@CompanyId ");
+            }
+            SqlParameter[] pars = { 
+                                new SqlParameter("@CompanyId",Company),
+                                  };
+
+            using (IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+            {
+                while (dr.Read())
+                {
+                    try
+                    {
+                        DtuList.Add(IDataT_DTU_ExReader(dr));
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            return DtuList;
+        }
+
+        public T_Dtu_Ex GetSiteById(string Dtuid)
+        {
+            T_Dtu_Ex Ex = new T_Dtu_Ex();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT top 1 a.*,b.CompanyId  FROM [Infa]..[T_DTU] as a left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode where  Dtuid=@Dtuid  and a.Status=1 ");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@Dtuid",Dtuid)
+                                  };
+            using (IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+            {
+                while (dr.Read())
+                {
+                    Ex = IDataT_DTU_ExReader(dr);
+                }
+            }
+            return Ex;
+        }
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public bool Add(T_DTU model)
+        {
+            bool rlst = false;
+            try
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("insert into [Infa]..[T_DTU](");
+                strSql.Append("Dtuid,DtuidName,Skidbrand,Supplier,FlowBrand,FlowType,PressureLevel,DtuidLocation,RegDate,RunDate,Longitude,Latitude,DayFrom,MonthFrom,LgPwd,PhoneNum,DataInterval,UpLoadInterval,Status,GroupCode,ConfigCode,ProtocolVersion,OrderId,UpdateFlag)");
+                strSql.Append(" values (");
+                strSql.Append("@Dtuid,@DtuidName,@Skidbrand,@Supplier,@FlowBrand,@FlowType,@PressureLevel,@DtuidLocation,@RegDate,@RunDate,@Longitude,@Latitude,@DayFrom,@MonthFrom,@LgPwd,@PhoneNum,@DataInterval,@UpLoadInterval,@Status,@GroupCode,@ConfigCode,@ProtocolVersion,@OrderId,@UpdateFlag)");
+                SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@DtuidName", SqlDbType.NVarChar,30),
+					new SqlParameter("@Skidbrand", SqlDbType.NVarChar,50),
+					new SqlParameter("@Supplier", SqlDbType.NVarChar,50),
+					new SqlParameter("@FlowBrand", SqlDbType.NVarChar,50),
+					new SqlParameter("@FlowType", SqlDbType.VarChar,50),
+					new SqlParameter("@PressureLevel", SqlDbType.VarChar,30),
+					new SqlParameter("@DtuidLocation", SqlDbType.NVarChar,50),
+					new SqlParameter("@RegDate", SqlDbType.DateTime),
+					new SqlParameter("@RunDate", SqlDbType.DateTime),
+					new SqlParameter("@Longitude", SqlDbType.Float,8),
+					new SqlParameter("@Latitude", SqlDbType.Float,8),
+					new SqlParameter("@DayFrom", SqlDbType.SmallInt,2),
+					new SqlParameter("@MonthFrom", SqlDbType.SmallInt,2),
+					new SqlParameter("@LgPwd", SqlDbType.VarChar,20),
+					new SqlParameter("@PhoneNum", SqlDbType.VarChar,20),
+					new SqlParameter("@DataInterval", SqlDbType.SmallInt,2),
+					new SqlParameter("@UpLoadInterval", SqlDbType.SmallInt,2),
+					new SqlParameter("@Status", SqlDbType.SmallInt,2),
+					new SqlParameter("@GroupCode", SqlDbType.VarChar,30),
+					new SqlParameter("@ConfigCode", SqlDbType.VarChar,30),
+					new SqlParameter("@ProtocolVersion", SqlDbType.VarChar,4),
+					new SqlParameter("@OrderId", SqlDbType.Int,4),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4)};
+                parameters[0].Value = model.Dtuid;
+                parameters[1].Value = model.DtuidName;
+                parameters[2].Value = model.Skidbrand;
+                parameters[3].Value = model.Supplier;
+                parameters[4].Value = model.FlowBrand;
+                parameters[5].Value = model.FlowType;
+                parameters[6].Value = model.PressureLevel;
+                parameters[7].Value = model.DtuidLocation;
+                parameters[8].Value = model.RegDate;
+                parameters[9].Value = model.RunDate;
+                parameters[10].Value = model.Longitude;
+                parameters[11].Value = model.Latitude;
+                parameters[12].Value = model.DayFrom;
+                parameters[13].Value = model.MonthFrom;
+                parameters[14].Value = model.LgPwd;
+                parameters[15].Value = model.PhoneNum;
+                parameters[16].Value = model.DataInterval;
+                parameters[17].Value = model.UpLoadInterval;
+                parameters[18].Value = model.Status;
+                parameters[19].Value = model.GroupCode;
+                parameters[20].Value = model.ConfigCode;
+                parameters[21].Value = model.ProtocolVersion;
+                parameters[22].Value = model.OrderId;
+                parameters[23].Value = model.UpdateFlag;
+                if (SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters) > 0)
+                {
+                    rlst = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        /// <summary>
+        /// 添加站点信息和站点配置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddSiteAndSetting(T_DTU model)
+        {
+            bool rlst = false;
+            try
+            {
+                bool IsSuccess = true;
+                if (GetModel(model.Dtuid) == null)
+                {
+                    IsSuccess = Add(model);//添加站点,添加成功说明不存在该站点的表配置
+                }
+                if (IsSuccess)//站点添加成功，再添加配置，加臭和普通，加臭多C，创建索引
+                {
+                    //获取站点配置
+                    var ConfigModel = new DtuConfigProvider().GetModel(model.ConfigCode);
+                    if (ConfigModel != null)
+                    {
+                        string sql = CheckAndCreateDtuTable(ConfigModel, model);
+                        int num = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, sql, null);
+                        rlst = true;
+                    }
+                }
+
+                if (!rlst)
+                { //DeleteTruely(model.Dtuid); 
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+
+        /// <summary>
+        /// 创建表
+        /// </summary>
+        /// <param name="ConfigModel"></param>
+        /// <param name="TableFileds"></param>
+        public string CheckAndCreateDtuTable(T_DTU_Config ConfigModel, T_DTU model)
+        {
+            StringBuilder Sql = new StringBuilder();
+            StringBuilder sbIndex = new StringBuilder();//索引信息
+            Sql.Append("USE [DataCenter] ");
+            Sql.AppendFormat(@"IF NOT EXISTS(SELECT * FROM SYS.TABLES WHERE NAME = 'T_{0}') BEGIN ", model.Dtuid);
+            Sql.AppendFormat("CREATE TABLE [DataCenter]..[T_{0}](Id INT PRIMARY KEY IDENTITY(1,1) NOT NULL,Dtuid VARCHAR(8) NULL,", model.Dtuid);
+            if (ConfigModel.FlowNum > 0)//流量计个数
+            {
+                for (int i = 0; i < ConfigModel.FlowNum; i++)
+                {
+                    Sql.AppendFormat("M{0}Qb FLOAT NULL,M{0}Q FLOAT NULL,M{0}Vb FLOAT NULL,M{0}V FLOAT NULL,M{0}P FLOAT NULL,M{0}T FLOAT NULL,", i + 1);
+                    sbIndex.AppendFormat("CREATE NONCLUSTERED INDEX [T_{0}_Index_M{1}Vb_COLLECTTIME] ON [DataCenter]..[T_{0}] ([COLLECTTIME] ASC,M{1}Vb); ", model.Dtuid, i + 1);
+                }
+            }
+            for (int i = 0; i < ConfigModel.AINum; i++)
+            {
+                Sql.AppendFormat("AI{0} FLOAT NULL,", i + 1);
+            }
+            for (int i = 0; i < ConfigModel.DINum; i++)
+            {
+                Sql.AppendFormat("DI{0} SMALLINT NULL,", i + 1);
+            }
+            //面板信息生成AO,BO的依据
+            if (!string.IsNullOrWhiteSpace(ConfigModel.BoardInfo))
+            {
+                Dictionary<int, int> BoardInfo = (Dictionary<int, int>)JsonHelper.DeserializeToObj(ConfigModel.BoardInfo, typeof(Dictionary<int, int>));
+                int k = 1;
+                for (int i = 0; i < BoardInfo.Count; i++)
+                {
+                    Sql.AppendFormat("AO{0} SMALLINT NULL,", i + 1);
+                    Sql.AppendFormat("BO{0} SMALLINT NULL,", i + 1);
+                    for (int j = 0; j < BoardInfo[i + 1]; j++)
+                    {
+                        Sql.AppendFormat("M{0}TC SMALLINT NULL,", k);
+                        Sql.AppendFormat("M{0}VC FLOAT NULL,", k);
+                        Sql.AppendFormat("M{0}QC FLOAT NULL,", k);
+                        Sql.AppendFormat("M{0}VBC FLOAT NULL,", k);
+                        Sql.AppendFormat("M{0}QBC FLOAT NULL,", k);
+                        Sql.AppendFormat("M{0}PC INT NULL,", k);
+                        k++;
+                    }
+                }
+            }
+            Sql.AppendFormat("Electrically FLOAT NULL DEFAULT ((0)),COLLECTTIME DATETIME NULL ) ");
+            Sql.AppendFormat(" CREATE NONCLUSTERED INDEX [T_{0}_Index_COLLECTTIME] ON [DataCenter]..[T_{0}] ([COLLECTTIME] ASC) ", model.Dtuid);
+            Sql.AppendLine(sbIndex.ToString());
+            Sql.AppendFormat(" END ");
+
+            return Sql.ToString();
+        }
+
+        public bool DeleteTruely(string Dtuid)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from   [Infa]..[T_DTU] ");
+            strSql.Append(" where Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+            parameters[0].Value = Dtuid;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 更新站点信息，同时更新配置表结构（只能添加列，不能删除列）
+        /// </summary>
+        /// <returns></returns>
+        public bool UpdateSiteAndSetting(T_DTU model)
+        {
+            bool rlst = false;
+            try
+            {
+                if (Update(model))//更新站点信息
+                {
+                    //更新表结构
+                    //获取站点配置
+                    var ConfigModel = new DtuConfigProvider().GetModel(model.ConfigCode);
+                    if (ConfigModel != null)
+                    {
+                        Dictionary<string, string> DicOld = GetOldDic(model);
+                        if (DicOld.Count == 0)//如果当前站点没有配置，则新增
+                        {
+                            rlst = AddSiteAndSetting(model);
+                        }
+                        else
+                        {
+                            string sql = AddTableColums(ConfigModel, model);
+                            if (sql.Length > 0)
+                            {
+                                LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), "", sql.ToString(), 1);
+                                if (SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, sql, null) > 0)
+                                {
+                                    rlst = true;
+                                }
+                            }
+                            else
+                            { rlst = true; }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+
+        }
+
+        private string AddTableColums(T_DTU_Config ConfigModel, T_DTU model)
+        {
+            StringBuilder sql = new StringBuilder();
+            //获取当前的表的列名列表
+            Dictionary<string, string> DicOld = GetOldDic(model);
+            //根据现在的配置获取该表应该有的列名列表
+            Dictionary<string, string> DicNew = GetNewDic(ConfigModel, model);
+            foreach (var a in DicOld)
+            {
+                if (DicNew.ContainsKey(a.Key))
+                {
+                    DicNew.Remove(a.Key);
+                }
+            }
+            sql.Clear();
+            if (DicNew.Count > 0)
+            {
+                sql.AppendFormat("ALTER TABLE 'T_{0} ADD", model.Dtuid);
+                foreach (var a in DicNew)
+                {
+                    sql.AppendFormat("{0} {1}", a.Key, a.Value);
+                }
+                sql.Remove(sql.Length - 1, 1);//去掉最后一个逗号
+            }
+           
+            return sql.ToString();
+        }
+
+        private Dictionary<string, string> GetNewDic(T_DTU_Config ConfigModel, T_DTU model)
+        {
+            Dictionary<string, string> DicNew = new Dictionary<string, string>();
+            try
+            {
+                for (int i = 0; i < ConfigModel.FlowNum; i++)//流量计个数
+                {
+                    DicNew.Add("M" + (i + 1) + "QB", "");
+                    DicNew.Add("M" + (i + 1) + "Q", "");
+                    DicNew.Add("M" + (i + 1) + "VB", "");
+                    DicNew.Add("M" + (i + 1) + "V", "");
+                }
+                for (int i = 0; i < ConfigModel.AINum; i++)
+                {
+                    DicNew.Add("AI" + (i + 1), "");
+                }
+                for (int i = 0; i < ConfigModel.DINum; i++)
+                {
+                    DicNew.Add("DI" + (i + 1), "");
+                }
+                //面板信息生成AO,BO的依据
+                if (!string.IsNullOrWhiteSpace(ConfigModel.BoardInfo))
+                {
+                    Dictionary<int, int> BoardInfo = (Dictionary<int, int>)JsonHelper.DeserializeToObj(ConfigModel.BoardInfo, typeof(Dictionary<int, int>));
+                    int k = 1;
+                    for (int i = 0; i < BoardInfo.Count; i++)
+                    {
+                        DicNew.Add("AO" + (i + 1), " SMALLINT NULL,");
+                        DicNew.Add("BO" + (i + 1), " SMALLINT NULL,");
+                        for (int j = 0; j < BoardInfo[i + 1]; j++)
+                        {
+                            DicNew.Add("M" + k + "TC", " SMALLINT NULL,");
+                            DicNew.Add("M" + k + "VC", " FLOAT NULL,");
+                            DicNew.Add("M" + k + "QC", " FLOAT NULL,");
+                            DicNew.Add("M" + k + "VBC", " FLOAT NULL,");
+                            DicNew.Add("M" + k + "QBC", " FLOAT NULL,");
+                            DicNew.Add("M" + k + "PC", " INT NULL,");
+                            k++;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex); }
+            return DicNew;
+        }
+
+        private Dictionary<string, string> GetOldDic(T_DTU model)
+        {
+            Dictionary<string, string> DicOld = new Dictionary<string, string>();
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.AppendFormat("SELECT syscolumns.name,systypes.name ");
+                sql.AppendFormat("FROM syscolumns, systypes ");
+                sql.AppendFormat("WHERE syscolumns.xusertype = systypes.xusertype ");
+                sql.AppendFormat("AND syscolumns.id = object_id('T_{0}')", model.Dtuid);
+                using (var reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, sql.ToString(), null))
+                {
+                    if (reader != null)
+                    {
+                        while (reader.Read())
+                        {
+                            DicOld.Add(reader[0].ToString(), reader[1].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex); }
+            return DicOld;
+        }
+
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(T_DTU model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_DTU] set ");
+            strSql.Append("DtuidName=@DtuidName,");
+            strSql.Append("Skidbrand=@Skidbrand,");
+            strSql.Append("Supplier=@Supplier,");
+            strSql.Append("FlowBrand=@FlowBrand,");
+            strSql.Append("FlowType=@FlowType,");
+            strSql.Append("PressureLevel=@PressureLevel,");
+            strSql.Append("DtuidLocation=@DtuidLocation,");
+            strSql.Append("RegDate=@RegDate,");
+            strSql.Append("RunDate=@RunDate,");
+            strSql.Append("Longitude=@Longitude,");
+            strSql.Append("Latitude=@Latitude,");
+            strSql.Append("DayFrom=@DayFrom,");
+            strSql.Append("MonthFrom=@MonthFrom,");
+            strSql.Append("LgPwd=@LgPwd,");
+            strSql.Append("PhoneNum=@PhoneNum,");
+            strSql.Append("DataInterval=@DataInterval,");
+            strSql.Append("UpLoadInterval=@UpLoadInterval,");
+            strSql.Append("Status=@Status,");
+            strSql.Append("GroupCode=@GroupCode,");
+            strSql.Append("ConfigCode=@ConfigCode,");
+            strSql.Append("ProtocolVersion=@ProtocolVersion,");
+            strSql.Append("OrderId=@OrderId,");
+            strSql.Append("UpdateFlag=@UpdateFlag");
+            strSql.Append(" where Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@DtuidName", SqlDbType.NVarChar,30),
+					new SqlParameter("@Skidbrand", SqlDbType.NVarChar,50),
+					new SqlParameter("@Supplier", SqlDbType.NVarChar,50),
+					new SqlParameter("@FlowBrand", SqlDbType.NVarChar,50),
+					new SqlParameter("@FlowType", SqlDbType.VarChar,50),
+					new SqlParameter("@PressureLevel", SqlDbType.VarChar,30),
+					new SqlParameter("@DtuidLocation", SqlDbType.NVarChar,50),
+					new SqlParameter("@RegDate", SqlDbType.DateTime),
+					new SqlParameter("@RunDate", SqlDbType.DateTime),
+					new SqlParameter("@Longitude", SqlDbType.Float,8),
+					new SqlParameter("@Latitude", SqlDbType.Float,8),
+					new SqlParameter("@DayFrom", SqlDbType.SmallInt,2),
+					new SqlParameter("@MonthFrom", SqlDbType.SmallInt,2),
+					new SqlParameter("@LgPwd", SqlDbType.VarChar,20),
+					new SqlParameter("@PhoneNum", SqlDbType.VarChar,20),
+					new SqlParameter("@DataInterval", SqlDbType.SmallInt,2),
+					new SqlParameter("@UpLoadInterval", SqlDbType.SmallInt,2),
+					new SqlParameter("@Status", SqlDbType.SmallInt,2),
+					new SqlParameter("@GroupCode", SqlDbType.VarChar,30),
+					new SqlParameter("@ConfigCode", SqlDbType.VarChar,30),
+					new SqlParameter("@ProtocolVersion", SqlDbType.VarChar,4),
+					new SqlParameter("@OrderId", SqlDbType.Int,4),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8)};
+            parameters[0].Value = model.DtuidName;
+            parameters[1].Value = model.Skidbrand;
+            parameters[2].Value = model.Supplier;
+            parameters[3].Value = model.FlowBrand;
+            parameters[4].Value = model.FlowType;
+            parameters[5].Value = model.PressureLevel;
+            parameters[6].Value = model.DtuidLocation;
+            parameters[7].Value = model.RegDate;
+            parameters[8].Value = model.RunDate;
+            parameters[9].Value = model.Longitude;
+            parameters[10].Value = model.Latitude;
+            parameters[11].Value = model.DayFrom;
+            parameters[12].Value = model.MonthFrom;
+            parameters[13].Value = model.LgPwd;
+            parameters[14].Value = model.PhoneNum;
+            parameters[15].Value = model.DataInterval;
+            parameters[16].Value = model.UpLoadInterval;
+            parameters[17].Value = model.Status;
+            parameters[18].Value = model.GroupCode;
+            parameters[19].Value = model.ConfigCode;
+            parameters[20].Value = model.ProtocolVersion;
+            parameters[21].Value = model.OrderId;
+            parameters[22].Value = model.UpdateFlag;
+            parameters[23].Value = model.Dtuid;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(string Dtuid)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update  [Infa]..[T_DTU] set Status=0");
+            strSql.Append(" where Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+            parameters[0].Value = Dtuid;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public T_DTU GetModel(string Dtuid)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Dtuid,DtuidName,Skidbrand,Supplier,FlowBrand,FlowType,PressureLevel,DtuidLocation,RegDate,RunDate,");
+            strSql.Append(" Longitude,Latitude,DayFrom,MonthFrom,LgPwd,PhoneNum,DataInterval,UpLoadInterval,Status,GroupCode,ConfigCode,");
+            strSql.Append(" ProtocolVersion,OrderId,UpdateFlag from [Infa]..[T_DTU] ");
+            strSql.Append(" where Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+            parameters[0].Value = Dtuid;
+            T_DTU model = null;
+            using (IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if (dr.Read())
+                {
+                    model = IDataT_DTUReader(dr);
+                }
+            }
+            return model;
+        }
+
+        /// T_DTU 数据读取
+        private T_DTU IDataT_DTUReader(IDataReader dr)
+        {
+            T_DTU model = new T_DTU();
+            try
+            {
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.DtuidName = (dr["DtuidName"] is DBNull) ? string.Empty : dr["DtuidName"].ToString();
+                model.Skidbrand = (dr["Skidbrand"] is DBNull) ? string.Empty : dr["Skidbrand"].ToString();
+                model.Supplier = (dr["Supplier"] is DBNull) ? string.Empty : dr["Supplier"].ToString();
+                model.FlowBrand = (dr["FlowBrand"] is DBNull) ? string.Empty : dr["FlowBrand"].ToString();
+                model.FlowType = (dr["FlowType"] is DBNull) ? string.Empty : dr["FlowType"].ToString();
+                model.PressureLevel = (dr["PressureLevel"] is DBNull) ? string.Empty : dr["PressureLevel"].ToString();
+                model.DtuidLocation = (dr["DtuidLocation"] is DBNull) ? string.Empty : dr["DtuidLocation"].ToString();
+                model.RegDate = (dr["RegDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RegDate"].ToString());
+                model.RunDate = (dr["RunDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RunDate"].ToString());
+                model.Longitude = (dr["Longitude"] is DBNull) ? 0 : Convert.ToDecimal(dr["Longitude"].ToString());
+                model.Latitude = (dr["Latitude"] is DBNull) ? 0 : Convert.ToDecimal(dr["Latitude"].ToString());
+                model.DayFrom = (dr["DayFrom"] is DBNull) ? 0 : Convert.ToInt32(dr["DayFrom"].ToString());
+                model.MonthFrom = (dr["MonthFrom"] is DBNull) ? 0 : Convert.ToInt32(dr["MonthFrom"].ToString());
+                model.LgPwd = (dr["LgPwd"] is DBNull) ? string.Empty : dr["LgPwd"].ToString();
+                model.PhoneNum = (dr["PhoneNum"] is DBNull) ? string.Empty : dr["PhoneNum"].ToString();
+                model.DataInterval = (dr["DataInterval"] is DBNull) ? 0 : Convert.ToInt32(dr["DataInterval"].ToString());
+                model.UpLoadInterval = (dr["UpLoadInterval"] is DBNull) ? 0 : Convert.ToInt32(dr["UpLoadInterval"].ToString());
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.GroupCode = (dr["GroupCode"] is DBNull) ? string.Empty : dr["GroupCode"].ToString();
+                model.ConfigCode = (dr["ConfigCode"] is DBNull) ? string.Empty : dr["ConfigCode"].ToString();
+                model.ProtocolVersion = (dr["ProtocolVersion"] is DBNull) ? string.Empty : dr["ProtocolVersion"].ToString();
+                model.OrderId = (dr["OrderId"] is DBNull) ? 0 : Convert.ToInt32(dr["OrderId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch
+            {
+                //WebLog.WSLogger.Error(ex.Message);//Please add references(log4net.dll)
+                return null;
+            }
+            return model;
+        }
+        /// T_DTU_Ex 数据读取
+        private T_Dtu_Ex IDataT_DTU_ExReader(IDataReader dr)
+        {
+            T_Dtu_Ex model = new T_Dtu_Ex();
+            try
+            {
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.DtuidName = (dr["DtuidName"] is DBNull) ? string.Empty : dr["DtuidName"].ToString();
+                model.Skidbrand = (dr["Skidbrand"] is DBNull) ? string.Empty : dr["Skidbrand"].ToString();
+                model.Supplier = (dr["Supplier"] is DBNull) ? string.Empty : dr["Supplier"].ToString();
+                model.FlowBrand = (dr["FlowBrand"] is DBNull) ? string.Empty : dr["FlowBrand"].ToString();
+                model.FlowType = (dr["FlowType"] is DBNull) ? string.Empty : dr["FlowType"].ToString();
+                model.PressureLevel = (dr["PressureLevel"] is DBNull) ? string.Empty : dr["PressureLevel"].ToString();
+                model.DtuidLocation = (dr["DtuidLocation"] is DBNull) ? string.Empty : dr["DtuidLocation"].ToString();
+                model.RegDate = (dr["RegDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RegDate"].ToString());
+                model.RunDate = (dr["RunDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RunDate"].ToString());
+                model.Longitude = (dr["Longitude"] is DBNull) ? 0 : Convert.ToDecimal(dr["Longitude"].ToString());
+                model.Latitude = (dr["Latitude"] is DBNull) ? 0 : Convert.ToDecimal(dr["Latitude"].ToString());
+                model.DayFrom = (dr["DayFrom"] is DBNull) ? 0 : Convert.ToInt32(dr["DayFrom"].ToString());
+                model.MonthFrom = (dr["MonthFrom"] is DBNull) ? 0 : Convert.ToInt32(dr["MonthFrom"].ToString());
+                model.LgPwd = (dr["LgPwd"] is DBNull) ? string.Empty : dr["LgPwd"].ToString();
+                model.PhoneNum = (dr["PhoneNum"] is DBNull) ? string.Empty : dr["PhoneNum"].ToString();
+                model.DataInterval = (dr["DataInterval"] is DBNull) ? 0 : Convert.ToInt32(dr["DataInterval"].ToString());
+                model.UpLoadInterval = (dr["UpLoadInterval"] is DBNull) ? 0 : Convert.ToInt32(dr["UpLoadInterval"].ToString());
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.GroupCode = (dr["GroupCode"] is DBNull) ? string.Empty : dr["GroupCode"].ToString();
+                model.ConfigCode = (dr["ConfigCode"] is DBNull) ? string.Empty : dr["ConfigCode"].ToString();
+                model.ProtocolVersion = (dr["ProtocolVersion"] is DBNull) ? string.Empty : dr["ProtocolVersion"].ToString();
+                model.OrderId = (dr["OrderId"] is DBNull) ? 0 : Convert.ToInt32(dr["OrderId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+                model.CompanyId = (dr["CompanyId"] is DBNull) ? 0 : Convert.ToInt32(dr["CompanyId"].ToString());
+            }
+            catch
+            {
+                //WebLog.WSLogger.Error(ex.Message);//Please add references(log4net.dll)
+                return null;
+            }
+            return model;
+        }
+
+
+        public List<string> GenerateDtuCode(string CompanyId, int Num)
+        {
+            List<string> DtuIdList = new List<string>();
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+
+
+            }
+            catch
+            {
+
+            }
+            return DtuIdList;
+        }
+
+
+    }
+}

@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using Proxy;
+using Proxy.ServiceWinToolRead;
+using Proxy.ServiceWinToolWrite;
+using Com.Winfotian.Common;
+using System.Web.Script.Serialization;
+using Com.Winfotian.DB;
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserInfoController : Controller
+    {
+        //
+        // GET: /UserInfo/
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据分组编码查询站点信息
+        public JsonResult GetDTUByGroupCode(string companyId, string groupCode)
+        {
+            List<Proxy.ServiceWinToolRead.T_DTU> list = ServcieTool.WinToolServiceReadInstance.GetDTUListByGroupCode(Pms.PmsMng.ActiveKey, companyId, groupCode);
+            return Json(list);
+        }
+
+        //根据站点编号查找用户信息
+        public JsonResult GetUserInfoByDtuId(string dtuId)
+        {
+            List<T_User_Info> list = ServcieTool.WinToolServiceReadInstance.GetUserListByDTUId("", dtuId);
+            return Json(list);
+        }
+
+        public JsonResult GetUserList(string CompanyId, string GroupCode)
+        {
+            List<Proxy.CrmServiceGet.T_UserNewInfo> temp = new List<Proxy.CrmServiceGet.T_UserNewInfo>();
+            try
+            {
+                List<Proxy.CrmServiceGet.T_UserNewInfo> UserList = ServcieTool.CrmServiceGetInstance.GetEmployeeInfoTwo(CompanyId, Pms.PmsMng.ActiveKey);
+                if (UserList != null && UserList.Count>0)
+                {
+                   
+                    List<Proxy.ServiceWinToolRead.T_User_UserGroup> UserGroups = ServcieTool.WinToolServiceReadInstance.GetUserUserGroupList(Pms.PmsMng.ActiveKey, GroupCode);
+                    foreach (var a in UserGroups)
+                    {
+                        foreach (var b in UserList)
+                        {
+                            if (a.UserId == b.UserId)
+                            {
+                                temp.Add(b);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return Json(temp);
+        }
+
+        //添加页面
+        public ActionResult AddUser(string companyId, string dtuId)
+        {
+            var model = ServcieTool.WinToolServiceReadInstance.GetUserInfroByCompanyId("", companyId, dtuId);
+            ViewBag.DTUId = dtuId;
+            return View(model);
+        }
+
+        //添加
+        public string Add(string userId, string dtuId)
+        {
+            string result = "false";
+            string[] ids = userId.Split(',');
+            foreach (var id in ids)
+            {
+                T_User_UserDtuid user = new T_User_UserDtuid();
+                user.UserId = id;
+                user.Dtuid = dtuId;
+                user.Status = 1;
+                if (ServcieTool.WinToolServiceWriteInstance.AddDTUUser("", user))
+                {
+                    result = "true";
+                }
+            }
+
+            return result;
+        }
+
+        //删除
+        public string Delete(string userId, string dtuId)
+        {
+            string result = "false";
+            if (ServcieTool.WinToolServiceWriteInstance.DeleteDTUUser("", userId, dtuId))
+            {
+                result = "true";
+            }
+            return result;
+        }
+    }
+}

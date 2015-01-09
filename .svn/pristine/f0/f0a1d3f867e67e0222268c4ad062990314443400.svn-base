@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加站点用户</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+     <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <script src="~/Scripts/UserMng/UserConfig.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var tab = new comTab();
+            UserDTU.LoadCompanys();
+            UserDTU.LoadCompanysV2();
+            UserDTU.GetDTUListByComanyId($("#ddlCompany").val());
+            Common.GetDepartListByCompany($("#ddlCompany").val());
+            Common.GetPostinfo($("#Departs").val());
+            UserDTU.GetUserFeeType();//获取计费列表
+            UserDTU.GetUserRole();//获取角色列表
+            UserConfig.GetUserConfigListVer2($("#UserConfig"));//获取用户配置列表
+        });
+    </script>
+</head>
+<body style="margin: 0; padding: 0">
+    <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+        <table id="tbUsers" class="ui-com-tab" rules="all">
+            <tbody>
+                <tr>
+                    <td class="com_w10pen">用户编号</td>
+                    <td>
+                        <input type="text" id="UserId" />
+                    </td>
+                    <td class="com_w10pen">真实姓名</td>
+                    <td>
+                        <input type="text" id="TrueName" value="领导" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户密码</td>
+                    <td>
+                        <input type="text"  id="UserPwd" value="@ViewBag.Pwd"/>
+                    </td>
+                    <td>移动电话</td>
+                    <td>
+                        <input id="UserPhone" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>所属职位</td>
+                    <td>
+                        <input id="UserPosition" type="text" value="经理/部长/员工" />
+                    </td>
+                    <td>生日</td>
+                    <td>
+                        <input id="BirthDay" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>联系地址</td>
+                    <td colspan="3">
+                        <input id="LinkAddr" type="text" class="com_w70pen" value="四川省成都市XXX街XXX号" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>所属公司</td>
+                    <td colspan="3">
+                        <select id="ddlCompany" onchange="Common.GetDepartListByCompany(this.value);Common.GetPostinfo($('#Departs').val())"></select>
+                        所属部门：<select id="Departs" class="com_w15pen" onchange="Common.GetPostinfo(this.value)"></select>
+                        所属职位:<select id="Position" class="com_w15pen"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>所属分组</td>
+                    <td>
+                        <select id="ddlGroup"></select>
+                    </td>
+                    <td>用户配置</td>
+                    <td>
+                        <select id="UserConfig"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户角色</td>
+                    <td>
+                        <select id="UserRole"></select>
+                    </td>
+                    <td>用户计费</td>
+                    <td>
+                        <select id="UserFee"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>可选站点</td>
+                    <td>
+                        <select id="ddlCompanyV2" class="com_w80pen" onchange="UserDTU.GetDTUListByComanyId(this.value)">
+                        </select>
+                    </td>
+                    <td></td>
+                    <td>已选站点列表</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div style="height: 140px; overflow-y: scroll; overflow-x: hidden" id="AreaSite"></div>
+                    </td>
+                    <td>
+                        <div class="com_TextCenter">
+                            <p>
+                                <input class="buttonVer2" type="button" value=" > " onclick="UserDTU.AddSiteToRoute(false)" />
+                            </p>
+                            <p>
+                                <input class="buttonVer2" type="button" value=">>" onclick="UserDTU.AddSiteToRoute(true)" />
+                            </p>
+                            <p>
+                                <input class="buttonVer2" type="button" value=" < " onclick="UserDTU.DeleteSiteToRoute(false)" />
+                            </p>
+                            <p>
+                                <input class="buttonVer2" type="button" value="<<" onclick="UserDTU.DeleteSiteToRoute(true)" />
+                            </p>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="height: 140px; overflow-y: scroll; overflow-x: hidden" id="RouteSite"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="com_TextCenter">
+                        <input type="button" class="buttonVer2" value="添加" onclick="UserDTU.AddUserV2()" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="dd"></div>
+    <div id="loading"></div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Release\Proxy.dll.config
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Release\Proxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Release\Proxy.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Release\InfaCommon.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Release\InfaCompact.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Release\InfaEncrypt.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Release\Newtonsoft.Json.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\obj\Release\Proxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\obj\Release\Proxy.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\obj\Release\Com.Winfotian.Proxy.csprojResolveAssemblyReference.cache

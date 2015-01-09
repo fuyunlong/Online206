@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteGroupController : Controller
+    {
+        /// <summary>
+        /// 内部方法-递归分组子集
+        /// </summary>
+        /// <param name="originalList">原分组</param>
+        /// <param name="refModels">新分组集-output</param>
+        /// <param name="parentCode">父编号</param>
+        /// <param name="index">当前子分组层次深度</param>
+        private void SubGroup(IList<T_DTU_GroupEx> originalList, IList<T_DTU_GroupEx> refModels, string parentCode, int index)
+        {
+            ++index;
+            var arr = (from row in originalList
+                       where row.ParentCode == parentCode
+                       select row).ToList();
+            foreach(var m in arr)
+            {
+                m.GroupName = GetTreeviewMarks(index, (m.GroupCode==arr.Last().GroupCode)) + m.GroupName;
+                refModels.Add(m);
+                SubGroup(originalList, refModels, m.GroupCode, index);
+            }
+        }
+        /// <summary>
+        /// 生成树形结构线
+        /// </summary>
+        private string GetTreeviewMarks(int sum, bool isLast)
+        {
+            if(sum == 0)
+                return "";
+            string mark = "";
+            for(int i = 0; i < sum; i++)
+            {
+                mark += "&nbsp&nbsp";
+            }
+            if(isLast)
+                mark += "└ ";
+            else
+                mark += "├ ";
+            return mark;
+        }
+        /// <summary>
+        /// 包装树形结构分组
+        /// </summary>
+        private List<T_DTU_GroupEx> WrapTreeGroup(IList<T_DTU_GroupEx> list)
+        {
+            var models = new List<T_DTU_GroupEx>();
+            foreach(T_DTU_GroupEx m in list)
+            {
+                if(m.ParentCode == "0")
+                {
+                    models.Add(m);
+                    SubGroup(list, models, m.GroupCode, 0);
+                }
+            }
+            return models;
+        }
+        //站点分组
+        // GET: /SiteGroup/
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+        /// <summary>
+        /// 获取单个公司下所以分组(树形结构展开)
+        /// </summary>
+        /// <param name="id">公司Id</param>
+        /// <returns></returns>
+        public JsonResult GetGroup(string id)
+        {
+            if(id == "0" || id == "")
+                return Json(new List<int>());
+            var list = new ServiceProxyRead().GetProxy().GetGroupByComId(PmsMng.ActiveKey, id);
+            if(list.Count == 0)
+                return Json(list);
+            return Json(WrapTreeGroup(list));
+        }
+
+        public JsonResult GetGroupDeatail(string id)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetGroupDeatail(PmsMng.ActiveKey, id));
+        }
+
+        public ActionResult ChoseSiteGroup()
+        {
+           string aa= new ServiceCrmGet.CRMSGetClient().GetListCompany(0, PmsMng.ActiveKey);
+           ViewBag.CompanyList = aa;
+            return View();
+        }
+    }
+}

@@ -1,0 +1,152 @@
+﻿var SiteSet = {
+    //获取站点配置列表
+    GetSiteSetList: function (srcObj, configName) {
+        $.ajax({
+            type: "post",
+            url: "/SiteSet/GetSiteSetList",
+            data: { configName: configName },
+            dataType: "json",
+            error: function () {
+                layer.alert("查询配置信息失败,请稍后再试！", 8);
+            },
+            success: function (data) {
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<tr>";
+                    html += "<td class='com_TextCenter com_w25pen'>" + data[i].ConfigName + "</td>";
+                    html += "<td class='com_TextCenter com_w25pen com_disnote'>" + data[i].ConfigDesc + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].FlowNum + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].AINum + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].DINum + "</td>";
+                    html += "<td class='com_TextCenter com_w20pen'>";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置查看','38%','38%','25%','35%','SiteSet/ShowDetail?oper=Show&configId=" + data[i].ConfigCode + "')>查看|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置修改','38%','38%','25%','35%','SiteSet/ShowDetail?oper=Edit&configId=" + data[i].ConfigCode + "')>修改|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=SiteSet.Delete('" + data[i].ConfigCode + "')>删除</a> ";
+                    html += "</td>";
+                    html += "</tr>";
+                }
+                srcObj.html(html);
+            }
+        });
+    },
+    //流量计
+    FlowNumChanged: function (obj) {
+        var ai = $("#txtAINum").val();
+        var di = $("#txtDINum").val();
+        var text1 = obj + "流" + ai + "模" + di + "开";
+        var text2 = obj + "个流量计" + ai + "个模拟量" + di + "个开关量";
+        $("#txtConfigName").val(text1);
+        $("#txtDesc").val(text2);
+    },
+    //模拟量
+    AINumChanged: function (obj) {
+        var flow = $("#txtFlowNum").val();
+        var di = $("#txtDINum").val();
+        var text1 = flow + "流" + obj + "模" + di + "开";
+        var text2 = flow + "个流量计" + obj + "个模拟量" + di + "个开关量";
+        $("#txtConfigName").val(text1);
+        $("#txtDesc").val(text2);
+    },
+    //开关量
+    DINumChanged: function (obj) {
+        var flow = $("#txtFlowNum").val();
+        var ai = $("#txtAINum").val();
+        var text1 = flow + "流" + ai + "模" + obj + "开";
+        var text2 = flow + "个流量计" + ai + "个模拟量" + obj + "个开关量";
+        $("#txtConfigName").val(text1);
+        $("#txtDesc").val(text2);
+    },
+    //新增
+    Add: function () {
+        var model = SiteSet.GetData();
+        $.ajax({
+            type: "post",
+            url: "/SiteSet/Add",
+            data: model,
+            dataType: "text",
+            error: function () {
+                layer.alert("添加配置信息失败,请稍后再试！", 8);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    layer.alert("添加配置信息成功！", 9, function () {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    });
+                }
+                else {
+                    layer.alert("添加配置信息失败", 8);
+                }
+            }
+        });
+    },
+    //更改配置
+    Update: function () {
+        var model = SiteSet.GetData();
+        $.ajax({
+            type: "post",
+            url: "/SiteSet/Update",
+            data: model,
+            dataType: "text",
+            error: function () {
+                layer.alert("修改配置信息失败,请稍后再试！", 8);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    layer.alert("修改配置信息成功！", 9, function () {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    });
+                }
+                else if (data == "4") {
+                    layer.alert("没有修改权限！", 8);
+                }
+                else {
+                    layer.alert("修改配置信息失败！", 8);
+                }
+            }
+        });
+    },
+    //删除配置
+    Delete: function (configCode) {
+        layer.confirm('你确定要删除吗？', function () {
+            $.ajax({
+                type: "post",
+                url: "/SiteSet/Delete",
+                data: { configCode: configCode },
+                dataType: "text",
+                error: function () {
+                    layer.alert("删除配置信息失败,请稍后再试！", 8);
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        layer.alert("删除配置信息成功！", 9, function () {
+                            Common.layoutTopClose();
+                            $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                        });
+                    }
+                    else if (data == "4") {
+                        layer.alert("没有删除权限！", 8);
+                    }
+                    else {
+                        layer.alert("删除配置信息失败！", 8);
+                    }
+                }
+            });
+        });
+    },
+    //获取数据
+    GetData: function () {
+        var model = {
+            ConfigCode: $("#txtConfigName").attr("name"),
+            ConfigName: $("#txtConfigName").val().trim(),
+            ConfigDesc: $("#txtDesc").val().trim(),
+            FlowNum: $("#txtFlowNum").val().trim(),
+            AINum: $("#txtAINum").val().trim(),
+            DINum: $("#txtDINum").val().trim(),
+            IsAlert: $("input[type=radio][name=IsAlert]:checked").val(),
+            IsCreate: $("input[type=radio][name=IsCreate]:checked").val()
+        };
+        return model;
+    }
+};

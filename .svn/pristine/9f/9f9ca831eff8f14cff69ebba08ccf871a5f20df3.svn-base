@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>站点管理</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+    <script>
+        $(function () {
+            UserDTU.LoadCompanys();//加载公司
+            $("#filedComList").css("height", $("#divRight").css("height"));
+            $("#tbDiv").css("height", $(window).height() * 0.87);
+            new comTab().fnInit();
+        });
+    </script>
+</head>
+<body>
+    <div class=" com_TextCenter com_font13Px com_DivBorderGray">
+        所属公司:<select class="com_w15pen" id="ddlCompany" onchange="UserDTU.GetGroupsByComId(this.value)">
+        </select>
+        所属分组:<select class="com_w15pen" id="ddlGroup">
+        </select>
+        <input type="button" value="查询" class="buttonVer2" onclick="SiteMng.GetInfurenceList()" />
+        <input type="button" class="buttonVer2" value="添加" onclick="Common.WindowBox('查看', '80%', '80%', 'ValveInfluence/InfuenceViewAdd?id=' + $('#Company').val())" />
+    </div>
+    <div style="width: 100%; background-color: #8BC0D2;">
+        <div id="divHead">
+            <table class="MonitorTable com_w100pen " rules="all" cellpadding="0"
+                border="1px" style="border: thin #99BBE8 solid;">
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="tbDiv" class="com_fl   com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+        <table id="ComList" class="ui-com-tab" rules="all">
+            <thead>
+                <tr align="left" class="panel-header">
+                    <th class=' com_TextCenter com_w10pen'>阀门编号
+                    </th>
+                    <th class="com_TextCenter com_w25pen">阀门名称
+                    </th>
+                    <th class='com_TextCenter com_w12pen'>关阀时间
+                    </th>
+                    <th class='com_TextCenter com_w12pen'>影响区域
+                    </th>
+                    <th class='com_TextCenter'>影响户数
+                    </th>
+                    <th class='com_TextCenter com_w15pen'>操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    </div>
+    <div id="dd"></div>
+    <div id="loading"></div>
+</body>
+</html>

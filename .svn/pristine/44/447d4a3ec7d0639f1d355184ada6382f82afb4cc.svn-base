@@ -1,0 +1,65 @@
+﻿var VipDevice = {
+    GetVipDevice: function () {
+        $.ajax({
+            type: "POST",
+            url: "/VipDevice/GetVipDeviceList",
+            data: { DtuId: $("#SiteName").val() },
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var HtmlStr = "";
+                for (var a in data) {
+                    HtmlStr += "<tr>";
+                    HtmlStr += "<td class=' com_w10pen'>" + data[a].Dtuid + "</td>";
+                    HtmlStr += "<td class=' com_w25pen'>" + data[a].DeviceName + "</td>";
+                    HtmlStr += "<td  class=' com_w12pen'>" + data[a].DeviceBrand + "</td>";
+                    HtmlStr += "<td  class=' com_w12pen'>" + data[a].DeviceSupplier + "</td>";
+                    HtmlStr += "<td>" + data[a].ModelCode + "</td>";
+                    HtmlStr += "<td  class=' com_w155pen'>";
+                    HtmlStr += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','80%','VipDevice/VipDeviceDetail?Oper=Show&Id=" + data[a].Id + "&CType=0')>查看|</a> ";
+                    HtmlStr += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','80%','VipDevice/VipDeviceDetail?Oper=Edit&Id=" + data[a].Id + "&CType=0')>修改|</a> ";
+                    HtmlStr += "<a href='javascript:void(0)' onclick=VipDevice.DeleteDevice(" + data[a].ConfigCode + ")>删除</a> ";
+                    HtmlStr += "</td>";
+                    HtmlStr += "</tr>";
+                }
+                $("#ComList tbody").html(HtmlStr);
+            }
+        });
+    },
+    GetSiteList: function () {
+        var ComId = $("#Company").val();
+        $.ajax({
+            type: "POST",
+            url: "/VipDevice/GetSiteList",
+            data: { ComId: ComId },
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var a in data) {
+                    str += "<option value=" + data[a].Dtuid + ">" + data[a].DtuidName + "</option>";
+                }
+                $("#SiteName").html(str);
+            }
+        });
+    },
+    UpdateDevice: function () {
+        var DeviceObj = {
+
+        };
+        $.ajax({
+            type: "POST",
+            url: "/VipDevice/GetSiteList",
+            data: { ComId: ComId },
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) { }
+        });
+    }
+}

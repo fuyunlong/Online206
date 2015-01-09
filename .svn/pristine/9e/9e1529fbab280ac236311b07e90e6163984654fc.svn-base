@@ -1,0 +1,78 @@
+﻿ 
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>用户信息管理</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/UserMng/UserInfoMng.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            //var objClientInfoQ = {
+            //    objTab: null,
+            //    fnBind: function () {
+            //        $("#filedComList").css("height", $("#divRight").css("height"));
+            //        $("#tbDiv").css("height", $(window).height() * 0.87);
+            //        $("#btnQuery").click(function () {
+            //            ClientMng.SerarchCompany();
+            //            objClientInfoQ.objTab.fnResizeTable();
+            //        });
+            //    },
+            //    fnLoad: function () {
+            //        objClientInfoQ.fnBind();
+            //        Common.GetProvince();
+            //        objClientInfoQ.objTab = new comTab();
+            //        objClientInfoQ.objTab.fnInit();
+            //    }
+            //};
+            //window.onload = objClientInfoQ.fnLoad;
+        </script>
+    </head>
+    <body>
+        <div class=" com_TextCenter com_font13Px com_borderCom" style='height: 26px;'>
+            所属公司&nbsp;<select class="com_w15pen" id="ddlCompany" onchange=""><option selected='selected'>--请选择--</option></select>
+            用户分组&nbsp;<select class="com_w15pen" id="ddlGroup"></select>
+            真实姓名&nbsp;<input type="text" class="com_w15pen" id="txtName" />
+            <input type="button" value="查询" class="buttonVer2" id="btnQuery" />
+            <input type="button" class="buttonVer2" value="添加" onclick="Common.WindowBox('用户添加', 0.8, 0.8, 'ClientInfo/ClientDetail/Add/0')" />
+        </div>
+        <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+            <table id="UserList" class="ui-com-tab" rules="all">
+                <thead>
+                    <tr align="left" class="panel-header">
+                        <th class="com_TextCenter com_w35pen">
+                            用户编号
+                        </th>
+                        <th class=' com_TextCenter com_w10pen'>
+                            用户名称
+                        </th>
+                        <th class='com_TextCenter com_w10pen'>
+                            所属公司
+                        </th>
+                        <th class='com_TextCenter com_w12pen'>
+                            所属职位
+                        </th>
+                        <th class='com_TextCenter com_w12pen'>
+                            移动电话
+                        </th>
+                        <th class='com_TextCenter'>
+                            联系地址
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="dd"></div>
+        <div id="loading"></div>
+    </body>
+</html>
+

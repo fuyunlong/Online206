@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点管理</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+        <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+        <script>
+            var objOdorView = {
+                oTab: null,
+                fnNoop:function(){},
+                fnAction: function (opt) {
+                    var act = { view: "fnViewInfo", update: "", dele: "" };
+                    if (opt && act[opt])
+                        return act[opt];
+                    return "fnNoop";
+                },
+                fnBing: function () {
+                    $("#ComList").delegate("a", "click", function (evt) {
+                        var target = evt.target || evt;
+                        if (!target.title) return;
+                        objOdorView[objOdorView.fnAction(target.title)](target);
+                    });
+                    $("#Company").change(function () { Common.GetGroupsByComId(this.value); });
+                },
+                fnLoad: function () {
+                    $("#tbDiv").css("height", $(window).height() * 0.9);
+                    Common.GetProvince();
+                    objOdorView.oTab = new comTab();
+                    objOdorView.oTab.fnInit();
+                    objOdorView.fnBing();
+                },
+                fnQueryConfig: function () {
+                    var siteName = $("#SiteName").val() || "";
+                    var compId = $("#Company").val();
+                    var gId = $("#Group").val();
+                    $.ajax({
+                        type: "POST",
+                        data: { Oper: siteName, ComId: compId, FieldName: gId },
+                        url: "/SiteSetMalodor/GetOdorizationList",
+                        dataType: "json",
+                        error: function (ex) {
+                            parent.Common.MsgBox("请求失败,请稍后再试");
+                        },
+                        success: function (back) {
+                            var htm = "";
+                            for (var i = 0; i < back.length; i++) {
+                                htm += "<tr>";
+                                htm += "<td class='com_w10pen'>" + back[i].Dtuid + "</td>";
+                                htm += "<td class='com_w25pen'>" + back[i].DtuidName + "</td>";
+                                htm += "<td class='com_w20pen'>" + back[i].ConfigName + "</td>";
+                                htm += "<td>" + back[i].ConfigDesc + "</td>";
+                                htm += "<td class='com_w15pen com_TextCenter'>";
+                                htm += "<a href='javascript:void(0)' title='view' name='" + (back[i].ConfigCode + "," + back[i].DtuidName) + "'>查看|</a> ";
+                                htm += "<a href='javascript:void(0)' title='update' name='" + (back[i].ConfigCode + "," + back[i].DtuidName) + "'>修改|</a> ";
+                                htm += "<a href='javascript:void(0)' title='dele' name='" + (back[i].ConfigCode + "," + back[i].Dtuid) + "'>删除</a> ";
+                                htm += "</tr>";
+                            }
+                            $("#ComList>tbody").html(htm);
+                            objOdorView.oTab.fnResizeTable();
+                        }
+                    });
+                },
+                fnViewInfo: function (elm) {
+                    var attr = elm.getAttribute("name").split(",");
+                    Common.WindowBox(attr[1], 0, 0, "");
+                },
+                fnUpdateInfo: function () {
+                    var attr = elm.getAttribute("name").split(",");
+                    Common.WindowBox(attr[1], 0, 0, "");
+                },
+                fnDeleteInfo: function () {
+
+                }
+            };
+            window.onload = objOdorView.fnLoad;
+        </script>
+    </head>
+    <body>
+        <div class=" com_TextCenter com_font13Px com_borderCom" style='height: 26px;'>
+            所属公司:<select class="com_w15pen" id="Company" onchange="SiteMng.GetGroup()">
+                <option value="0">全部</option>
+                @{
+                    foreach(var a in ViewBag.CompanyList)
+                    {
+                    <option value=@a.CompanyId>@a.CompanyName</option>
+                    }
+                }
+            </select>
+            所属分组:<select class="com_w15pen" id="Group">
+                <option value="0">全部</option>
+            </select>
+            站点名称:<input type="text" class="com_w15pen" id="SiteName" />
+            <input type="button" value="查询" class="buttonVer2" onclick="objOdorView.fnQueryConfig()" />
+            <input type="button" class="buttonVer2" value="添加" onclick="" />
+        </div>
+        <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+            <table id="ComList" class="ui-com-tab" rules="all">
+                <thead>
+                    <tr class="panel-header">
+                        <th class='com_w10pen'>
+                            站点编号
+                        </th>
+                        <th class="com_w25pen">
+                            站点名称
+                        </th>
+                        <th class='com_w20pen'>
+                            配置名称
+                        </th>
+                        <th>
+                            配置说明
+                        </th>
+                        <th class='com_w15pen'>
+                            操作
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="dd"></div>
+        <div id="loading"></div>
+    </body>
+</html>

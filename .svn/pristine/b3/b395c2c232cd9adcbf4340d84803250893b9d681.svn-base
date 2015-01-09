@@ -1,0 +1,152 @@
+﻿var UserDTU = {
+    //加载公司列表
+    LoadCompanys: function () {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询公司失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                $("#ddlCompany").append(str);
+            }
+        });
+    },
+    //加载分组
+    GetGroupsByComId: function (compId) {
+        $.ajax({
+            type: "post",
+            data: { id: compId },
+            url: "/SiteGroup/GetGroup",
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询分组失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].GroupCode + '">' + data[i].GroupName + '</option>';
+                }
+                $("#ddlGroup").html(str);
+                $("#ddlDtu").html("");
+            }
+        });
+    },
+    //根据分组编码查询站点
+    GetDTUByGroupCode: function (code) {
+        $.ajax({
+            type: "post",
+            url: "/UserInfo/GetDTUByGroupCode",
+            data: { groupCode: code },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].Dtuid + '">' + data[i].DtuidName + '</option>';
+                }
+                $("#ddlDtu").html(str);
+            }
+        });
+    },
+    //查询用户
+    SearchUser: function () {
+        var id = $("#ddlDtu").val();
+        $.ajax({
+            type: "post",
+            url: "/UserInfo/GetUserInfoByDtuId",
+            data: { dtuId: id },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询用户失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<tr>";
+                    str += "<td class='com_w15pen com_TextCenter com_disnote' title='" + data[i].UserId + "'>" + data[i].UserId + "</td>";
+                    str += "<td class='com_w15pen com_TextCenter com_disnote' title='" + data[i].TrueName + "'>" + data[i].TrueName + "</td>";
+                    str += "<td class='com_w15pen com_TextCenter com_disnote' title='" + data[i].UserPosition + "'>" + data[i].UserPosition + "</td>";
+                    str += "<td class='com_w15pen com_TextCenter com_disnote' title='" + data[i].UserPhone + "'>" + data[i].UserPhone + "</td>";
+                    str += "<td class='com_w20pen com_TextCenter com_disnote' title='" + data[i].UserMail + "'>" + data[i].UserMail + "</td>";
+                    str += "<td class='com_w20pen com_TextCenter'>";
+                    str += "<a href='javascript:void(0)' onclick=UserDTU.DeleteDtuidUser('" + data[i].UserId + "'," + $("#ddlDtu").val() + ")>删除</a>";
+                    str += "</td>";
+                    str += "</tr>";
+                }
+                $("#UserList tbody").html(str);
+            }
+        });
+    },
+    //添加站点用户
+    AddDtuidUser: function () {
+        var userId = "";
+        var dtuId = $("input[type=checkbox]:first").attr("name");
+        for (var i = 0; i < $("input[type=checkbox]:checked").length; i++) {
+            if (i != $("input[type=checkbox]:checked").length - 1) {
+                userId += $("input[type=checkbox]:checked")[i].value + ",";
+            }
+            else {
+                userId += $("input[type=checkbox]:checked")[i].value;
+            }
+        }
+        $.ajax({
+            type: "post",
+            url: "/UserInfo/Add",
+            data: { userId: userId, dtuId: dtuId },
+            dataType: "text",
+            error: function (ex) {
+                Common.MsgBox("添加用户失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    Common.layoutTopClose();
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        });
+    },
+    //删除站点用户
+    DeleteDtuidUser: function (uid, did) {
+        if (confirm("确定要删除吗?")) {
+            $.ajax({
+                type: "post",
+                url: "/UserInfo/Delete",
+                data: { userId: uid, dtuId: did },
+                dataType: "text",
+                error: function (ex) {
+                    Common.MsgBox("删除用户失败,请稍后再试" + ex.responseText);
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    },
+    //加载用户
+    CheckData: function () {
+        var companyId = $("#ddlCompany").val();
+        var dtuId = $("#ddlDtu").val();
+        if (dtuId == undefined) {
+            alert("请选择站点!");
+            return;
+        }
+        Common.WinTopBox("用户添加", "38%", "48%", "25%", "35%", "UserInfo/AddUser?companyId=" + companyId + "&dtuId=" + dtuId + "");
+    }
+};

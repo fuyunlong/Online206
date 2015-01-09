@@ -1,0 +1,30 @@
+﻿//数据转发
+var DataTrans = {
+    //获取转发列表
+    GetTransList: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: $("#SiteName").val() },
+            url: "/DataTrans/GetTransSetList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var a in data) {
+                    Str += "<tr>";
+                    Str += "<td>" + data[a].Dtuid + "</td>";
+                    Str += "<td>" + data[a].TargetIP + "</td>";
+                    Str += "<td></td>";
+                    Str += "<td>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','80%','ClientInfo/ClientDetail?Oper=Show&ComId=" + data[i].CompanyId + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','80%','SiteInfo/SiteDetail?OperRation=Edit&DtuId=" + data[i].Dtuid + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.DeleteCompany(" + data[i].CompanyId + ")>删除</a> ";
+                    str += "</td>";
+                    Str += "</tr>";
+                }
+            }
+        });
+    }
+};

@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class VipDeviceController : Controller
+    {
+        //
+        // GET: /VipDevice/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+
+        public JsonResult GetVipDeviceList(string DtuId)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetVipDeviceList(PmsMng.ActiveKey, DtuId));
+        }
+
+        public ActionResult VipDeviceDetail(string Oper, string Id)
+        {
+            var model = new ServiceProxyRead().GetProxy().GetVipDeviceById(PmsMng.ActiveKey, Id);
+            ViewBag.model = model;
+            return View();
+        }
+    }
+}

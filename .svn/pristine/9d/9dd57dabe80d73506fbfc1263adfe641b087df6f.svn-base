@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserRoleController : Controller
+    {
+        //
+        // GET: /UserRole/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //查询角色信息
+        public JsonResult GetListByName(string roleName)
+        {
+            List<ServiceCrmGet.T_User_Role> list = new List<ServiceCrmGet.T_User_Role>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().QueryUserRoleInfo(roleName, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+    }
+}

@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+ 
+ 
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteSetMalodorController : Controller
+    {
+        //
+        // GET: /SiteSetMalodor/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetOdorizationList(string Oper, string ComId, string FieldName)
+        {
+            var toolService = new ServiceProxyRead().GetProxy();
+            //根据站点名查找
+            var list = toolService.DtuConfigList(PmsMng.ActiveKey, Oper, new int[] { 1 });
+            if(ComId == "" && ComId == "0")
+                return Json(list);
+            //如果有公司选项先查找公司下所以站点
+            List<Com.Winfotian.Model.T_Dtu_Ex> dtus = toolService.GetSite(PmsMng.ActiveKey,ComId,FieldName,Oper,false);
+            //关联两个表筛选到model
+            var model = from row in list join dtu in dtus on row.Dtuid equals dtu.Dtuid
+                        select new
+                        {
+                            Dtuid = row.Dtuid,
+                            DtuidName = row.DtuidName,
+                            ConfigName = row.ConfigName,
+                            ConfigDesc = row.ConfigDesc,
+                            ConfigCode = row.ConfigCode,
+                            IsAlert = row.IsAlert,
+                            IsCreate = row.IsCreate,
+                            Status = row.Status
+                        };
+            return Json(model);
+        }
+    }
+}

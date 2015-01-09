@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteSetController : Controller
+    {
+        //站点配置
+        // GET: /SiteSet/
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult SiteSetAdd()
+        { return View(); }
+
+        public JsonResult GetSiteSetList(string CType)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetDtuConfigList(PmsMng.ActiveKey, CType));
+        }
+
+        public string DeleteConfig(string ConfigCode)
+        {
+            return "";
+        }
+
+        public ActionResult SiteSetDetail(string Oper, string ConfigCode, string CType)
+        {
+            ViewBag.SiteSetObj = new ServiceProxyRead().GetProxy().GetDtuConfigById(PmsMng.ActiveKey, ConfigCode, CType);
+            string OperText = "";
+            switch (Oper)
+            {
+                case "Show":
+                    OperText = "<input type=button  class='buttonVer2' value='添加'>";
+                    break;
+                case "Edit":
+                    OperText = "<input type=button class='buttonVer2' value='修改'>";
+                    break;
+                default: break;
+            }
+            ViewBag.Oper = OperText;
+            return View();
+        }
+    }
+}

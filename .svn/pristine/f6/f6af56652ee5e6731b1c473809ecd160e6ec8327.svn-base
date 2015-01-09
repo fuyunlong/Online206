@@ -1,0 +1,169 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using Proxy;
+using Com.Winfotian.Common;
+using System.Web.Script.Serialization;
+using Com.Winfotian.DB;
+using WinfoToolSys.Pms;
+using Proxy.ServiceWinToolWrite;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserInfoController : Controller
+    {
+        //用户信息管理
+        public ActionResult Index()
+        {
+
+         
+            return View();
+        }
+
+        //站点用户管理
+        public ActionResult SiteUser()
+        {
+            return View();
+        }
+
+        //根据分组编码查询站点信息
+        public JsonResult GetDTUByGroupCode(string companyId, string groupCode)
+        {
+            List<Proxy.ServiceWinToolRead.T_DTU> list = new List<Proxy.ServiceWinToolRead.T_DTU>();
+            try
+            {
+                list = ServcieTool.WinToolServiceReadInstance.GetDTUListByGroupCode(PmsMng.ActiveKey, companyId, groupCode);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //根据站点编号查找用户信息
+        public JsonResult GetUserInfoByDtuId(string dtuId)
+        {
+            List<Proxy.ServiceWinToolRead.T_User_Info> list = new List<Proxy.ServiceWinToolRead.T_User_Info>();
+            try
+            {
+                list = ServcieTool.WinToolServiceReadInstance.GetUserListByDTUId(PmsMng.ActiveKey, dtuId);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取用户列表
+        public JsonResult GetUserList(string companyId, string groupCode)
+        {
+            List<Proxy.CrmServiceGet.T_UserNewInfo> temp = new List<Proxy.CrmServiceGet.T_UserNewInfo>();
+            try
+            {
+
+                List<Proxy.CrmServiceGet.T_UserNewInfo> list = ServcieTool.CrmServiceGetInstance.GetEmployeeInfoTwo(companyId, PmsMng.ActiveKey);
+                if (list != null && list.Count > 0)
+ 
+                {
+ 
+
+ 
+                    List<Proxy.ServiceWinToolRead.T_User_UserGroup> groups = ServcieTool.WinToolServiceReadInstance.GetUserUserGroupList(PmsMng.ActiveKey, groupCode);
+                    foreach (var a in groups)
+ 
+                    {
+                        foreach (var b in list)
+                        {
+                            if (a.UserId == b.UserId)
+                            {
+                                temp.Add(b);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(temp);
+        }
+
+        //添加页面
+        public ActionResult AddUser(string companyId, string dtuId)
+        {
+            List<Proxy.ServiceWinToolRead.T_User_Info> list = new List<Proxy.ServiceWinToolRead.T_User_Info>();
+            try
+            {
+                list = ServcieTool.WinToolServiceReadInstance.GetUserInfroByCompanyId(PmsMng.ActiveKey, companyId, dtuId);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            ViewBag.DTUId = dtuId;
+            return View(list);
+        }
+
+        public ActionResult AddUserV2()
+        {
+            ViewBag.Pwd = new Random().Next(000000, 1000000);
+            return View();
+        }
+
+        public ActionResult UserDeatail(string Oper, string UserId)
+        {
+            
+            return View();
+        }
+
+        //添加
+        public string Add(string userId, string dtuId)
+        {
+            string result = "false";
+            try
+            {
+                string[] ids = userId.Split(',');
+                foreach (var id in ids)
+                {
+                    T_User_UserDtuid user = new T_User_UserDtuid();
+                    user.UserId = id;
+                    user.Dtuid = dtuId;
+                    user.Status = 1;
+                    if (ServcieTool.WinToolServiceWriteInstance.AddDTUUser(PmsMng.ActiveKey, user))
+                    {
+                        result = "true";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //删除
+        public string Delete(string userId, string dtuId)
+        {
+            string result = "false";
+            try
+            {
+                if (ServcieTool.WinToolServiceWriteInstance.DeleteDTUUser(PmsMng.ActiveKey, userId, dtuId))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+    }
+}

@@ -1,0 +1,164 @@
+﻿var Config = {
+    flag: true,
+    //搜索配置信息
+    SerarchConfig: function () {
+        var configName = $("#txtConfigName").val().trim() || "";
+        $.ajax({
+            type: "post",
+            url: "/Config/GetConfigByName",
+            data: { configName: configName },
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<tr>";
+                    str += "<td class='com_w30pen com_TextCenter'>" + data[i].ConfigName + "</td>";
+                    str += "<td class='com_w25pen com_TextCenter'>" + data[i].IP + "</td>";
+                    str += "<td class='com_w20pen com_TextCenter'>" + data[i].Port + "</td>";
+                    str += "<td class='com_w25pen com_TextCenter'>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置查看','38%','40%','25%','35%','Config/ShowOper?oper=Show&configId=" + data[i].ConfigId + "')>查看|</a>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置修改','38%','40%','25%','35%','Config/ShowOper?oper=Edit&configId=" + data[i].ConfigId + "')>修改|</a>";
+                    str += "<a href='javascript:void(0)' onclick=Config.DeleteConfig(" + data[i].ConfigId + ")>删除</a>";
+                    str += "</td>";
+                    str += "</tr>";
+                }
+                $("#ConfigList tbody").html(str);
+            }
+        });
+    },
+    //获取客户端类型
+    GetClienType: function () {
+        $.ajax({
+            type: "post",
+            url: "/UserSetting/GetUsers",
+            dataType: "text",
+            error: function () {
+                Common.MsgBox("获取客户端信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                data = JSON.parse(data);
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value='" + data[i].Key + "'>" + data[i].Value + "</option>";
+                }
+                $("#ddlClienType").html(str);
+            }
+        });
+    },
+    //添加配置
+    AddConfig: function () {
+        var model = Config.GetData();
+        Config.CheckData();
+        if (Config.flag) {
+            $.ajax({
+                type: "post",
+                url: "/Config/Add",
+                data: model,
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("添加配置信息失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+                }
+            });
+        }
+    },
+    //修改配置
+    UpdateConfig: function () {
+        var model = Config.GetData();
+        Config.CheckData();
+        if (Config.flag) {
+            $.ajax({
+                type: "post",
+                url: "/Config/Update",
+                data: model,
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("修改配置配置失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("修改失败");
+                    }
+                }
+            });
+        }
+    },
+    //删除配置
+    DeleteConfig: function (configId) {
+        if (confirm("确定要删除吗?")) {
+            $.ajax({
+                type: "post",
+                url: "/Config/Delete",
+                data: { configId: configId },
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("删除配置信息失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    },
+    //获取数据
+    GetData: function () {
+        var model = {
+            ConfigId: $("#txtConfigName").attr("name"),
+            ConfigName: $("#txtConfigName").val().trim(),
+            ConfigDesc: $("#txtDesc").val().trim(),
+            IP: $("#txtIP").val().trim(),
+            Port: $("#txtPort").val().trim(),
+            ClientNum: $("#txtClientNum").val().trim(),
+            ClientType: $("#ddlClienType").val()
+        };
+        return model;
+    },
+    //数据验证
+    CheckData: function () {
+        Config.flag = true;
+        if (!Validate.IsRequired($("#txtConfigName").val())) {
+            Config.flag = false;
+            Stip("txtConfigName").show({ content: "不能为空", kind: "error", time: 3000 });
+            $("#txtConfigName").focus();
+            return;
+        }
+        if (!Validate.IsRequired($("#txtIP").val())) {
+            Config.flag = false;
+            Stip("txtIP").show({ content: "不能为空", kind: "error", time: 3000 });
+            $("#txtIP").focus();
+            return;
+        }
+        if (!Validate.IsIPAddress($("#txtIP").val())) {
+            Config.flag = false;
+            Stip("txtIP").show({ content: "格式错误", kind: "error", time: 3000 });
+            $("#txtIP").focus();
+            return;
+        }
+        if (!Validate.IsRequired($("#txtPort").val())) {
+            Config.flag = false;
+            Stip("txtPort").show({ content: "不能为空", kind: "error", time: 3000 });
+            $("#txtPort").focus();
+            return;
+        }
+    }
+};

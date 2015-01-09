@@ -1,0 +1,161 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.ServiceProxy;
+using Com.Winfotian.ServiceProxy.UpdateService;
+using System.Text;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using WinfoToolSys.Models;
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class ConfigController : Controller
+    {
+        //
+        // GET: /Config/
+        public ActionResult ShowConfigList()
+        {
+            return View();
+        }
+
+        //查询配置信息
+        public JsonResult GetConfigByName(string configName)
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetListConfiginfo("", configName, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        private void GetClientTypeList(string TypeId)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+        }
+
+        private void GetConfigList(string ConfigId)
+        {
+            try
+            {
+
+                //ConfigList = new ServiceProxyRead().GetProxy().GetConfigList(PmsMng.ActiveKey, ConfigId);
+
+
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+        }
+
+        public JsonResult GetConfigList()
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetCompanyConfigs("");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        public JsonResult GetCompanyConfig(string CompanyId)
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetCompanyConfig(CompanyId, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        //添加、详细、修改页面
+        public ActionResult ShowOper(string Oper, string ConfigId)
+        {
+            T_ConfigExt config = new T_ConfigExt();
+            StringBuilder sb = new StringBuilder();
+
+            try
+            {
+                ServiceCrmGet.T_CompanyComfigs info = new ServiceCrmGet.CRMSGetClient().GetCompanyConfigID(ConfigId, "");
+                config.ConfigInfo = info;
+
+                switch (Oper)
+                {
+                    case "Show":
+                        config.Oper = "Show";
+                        break;
+                    case "Edit":
+                        config.Oper = "Edit";
+                        sb.Append("<input type='button' class='buttonVer2' value='修改' id='btnUpdateConfig' onclick='' />");
+                        break;
+                    case "Add":
+                        config.Oper = "Edit";
+                        sb.Append("<input type='button' class='buttonVer2' value='修改' id='btnAddConfig' onclick=' />");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            //用户操作按钮
+            ViewBag.Oper = sb.ToString();
+
+            return View(config);
+        }
+
+        public string Add(string companyName, string[] arr)
+        {
+            string result = "";
+
+            try
+            {
+                if (new ServiceCrmPost.CRMSPostClient().AddCompanyConfig(companyName, arr, ""))
+                {
+                    result = "1";
+                }
+                else
+                {
+                    result = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+
+            return result;
+        }
+    }
+}

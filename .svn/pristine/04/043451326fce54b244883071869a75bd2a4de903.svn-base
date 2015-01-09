@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>管理平台首页</title>
+    <link href="~/Scripts/JqLigerUI/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/page_fn.css" rel="stylesheet" />
+    <link href="~/Style/index.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/JqLigerUI/ligerUI/js/ligerui.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/JqLigerUI/ligerUI/js/plugins/ligerTab.js" type="text/javascript"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js" type="text/javascript" defer="defer"></script>
+    <script src="~/Scripts/Common/Common.js" type="text/javascript"></script>
+    <script src="~/Scripts/Common/ui_common.js"></script>
+    <script>
+        var objIndex = {
+            tab: null,
+            accordion: null,
+            tree: null,
+            objLay: null,
+            fnBind: function () {
+                //布局
+                objIndex.objLay = $("#layout1").ligerLayout({ leftWidth: 190, height: '100%', bottomHeight: 20, onHeightChanged: this.fnLayouHeightCG });
+                var height = objIndex.objLay.center.height();
+                //Tab
+                $("#framecenter").ligerTab({ height: height });
+                //面板
+                $("#accordion1").ligerAccordion({ height: height - 24, speed: null });
+                $(".l-link").hover(function () {
+                    $(this).addClass("l-link-over");
+                }, function () {
+                    $(this).removeClass("l-link-over");
+                });
+                //树
+                $(".tree").ligerTree({
+                    checkbox: false,
+                    slide: false,
+                    nodeWidth: 120,
+                    attribute: ['nodename', 'url'],
+                    onSelect: function (node) {
+                        if (!node.data.url) return;
+                        var tabid = $(node.target).attr("tabid");
+                        if (!tabid) {
+                            tabid = new Date().getTime();
+                            $(node.target).attr("tabid", tabid)
+                        }
+                        objIndex.fnLayouTabAddItem(tabid, node.data.text, node.data.url);
+                    }
+                });
+                this.tab = $("#framecenter").ligerGetTabManager();
+                this.accordion = $("#accordion1").ligerGetAccordionManager();
+                $(".tree").ligerGetTreeManager();
+                $("#pageloading").hide();
+                //top-right-desc
+                $(".top-right-desc>span", "#layout1").hover(function () {
+                    var kv = { 1: "icon-user-hover", 2: "icon-syshelp-hover", 3: "icon-sysout-hover" };
+                    this.firstChild.classList.add(kv[this.tabIndex]);
+                    this.lastChild.classList.add("com_red"); kv = null;
+                }, function () {
+                    var kv = { 1: "icon-user-hover", 2: "icon-syshelp-hover", 3: "icon-sysout-hover" };
+                    this.firstChild.classList.remove(kv[this.tabIndex]);
+                    this.lastChild.classList.remove("com_red"); kv = null;
+                });
+            },
+            fnLoading: function () {
+                objIndex.fnBind();
+            },
+            fnLayouHeightCG: function (options) {
+                if (objIndex.tab)
+                    objIndex.tab.addHeight(options.diff);
+                if (objIndex.accordion && options.middleHeight - 24 > 0)
+                    objIndex.accordion.setHeight(options.middleHeight - 24);
+            },
+            fnLayouTabAddItem: function (tabId, txt, url) {
+                this.tab.addTabItem({ tabid: tabId, text: txt, url: url });
+            },
+            fnUpdateCompLogo: function (imgUrl) {
+                var img = $('<img style="height:50px;"/>');
+                img.attr({ alt: "dynamic-logo", src: imgUrl });
+                img.appendTo(".top-company-logo");
+            },
+            fnHideOrShow: function (elms, isHide) {
+                for (var e = 0; e < elms.length; e++) {
+                    var elm = elms[e];
+                    if (!elm)
+                        continue;
+                    if (typeof isHide === 'undefined') {
+                        elm.style.display = elm.style.display == 'none' ? 'block' : 'none';
+                        continue;
+                    }
+                    if (isHide === true)
+                        elm.style.display = 'none';
+                    else
+                        elm.style.display = 'block';
+                }
+            }
+        };
+        window.onload = objIndex.fnLoading;
+    </script>
+</head>
+<body>
+    <div id="pageloading" class="com_loading"></div>
+    <div id="layout1" style="width: 100%;background-color:#D6E7FC">
+        <div position="top" style="background-color:#D6E7FC ">
+            <div  style="background-color:#D6E7FC">
+                <span class="top-company-logo">
+                    <img alt="dynamic-logo" src="style/imgs/logo0000.png" width="190" height="50" /></span>
+                <span class="top-company-name">成都英菲信信息技术有限公司</span>
+                <div class="top-right-desc">
+                    <span tabindex="1"><span class="icon-imgs icon-pointer icon-minWH icon-user"></span><a id="topLoginUser" class="top-text-desc" href="javascript:void(0);">登录用户</a></span>
+                    <span tabindex="2"><span class="icon-imgs icon-pointer icon-minWH icon-syshelp"></span><a id="topSystemHelp" class="top-text-desc" href="javascript:void(0);">系统帮助</a></span>
+                    <span tabindex="3"><span class="icon-imgs icon-pointer icon-minWH icon-sysout"></span><a id="topSystemOut" class="top-text-desc" href="javascript:void(0);">注销登录</a></span>
+                </div>
+            </div>
+        </div>
+        <div position="left" title="功能菜单" id="accordion1">
+            @Html.Raw(ViewBag.Menus)
+        </div>
+        <div position="center" id="framecenter">
+            <div tabid="home" title="我的主页" style="height: 300px">
+            </div>
+        </div>
+        <div position="bottom" style="color: #BB7A06">
+            <marquee loop="-1" scrollamount="10" scrolldelay="200">卓越品质，值得信赖，用心做最好的系统，提供最贴心的服务</marquee>
+        </div>
+    </div>
+
+    <div style="display: none">
+        <!-- 流量统计代码 -->
+    </div>
+    <!--第一层弹出层-->
+    <div id="div_show" class="msbgs" style="display: none">
+        <div class="myBG com_baffle">
+        </div>
+        <div id="meLayout" class="myMsgBody com_ovH">
+            <div class="l-window-header">
+                <div class="dialog-header-logo"></div>
+                <div class="dialog-header-title">hello</div>
+                <div class="dialog-header-close l-window-close" onclick="common.layoutClose();"></div>
+            </div>
+            <div class="msgContent">
+                <iframe id="ifrHTML" frameborder="0" height="98%" width="100%" style="overflow-x: hidden; border: 0;"></iframe>
+            </div>
+        </div>
+    </div>
+    <!--顶层弹出层-->
+    <div id="WinTop" class="myMsgBody com_ovH" style="top: 20%; z-index: 10010; display: none;">
+        <div class="l-window-header">
+            <div class="dialog-header-logo"></div>
+            <div class="dialog-header-title">hello</div>
+            <div class="dialog-header-close l-window-close" onclick="common.layoutTopClose();"></div>
+        </div>
+        <div class="msgContent">
+            <iframe id="ifrHTMLTop" frameborder="0" height="98%" width="100%" style="overflow-x: hidden; border: 0;"></iframe>
+        </div>
+    </div>
+    <div class="myBGTop com_baffle" style="z-index: 10009; display: none;">
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,108 @@
+﻿//数据转发
+var DataTrans = {
+    //获取转发列表
+    GetTransList: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#ddlCompany").val() },
+            url: "/DataTrans/GetTransSetList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var a in data) {
+                    Str += "<tr>";
+                    Str += "<td class=' com_w10pen'>" + data[a].Dtuid + "</td>";
+                    Str += "<td class='com_w25pen'>" + data[a].DtuidName + "</td>";
+                    Str += "<td class='com_w12pen'>" + data[a].TransDesc + "</td>";
+                    Str += "<td class='com_w12pen com_TextCenter'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','60%','DataTrans/DataTransDetail?Oper=Show&TransId=" + data[a].Id + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','60%','DataTrans/DataTransDetail?Oper=Edit&TransId=" + data[a].Id + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=DataTrans.DeleteTrans(" + data[a].Id + ")>删除</a> ";
+                    Str += "</td>";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    GetVerList: function () {
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/DataTrans/GetVerList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var a in data) {
+                    str += "<option value=" + data[a].TargetVersion + ">" + data[a].TargetVersion + "</option>";
+                }
+                $("#TargetVersion").html(str);
+            }
+        });
+    },
+    AddTrans: function () {
+
+        var model = DataTrans.GetModel();
+        if (model != null) {
+            $.ajax({
+                type: "POST",
+                data: model,
+                url: "/DataTrans/AddTransOper",
+                dataType: "text",
+                error: function (xhr) {
+                    Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+                },
+                success: function (data) {
+                    if (data == "1") {
+                        alert("添加成功");
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+                }
+            });
+        }
+    },
+    DeleteTrans: function (Id) {
+        $.ajax({
+            type: "POST",
+            data: model,
+            data: "Id=" + Id,
+            url: "/DataTrans/DeleteTrans",
+            dataType: "text",
+            error: function ()
+            { },
+            success: function (data) {
+                if (data == "1") {
+                    alert("删除成功");
+                }
+                else {
+                    alert("删除失败");
+                }
+            }
+        });
+    },
+    GetModel: function () {
+        var model = {
+            Dtuid: $("#ddlDtu").val(),
+            TargetIP: $("#TargetIP").val(),
+            TargetPort: $("#TargetPort").val(),
+            TargetVersion: $("#Ver").val(),
+            TargetPhoneNum: $("#TargetPhoneNum").val(),
+            TargetId: $("#TargetId").val(),
+            OrderNum: $("#OrderNum").val(),
+            TransProtocol: $("#TransProtocol").val(),
+            TargetPhoneNum: $("#TargetPhoneNum").val(),
+            IsTransmit: $("#IsTransmit").val(),
+            TransDesc: $("#TransDesc").val()
+        };
+        return model;
+    }
+
+};

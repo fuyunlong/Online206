@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加站点</title>
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <link href="~/Style/Stip.css" rel="stylesheet" />
+    <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body onload="$('#loading').hide()">
+    <div>
+        <table class="ui-com-tabFrm">
+            <tbody>
+                <tr>
+                    <td colspan="8">
+                        <div class="com_DivBor com_font10size">
+                            <font class="com_red">*操作说明:</font>
+                            <br />
+                            1、数据上传频率：（区间1-1440分钟）会根据该值判断是否超时报警
+   数据采集频率：（区间1-1440分钟）会根据该值绘制实时曲线图
+                                <br />
+                            2、【上传频率】 必须大于等于 【采集频率】 
+                                <br />
+                            3、登录密码：必须和终端上面一致 
+                                <br />
+                            4、终端卡号：终端使用的电话卡号码 
+                                <br />
+                            5、站点编号：默认情况尽量自动生成 
+                                <br />
+                            6、带 * 号的必须慎重填写！！
+                                <br />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>站点名称 
+                    </td>
+                    <td colspan="8">
+                        <input class="com_w80pen oper" type="text" id="DtuidName" /><font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>所属公司</td>
+                    <td colspan="6">
+                        @Html.DropDownList("ddlCompany", null, new { id = "ddlCompany", onchange = "UserDTU.GetGroupsByComId(this.value);" })
+                    </td>
+                    <td>
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>站点编号</td>
+                    <td colspan="2">
+                        <input type="text" id="Dtuid" class="oper " value="系统生成" disabled="disabled" />
+                    </td>
+                    <td>压力等级</td>
+                    <td colspan="4">
+                        @Html.DropDownList("PressureLevel", null, new { id = "PressureLevel" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>调压器品牌</td>
+                    <td colspan="2">
+                        <input type="text" id="Skidbrand" class="oper " value="Joyu/Winfo" />
+                    </td>
+                    <td>调压器供应商</td>
+                    <td colspan="4">
+                        <input type="text" id="Supplier" class="oper " value="久宇/英菲信" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>流量计品牌</td>
+                    <td colspan="2">
+                        <input type="text" id="FlowBrand" class="oper " value="苍南/天信" />
+                    </td>
+                    <td>流量计型号</td>
+                    <td colspan="4">
+                        <input type="text" id="FlowType" class="oper " value="Winfo-001" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>具体位置</td>
+                    <td colspan="7">
+                        <input type="text" id="DtuidLocation" class="com_w80pen  oper" value="四川省成都市青羊区XX街" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>注册时间</td>
+                    <td colspan="2">
+                        <input class=" oper " type="text" id="RegDate" value="@DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" />
+                    </td>
+                    <td>运行时间</td>
+                    <td colspan="4">
+                        <input class=" oper " type="text" id="RunDate"  value="@DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>经度</td>
+                    <td colspan="2">
+                        <input type="text" id="Longitude" class=" oper" />
+                        <font class="com_red">*</font>
+                    </td>
+                    <td>纬度</td>
+                    <td colspan="2">
+                        <input type="text" id="Latitude" class="oper " />
+                        <font class="com_red">*</font>
+                    </td>
+                    <td colspan="2">
+                        <input type="button" value="获取经纬度" class="buttonVer2 oper" onclick="Common.WinTopBox('选择经纬度', '70%', '70%', '10%', '15%', 'Map/Index')" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>时间起始点</td>
+                    <td colspan="2">
+                        <input type="text" id="DayFrom" onkeydown="Validate.funOnlyNumber(this);" class=" oper" value="8" />
+                    </td>
+                    <td>月起止日</td>
+                    <td colspan="4">
+                        <input type="text" id="MonthFrom" onkeydown="Validate.funOnlyNumber(this);" class="oper " value="1" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>站点分组</td>
+                    <td colspan="2">
+                        <select id="ddlGroup">
+                        </select>
+                        <font class="com_red">*</font>
+                    </td>
+                    <td>配置信息</td>
+                    <td colspan="4">
+                        @Html.DropDownList("DtuConfig", null, new { id = "DtuConfig" })
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>排序</td>
+                    <td colspan="2">
+                        <input type="text" id="OrderId" class="oper " value="0" />
+                    </td>
+                    <td>登陆密码</td>
+                    <td colspan="4">
+                        <input type="text" id="LgPwd" class=" oper" value="123456" />
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>终端卡号</td>
+                    <td colspan="2">
+                        <input type="text" id="PhoneNum" class=" oper" onkeydown="Validate.funOnlyNumber(this);" value="13800138000" />
+                        <font class="com_red">*</font>
+                    </td>
+                    <td>终端类型</td>
+                    <td colspan="4">
+                        @Html.DropDownList("VerType", null, new { id = "VerType" })
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>数据采集频率</td>
+                    <td colspan="2">
+                        <input type="text" id="DataInterval" onkeydown="Validate.funOnlyNumber(this);" class="oper " value="2" />
+                        分<font class="com_red">*</font>
+                    </td>
+
+                    <td>数据上传频率</td>
+                    <td colspan="4">
+                        <input type="text" id="UpLoadInterval" onkeydown="Validate.funOnlyNumber(this);" class="oper " value="2" />
+                        分<font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" style="text-align: center" id="OperArea">
+                        <input type="button" class="buttonVer2 " value="添加" onclick="SiteMng.AddSite()" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="ShowTree" style="width: auto; position: absolute; background-color: white; z-index: 999999; display: none; height: 200px; margin: 10px; float: left; border: 1px solid #ccc; overflow: auto;">
+            <ul id="tree1">
+            </ul>
+        </div>
+    </div>
+    <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+<script src="~/Scripts/layer/layer.min.js"></script>
+<script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+<script src="~/Scripts/Common/Common.js"></script>
+<script src="~/Scripts/SiteMng/SiteMng.js"></script>
+<script src="~/Scripts/UserMng/UserDtu.js"></script>
+<script src="~/Scripts/Common/Validate.js"></script>
+<script src="~/Scripts/Common/GlobalLoading.js"></script>
+<script src="~/Scripts/Stip.js"></script>
+<script>
+    $(function () {
+        UserDTU.GetGroupsByComId($("#ddlCompany").val());
+    });
+</script>
+</html>

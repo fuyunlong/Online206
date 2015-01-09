@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+    @model Com.Winfotian.Model.T_User_Config
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>用户配置信息</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/Common/ui_common.js"></script>
+        <script src="~/Scripts/UserMng/UserConfig.js"></script>
+        <script>
+            $(function () {
+                UserConfig.GetClienType();
+                var oper = "@ViewBag.Oper";
+                var isAlert = "@Model.IsAlert";
+                var isRpt = "@Model.IsRpt";
+                var users = "@Model.PopCode";
+                if (oper != null && oper != "null" && oper.length > 0) {
+                    for (var i = 0; i < $("input[type=radio][name=IsAlert]").length ; i++) {
+                        if (isAlert == $("input[type=radio][name=IsAlert]")[i].value) {
+                            $("input[type=radio][name=IsAlert]")[i].checked = true;
+                            break;
+                        }
+                    }
+                    for (var i = 0; i < $("input[type=radio][name=IsRpt]").length ; i++) {
+                        if (isRpt == $("input[type=radio][name=IsRpt]")[i].value) {
+                            $("input[type=radio][name=IsRpt]")[i].checked = true;
+                            break;
+                        }
+                    }
+                    var arr = users.split(",");
+                    setTimeout(function () {
+                        for (var i = 0; i < arr.length ; i++) {
+                            for (var j = 0; j < $("#divUsers input[type=checkbox]").length; j++) {
+                                if (arr[i] == $("#divUsers input[type=checkbox]")[j].value) {
+                                    $("#divUsers input[type=checkbox]")[j].checked = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }, 100);
+
+                    //详细
+                    if (oper == "Show") {
+                        function SetInput() {
+                            var ipt = $("#divUsers>input");
+                            if (ipt.length == 0) {
+                                setTimeout(SetInput, 100);
+                                return;
+                            }
+                            ipt.attr("disabled", "disabled");
+                        }
+                        $(".oper").attr("disabled", "disabled");
+                        SetInput();
+                    }
+                    if (oper == "Add")
+                    {
+                        $("#txtInterval").val("");
+                    }    
+                }
+                $("#OperArea").html(@Html.Raw(ViewBag.Button));
+            });
+        </script>
+        <style type="text/css">
+            table td
+            {
+                padding-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td>配置名称</td>
+                    <td colspan="5">
+                        <input type="text" class="oper" id="txtConfigName" style="width:417px;" value="@Model.ConfigName" name="@Model.CCode" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>配置描述</td>
+                    <td colspan="5">
+                        <input type="text" class="oper" id="txtDesc" style="width:417px;" value="@Model.ConfigDesc" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>使用者</td>
+                    <td colspan="5">
+                        <div id="divUsers" style="height: 95px; background-color: white; width: 420px; overflow-y: scroll; overflow-x: hidden"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>刷新时间</td>
+                    <td>
+                        <input type="text" style="width:75px" id="txtInterval"  class="oper" value="@Model.SoftInterval"/>
+                    </td>
+                    <td>接收报警</td>
+                    <td>
+                        <input type="radio" class="oper" name="IsAlert" value="1" />是<input type="radio" class="oper" name="IsAlert" value="0" />否
+                    </td>
+                    <td>短信报表</td>
+                    <td>
+                        <input type="radio" class="oper" name="IsRpt" value="1" />是<input type="radio" class="oper" name="IsRpt" value="0" />否
+                    </td>
+                </tr>
+                <tr>
+                   <td colspan="6" class="com_TextCenter" id="OperArea">
+                   </td>
+               </tr>
+            </table>
+        </div>
+    </body>
+</html>

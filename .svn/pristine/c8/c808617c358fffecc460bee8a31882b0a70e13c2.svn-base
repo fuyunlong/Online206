@@ -1,0 +1,62 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Data;
+using System.Runtime.Serialization;
+namespace Com.Winfotian.Model
+{
+    //T_DTU_Transmit
+    [Serializable]
+    [DataContract]
+    public class T_DTU_Transmit
+    {
+
+        /// <summary>
+        /// Dtuid
+        /// </summary>		
+        [DataMember]
+        public string Dtuid
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// IsTransmit
+        /// </summary>		
+        [DataMember]
+        public int IsTransmit
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// TargetIP
+        /// </summary>		
+        [DataMember]
+        public string TargetIP
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// TargetPort
+        /// </summary>		
+        [DataMember]
+        public int TargetPort
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// TargetVersion
+        /// </summary>		
+        [DataMember]
+        public string TargetVersion
+        {
+            set;
+            get;
+        }
+
+    }
+}
+

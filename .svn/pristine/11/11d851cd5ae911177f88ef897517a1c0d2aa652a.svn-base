@@ -1,0 +1,29 @@
+﻿var HeartRecord = {
+    //查询站点列表
+    GetDTUList: function () {
+        $.ajax({
+            type: "post",
+            url: "/HeartBeat/GetDTUList",
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点信息失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "<option value=''>--全部--</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].Dtuid + ">" + data[i].DtuidName + "</option>";
+                }
+                $("#ddlDTU").html(str);
+            }
+        });
+    },
+    //站点下拉列表变化
+    DTUChanged: function (dtuId) {
+        if (dtuId == "") {
+            $("#txtDate").parent("span").css("display", "none");
+        }
+        else {
+            $("#txtDate").parent("span").css("display", "inline");
+        }
+    }
+};

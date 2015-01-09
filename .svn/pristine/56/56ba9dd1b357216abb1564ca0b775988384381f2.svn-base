@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+using Com.Winfotian.ServiceProxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class CompanyController : Controller
+    {
+        //
+        // GET: /Company/
+        public ActionResult Index()
+        {
+            return View("ClientInfo");
+        }
+
+        //获取公司信息
+        public JsonResult GetComany(string cityId)
+        {
+            List<ServiceCrmGet.T_Companys> list = new ServiceCrmGet.CRMSGetClient().GetCompanyLists(cityId, "", "");
+            return Json(list);
+        }
+
+        //获取省份信息 
+        public JsonResult GetProvince()
+        {
+            List<string> list = new ServiceProxyRead().GetProxy().GetProvinceList(PmsMng.ActiveKey);
+            return Json(list);
+        }
+
+        //获取城市
+        public JsonResult GetCity(string province)
+        {
+            List<T_CityInfo> list = new ServiceProxyRead().GetProxy().GetCityList(PmsMng.ActiveKey, province);
+            return Json(list);
+        }
+
+        public ActionResult GetCmpIdAndNameList(int cityID, string txtQCompanyName)
+        {
+            List<Com.Winfotian.ServiceProxy.CompanyService.CompanyIDAndName> list = new List<Com.Winfotian.ServiceProxy.CompanyService.CompanyIDAndName>();
+            try
+            {
+                list = CompanyServiceProxy.GetCmpIdAndNameListBy(WinManager.GetPublicIP(), cityID, txtQCompanyName.Trim(), 1);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return View("ClientInfo", list);
+        }
+
+        //获取母公司
+        public JsonResult GetParentCompanyList(string parentCompanyId)
+        {
+            List<ServiceCrmGet.T_ParentCompany> list = new ServiceCrmGet.CRMSGetClient().ParmCompanyInfo(parentCompanyId, "");
+            return Json(list);
+        }
+
+        //添加公司信息
+        public string AddCompanyInfo(Com.Winfotian.ServiceProxy.CompanyService.T_Company company)
+        {
+
+            return "";
+        }
+    }
+}

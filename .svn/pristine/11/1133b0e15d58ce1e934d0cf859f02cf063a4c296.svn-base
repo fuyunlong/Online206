@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+    @model Com.Winfotian.Model.T_DTU_Config
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点配置信息（加臭）</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/Common/ui_common.js"></script>
+        <script src="~/Scripts/SiteMng/SiteSet.js"></script>
+        <script>
+            $(function () {
+                var oper = "@ViewBag.Oper";
+                if (oper != null && oper != "null" && oper.length > 0) {
+                    @*setTimeout(function () {
+                        for (var i = 0; i < $("#ddlClienType option").length ; i++) {
+                            if ("@Model.ClientType" == $("#ddlClienType option")[i].value) {
+                                $("#ddlClienType option")[i].selected = true;
+                                break;
+                            }
+                        }
+                    }, 100);*@
+                    
+                    //详细
+                    if (oper == "Show") {
+                        $(".oper").attr("disabled", "disabled");
+                    }
+                    //添加
+                    if (oper == "Add") {
+                        $("input[type=text]").val("");
+                    }
+                }
+                $("#OperArea").html(@Html.Raw(ViewBag.Button));
+            });
+        </script>
+        <style type="text/css">
+            table td
+            {
+                padding-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td>配置名称</td>
+                    <td colspan="5">
+                        <input id="txtConfigName" type="text" class="oper" style="width:402px;" value="@Model.ConfigName" name="@Model.ConfigCode" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>配置描述</td>
+                    <td colspan="5">
+                        <textarea id="txtDesc" class="oper" style="width:398px;height:100px;border: thin solid #2DAAE2;border-radius: 3px">@Model.ConfigDesc</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>流量计个数</td>
+                    <td>
+                        <input type="text" style="width:50px" id="txtFlowNum"  class="oper" value="@Model.FlowNum"/>
+                    </td>
+                    <td>模拟量个数</td>
+                    <td>
+                        <input type="text" style="width:50px" id="txtAINum" class="oper" value="@Model.AINum">
+                    </td>
+                    <td>开关量个数</td>
+                    <td>
+                        <input type="text" style="width:50px" id="txtDINum" class="oper" value="@Model.DINum">
+                    </td>
+                </tr>
+                <tr>
+                    <td>报警通知</td>
+                    <td>
+                        <input type="radio" class="oper" />是<input type="radio" class="oper" />否
+                    </td>
+                    <td>是否已创建</td>
+                    <td>
+                        input type="radio" class="oper" />是<input type="radio" class="oper" />否
+                    </td>
+                    <td>面板个数</td>
+                    <td>
+                        <select class="oper" style="width:100px"></select>
+                    </td>
+                </tr>
+                <tr>
+                   <td colspan="4" class="com_TextCenter" id="OperArea">
+                   </td>
+               </tr>
+            </table>
+        </div>
+    </body>
+</html>

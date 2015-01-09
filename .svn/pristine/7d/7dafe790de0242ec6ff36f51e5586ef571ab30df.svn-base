@@ -1,0 +1,296 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+
+namespace Com.Winfotian.DB.Provider
+{
+    // 用户---用户dtuid
+    public class UserUserDtuidProvider
+    {
+        /// <summary>
+        /// 是否存在该记录
+        /// </summary>
+        public bool Exists(string UserId, string Dtuid)
+        {
+            int sum = 0;
+            try
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("select count(1) from [Infa]..[T_User_UserDtuid]");
+                strSql.Append(" where UserId=@UserId and Dtuid=@Dtuid ");
+                SqlParameter[] parameters = {
+					new SqlParameter("@UserId", SqlDbType.VarChar,50),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+                parameters[0].Value = UserId;
+                parameters[1].Value = Dtuid;
+                using (var reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+                {
+                    if (reader != null)
+                    {
+                        while (reader.Read())
+                        {
+                            sum = Convert.ToInt32(reader[0].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            { }
+            if (sum == 0)
+            { return true; }
+            else
+            { return false; }
+        }
+
+        public bool AddBatch(List<T_User_UserDtuid> dtus)
+        {
+            bool rslt = false;
+            try
+            {
+                //创建一个dt
+                DataTable dt = new DataTable();
+                dt.Columns.Add("UserId", typeof(string));
+                dt.Columns.Add("Dtuid", typeof(string));
+                dt.Columns.Add("Status", typeof(Int32));
+
+                foreach (var a in dtus)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr["UserId"] = a.UserId;
+                    dr["Dtuid"] = a.Dtuid;
+                    dr["Status"] = 1;
+                    dt.Rows.Add(dr);
+                }
+                SqlConnection conn = new SqlConnection(SqlHelper.DBHelper.OnlyWrite);
+                conn.Open();
+                //声明SqlBulkCopy ,using释放非托管资源
+                using (SqlBulkCopy sqlBC = new SqlBulkCopy(conn))
+                {
+                    //超时之前操作完成所允许的秒数，如果超时则事务不会提交 ，数据将回滚，所有已复制的行都会从目标表中移除
+                    sqlBC.BulkCopyTimeout = 60;
+                    //設定 NotifyAfter 属性，以便在每插入10000 条数据时，呼叫相应事件。  
+                    //设置要批量写入的表
+                    sqlBC.DestinationTableName = "[Infa]..[T_User_UserDtuid]";
+
+                    sqlBC.WriteToServer(dt);
+                }
+                conn.Dispose();
+                rslt = true;
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rslt;
+        }
+
+        public bool DeleteByDtuId(string Dutid)
+        {
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("delete from  [Infa]..[T_User_UserDtuid] where Dtuid=@Dtuid");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@Dtuid",Dutid)
+                                  };
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, SqlStr.ToString(), pars);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public Dictionary<string, string> GetUserUserDtuListByUserId(string UserId)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append("SELECT  b.Dtuid, b.DtuidName ");
+                SqlStr.Append("FROM [Infa]..[T_User_UserDtuid] as a ");
+                SqlStr.Append("left join [Infa]..[T_DTU] as b on a.Dtuid=b.Dtuid where a.UserId=@UserId and a.Status=1");
+                SqlParameter[] pars = { 
+                                      new SqlParameter("@UserId",UserId)
+                                      };
+                using (var reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+                {
+                    if (reader != null)
+                    {
+                        while (reader.Read())
+                        {
+                            if (!dic.ContainsKey(reader["Dtuid"].ToString()))
+                            {
+                                try
+                                {
+                                    dic.Add(reader["Dtuid"].ToString(), reader["DtuidName"].ToString());
+                                }
+                                catch { }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return dic;
+        }
+
+        public bool DeleteAddUserDtuids(string UserId)
+        {
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("delete from [Infa]..[T_User_UserDtuid] where UserId=@UserId");
+            SqlParameter[] pars = {
+                                      new SqlParameter("@UserId",UserId)
+                                  };
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, SqlStr.ToString(), pars);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public bool Add(T_User_UserDtuid model)
+        {
+            bool rslt = false;
+            try
+            {
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append("insert into [Infa]..[T_User_UserDtuid](");
+                strSql.Append("UserId,Dtuid,Status)");
+                strSql.Append(" values (");
+                strSql.Append("@UserId,@Dtuid,@Status)");
+                SqlParameter[] parameters = {
+					new SqlParameter("@UserId", SqlDbType.VarChar,30),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@Status", SqlDbType.SmallInt,2)};
+                parameters[0].Value = model.UserId;
+                parameters[1].Value = model.Dtuid;
+                parameters[2].Value = model.Status;
+                int num = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+                if (num == 1)
+                { rslt = true; }
+            }
+            catch
+            { }
+            return rslt;
+
+        }
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(T_User_UserDtuid model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_User_UserDtuid] set ");
+            strSql.Append("Status=@Status");
+            strSql.Append(" where UserId=@UserId and Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Status", SqlDbType.SmallInt,2),
+					new SqlParameter("@UserId", SqlDbType.VarChar,30),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8)};
+            parameters[0].Value = model.Status;
+            parameters[1].Value = model.UserId;
+            parameters[2].Value = model.Dtuid;
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(string UserId, string Dtuid)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from [Infa]..[T_User_UserDtuid] ");
+            strSql.Append(" where UserId=@UserId and Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserId", SqlDbType.VarChar,50),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+            parameters[0].Value = UserId;
+            parameters[1].Value = Dtuid;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public T_User_UserDtuid GetModel(string UserId, string Dtuid)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 UserId,Dtuid,Status from [Infa]..[T_User_UserDtuid] ");
+            strSql.Append(" where UserId=@UserId and Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@UserId", SqlDbType.VarChar,50),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+            parameters[0].Value = UserId;
+            parameters[1].Value = Dtuid;
+
+            T_User_UserDtuid model = null;
+            using (IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if (dr.Read())
+                {
+                    model = IDataT_User_UserDtuidReader(dr);
+                }
+            }
+            return model;
+        }
+
+
+
+        /// <summary>
+        /// T_User_UserDtuid 数据读取
+        /// </summary>
+        private T_User_UserDtuid IDataT_User_UserDtuidReader(IDataReader dr)
+        {
+            T_User_UserDtuid model = new T_User_UserDtuid();
+            try
+            {
+                model.UserId = (dr["UserId"] is DBNull) ? string.Empty : dr["UserId"].ToString();
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+            }
+            catch (Exception ex)
+            {
+                //WebLog.WSLogger.Error(ex.Message);//Please add references(log4net.dll)
+                return null;
+            }
+            return model;
+        }
+    }
+}

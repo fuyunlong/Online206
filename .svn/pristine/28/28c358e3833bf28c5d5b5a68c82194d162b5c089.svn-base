@@ -1,0 +1,119 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class ValveInfluenceController : Controller
+    {
+        //
+        // GET: /ValveInfluence/
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        //获取阀门影响列表
+        public JsonResult GetInfluencList()
+        {
+            string company = HttpContext.Request.Form["Company"].ToString();
+            string Group = HttpContext.Request.Form["Group"].ToString();
+            string SiteName = HttpContext.Request.Form["SiteName"].ToString();
+            var list = new List<T_DTU_ValveEffect>();
+            try
+            {
+                list = new ServiceProxyRead().GetProxy().GetInfluencList(PmsMng.ActiveKey, company, Group, SiteName);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        //显示阀门列表详细
+        public ActionResult InfuenceViewShow(string id)
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.InfluObj = new ServiceProxyRead().GetProxy().GetInfluenceById(PmsMng.ActiveKey, id);
+            return View();
+        }
+
+        //阀门编辑
+        public ActionResult InfuenceViewEdit(string id)
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.InfluObj = new ServiceProxyRead().GetProxy().GetInfluenceById(PmsMng.ActiveKey, id);
+            return View();
+        }
+
+        public string InfuenceActionEdit(T_DTU_ValveEffect tdv)
+        {
+            string rlst = "0";
+            try
+            {
+                if (new ServiceProxyWrite().GetProxy().UpdateInfluence(PmsMng.ActiveKey, tdv, PmsMng.LogUser))
+                { rlst = "1"; }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        //阀门添加
+        public ActionResult InfuenceViewAdd(string id)
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        public string InfuenceActionAdd(T_DTU_ValveEffect tdv)
+        {
+            string rslt = "0";
+            try
+            {
+                if (new ServiceProxyWrite().GetProxy().AddInfluence(PmsMng.ActiveKey, tdv))
+                {
+                    rslt = "1";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rslt;
+        }
+
+        //删除
+        public ActionResult InfuenceViewDelete(string id)
+        {
+            return View();
+        }
+
+        public string InfuenceActionDelete(string id)
+        {
+            string rslt = "0";
+            try
+            {
+                if (new ServiceProxyWrite().GetProxy().DeleteInfluence(PmsMng.ActiveKey, id, PmsMng.LogUser))
+                { rslt = "1"; }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rslt;
+        }
+    }
+}

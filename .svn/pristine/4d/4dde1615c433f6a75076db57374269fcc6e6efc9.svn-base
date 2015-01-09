@@ -1,0 +1,86 @@
+﻿using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+
+namespace Com.Winfotian.DB.Provider
+{
+
+    public class DtuDataTransProvider
+    {
+        public List<T_DTU_DataTransmit> GetTransList(string CompanyID)
+        {
+            List<T_DTU_DataTransmit> list = new List<T_DTU_DataTransmit>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT c.*,a.DtuidName  FROM [Infa]..[T_DTU_DataTransmit] as c  left join [Infa]..[T_DTU] as a ");
+            SqlStr.Append("on a.Dtuid=c.Dtuid ");
+            SqlStr.Append("left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode where 1=1  and b.CompanyId=@CompanyId");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@CompanyId",CompanyID)
+                                  };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = DatatableToList(reader);
+                        if (model == null)
+                            continue;
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+
+        private T_DTU_DataTransmit DatatableToList(SqlDataReader reader)
+        {
+            T_DTU_DataTransmit obj = new T_DTU_DataTransmit();
+            try
+            {
+
+                obj.Dtuid = reader["Dtuid"].ToString();
+                obj.Id = Convert.ToInt32(reader["Id"].ToString());
+                obj.IsTransmit = Convert.ToInt32(reader["IsTransmit"].ToString());
+                obj.OrderNum = Convert.ToInt32(reader["OrderNum"].ToString());
+                obj.TargetId = Convert.ToInt32(reader["TargetId"].ToString());
+                obj.TargetIP = reader["TargetIP"].ToString();
+                obj.TargetPhoneNum = reader["TargetPhoneNum"].ToString();
+                obj.TargetPort = Convert.ToInt32(reader["TargetPort"].ToString());
+                obj.TargetVersion = reader["TargetVersion"].ToString();
+                obj.TransDesc = reader["TransDesc"].ToString();
+                obj.TransProtocol = reader["TransProtocol"].ToString();
+                obj.DtuidName = reader["DtuidName"].ToString();
+            }
+            catch { }
+            return obj;
+        }
+
+        public T_DTU_DataTransmit GetTransById(string TransId)
+        {
+            T_DTU_DataTransmit model = null;
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append(" SELECT c.*,a.DtuidName FROM [Infa]..[T_DTU_DataTransmit] as c  left join [Infa]..[T_DTU] as a on a.Dtuid=c.Dtuid left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode where 1=1  and c.Id=@Id");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@Id",TransId)
+                                  };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        model = DatatableToList(reader);
+
+                    }
+                }
+            }
+            return model;
+        }
+
+    }
+
+}

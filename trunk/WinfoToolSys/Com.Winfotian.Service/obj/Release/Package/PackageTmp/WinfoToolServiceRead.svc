@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Com.Winfotian.Service.WinfoToolServiceRead" CodeBehind="Com.Winfotian.ServiceLibary.WinfoToolServiceRead.svc.cs" %>

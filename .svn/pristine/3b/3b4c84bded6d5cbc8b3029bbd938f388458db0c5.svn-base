@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteSetController : Controller
+    {
+        //站点配置
+        // GET: /SiteSet/
+        public ActionResult Index()
+        {
+
+            return View();
+        }
+
+        public string DeleteConfig(string ConfigCode)
+        {
+            return "";
+        }
+    }
+}

@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WinfoToolServiceRead" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Model" />
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWinfoToolServiceRead_GetCityList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCityList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetCityList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCityListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetProvinceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProvinceList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetProvinceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProvinceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetCompanyList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetCompanyList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetConfigList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConfigList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetConfigList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConfigListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetCompanyConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfig" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetCompanyConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetCompanyById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyById" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetCompanyById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetClientTypeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientTypeList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetClientTypeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientTypeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSite_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSite" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSite_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteById" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetMalodorSiteById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMalodorSiteById" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetMalodorSiteById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMalodorSiteByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteGroupByCompanyId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteGroupByCompanyId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteGroupByCompanyId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteGroupByCompanyIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetGroupDeatail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupDeatail" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetGroupDeatail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupDeatailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetFiledList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiledList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetFiledList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiledListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetFiledById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiledById" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetFiledById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiledByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetGroupListByCompanyID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupListByCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetGroupListByCompanyID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupListByCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetGroupByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupByCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetGroupByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGroupByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteByCompanyIdAndGroupCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteByCompanyIdAndGroupCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteByCompanyIdAndGroupCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteByCompanyIdAndGroupCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserListByDTUId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByDTUId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserListByDTUId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByDTUIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserInfroByCompanyId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfroByCompanyId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserInfroByCompanyId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfroByCompanyIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserConfigListByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConfigListByName" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserConfigListByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConfigListByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserConfigByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConfigByCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserConfigByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConfigByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserCoinfigList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserCoinfigList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserCoinfigList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserCoinfigListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_DtuConfigListV2_InputMessage">
+    <wsdl:part name="parameters" element="tns:DtuConfigListV2" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_DtuConfigListV2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DtuConfigListV2Response" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_DtuConfigList_InputMessage">
+    <wsdl:part name="parameters" element="tns:DtuConfigList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_DtuConfigList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DtuConfigListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetPressureLevelList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPressureLevelList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetPressureLevelList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPressureLevelListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetOnePressureLevel_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnePressureLevel" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetOnePressureLevel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnePressureLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVerList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetInfluencList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfluencList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetInfluencList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfluencListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetInfluencByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfluencByCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetInfluencByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfluencByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetTransSetList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransSetList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetTransSetList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransSetListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetTransById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransById" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetTransById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetTransVerList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransVerList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetTransVerList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransVerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUConfigListByConfigName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUConfigListByConfigName" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUConfigListByConfigName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUConfigListByConfigNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDtuMalodorListByConfigName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDtuMalodorListByConfigName" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDtuMalodorListByConfigName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDtuMalodorListByConfigNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDtuConfigByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDtuConfigByCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDtuConfigByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDtuConfigByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVipDeviceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVipDeviceList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVipDeviceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVipDeviceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVipDeviceById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVipDeviceById" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVipDeviceById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVipDeviceByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVipDeviceExById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVipDeviceExById" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetVipDeviceExById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVipDeviceExByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteListByComId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteListByComId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteListByComId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteListByComIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUListByCompanyId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUListByCompanyId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUListByCompanyId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUListByCompanyIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetAlertListBySiteIdAndDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlertListBySiteIdAndDate" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetAlertListBySiteIdAndDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlertListBySiteIdAndDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteGroupByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteGroupByCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetSiteGroupByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSiteGroupByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserUserGroupList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserUserGroupList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserUserGroupList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserUserGroupListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetRoleList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleList" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetRoleList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetRoleByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetRoleByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_AddRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRole" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_AddRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_UpdateRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRole" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_UpdateRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_DelRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelRole" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_DelRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetDTUByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDTUByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserUserDtuListByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserUserDtuListByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserUserDtuListByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserUserDtuListByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserGroupCodeByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroupCodeByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetUserGroupCodeByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserGroupCodeByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetRoleByUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByUserId" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceRead_GetRoleByUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByUserIdResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWinfoToolServiceRead">
+    <wsdl:operation name="GetCityList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCityList" message="tns:IWinfoToolServiceRead_GetCityList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCityListResponse" message="tns:IWinfoToolServiceRead_GetCityList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProvinceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetProvinceList" message="tns:IWinfoToolServiceRead_GetProvinceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetProvinceListResponse" message="tns:IWinfoToolServiceRead_GetProvinceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCompanyList" message="tns:IWinfoToolServiceRead_GetCompanyList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCompanyListResponse" message="tns:IWinfoToolServiceRead_GetCompanyList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetConfigList" message="tns:IWinfoToolServiceRead_GetConfigList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetConfigListResponse" message="tns:IWinfoToolServiceRead_GetConfigList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCompanyConfig" message="tns:IWinfoToolServiceRead_GetCompanyConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCompanyConfigResponse" message="tns:IWinfoToolServiceRead_GetCompanyConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCompanyById" message="tns:IWinfoToolServiceRead_GetCompanyById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetCompanyByIdResponse" message="tns:IWinfoToolServiceRead_GetCompanyById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientTypeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetClientTypeList" message="tns:IWinfoToolServiceRead_GetClientTypeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetClientTypeListResponse" message="tns:IWinfoToolServiceRead_GetClientTypeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSite" message="tns:IWinfoToolServiceRead_GetSite_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteResponse" message="tns:IWinfoToolServiceRead_GetSite_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteById" message="tns:IWinfoToolServiceRead_GetSiteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteByIdResponse" message="tns:IWinfoToolServiceRead_GetSiteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMalodorSiteById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetMalodorSiteById" message="tns:IWinfoToolServiceRead_GetMalodorSiteById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetMalodorSiteByIdResponse" message="tns:IWinfoToolServiceRead_GetMalodorSiteById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteGroupByCompanyId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteGroupByCompanyId" message="tns:IWinfoToolServiceRead_GetSiteGroupByCompanyId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteGroupByCompanyIdResponse" message="tns:IWinfoToolServiceRead_GetSiteGroupByCompanyId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupDeatail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetGroupDeatail" message="tns:IWinfoToolServiceRead_GetGroupDeatail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetGroupDeatailResponse" message="tns:IWinfoToolServiceRead_GetGroupDeatail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiledList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetFiledList" message="tns:IWinfoToolServiceRead_GetFiledList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetFiledListResponse" message="tns:IWinfoToolServiceRead_GetFiledList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiledById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetFiledById" message="tns:IWinfoToolServiceRead_GetFiledById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetFiledByIdResponse" message="tns:IWinfoToolServiceRead_GetFiledById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupListByCompanyID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetGroupListByCompanyID" message="tns:IWinfoToolServiceRead_GetGroupListByCompanyID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetGroupListByCompanyIDResponse" message="tns:IWinfoToolServiceRead_GetGroupListByCompanyID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetGroupByCode" message="tns:IWinfoToolServiceRead_GetGroupByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetGroupByCodeResponse" message="tns:IWinfoToolServiceRead_GetGroupByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteByCompanyIdAndGroupCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteByCompanyIdAndGroupCode" message="tns:IWinfoToolServiceRead_GetSiteByCompanyIdAndGroupCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteByCompanyIdAndGroupCodeResponse" message="tns:IWinfoToolServiceRead_GetSiteByCompanyIdAndGroupCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByDTUId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserListByDTUId" message="tns:IWinfoToolServiceRead_GetUserListByDTUId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserListByDTUIdResponse" message="tns:IWinfoToolServiceRead_GetUserListByDTUId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfroByCompanyId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserInfroByCompanyId" message="tns:IWinfoToolServiceRead_GetUserInfroByCompanyId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserInfroByCompanyIdResponse" message="tns:IWinfoToolServiceRead_GetUserInfroByCompanyId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConfigListByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserConfigListByName" message="tns:IWinfoToolServiceRead_GetUserConfigListByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserConfigListByNameResponse" message="tns:IWinfoToolServiceRead_GetUserConfigListByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConfigByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserConfigByCode" message="tns:IWinfoToolServiceRead_GetUserConfigByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserConfigByCodeResponse" message="tns:IWinfoToolServiceRead_GetUserConfigByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCoinfigList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserCoinfigList" message="tns:IWinfoToolServiceRead_GetUserCoinfigList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserCoinfigListResponse" message="tns:IWinfoToolServiceRead_GetUserCoinfigList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DtuConfigListV2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/DtuConfigListV2" message="tns:IWinfoToolServiceRead_DtuConfigListV2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/DtuConfigListV2Response" message="tns:IWinfoToolServiceRead_DtuConfigListV2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DtuConfigList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/DtuConfigList" message="tns:IWinfoToolServiceRead_DtuConfigList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/DtuConfigListResponse" message="tns:IWinfoToolServiceRead_DtuConfigList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPressureLevelList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetPressureLevelList" message="tns:IWinfoToolServiceRead_GetPressureLevelList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetPressureLevelListResponse" message="tns:IWinfoToolServiceRead_GetPressureLevelList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOnePressureLevel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetOnePressureLevel" message="tns:IWinfoToolServiceRead_GetOnePressureLevel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetOnePressureLevelResponse" message="tns:IWinfoToolServiceRead_GetOnePressureLevel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVerList" message="tns:IWinfoToolServiceRead_GetVerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVerListResponse" message="tns:IWinfoToolServiceRead_GetVerList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfluencList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetInfluencList" message="tns:IWinfoToolServiceRead_GetInfluencList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetInfluencListResponse" message="tns:IWinfoToolServiceRead_GetInfluencList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfluencByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetInfluencByCode" message="tns:IWinfoToolServiceRead_GetInfluencByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetInfluencByCodeResponse" message="tns:IWinfoToolServiceRead_GetInfluencByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransSetList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetTransSetList" message="tns:IWinfoToolServiceRead_GetTransSetList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetTransSetListResponse" message="tns:IWinfoToolServiceRead_GetTransSetList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetTransById" message="tns:IWinfoToolServiceRead_GetTransById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetTransByIdResponse" message="tns:IWinfoToolServiceRead_GetTransById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransVerList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetTransVerList" message="tns:IWinfoToolServiceRead_GetTransVerList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetTransVerListResponse" message="tns:IWinfoToolServiceRead_GetTransVerList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUConfigListByConfigName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUConfigListByConfigName" message="tns:IWinfoToolServiceRead_GetDTUConfigListByConfigName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUConfigListByConfigNameResponse" message="tns:IWinfoToolServiceRead_GetDTUConfigListByConfigName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDtuMalodorListByConfigName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDtuMalodorListByConfigName" message="tns:IWinfoToolServiceRead_GetDtuMalodorListByConfigName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDtuMalodorListByConfigNameResponse" message="tns:IWinfoToolServiceRead_GetDtuMalodorListByConfigName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDtuConfigByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDtuConfigByCode" message="tns:IWinfoToolServiceRead_GetDtuConfigByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDtuConfigByCodeResponse" message="tns:IWinfoToolServiceRead_GetDtuConfigByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVipDeviceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceList" message="tns:IWinfoToolServiceRead_GetVipDeviceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceListResponse" message="tns:IWinfoToolServiceRead_GetVipDeviceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVipDeviceById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceById" message="tns:IWinfoToolServiceRead_GetVipDeviceById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceByIdResponse" message="tns:IWinfoToolServiceRead_GetVipDeviceById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVipDeviceExById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceExById" message="tns:IWinfoToolServiceRead_GetVipDeviceExById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceExByIdResponse" message="tns:IWinfoToolServiceRead_GetVipDeviceExById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteListByComId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteListByComId" message="tns:IWinfoToolServiceRead_GetSiteListByComId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteListByComIdResponse" message="tns:IWinfoToolServiceRead_GetSiteListByComId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUListByCompanyId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUListByCompanyId" message="tns:IWinfoToolServiceRead_GetDTUListByCompanyId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUListByCompanyIdResponse" message="tns:IWinfoToolServiceRead_GetDTUListByCompanyId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUList" message="tns:IWinfoToolServiceRead_GetDTUList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUListResponse" message="tns:IWinfoToolServiceRead_GetDTUList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlertListBySiteIdAndDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetAlertListBySiteIdAndDate" message="tns:IWinfoToolServiceRead_GetAlertListBySiteIdAndDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetAlertListBySiteIdAndDateResponse" message="tns:IWinfoToolServiceRead_GetAlertListBySiteIdAndDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteGroupByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteGroupByCode" message="tns:IWinfoToolServiceRead_GetSiteGroupByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetSiteGroupByCodeResponse" message="tns:IWinfoToolServiceRead_GetSiteGroupByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserUserGroupList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserUserGroupList" message="tns:IWinfoToolServiceRead_GetUserUserGroupList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserUserGroupListResponse" message="tns:IWinfoToolServiceRead_GetUserUserGroupList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetRoleList" message="tns:IWinfoToolServiceRead_GetRoleList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetRoleListResponse" message="tns:IWinfoToolServiceRead_GetRoleList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetRoleByCode" message="tns:IWinfoToolServiceRead_GetRoleByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetRoleByCodeResponse" message="tns:IWinfoToolServiceRead_GetRoleByCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/AddRole" message="tns:IWinfoToolServiceRead_AddRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/AddRoleResponse" message="tns:IWinfoToolServiceRead_AddRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/UpdateRole" message="tns:IWinfoToolServiceRead_UpdateRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/UpdateRoleResponse" message="tns:IWinfoToolServiceRead_UpdateRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/DelRole" message="tns:IWinfoToolServiceRead_DelRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/DelRoleResponse" message="tns:IWinfoToolServiceRead_DelRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUByUserId" message="tns:IWinfoToolServiceRead_GetDTUByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetDTUByUserIdResponse" message="tns:IWinfoToolServiceRead_GetDTUByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserUserDtuListByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserUserDtuListByUserId" message="tns:IWinfoToolServiceRead_GetUserUserDtuListByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserUserDtuListByUserIdResponse" message="tns:IWinfoToolServiceRead_GetUserUserDtuListByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroupCodeByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserGroupCodeByUserId" message="tns:IWinfoToolServiceRead_GetUserGroupCodeByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetUserGroupCodeByUserIdResponse" message="tns:IWinfoToolServiceRead_GetUserGroupCodeByUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetRoleByUserId" message="tns:IWinfoToolServiceRead_GetRoleByUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceRead/GetRoleByUserIdResponse" message="tns:IWinfoToolServiceRead_GetRoleByUserId_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWinfoToolServiceRead" type="tns:IWinfoToolServiceRead">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCityList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetCityList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProvinceList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetProvinceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetCompanyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConfigList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetConfigList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfig">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetCompanyConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyById">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetCompanyById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientTypeList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetClientTypeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSite">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteById">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetSiteById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMalodorSiteById">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetMalodorSiteById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteGroupByCompanyId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetSiteGroupByCompanyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupDeatail">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetGroupDeatail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiledList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetFiledList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiledById">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetFiledById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupListByCompanyID">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetGroupListByCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupByCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetGroupByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteByCompanyIdAndGroupCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetSiteByCompanyIdAndGroupCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByDTUId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserListByDTUId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfroByCompanyId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserInfroByCompanyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConfigListByName">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserConfigListByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConfigByCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserConfigByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserCoinfigList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserCoinfigList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DtuConfigListV2">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/DtuConfigListV2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DtuConfigList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/DtuConfigList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPressureLevelList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetPressureLevelList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOnePressureLevel">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetOnePressureLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVerList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetVerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfluencList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetInfluencList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfluencByCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetInfluencByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransSetList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetTransSetList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransById">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetTransById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransVerList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetTransVerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUConfigListByConfigName">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetDTUConfigListByConfigName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDtuMalodorListByConfigName">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetDtuMalodorListByConfigName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDtuConfigByCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetDtuConfigByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVipDeviceList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVipDeviceById">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVipDeviceExById">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetVipDeviceExById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteListByComId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetSiteListByComId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUListByCompanyId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetDTUListByCompanyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetDTUList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlertListBySiteIdAndDate">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetAlertListBySiteIdAndDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSiteGroupByCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetSiteGroupByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserUserGroupList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserUserGroupList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleList">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetRoleList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetRoleByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRole">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/AddRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/UpdateRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DelRole">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/DelRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDTUByUserId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetDTUByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserUserDtuListByUserId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserUserDtuListByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserGroupCodeByUserId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetUserGroupCodeByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByUserId">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceRead/GetRoleByUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WinfoToolServiceRead">
+    <wsdl:port name="BasicHttpBinding_IWinfoToolServiceRead" binding="tns:BasicHttpBinding_IWinfoToolServiceRead">
+      <soap:address location="http://localhost:5644/WinfoToolServiceRead.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

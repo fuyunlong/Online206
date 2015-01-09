@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WinfoToolServiceWrite" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Model" />
+      <xsd:import schemaLocation="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IWinfoToolServiceWrite_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateSite_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSite" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateSite_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddSite_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSite" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddSite_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_GenerateSiteCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateSiteCode" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_GenerateSiteCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GenerateSiteCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteSite_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSite" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteSite_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSiteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddLevel_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddLevel" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddLevel_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddLevelResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddFiled_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddFiled" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddFiled_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddFiledResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_EditFiled_InputMessage">
+    <wsdl:part name="parameters" element="tns:EditFiled" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_EditFiled_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EditFiledResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteFiledd_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFiledd" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteFiledd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFileddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddInfluence_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddInfluence" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddInfluence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddInfluenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateInfluence_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateInfluence" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateInfluence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateInfluenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteInfluence_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteInfluence" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteInfluence_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteInfluenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroup" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroup" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddUserConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserConfig" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddUserConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateUserConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserConfig" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateUserConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteUserConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserConfig" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteUserConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddDTUUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDTUUser" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddDTUUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDTUUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteDTUUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDTUUser" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteDTUUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDTUUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddDtuConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDtuConfig" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddDtuConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDtuConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateDtuConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDtuConfig" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateDtuConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDtuConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteDtuConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDtuConfig" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteDtuConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDtuConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddSiteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSiteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddSiteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSiteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateSiteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSiteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateSiteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSiteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteSiteGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSiteGroup" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteSiteGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSiteGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddVIPDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddVIPDevice" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_AddVIPDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddVIPDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateVIPDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVIPDevice" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_UpdateVIPDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateVIPDeviceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteVIPDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteVIPDevice" />
+  </wsdl:message>
+  <wsdl:message name="IWinfoToolServiceWrite_DeleteVIPDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteVIPDeviceResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IWinfoToolServiceWrite">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DoWork" message="tns:IWinfoToolServiceWrite_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DoWorkResponse" message="tns:IWinfoToolServiceWrite_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateSite" message="tns:IWinfoToolServiceWrite_UpdateSite_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateSiteResponse" message="tns:IWinfoToolServiceWrite_UpdateSite_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddSite" message="tns:IWinfoToolServiceWrite_AddSite_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddSiteResponse" message="tns:IWinfoToolServiceWrite_AddSite_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateSiteCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/GenerateSiteCode" message="tns:IWinfoToolServiceWrite_GenerateSiteCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/GenerateSiteCodeResponse" message="tns:IWinfoToolServiceWrite_GenerateSiteCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSite">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteSite" message="tns:IWinfoToolServiceWrite_DeleteSite_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteSiteResponse" message="tns:IWinfoToolServiceWrite_DeleteSite_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddLevel">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddLevel" message="tns:IWinfoToolServiceWrite_AddLevel_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddLevelResponse" message="tns:IWinfoToolServiceWrite_AddLevel_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddFiled">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddFiled" message="tns:IWinfoToolServiceWrite_AddFiled_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddFiledResponse" message="tns:IWinfoToolServiceWrite_AddFiled_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EditFiled">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/EditFiled" message="tns:IWinfoToolServiceWrite_EditFiled_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/EditFiledResponse" message="tns:IWinfoToolServiceWrite_EditFiled_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFiledd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteFiledd" message="tns:IWinfoToolServiceWrite_DeleteFiledd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteFileddResponse" message="tns:IWinfoToolServiceWrite_DeleteFiledd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddInfluence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddInfluence" message="tns:IWinfoToolServiceWrite_AddInfluence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddInfluenceResponse" message="tns:IWinfoToolServiceWrite_AddInfluence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateInfluence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateInfluence" message="tns:IWinfoToolServiceWrite_UpdateInfluence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateInfluenceResponse" message="tns:IWinfoToolServiceWrite_UpdateInfluence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteInfluence">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteInfluence" message="tns:IWinfoToolServiceWrite_DeleteInfluence_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteInfluenceResponse" message="tns:IWinfoToolServiceWrite_DeleteInfluence_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddGroup" message="tns:IWinfoToolServiceWrite_AddGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddGroupResponse" message="tns:IWinfoToolServiceWrite_AddGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateGroup" message="tns:IWinfoToolServiceWrite_UpdateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateGroupResponse" message="tns:IWinfoToolServiceWrite_UpdateGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteGroup" message="tns:IWinfoToolServiceWrite_DeleteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteGroupResponse" message="tns:IWinfoToolServiceWrite_DeleteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddUserConfig" message="tns:IWinfoToolServiceWrite_AddUserConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddUserConfigResponse" message="tns:IWinfoToolServiceWrite_AddUserConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateUserConfig" message="tns:IWinfoToolServiceWrite_UpdateUserConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateUserConfigResponse" message="tns:IWinfoToolServiceWrite_UpdateUserConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteUserConfig" message="tns:IWinfoToolServiceWrite_DeleteUserConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteUserConfigResponse" message="tns:IWinfoToolServiceWrite_DeleteUserConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDTUUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddDTUUser" message="tns:IWinfoToolServiceWrite_AddDTUUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddDTUUserResponse" message="tns:IWinfoToolServiceWrite_AddDTUUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDTUUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteDTUUser" message="tns:IWinfoToolServiceWrite_DeleteDTUUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteDTUUserResponse" message="tns:IWinfoToolServiceWrite_DeleteDTUUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDtuConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddDtuConfig" message="tns:IWinfoToolServiceWrite_AddDtuConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddDtuConfigResponse" message="tns:IWinfoToolServiceWrite_AddDtuConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDtuConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateDtuConfig" message="tns:IWinfoToolServiceWrite_UpdateDtuConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateDtuConfigResponse" message="tns:IWinfoToolServiceWrite_UpdateDtuConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDtuConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteDtuConfig" message="tns:IWinfoToolServiceWrite_DeleteDtuConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteDtuConfigResponse" message="tns:IWinfoToolServiceWrite_DeleteDtuConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSiteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddSiteGroup" message="tns:IWinfoToolServiceWrite_AddSiteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddSiteGroupResponse" message="tns:IWinfoToolServiceWrite_AddSiteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSiteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateSiteGroup" message="tns:IWinfoToolServiceWrite_UpdateSiteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateSiteGroupResponse" message="tns:IWinfoToolServiceWrite_UpdateSiteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSiteGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteSiteGroup" message="tns:IWinfoToolServiceWrite_DeleteSiteGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteSiteGroupResponse" message="tns:IWinfoToolServiceWrite_DeleteSiteGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddVIPDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddVIPDevice" message="tns:IWinfoToolServiceWrite_AddVIPDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/AddVIPDeviceResponse" message="tns:IWinfoToolServiceWrite_AddVIPDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVIPDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateVIPDevice" message="tns:IWinfoToolServiceWrite_UpdateVIPDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/UpdateVIPDeviceResponse" message="tns:IWinfoToolServiceWrite_UpdateVIPDevice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteVIPDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteVIPDevice" message="tns:IWinfoToolServiceWrite_DeleteVIPDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWinfoToolServiceWrite/DeleteVIPDeviceResponse" message="tns:IWinfoToolServiceWrite_DeleteVIPDevice_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IWinfoToolServiceWrite" type="tns:IWinfoToolServiceWrite">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSite">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/UpdateSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSite">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateSiteCode">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/GenerateSiteCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSite">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteSite" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLevel">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddLevel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddFiled">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddFiled" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EditFiled">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/EditFiled" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFiledd">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteFiledd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddInfluence">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddInfluence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateInfluence">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/UpdateInfluence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteInfluence">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteInfluence" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGroup">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateGroup">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/UpdateGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteGroup">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserConfig">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddUserConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserConfig">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/UpdateUserConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserConfig">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteUserConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDTUUser">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddDTUUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDTUUser">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteDTUUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDtuConfig">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddDtuConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDtuConfig">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/UpdateDtuConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDtuConfig">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteDtuConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSiteGroup">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddSiteGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSiteGroup">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/UpdateSiteGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSiteGroup">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteSiteGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddVIPDevice">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/AddVIPDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateVIPDevice">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/UpdateVIPDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteVIPDevice">
+      <soap:operation soapAction="http://tempuri.org/IWinfoToolServiceWrite/DeleteVIPDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WinfoToolServiceWrite">
+    <wsdl:port name="BasicHttpBinding_IWinfoToolServiceWrite" binding="tns:BasicHttpBinding_IWinfoToolServiceWrite">
+      <soap:address location="http://localhost:5644/WinfoToolServiceWrite.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

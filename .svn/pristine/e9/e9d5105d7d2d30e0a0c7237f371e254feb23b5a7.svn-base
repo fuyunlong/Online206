@@ -1,0 +1,136 @@
+﻿
+/* 普通短信 */
+.fn_nav_mess{width:17px;height:17px;background:url(imgs/sprites/SmsCom.gif) no-repeat -24px -43px;cursor:pointer; overflow:hidden;}
+/* 祝福短信 */
+.fn_nav_messBless{width:17px;height:17px;background:url(imgs/sprites/SmsCom.gif) no-repeat -24px -43px;cursor:pointer; overflow:hidden;}
+/* 查询短信 */
+.fn_nav_messSearch{width:17px;height:17px;background:url(imgs/sprites/SmsCom.gif) no-repeat -1px -66px;cursor:pointer; overflow:hidden;}
+/* 预定短信 */
+.fn_nav_reserveMess{width:17px;height:17px;background:url(imgs/sprites/SmsCom.gif) no-repeat -24px -86px;cursor:pointer; overflow:hidden;}
+/* 预定祝福 */
+.fn_nav_reserveBless{width:17px;height:17px;background:url(imgs/sprites/SmsCom.gif) no-repeat -24px -43px;cursor:pointer; overflow:hidden;}
+/* 预定短信管理 */
+.fn_nav_reserveManage{width:17px;height:17px;background:url(imgs/sprites/SmsCom.gif) no-repeat 0px -22px;cursor:pointer; overflow:hidden;}
+/* 日月年报表 */
+.fn_nav_report{width:17px;height:15px;background:url(imgs/sprites/SmsCom.gif) no-repeat -206px -45px;cursor:pointer; overflow:hidden;}
+/* 关键字管理 */
+.fn_nav_Keys{width:16px;height:16px;background:url(imgs/sprites/SmsCom.gif) no-repeat -366px -223px;cursor:pointer;}
+/* 日月表短信查询 */
+.fn_nav_reportSearch{width:16px;height:15px;background:url(imgs/sprites/SmsCom.gif) no-repeat -175px -45px;cursor:pointer;}
+/* 数据查询 */
+.fn_nav_dataSearch{width:16px;height:15px;background:url(imgs/sprites/SmsCom.gif) no-repeat -84px -44px;cursor:pointer;}
+/*我的信息*/
+.fn_SysChgPic{width:20px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -281px -25px;}
+/*F11全屏*/
+.fn_full{width:20px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -303px -24px;cursor:pointer;}
+/*切换账号*/
+.fn_userchg{width:22px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -256px -24px;cursor:pointer;}
+/* 转账服务 */
+.fn_nav_accountCenter{width:16px;height:17px;background:url(imgs/sprites/SmsCom.gif) no-repeat -246px -69px;}
+/* 收费标准查询 */
+.fn_nav_expenseSearch{width:15px;height:15px;background:url(imgs/sprites/SmsCom.gif) no-repeat -326px -86px;}
+/* 自定义短信标识 */
+.fn_nav_customKey{width:16px;height:15px;background:url(imgs/sprites/SmsCom.gif) no-repeat -376px -68px;}
+/* 账户明细 */
+.fn_nav_acDetails{width:16px;height:16px;background:url(imgs/sprites/SmsCom.gif) no-repeat -366px -200px;}
+/* 消费账单管理 */
+.fn_nav_expenseRecord{width:16px;height:16px;background:url(imgs/sprites/SmsCom.gif) no-repeat -366px -178px;}
+/* 查询联系人*/
+.fn_nav_searchLinkman{width:16px;height:16px;background:url(imgs/sprites/SmsCom.gif) no-repeat -341px -156px;}
+/*新增联系人*/
+.fn_nav_addLinkman{width:16px;height:16px;background:url(imgs/sprites/SmsCom.gif) no-repeat -366px -156px;}
+/***ver:1.2.1***/
+/*设备接口*/
+.fn_nav_deviceInf{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat 0px 0px;}
+/*显示器*/
+.fn_nav_display1{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -22px 0px;}
+.fn_nav_display2{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -154px 0px;}
+.fn_nav_display3{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -176px 0px;}
+.fn_nav_display4{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -132px -22px;}
+.fn_nav_display5{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -154px -22px;}
+/*安全设备*/
+.fn_nav_safetyDev1{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -198px -22px;}
+.fn_nav_safetyDev2{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat 0px -44px;}
+.fn_nav_safetyDev3{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -22px -44px;}
+.fn_nav_safetyDev4{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -44px -44px;}
+.fn_nav_safetyDev5{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -176px -22px;}
+.fn_nav_safetyDev6{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -44px -22px;}
+/*耳机*/
+.fn_nav_headset{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -44px 0px;}
+/*摄像机*/
+.fn_nav_vidicon{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -66px 0px;}
+/*服务器*/
+.fn_nav_server1{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -88px 0px;}
+.fn_nav_server2{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -110px 0px;}
+/*数据库*/
+.fn_nav_database{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -132px 0px;}
+/*手托地球*/
+.fn_nav_handEarth{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -198px 0px;}
+/*数据交换*/
+.fn_nav_dataExchange{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat 0px -22px;}
+/*数据查询*/
+.fn_nav_dataQuery{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -22px -22px;}
+/*座机*/
+.fn_nav_telephone{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -66px -22px;}
+/*权重设置*/
+.fn_nav_toolEarth{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -88px -22px;}
+/*日历*/
+.fn_nav_calendar{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -110px -22px;}
+/*电源*/
+.fn_nav_powerSupply{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -66px -44px;}
+/*数据涨幅分析*/
+.fn_nav_dataUp{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -132px -44px;}
+/*电话薄*/
+.fn_nav_phonebook1{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -88px -44px;}
+.fn_nav_phonebook2{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -110px 44px;}
+/*实时数据*/
+.fn_nav_realData{width:20px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -373px 0px;}
+/*数据对比分析*/
+.fn_nav_dataComparison{width:20px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -351px 0px;}
+/*安全检测*/
+.fn_nav_securityDet{width:20px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -328px 0px;}
+/*数据报警*/
+.fn_nav_alertData{width:20px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -259px 0px;}
+/*数据报表*/
+.fn_nav_dataRpt{width:20px;height:20px;background:url(imgs/sprites/SmsCom.gif) no-repeat -304px 0px;}
+/*参数列表*/
+.fn_nav_paraList{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -154px -44px;}
+/*阀值设置*/
+.fn_nav_thrValue{width:20px;height:20px;background:url(imgs/sprites/MonitorCom.gif) no-repeat -176px -44px;}
+/*关闭图标*/
+.bgClosePic { width: 18px; height: 18px; background: url(/Style/imgs/ComImg.gif) no-repeat -5px 0px; cursor: pointer; float: right; }
+.com_bgColor { background-color: #DEE5EA; }
+/*IE图标*/
+.fn_ieLogo { width: 19px; height: 20px; background: url(imgs/sprites/pic_sprites.gif) no-repeat -107px -179px; border-radius: 6px; border: 1px solid Silver; cursor: pointer; }
+/*建设银行*/
+.fn_bank_ccb { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -38px -109px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*招商银行*/
+.fn_bank_cmbc { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -143px -109px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*工商银行*/
+.fn_bank_icbc { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -9px -133px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*中国民生银行*/
+.fn_bank_cmbc { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -9px -162px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*上海浦东发展银行*/
+.fn_bank_spdb { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -9px -190px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*中国银行*/
+.fn_bank_boc { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -9px -217px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*华夏银行*/
+.fn_bank_hxb { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -9px -243px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*中国邮政银行*/
+.fn_bank_psbc { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -9px -268px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*农业银行*/
+.fn_bank_abc { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -105px -135px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*广东发展银行*/
+.fn_bank_gdb { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -105px -162px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*深圳发展银行*/
+.fn_bank_sdb { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -105px -189px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*兴业银行*/
+.fn_bank_cib { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -105px -217px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*交通银行*/
+.fn_bank_bocom { width: 82px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -105px -244px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*VISA*/
+.fn_bank_visa { width: 60px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -105px -269px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*万事达*/
+.fn_bank_mastercard { width: 58px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -170px -269px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }
+/*银联*/
+.fn_bank_unionpay { width: 58px; height: 22px; background: url(/Style/imgs/ComImg.gif) no-repeat -186px -243px; cursor: pointer; border-radius: 6px; border: 1px solid Silver; }

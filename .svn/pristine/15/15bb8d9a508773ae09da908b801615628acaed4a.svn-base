@@ -1,0 +1,263 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using Com.Winfotian.DB.SqlHelper;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.DB
+{
+    public class AlertInfoProvider
+    {
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public int Add(T_Alert_Info model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into [Infa]..[T_Alert_Info](");
+            strSql.Append("Dtuid,AlertDesc,AlertTime,AlertLevel,FieldName,FieldValue,SMSContent,AlertType,PhoneNum,AlertState,RecentTime,IsReply,IsSend,CurSendTimes,CurAlertCount,SendTimes,AlertCount,UpdateFlag)");
+            strSql.Append(" values (");
+            strSql.Append("@Dtuid,@AlertDesc,@AlertTime,@AlertLevel,@FieldName,@FieldValue,@SMSContent,@AlertType,@PhoneNum,@AlertState,@RecentTime,@IsReply,@IsSend,@CurSendTimes,@CurAlertCount,@SendTimes,@AlertCount,@UpdateFlag)");
+            strSql.Append(";select @@IDENTITY");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@AlertDesc", SqlDbType.NVarChar,50),
+					new SqlParameter("@AlertTime", SqlDbType.DateTime),
+					new SqlParameter("@AlertLevel", SqlDbType.SmallInt,2),
+					new SqlParameter("@FieldName", SqlDbType.VarChar,30),
+					new SqlParameter("@FieldValue", SqlDbType.Float,8),
+					new SqlParameter("@SMSContent", SqlDbType.Text),
+					new SqlParameter("@AlertType", SqlDbType.SmallInt,2),
+					new SqlParameter("@PhoneNum", SqlDbType.Text),
+					new SqlParameter("@AlertState", SqlDbType.SmallInt,2),
+					new SqlParameter("@RecentTime", SqlDbType.DateTime),
+					new SqlParameter("@IsReply", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsSend", SqlDbType.SmallInt,2),
+					new SqlParameter("@CurSendTimes", SqlDbType.SmallInt,2),
+					new SqlParameter("@CurAlertCount", SqlDbType.Int,4),
+					new SqlParameter("@SendTimes", SqlDbType.Int,4),
+					new SqlParameter("@AlertCount", SqlDbType.Int,4),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4)};
+            parameters[0].Value = model.Dtuid;
+            parameters[1].Value = model.AlertDesc;
+            parameters[2].Value = model.AlertTime;
+            parameters[3].Value = model.AlertLevel;
+            parameters[4].Value = model.FieldName;
+            parameters[5].Value = model.FieldValue;
+            parameters[6].Value = model.SMSContent;
+            parameters[7].Value = model.AlertType;
+            parameters[8].Value = model.PhoneNum;
+            parameters[9].Value = model.AlertState;
+            parameters[10].Value = model.RecentTime;
+            parameters[11].Value = model.IsReply;
+            parameters[12].Value = model.IsSend;
+            parameters[13].Value = model.CurSendTimes;
+            parameters[14].Value = model.CurAlertCount;
+            parameters[15].Value = model.SendTimes;
+            parameters[16].Value = model.AlertCount;
+            parameters[17].Value = model.UpdateFlag;
+
+            object obj = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(T_Alert_Info model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_Alert_Info] set ");
+            strSql.Append("Dtuid=@Dtuid,");
+            strSql.Append("AlertDesc=@AlertDesc,");
+            strSql.Append("AlertTime=@AlertTime,");
+            strSql.Append("AlertLevel=@AlertLevel,");
+            strSql.Append("FieldName=@FieldName,");
+            strSql.Append("FieldValue=@FieldValue,");
+            strSql.Append("SMSContent=@SMSContent,");
+            strSql.Append("AlertType=@AlertType,");
+            strSql.Append("PhoneNum=@PhoneNum,");
+            strSql.Append("AlertState=@AlertState,");
+            strSql.Append("RecentTime=@RecentTime,");
+            strSql.Append("IsReply=@IsReply,");
+            strSql.Append("IsSend=@IsSend,");
+            strSql.Append("CurSendTimes=@CurSendTimes,");
+            strSql.Append("CurAlertCount=@CurAlertCount,");
+            strSql.Append("SendTimes=@SendTimes,");
+            strSql.Append("AlertCount=@AlertCount,");
+            strSql.Append("UpdateFlag=@UpdateFlag");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@AlertDesc", SqlDbType.NVarChar,50),
+					new SqlParameter("@AlertTime", SqlDbType.DateTime),
+					new SqlParameter("@AlertLevel", SqlDbType.SmallInt,2),
+					new SqlParameter("@FieldName", SqlDbType.VarChar,30),
+					new SqlParameter("@FieldValue", SqlDbType.Float,8),
+					new SqlParameter("@SMSContent", SqlDbType.Text),
+					new SqlParameter("@AlertType", SqlDbType.SmallInt,2),
+					new SqlParameter("@PhoneNum", SqlDbType.Text),
+					new SqlParameter("@AlertState", SqlDbType.SmallInt,2),
+					new SqlParameter("@RecentTime", SqlDbType.DateTime),
+					new SqlParameter("@IsReply", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsSend", SqlDbType.SmallInt,2),
+					new SqlParameter("@CurSendTimes", SqlDbType.SmallInt,2),
+					new SqlParameter("@CurAlertCount", SqlDbType.Int,4),
+					new SqlParameter("@SendTimes", SqlDbType.Int,4),
+					new SqlParameter("@AlertCount", SqlDbType.Int,4),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@Id", SqlDbType.Int,4)};
+            parameters[0].Value = model.Dtuid;
+            parameters[1].Value = model.AlertDesc;
+            parameters[2].Value = model.AlertTime;
+            parameters[3].Value = model.AlertLevel;
+            parameters[4].Value = model.FieldName;
+            parameters[5].Value = model.FieldValue;
+            parameters[6].Value = model.SMSContent;
+            parameters[7].Value = model.AlertType;
+            parameters[8].Value = model.PhoneNum;
+            parameters[9].Value = model.AlertState;
+            parameters[10].Value = model.RecentTime;
+            parameters[11].Value = model.IsReply;
+            parameters[12].Value = model.IsSend;
+            parameters[13].Value = model.CurSendTimes;
+            parameters[14].Value = model.CurAlertCount;
+            parameters[15].Value = model.SendTimes;
+            parameters[16].Value = model.AlertCount;
+            parameters[17].Value = model.UpdateFlag;
+            parameters[18].Value = model.Id;
+
+            int rows = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(int Id)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from [Infa]..[T_Alert_Info] ");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+};
+            parameters[0].Value = Id;
+
+            int rows = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public T_Alert_Info GetModel(int Id)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,Dtuid,AlertDesc,AlertTime,AlertLevel,FieldName,FieldValue,SMSContent,AlertType,PhoneNum,AlertState,RecentTime,IsReply,IsSend,CurSendTimes,CurAlertCount,SendTimes,AlertCount,UpdateFlag from [Infa]..[T_Alert_Info] ");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+};
+            parameters[0].Value = Id;
+
+            T_Alert_Info model = null;
+            using (IDataReader dr = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if (dr.Read())
+                {
+                    model = IDataT_Alert_InfoReader(dr);
+                }
+            }
+            return model;
+        }
+
+
+
+
+        /// <summary>
+        /// T_Alert_Info 数据读取
+        /// </summary>
+        private T_Alert_Info IDataT_Alert_InfoReader(IDataReader dr)
+        {
+            T_Alert_Info model = new T_Alert_Info();
+            try
+            {
+                model.Id = (dr["Id"] is DBNull) ? 0 : Convert.ToInt32(dr["Id"].ToString());
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.AlertDesc = (dr["AlertDesc"] is DBNull) ? string.Empty : dr["AlertDesc"].ToString();
+                model.AlertTime = (dr["AlertTime"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["AlertTime"].ToString());
+                model.AlertLevel = (dr["AlertLevel"] is DBNull) ? 0 : Convert.ToInt32(dr["AlertLevel"].ToString());
+                model.FieldName = (dr["FieldName"] is DBNull) ? string.Empty : dr["FieldName"].ToString();
+                model.FieldValue = (dr["FieldValue"] is DBNull) ? 0 : Convert.ToDecimal(dr["FieldValue"].ToString());
+                model.SMSContent = (dr["SMSContent"] is DBNull) ? string.Empty : dr["SMSContent"].ToString();
+                model.AlertType = (dr["AlertType"] is DBNull) ? 0 : Convert.ToInt32(dr["AlertType"].ToString());
+                model.PhoneNum = (dr["PhoneNum"] is DBNull) ? string.Empty : dr["PhoneNum"].ToString();
+                model.AlertState = (dr["AlertState"] is DBNull) ? 0 : Convert.ToInt32(dr["AlertState"].ToString());
+                model.RecentTime = (dr["RecentTime"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RecentTime"].ToString());
+                model.IsReply = (dr["IsReply"] is DBNull) ? 0 : Convert.ToInt32(dr["IsReply"].ToString());
+                model.IsSend = (dr["IsSend"] is DBNull) ? 0 : Convert.ToInt32(dr["IsSend"].ToString());
+                model.CurSendTimes = (dr["CurSendTimes"] is DBNull) ? 0 : Convert.ToInt32(dr["CurSendTimes"].ToString());
+                model.CurAlertCount = (dr["CurAlertCount"] is DBNull) ? 0 : Convert.ToInt32(dr["CurAlertCount"].ToString());
+                model.SendTimes = (dr["SendTimes"] is DBNull) ? 0 : Convert.ToInt32(dr["SendTimes"].ToString());
+                model.AlertCount = (dr["AlertCount"] is DBNull) ? 0 : Convert.ToInt32(dr["AlertCount"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch
+            {
+                return null;
+            }
+            return model;
+        }
+
+        //根据站点Id和日期查询报警记录
+        public List<T_Alert_Info> GetListBySiteAndDate(string siteId, DateTime begain, DateTime end)
+        {
+            List<T_Alert_Info> list = new List<T_Alert_Info>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select * from [Infa]..[T_Alert_Info] where Dtuid=@Dtuid and AlertTime BETWEEN @Begain AND @End");
+            SqlParameter[] parameters = {
+                           new SqlParameter("@Dtuid",siteId),
+                           new SqlParameter("@Begain",begain),
+                           new SqlParameter("@End",end)
+                                        };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters))
+            {
+                while (reader.Read())
+                {
+                    var model = IDataT_Alert_InfoReader(reader);
+                    list.Add(model);
+                }
+            }
+            return list;
+        }
+    }
+}

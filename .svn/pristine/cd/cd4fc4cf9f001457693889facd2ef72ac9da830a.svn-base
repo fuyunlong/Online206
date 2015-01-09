@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点用户管理</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/UserMng/UserDtu.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#tbDiv").css("height", $(window).height() * 0.87);
+                new comTab().fnInit();
+
+                UserDTU.LoadCompanys();
+                setTimeout(function () {
+                    UserDTU.GetGroupsByComId($("#ddlCompany").val());
+                }, 100);
+                setTimeout(function () {
+                    UserDTU.GetDTUByGroupCode($("#ddlGroup").val());
+                }, 100);
+                      
+                $("#btnQuery").click(function () {
+                    UserDTU.SearchUser();
+                    new comTab().fnResizeTable();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="com_TextCenter com_font13Px com_borderCom" style="height: 26px;">
+            所属公司&nbsp;<select id="ddlCompany" class="com_w15pen" onchange="UserDTU.GetGroupsByComId(this.value)"></select>
+            所属分组&nbsp;<select id="ddlGroup" class="com_w15pen" onchange="UserDTU.GetDTUByGroupCode(this.value)"></select>
+            站点名称&nbsp;<select id="ddlDtu" class="com_w15pen"></select>
+            <input type="button" value="查询" class="buttonVer2" id="btnQuery" />
+            <input type="button" class="buttonVer2" value="添加" onclick="UserDTU.CheckData()" />
+        </div>
+        <div>
+            <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+                <table id="UserList" class="ui-com-tab" rules="all">
+                    <thead>
+                        <tr align="left" class="panel-header">
+                            <th class="com_w15pen com_TextCenter">
+                                用户名
+                            </th>
+                            <th class="com_w15pen com_TextCenter">
+                                真实姓名
+                            </th>
+                            <th class="com_w15pen com_TextCenter">
+                                职务
+                            </th>
+                            <th class="com_w15pen com_TextCenter">
+                                联系电话
+                            </th>
+                            <th class="com_w20pen com_TextCenter">
+                                邮箱
+                            </th>
+                            <th class="com_w20pen com_TextCenter">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>                   
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="dd"></div>
+        <div id="loading"></div>
+    </body>
+</html>

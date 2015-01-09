@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加站点</title>
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+</head>
+<body>
+    <div>
+        <table class="ui-com-tabFrm">
+            <tbody>
+                <tr>
+                    <td>所属公司
+                    </td>
+                    <td>
+                        <select id="Company" onchange="SiteMng.GetGroup()">
+                            <option value="0">全部</option>
+                            @{
+                                foreach (var a in ViewBag.CompanyList)
+                                {
+                                <option value=@a.CompanyID>@a.CompanyName</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                    <td>站点分组</td>
+                    <td>
+                        <select id="Group">
+                            <option value="0">全部</option>
+                        </select></td>
+                    <td>站点名称</td>
+                    <td>
+                        <input type="text" id="SiteName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>阀门编号</td>
+                    <td>
+                        <input type="text" disabled="disabled" id="ValveCode"  value="@ViewBag.obj.ValveCode"/></td>
+                    <td>阀门名称</td>
+                    <td>
+                        <input type="text" id="ValveName" value="@ViewBag.obj.DtuName"/></td>
+                </tr>
+                <tr>
+                    <td>关阀时间</td>
+                    <td>
+                        <input type="text" id="ClosedTime"  value="@ViewBag.obj.ClosedTime"/>
+                    </td>
+                    <td>影响区域</td>
+                    <td>
+                        <input type="text" id="EffctArea"   value="@ViewBag.obj.EffctArea" />
+                    </td>
+                    <td>影响户数</td>
+                    <td>
+                        <input type="text" id="EffctUserNum" value="@ViewBag.obj.EffctUserNum"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="com_TextCenter">
+                        <input type="button" class="buttonVer2" value="修改" />
+                        <input type="button" class="buttonVer2" value="取消" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

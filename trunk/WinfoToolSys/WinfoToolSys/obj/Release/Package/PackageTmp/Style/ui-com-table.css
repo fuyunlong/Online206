@@ -1,0 +1,26 @@
+﻿/*-----------------------------------------------------------------------------------------------------
+ *   Company:   Chengdu Winfotian Infomation Technology Co.,Ltd
+ *    Author:   yuanyang@winfotian.com
+ *  DateTime:   2014-10-16 10:20:00 
+ *   Purpose:
+ *           Version           DateTime                    Author               Description
+ *            v1.0       2014-10-16 10:20:00       yuanyang@winfotian.com       ui-com-table.js自动导入的关联样式              
+ *
+ *----------------------------------------------------------------------------------------------------*/
+.ui-com-tab,.ui-com-thead { width:100%; table-layout:fixed; border:1px solid rgb(145, 215, 255);border-spacing:0;}
+.ui-com-thead { position:absolute;}
+.ui-com-tab th,.ui-com-thead th { height: 30px; color: white; background-color: rgb(52, 172, 240); box-shadow: inset 0px -1px 5px rgb(109, 151, 175); text-align: center; }
+.ui-com-tab td { height:24px; background-color: #F1F1F1; color: rgb(0, 121, 179);border:0; border-right: dashed 1px #d1d1d1;border-bottom: dashed 1px #d1d1d1; }
+.ui-com-tab td:hover { background-color: #FFEEAC; }
+.ui-com-tab tr > td:last-child { border-right:0;}
+.ui-com-tab td a { text-decoration: none; color: #EE6E18; }
+.ui-com-td-bg { background-color: #F1F1F1; }
+.ui-com-td-bg-hover { background-color: #FFEEAC !important; }
+
+/*
+*<summary>
+*下面样式仅用于提交类表单(非列表类)
+**/
+.ui-com-tabFrm { width:100%; border:1px solid rgb(145, 215, 255);border-spacing:0;}
+.ui-com-tabFrm td { background-color: #F1F1F1;border:0; border-right: dashed 1px #d1d1d1;border-bottom: dashed 1px #d1d1d1;}
+.ui-com-tabFrm > tr:last-child td { border:0;}

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+  </configSections>
+  <connectionStrings>
+    <add name="defaultConnection" connectionString="ABA377C675155CE0FAB40385223C596F3565DB667DB8FEA2D54034891AEFFDEC948888BF23FE970B8BF64AA17BADF4FBD33F5607A0DE653D7282F1C0F4BFF40F63F1CB1ACEFBAC6EAB" providerName="System.Data.SqlClient" />
+	<add name="LocalConnection" connectionString="ABA377C675155CE0FAB40385223C596F3565DB667DB8FEA2D54034891AEFFDEC948888BF23FE970B8BF64AA17BADF4FBD33F5607A0DE653D7282F1C0F4BFF40F63F1CB1ACEFBAC6EAB" providerName="System.Data.SqlClient" />
+  </connectionStrings>
+  <appSettings>
+    <add key="logPath" value="D:\GaSysLog\Serlog.txt" />
+  </appSettings>
+</configuration>

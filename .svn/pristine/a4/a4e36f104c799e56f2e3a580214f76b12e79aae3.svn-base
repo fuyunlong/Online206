@@ -1,0 +1,90 @@
+﻿var Fee = {
+    //添加
+    Add: function () {
+        var model = Fee.GetData();
+        $.ajax({
+            type: "post",
+            url: "/UserFee/Insert",
+            data: model,
+            dataType: "text",
+            error: function (ex) {
+                Common.MsgBox("添加计费失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    //关闭窗口
+                    Common.layoutTopClose();
+                    //刷新
+                    $("#framecenter iframe", parent.document).attr("src", "UserFee/Index");
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        });
+    },
+    //修改
+    Update: function () {
+        var model = Fee.GetData();
+        $.ajax({
+            type: "post",
+            url: "/UserFee/Update",
+            data: model,
+            dataType: "text",
+            error: function (ex) {
+                Common.MsgBox("修改计费失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    //关闭窗口
+                    Common.layoutTopClose();
+                    //刷新
+                    $("#framecenter iframe", parent.document).attr("src", "UserFee/Index");
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        });
+    },
+    //删除
+    Delete: function (billCode) {
+        if (confirm("确定要删除吗?")) {
+            $.ajax({
+                type: "post",
+                url: "/UserFee/DeleteFee",
+                data: { billCode: billCode },
+                dataType: "text",
+                error: function (ex) {
+                    Common.MsgBox("删除计费失败,请稍后再试" + ex.responseText);
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        //关闭窗口
+                        Common.layoutTopClose();
+                        //刷新
+                        $("#framecenter iframe", parent.document).attr("src", "UserFee/Index");
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    },
+    //获取数据
+    GetData: function () {
+        var model = {
+            BillCode: $("#txtFeeName").attr("name"),
+            BillName: $("#txtFeeName").val().trim(),
+            AlertFee: $("#txtAlertFee").val().trim(),
+            DataFee: $("#txtDataFee").val().trim(),
+            BookFee: $("#txtBookFee").val().trim(),
+            RptFee: $("#txtRptFee").val().trim(),
+            OtherFee: $("#txtOtherFee").val().trim(),
+            DayMax: $("#txtDayMax").val().trim(),
+            MonthMax: $("#txtMonthMax").val().trim()
+        };
+        return model;
+    }
+};

@@ -1,0 +1,95 @@
+﻿var Alert = {
+    //加载公司列表
+    LoadCompanys: function () {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取公司信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                $("#ddlCompany").append(str);
+                Alert.GetGroupsByComId($("#ddlCompany").val());
+            }
+        });
+    },
+    //加载分组
+    GetGroupsByComId: function (companyId) {
+        $.ajax({
+            type: "post",
+            data: { id: companyId },
+            url: "/SiteGroup/GetGroup",
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取分组信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "<option value=0>全部</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].GroupCode + '">' + data[i].GroupName + '</option>';
+                }
+                $("#ddlGroup").html(str);
+                Alert.GetSiteList();
+            }
+        });
+    },
+    //根据分组编码查询站点
+    GetSiteList: function () {
+        var companyId = $("#ddlCompany").val();
+        var groupCode = $("#ddlGroup").val();
+        $.ajax({
+            type: "post",
+            url: "/UserInfo/GetDTUByGroupCode",
+            data: { companyId: companyId, groupCode: groupCode },
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取站点信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].Dtuid + '">' + data[i].DtuidName + '</option>';
+                }
+                $("#ddlSite").html(str);
+            }
+        });
+    },
+    //查询列表
+    SearchRecord: function () {
+        var siteId = $("#ddlSite").val();
+        var begain = $("#txtBeginDate").val();
+        var end = $("#txtEndDate").val();
+        $.ajax({
+            type: "post",
+            url: "/AlearmRecord/GetRecordList",
+            data: { siteId: siteId, begain: begain, end: end },
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询报警记录失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<tr>";
+                    str += "<td class='com_TextCenter com_w10pen'>" + data[i].AlertCount + "</td>";
+                    str += "<td class='com_TextCenter com_w20pen'>" + $("#ddlSite option:selected").text() + "</td>";
+                    str += "<td class='com_TextCenter com_w20pen com_disnote'>" + data[i].AlertDesc + "</td>";
+                    str += "<td class='com_TextCenter com_w10pen'>" + (data[i].AlertState == 1 ? "已恢复" : "未查看") + "</td>";
+                    str += "<td class='com_TextCenter com_w15pen'>" + Common.ChangeDateFormat(data[i].RecentTime) + "</td>";
+                    str += "<td class='com_TextCenter com_w15pen'>" + Common.ChangeDateFormat(data[i].AlertTime) + "</td>";
+                    str += "<td class='com_TextCenter com_w10pen'>" + data[i].CurAlertCount + "</td>";
+                    str += "</tr>";
+                }
+                $("#RecordList tbody").html(str);
+            }
+        });
+    }
+};

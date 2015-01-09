@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点管理</title>
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js"></script>
+        <script src="~/Scripts/PreLevelMng/PreLevel.js?ver=1.0.0"></script>
+    </head>
+    <body>
+        <div class=" com_TextCenter com_font13Px com_borderCom" style='height: 26px;'>
+            压力名称:<input type="text" class="com_w15pen" id="LevelName" />
+            <input type="button" class="buttonVer2" value="查询" name="query" onclick="PreLevel.GetLevelList()" />
+            <input type="button" class="buttonVer2" value="添加" name="add" onclick="PreLevel.fnShowViewAdd();" />
+        </div>
+        <div id="tbDiv" class="com_font13Px" style="overflow-y: auto; overflow-x: hidden;">
+            <table id="ComList" class="ui-com-tab">
+                    <thead>
+                        <tr>
+                            <th class="com_w15pen">
+                                压力名称
+                            </th>
+                            <th>
+                               压力描述
+                            </th>
+                        </tr>
+                    </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="dd"></div>
+        <div id="loading"></div>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using Proxy;
+using Proxy.ServiceWinToolRead;
+using Proxy.ServiceWinToolWrite;
+ 
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserInfoController : Controller
+    {
+        //
+        // GET: /UserInfo/
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据分组编码查询站点信息
+        public JsonResult GetDTUByGroupCode(string groupCode)
+        {
+            List<Proxy.ServiceWinToolRead.T_DTU> list = ServcieTool.WinToolServiceReadInstance.GetDTUListByGroupCode("", groupCode);
+            return Json(list);
+        }
+
+        //根据站点编号查找用户信息
+        public JsonResult GetUserInfoByDtuId(string dtuId)
+        {
+            List<T_User_Info> list = ServcieTool.WinToolServiceReadInstance.GetUserListByDTUId("", dtuId);
+            return Json(list);
+        }
+
+        //添加页面
+        public ActionResult AddUser(string companyId, string dtuId)
+        {
+            var model = ServcieTool.WinToolServiceReadInstance.GetUserInfroByCompanyId("", companyId, dtuId);
+            ViewBag.DTUId = dtuId;
+            return View(model);
+        }
+
+        //添加
+        public string Add(string userId, string dtuId)
+        {
+            string result = "false";
+            string[] ids = userId.Split(',');
+            foreach (var id in ids)
+            {
+                T_User_UserDtuid user = new T_User_UserDtuid();
+                user.UserId = id;
+                user.Dtuid = dtuId;
+                user.Status = 1;
+                if (ServcieTool.WinToolServiceWriteInstance.AddDTUUser("", user))
+                {
+                    result = "true";
+                }
+            }
+
+            return result;
+        }
+
+        //删除
+        public string Delete(string userId, string dtuId)
+        {
+            string result = "false";
+            if (ServcieTool.WinToolServiceWriteInstance.DeleteDTUUser("", userId, dtuId))
+            {
+                result = "true";
+            }
+            return result;
+        }
+    }
+}

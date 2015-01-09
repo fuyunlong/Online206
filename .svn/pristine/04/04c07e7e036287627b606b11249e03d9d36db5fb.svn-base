@@ -1,0 +1,95 @@
+﻿var FiledMng = {
+    //获取字段列表
+    GetFiledList: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: $("#SiteName").val(), SiteFiled: $("#FiledName").val() },
+            url: "/FieldInfo/GetFiledList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_TextCenter com_disnote'>" + data[i].Dtuid + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].ColName + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].FieldName + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].FieldUnit + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].ValueMin + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].ValueMax + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].Lowlimit + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].Highlimit + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + (data[i].IsAlert == 1 ? "是" : "否") + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + (data[i].IsCollect == 1 ? "是" : "否") + "</td>";
+                    Str += "<td class='com_TextCenter'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('字段查看','80%','80%','FieldInfo/FieldInfoDetail/Show/" + data[i].Dtuid + "/" + data[i].FieldName + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('字段修改','80%','80%','FieldInfo/FieldInfoDetail/Edit/" + data[i].Dtuid + "/" + data[i].FieldName + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('字段删除','80%','80%','FieldInfo/FieldInfoDetail/Delete/" + data[i].Dtuid + "/" + data[i].FieldName + "')>删除|</a> ";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    //显示添加字段View
+    ShowAddFiledView: function () {
+        var url = '/FieldInfo/ShowAddFiled?CompanyId=' + $("#Company").val() + "&Group=" + $("#Group").val() + "&SiteName=" + $("#SiteName").val();
+        Common.WindowBox('添加字段', '80%', '80%', url);
+    },
+    //添加字段
+    AddFiled: function () {
+        $.ajax({
+            type: "POST",
+            data: FiledMng.GetFiledObj(),
+            url: "/FieldInfo/AddFiled",
+            dataType: "text",
+            error: function ()
+            { }, success: function (data) {
+                alert(data);
+            }
+        });
+    },
+    //修改字段
+    EditFiled: function () {
+        $.ajax({
+            type: "POST",
+            data: FiledMng.GetFiledObj(),
+            url: "/FieldInfo/EditFiled",
+            dataType: "text",
+            error: function ()
+            { }, success: function (data)
+            { alert(data); }
+        });
+    },
+    //删除字段
+    DeleteFiled: function ()
+    { },
+    GetFiledObj: function () {
+        var FiledObj = {
+            Id: $("#FiledId").val(),
+            Dtuid: $("#Dtuid").val(),
+            ColName: $("#ColName").val(),
+            FieldName: $("#FName").val(),
+            FieldShortDesc: $("#FieldShorDesc").val(),
+            FieldDesc: $("#FieldDesc").val(),
+            FieldUnit: $("#FiledUint").val(),
+            ValueMin: $("#ValueMin").val(),
+            ValueMax: $("#ValueMax").val(),
+            Lowlimit: $("#Lowlimit").val(),
+            Highlimit: $("#Highlimit").val(),
+            Lololimit: $("#Lololimit").val(),
+            Hihilimit: $("#Hihilimit").val(),
+            ValueInOrOut: $("#ValueInOrOut").val(),
+            IsAlert: $("#IsAlert").val(),
+            IsCollect: $("#IsCollect").val(),
+            IsShow: $("#IsShow").val(),
+            OrderId: $("#OrderId").val(),
+            ParentId: $("#ParentId").val(),
+            KeyValues: $("#KeyValues").val(),
+            FieldType: $("#FieldType").val()
+        };
+        return FiledObj;
+    }
+}

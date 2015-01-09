@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f162ea7f-205d-4cc6-8ed5-91b0e20a871d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://crm.scadacn.com/Service/crmsgetservice.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CRMSGet.wsdl" MetadataType="Wsdl" ID="ee31dca2-0cf4-451a-a004-761b56ea7523" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/CrmsGetService.svc?wsdl" />
+    <MetadataFile FileName="CrmsGetService.xsd" MetadataType="Schema" ID="7b4c3e47-4738-4ee0-816d-d0c0eeee7c46" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CrmsGetService1.xsd" MetadataType="Schema" ID="36f4a23a-82c9-441f-a182-865d7af61ec9" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CrmsGetService.disco" MetadataType="Disco" ID="9b757602-67cd-4e80-ad92-2607d51f40cb" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/CrmsGetService.svc?disco" />
+    <MetadataFile FileName="CrmsGetService2.xsd" MetadataType="Schema" ID="7a5dfdcc-39f4-4238-9347-854b1b58dcb9" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd3" />
+    <MetadataFile FileName="CrmsGetService21.xsd" MetadataType="Schema" ID="947c4f99-2123-4d2f-81f3-73ba4f714ecb" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

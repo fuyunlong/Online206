@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F0E0CA2-5C68-4A28-A47D-622EA7D4FF98}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Com.Winfotian.DB</RootNamespace>
+    <AssemblyName>Com.Winfotian.DB</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Com.Winfotian.DB.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="InfaCommon">
+      <HintPath>..\Libs\InfaCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="InfaEncrypt">
+      <HintPath>..\Libs\InfaEncrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceProxy">
+      <HintPath>..\Libs\ServiceProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LogProvider\LogBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\AlertInfoProvider.cs" />
+    <Compile Include="Provider\AutoriteProvider.cs" />
+    <Compile Include="Provider\BusynessProvider.cs" />
+    <Compile Include="Provider\CityInfoProvider.cs" />
+    <Compile Include="Provider\ComConfigProvider.cs" />
+    <Compile Include="Provider\CompanyProvider.cs" />
+    <Compile Include="Provider\ConfigProvider.cs" />
+    <Compile Include="Provider\DtuConfigProvider.cs" />
+    <Compile Include="Provider\DtuDataTransProvider.cs" />
+    <Compile Include="Provider\DtuGroupProvider.cs" />
+    <Compile Include="Provider\DtuInfoProvider.cs" />
+    <Compile Include="Provider\DTUPressureLevelProvider.cs" />
+    <Compile Include="Provider\DtuProvider.cs" />
+    <Compile Include="Provider\DtuRoleProvider.cs" />
+    <Compile Include="Provider\DtuValueInfluenceProvider.cs" />
+    <Compile Include="Provider\FieldProvider.cs" />
+    <Compile Include="Provider\HeartRecordProvider.cs" />
+    <Compile Include="Provider\SiteSetProvider.cs" />
+    <Compile Include="Provider\UserDTUProvider.cs" />
+    <Compile Include="Provider\UserGroupProvider.cs" />
+    <Compile Include="Provider\UserSettingProvider.cs" />
+    <Compile Include="Provider\UserUserGropProvider.cs" />
+    <Compile Include="Provider\VipDtuDevice.cs" />
+    <Compile Include="SqlHelper\DBHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Com.Winfotian.Common\Com.Winfotian.Common.csproj">
+      <Project>{c028bb78-9cb1-4b21-bf26-7718fdabad6e}</Project>
+      <Name>Com.Winfotian.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Com.Winfotian.Model\Com.Winfotian.Model.csproj">
+      <Project>{1de36a09-f719-49b8-a387-ede97a0d0464}</Project>
+      <Name>Com.Winfotian.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

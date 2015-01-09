@@ -1,0 +1,117 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Proxy;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class RemoteControlSetController : Controller
+    {
+        //
+        // GET: /RemoteControlSet/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = ServcieTool.CrmServiceGetInstance.GetCompanyLists("", "", PmsMng.ActiveKey);
+            return View();
+        }
+
+        public ActionResult AddControlSet(string Id)
+        {
+            ViewBag.DtuList = ServcieTool.WinToolServiceReadInstance.GetSiteListByComId(PmsMng.ActiveKey, Id);
+            return View();
+        }
+
+        public int UpdateControl(Com.Winfotian.ServiceProxy.DTUService.T_DTU_DOConfig config)
+        {
+
+            int rlst = 0;
+            try
+            {
+                if (Com.Winfotian.ServiceProxy.DTUServiceProxy.UpdateDOConfig(PmsMng.ActiveKey, config))
+                {
+                    rlst = 1;
+                    LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), PmsMng.LogUser, "修改远控配置" + config.Dtuid + config.FieldName, 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        public int AddControl(Com.Winfotian.ServiceProxy.DTUService.T_DTU_DOConfig config)
+        {
+            int rlst = 0;
+            try
+            {
+                if (Com.Winfotian.ServiceProxy.DTUServiceProxy.AddDOConfig(PmsMng.ActiveKey, config))
+                {
+                    rlst = 1;
+                    LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), PmsMng.LogUser, "创建远控配置" + config.Dtuid + config.FieldName, 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        public int DeleteControl(string Dtuid, string FieldName)
+        {
+            int rlst = 0;
+            try
+            {
+                if (Com.Winfotian.ServiceProxy.DTUServiceProxy.DeleteDOConfig(PmsMng.ActiveKey, Dtuid, FieldName))
+                {
+                    rlst = 1;
+                    LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), PmsMng.LogUser, "删除远控配置" + Dtuid + FieldName, 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+        /// <summary>
+        /// 查询控制列表
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public JsonResult GetRemoteControlList(string Id)
+        {
+            var list = Com.Winfotian.ServiceProxy.DTUServiceProxy.GetControlCfgByDtu(WinManager.GetPublicIP(), Id);
+            return Json(list);
+        }
+
+        /// <summary>
+        /// 显示控制详细
+        /// </summary>
+        /// <param name="Oper"></param>
+        /// <param name="Dtuid"></param>
+        /// <param name="FieldName"></param>
+        /// <returns></returns>
+        public ActionResult ControlDetail(string Oper, string Dtuid, string FieldName)
+        {
+            Com.Winfotian.ServiceProxy.DTUService.T_DTU_DOConfig  cfg = Com.Winfotian.ServiceProxy.DTUServiceProxy.GetControlCfgByField(Pms.PmsMng.ActiveKey, Dtuid, FieldName); ;
+            ViewBag.ControlObj = cfg;
+            if (Oper == "Edit")
+            {
+                ViewBag.Oper = "<input type=button class='buttonVer2' value='修改' onclick='RemoteControl.EditContrl()'>";
+            }
+            else
+            { ViewBag.Oper = ""; }
+            return View();
+        }
+    }
+}

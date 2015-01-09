@@ -1,0 +1,47 @@
+﻿PreLevel = {
+    oTab :null,
+    //获取压力等级列表
+    GetLevelList: function () {
+        $.ajax({
+            type: "POST",
+            data: { LevelName: $("#LevelName").val() },
+            url: "/PreLevel/GetLevelList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w15pen'>" + data[i].PressureName + "</td>";
+                    Str += "<td title='" + data[i].PressureDesc + "'>" + data[i].PressureDesc + "</td>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司查看',0.8,0.8,'PreLevel/LevelDetail/Show/" + data[i].Id + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司修改',0.8,0.8,'PreLevel/LevelDetail/Edit/" + data[i].Id + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司删除',0.8,0.8,'PreLevel/LevelDetail/Delete/" + data[i].Id + "')>删除|</a> ";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    //添加压力等级
+    AddLevel: function () {
+        $.ajax({
+            type: "POST",
+            dataType: "html",
+            url: "/PreLevel/ShowPreLevel",
+            data: "id=Edit",
+            error: function (ex) { console.dir(ex); },
+            success: function (back) { console.dir(back);}
+        });
+    },
+    fnLoad: function () {
+        PreLevel.oTab = new comTab();
+        PreLevel.oTab.fnInit();
+    },
+    fnShowViewAdd: function () {
+        Common.WindowBox("Add-Dev", 0, 0, "PreLevel/ShowPreLevel/Add");
+    }
+
+};
+window.onload = PreLevel.fnLoad;

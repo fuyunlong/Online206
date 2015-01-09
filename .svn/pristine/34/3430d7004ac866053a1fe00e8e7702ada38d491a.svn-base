@@ -1,0 +1,64 @@
+﻿var SiteGroup = {
+    //查询分组列表
+    SerarchGroup: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val() },
+            url: "/SiteGroup/GetGroup",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td>" + data[i].group.GroupName + "</td><td>" + data[i].group.GroupDesc + "</td><td>" + (data[i].ParentName == "" ? "顶级目录" : data[i].ParentName) + "</td>";
+                    Str += "<td class='com_TextCenter com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=SiteGroup.GetGroupDetail('" + data[i].GroupCode + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司修改','80%','80%','ClientInfo/ClientDetail/Edit/" + data[i].GroupCode + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司删除','80%','80%','ClientInfo/ClientDetail/Delete/" + data[i].GroupCode + "')>删除|</a> ";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    //获取分组信息详细
+    GetGroupDetail: function (id) {
+        SiteGroup.ShowBox();
+    },
+    //添加分组
+    AddGroup: function () {
+
+    },
+    //显示添加分组界面
+    ShowAddGroup: function () {
+        SiteGroup.ShowBox();
+        $("#OperArea").html("<input type=button class=buttonVer2 value=添加 onclick=SiteGroup.AddGroup()>");
+    },
+    //选择新建站点分组
+    ChoseNewSiteGroup: function () {
+
+    },
+    GetComListStr: function (CompanyList) {
+        var ComStr = "";
+        for (var i = 0; i < CompanyList.length; i++) {
+            ComStr += "<option value=" + CompanyList[i].CompanyId + ">" + CompanyList[i].CompanyName + "</option>"
+        }
+        $("#Company").html(ComStr);
+    },
+    //获取分组列表
+    GetGroup: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val() },
+            url: "/SiteGroup/GetGroup",
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+            }
+        });
+    }
+}

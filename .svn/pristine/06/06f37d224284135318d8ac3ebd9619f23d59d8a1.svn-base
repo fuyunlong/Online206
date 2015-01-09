@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+    @model Proxy.ServiceWinToolRead.T_DTU_ValveEffectEx
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>阀门影响详细</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/Common/ui_common.js"></script>
+        <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+        <script src="~/Scripts/SiteMng/ValueEffect.js"></script>
+        <script>
+            $(function () {
+                //VipDevice.LoadCompanys();
+
+                @*var oper = "@ViewBag.Oper";
+                if (oper != null && oper != "null" && oper.length > 0) {
+
+                    //详细
+                    if (oper == "Show" || oper == "Edit") {
+                        setTimeout(function () {
+                            for (var i = 0; i < $("#Company option").length ; i++) {
+                                if ("@Model.CompanyId" == $("#Company option")[i].value) {
+                                    $("#Company option")[i].selected = true;
+                                    break;
+                                }
+                            }
+                        }, 100);
+
+                        setTimeout(function () {
+                            VipDevice.GetDTUList();
+                            for (var i = 0; i < $("#SiteName option").length ; i++) {
+                                if ("@Model.Dtuid" == $("#SiteName option")[i].value) {
+                                    $("#SiteName option")[i].selected = true;
+                                    break;
+                                }
+                            }
+                        }, 100);
+                    }
+                    if (oper == "Show") {
+                        setTimeout(VipDevice.GetDTUList, 100);
+                        $(".oper").attr("disabled", "disabled");
+                    }
+                    //添加
+                    if (oper == "Add") {
+                        setTimeout(VipDevice.GetDTUList, 100);
+                        $("input[type=text]").val("");
+                    }
+                }*@
+                $("#OperArea").html(@Html.Raw(ViewBag.Button));
+            });
+        </script>
+        <style type="text/css">
+            table td
+            {
+                padding-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td>所属公司</td>
+                    <td>
+                        <select id="ddlCompany" class="oper" style="width:100px;border: thin solid #2DAAE2;border-radius: 3px;" onchange=""></select>
+                    </td>
+                    <td>站点分组</td>
+                    <td>
+                        <select id="ddlGroup" class="oper" style="width:100px;border: thin solid #2DAAE2;border-radius: 3px;" onchange=""></select>
+                    </td>
+                    <td>站点名称</td>
+                    <td>
+                        <select id="ddlSite" class="oper" style="width:100px;border: thin solid #2DAAE2;border-radius: 3px;">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>阀门编号</td>
+                    <td>
+                        <input id="txtValveCode" type="text" style="width:179px;" class="oper" value="@Model.ValveCode" />
+                    </td>
+                    <td>阀门名称</td>
+                    <td colspan="3">
+                        <input id="txtValveName" style="width:177px;" class="oper" type="text" value="@Model.ValveName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>关阀时间</td>
+                    <td>
+                        <input id="txtDate" type="text" style="width:177px;" class="oper" value="@Model.ClosedTime" onfocus="VipDevice.SetDateCtrl()" />
+                    </td>
+                    <td>影响区域</td>
+                    <td>
+                        <input id="txtEffctArea" type="text" class="oper" />
+                    </td>
+                    <td>影响户数</td>
+                    <td>
+                        <input id="EffctUserNum" type="text" class="oper" />
+                    </td>
+                </tr>
+                <tr>
+                   <td colspan="6" class="com_TextCenter" id="OperArea"></td>
+               </tr>
+            </table>
+        </div>
+    </body>
+</html>

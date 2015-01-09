@@ -1,0 +1,477 @@
+﻿var Common = {
+    SiteErrorMsg:"错误描述:未查询到相关站点信息\n可能原因:该用户没有该站点的权限\n解决方案:请先配置该用户具有的站点权限",
+    //获取版本列表
+    GetVerTypeList: function () {
+        $.ajax({
+            type: "post",
+            url: "/SiteInfo/GetVerTypeList",
+            dataType: "json",
+            async: false,
+            error: function (ex) {
+                alert("查询版本失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].key + '">' + data[i].value + '</option>';
+                }
+                $("#VerType").html(str);
+            }
+        });
+    },
+    //获取压力等级列表
+    PressureLevelList: function () {
+        $.ajax({
+            type: "post",
+            url: "/SiteInfo/PressureLevelList",
+            dataType: "json",
+            async: false,
+            error: function (ex) {
+                alert("查询版本失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].Id + '">' + data[i].PressureName + '</option>';
+                }
+                $("#PressureLevel").html(str);
+            }
+        });
+    },
+    //获取配置列表
+    DtuConfigList: function () {
+        $.ajax({
+            type: "post",
+            url: "/SiteInfo/DtuConfigList",
+            dataType: "json",
+            async: false,
+            error: function (ex) {
+                alert("查询版本失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].ConfigCode + '">' + data[i].ConfigName + '</option>';
+                }
+                $("#DtuConfig").html(str);
+            }
+        });
+    },
+    //添加一个tab页面
+    AddTab: function (title, src) {
+        $('#mytab').tabs('add', {
+            title: title,
+            content: " <iframe src=" + src + " width='99%' height='98.5%' over-flow:hidden ></iframe>",
+            closable: true
+        });
+    },
+    //获取省份**************************************************************************
+    GetProvince: function (srcObj, callBack) {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetProvince",
+            dataType: "json",
+            error: function () {
+                alert("获取省份信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option>" + data[i] + "</option>";
+                }
+                $(srcObj).append(str);
+                if (!callBack) {//没有回调函数
+                    return;
+                }
+                if (typeof callBack.constructor == "string") {
+                    callBack = new Function(callBack);
+                }
+                callBack.call();
+            }
+        });
+    },
+    //获取城市
+    GetCity: function (srcObj, province, callBack) {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetCity",
+            data: { province: province },
+            datatype: "json",
+            error: function () {
+                alert("获取城市信息失败，请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CityId + ">" + data[i].CityName + "</option>";
+                }
+                srcObj.html(str);
+                if (!callBack) {//没有回调函数
+                    return;
+                }
+                if (typeof callBack.constructor == "string") {
+                    callBack = new Function(callBack);
+                }
+                callBack.call();
+            }
+        });
+    },
+    //获取公司
+    GetCompany: function (srcObj, callBack) {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            dataType: "json",
+            error: function () {
+                alert("获取公司信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                srcObj.html(str);
+                if (!callBack) {
+                    return;
+                }
+                if (typeof callBack.constructor == "string") {
+                    callBack = new Function(callBack);
+                }
+                callBack.call();
+            }
+        });
+    },
+    //获取分组
+    GetGroup: function (srcObj, companyId, callBack) {
+        $.ajax({
+            type: "post",
+            url: "/SiteGroup/GetGroup",
+            data: { id: companyId },
+            dataType: "json",
+            error: function () {
+                alert("获取分组信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "<option value=0>全部</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].GroupCode + '">' + data[i].GroupName + '</option>';
+                }
+                srcObj.html(str);
+                if (!callBack) {
+                    return;
+                }
+                if (typeof callBack.constructor == "string") {
+                    callBack = new Function(callBack);
+                }
+                callBack.call();
+            }
+        });
+    },
+    //获取站点
+    GetSite: function (srcObj, companyId, groupCode, callBack) {
+        $.ajax({
+            type: "post",
+            url: "/UserInfo/GetDTUByGroupCode",
+            data: { companyId: companyId, groupCode: groupCode },
+            dataType: "json",
+            error: function () {
+                alert("获取站点信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].Dtuid + '">' + data[i].DtuidName + '</option>';
+                }
+                srcObj.html(str);
+                if (str.length == 0) {
+                    alert(Common.SiteErrorMsg);
+                }
+                if (!callBack) {
+                    return;
+                }
+                if (typeof callBack.constructor == "string") {
+                    callBack = new Function(callBack);
+                }
+                callBack.call();
+            }
+        });
+    },
+    //获取当前时间
+    GetDate: function (date) {
+        var year = date.getFullYear();
+        var mouth = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        var hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        date = year + '-' + mouth + '-' + day + " " + hour + ":" + minute + ":" + second;
+        return date;
+    },
+    //日历控件
+    SetDate: function () {
+        return WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' });
+    },
+    //日期格式转换
+    ChangeDate: function (date) {
+        date = date.replace("/Date(", "").replace(")/", "");
+        if (date.indexOf("+") > 0) {
+            date = date.substring(0, date.indexOf("+"));
+        }
+        else if (date.indexOf("-") > 0) {
+            date = date.substring(0, date.indexOf("-"));
+        }
+        var date = new Date(parseInt(date, 10));
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        var hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        return date.getFullYear() + "-" + month + "-" + currentDate + " " + hour + ":" + minute + ":" + second;
+    },
+    //*******************************************************************************
+    //查询站点
+    SerarchSite: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: "" },
+            url: "/SiteInfo/GetSite",
+            dataType: "json",
+            error: function (xhr) {
+                alert("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w10pen com_TextCenter com_disnote'>" + data[i].Dtuid + "</td>";
+                    Str += "<td class='com_w25pen com_disnote' title='" + data[i].DtuidName + "'>" + data[i].DtuidName + "</td><td class=' com_disnote com_TextCenter' title='" + data[i].Skidbrand + "'>" + data[i].Skidbrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].Supplier + "'>" + data[i].Supplier + "</td><td class=' com_disnote' title='" + data[i].FlowBrand + "'>" + data[i].FlowBrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].FlowType + "'>" + data[i].FlowType + "</td>";
+                    Str += "<td class='com_TextCenter com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','80%','SiteInfo/SiteDetail?OperRation=Show&DtuId=" + data[i].Dtuid + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','80%','SiteInfo/SiteDetail?OperRation=Edit&DtuId=" + data[i].Dtuid + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=SiteMng.DeleteSite('" + data[i].Dtuid + "')>删除</a> ";
+                    Str += "</td>";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+                if (Str.length == 0)
+                {
+                    alert(Common.SiteErrorMsg);
+                }
+                new comTab().fnResizeTable();
+            }
+        });
+    },
+    //获取公司Id下的分组群
+    GetGroupsByComId: function (compId) {
+        $.ajax({
+            type: "POST",
+            data: { id: compId },
+            url: "/SiteGroup/GetGroup",
+            dataType: "json",
+            error: function (xhr) {
+              
+               alert("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (back) {
+                var htm = '<option value="">全部</option>';
+                for (var i = 0; i < back.length; i++)
+                    htm += '<option value="' + back[i].GroupCode + '">' + back[i].GroupName + '</option>';
+                $("#Group").html(htm);
+            }
+        });
+    },
+    //加载指定公司的配置信息
+    GetCompanyConfig: function (CompanyId) {
+        $.ajax({
+            type: "POST",
+            url: "/Config/GetCompanyConfig",
+            dataType: "json",
+            data: "CompanyId=" + CompanyId,
+            error: function (xhr) {
+                alert("查询当前公司配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < $("#divComCoinfig input[type=checkbox]").length; j++) {
+                        if (data[i].ConfigId == $("#divComCoinfig input[type=checkbox]")[j].value) {
+                            $("#divComCoinfig input[type=checkbox]")[j].checked = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+        });
+    },
+
+    //提示框
+    MsgBox: function (content, callOpt) {
+        var htm = '<div class="l-window-header">';
+        htm += '<div class="dialog-header-logo"></div><div class="dialog-header-title">\u4FE1\u606F\u63D0\u793A</div>';
+        htm += '<div class="icon-imgs icon-minWH dialog-header-right" title="isOk"></div>';
+        htm += '<div class="dialog-header-close l-window-close" title="isCancel"></div>';
+        htm += '</div>';
+        htm += '<div class="msgContent dialog-msg-content"><div>' + content + '</div></div>';
+        var doc = document.createElement("div"), doca = doc.cloneNode(0);
+        doc.className = "dialog-ownDiv"; doc.innerHTML = htm;
+        doca.className = "com_baffle"; doca.style.zIndex = 200000;
+        document.body.appendChild(doca);
+        document.body.appendChild(doc);
+        doc.firstChild.onclick = function (e) {
+            var target = e.target || e.srcElement || e;
+            if (["isOk", "isCancel"].indexOf(target.title) != -1) {
+                document.body.removeChild(doca);
+                document.body.removeChild(doc);
+                if (!callOpt)
+                    return;
+                var cb = callOpt[target.title];
+                if (!cb) return;
+                if (typeof cb === 'string')
+                    cb = new Function(cb);
+                if (typeof cb.constructor === 'function')
+                    cb.call(this);
+            }
+        };
+    },
+    //弹出窗体
+    WindowBox: function (title, widthPercent, heightPercent, url) {
+        var doc = $("#ifrHTML", parent.document);
+        if (doc.length == 0) return;
+        doc.attr("src", url);
+        $("#meLayout", parent.document).css({ "width": widthPercent, "height": heightPercent }).find(".dialog-header-title").text(title);
+        $('.msbgs', parent.document).show();
+        $('.msbgs .myBG', parent.document).fadeTo("slow", 0.9);
+        setTimeout(function () {
+            doc[0].contentDocument.onkeydown = Common.fnKeydown;
+        }, 1500);
+    },
+    //弹出顶层窗口
+    WinTopBox: function (title, widthPercent, heightPercent, top, left, url) {
+        var doc = $("#ifrHTMLTop", parent.document);
+        if (doc.length == 0) return;
+        doc.attr("src", url);
+        $("#WinTop", parent.document).css({ "width": widthPercent, "height": heightPercent, "left": left, "top": top, "z-index": "10010" }).show().find(".dialog-header-title").text(title);
+        $('.myBGTop', parent.document).fadeTo("slow", 0.9).css("z-index", "10009");
+        setTimeout(function () {
+            doc[0].contentDocument.onkeydown = Common.fnKeydown;
+        }, 1500);
+    },
+    //关闭弹出层
+    layoutClose: function () {
+        $('.msbgs .myBG', parent.document).fadeTo("slow", 0);
+        $("#ifrHTML", parent.document).attr("src", "");
+        setTimeout(function () { $('.msbgs', parent.document).hide(); }, "500");
+    },
+    //关闭弹出顶层
+    layoutTopClose: function () {
+        $('.myBGTop', parent.document).fadeTo("slow", 0).css("z-index", 1);
+        $('#WinTop', parent.document).hide().css("z-index", 1);;
+        $("#ifrHTMLTop", parent.document).attr("src", "");
+    },
+    //展开弹出层  可以自己传入宽度和高度   支持百分比   根据页面大小合理设置
+    //meWidth meHeight meSrc
+    layoutShow: function (jason) {
+        var isHave = false; //不是百分比
+        if (arguments.length != 0) {
+            var thisWidth = typeof (jason.meWidth) == "undefined" ? "80%" : jason.meWidth;
+            var thisHeight = typeof (jason.meHeight) == "undefined" ? "90%" : jason.meHeight;
+            var thisLeft = 0;
+            if (thisWidth.indexOf("%") > -1) {
+                var newWidth = thisWidth.replace("%", "");
+                thisLeft = newWidth / 2;
+                isHave = true;
+            } else {
+                thisLeft = thisWidth / 2;
+            }
+            $("#meLayout").css({ "width": thisWidth, "height": thisHeight });
+            if (isHave) { //有%
+                $("#meLayout").css({ "margin-left": "-" + thisLeft + "%" });
+            } else {
+                $("#meLayout").css({ "margin-left": "-" + thisLeft + "px" });
+            }
+
+        } else {
+            $("#meLayout").css({ "width": "80%", "height": "90%", "margin-left": "-40%" });
+        }
+        $('.msbgs').show();
+        $('.msbgs .myBG').fadeTo("slow", 0.9)
+        $("#ifrHTML").attr("src", jason.meSrc);
+    },
+    //弹出窗口的Esc键盘事件
+    fnKeydown: function (evt) {
+        if (evt.keyCode == 27) {
+            var oTopWin = $("#WinTop", parent.document);
+            if (oTopWin.is(":visible")) {
+                Common.layoutTopClose();
+                return;
+            }
+            var oWin = $("#div_show", parent.document);
+            if (oWin.is(":visible"))
+                Common.layoutClose();
+        }
+    },
+    //获取get方式url地址参数
+    fnUrlGetName: function (name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    },
+    //获取cookie
+    fnCookieGetValue: function (key) {
+        if (!key)
+            return document.cookie;
+        var cook = document.cookie.match(new RegExp(key + "=([^;]+)"));
+        if (!!cook)
+            cook = cook[1];
+        return cook;
+    },
+    //屏蔽鼠标右键
+    fnForbidRightMouse: function (evt) {
+        evt = evt || window.event;
+        if (evt.returnValue) evt.returnValue = false; //IE的事件模型 
+        else evt.preventDefault(); //dom2的事件模型，主要针对firefox/sofari 
+    },
+    GetDepartListByCompany: function (id) {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetDepartListByCompany",
+            async: false,
+            data: "id=" + id,
+            dataType: "json",
+            error: function () {
+                alert("获取省份信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].DepartID + ">" + data[i].DepartName + "</option>";
+                }
+                $("#Departs").html(str);
+            }
+        });
+    },
+    GetPostinfo: function (departID) {
+        if (departID == null) {
+            departID = 0;
+        }
+        $.ajax({
+            type: "post",
+            url: "/Company/GetPostinfo",
+            async: false,
+            data: "id=" + departID,
+            dataType: "json",
+            error: function () {
+                alert("获取省份信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                if (data != "null") {
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<option value=" + data[i].PosID + ">" + data[i].PostName + "</option>";
+                    }
+                }
+                $("#Position").html(str);
+            }
+        });
+    }
+}

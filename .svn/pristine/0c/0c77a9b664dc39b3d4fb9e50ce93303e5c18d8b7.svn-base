@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点管理</title>     
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+         <script src="~/Scripts/SiteGropMng/SiteGrop.js"></script>
+        <script>
+            $(function () {
+                $("#tbDiv").css("height", $(window).height() * 0.87);
+                new comTab().fnInit();
+
+                //加载公司
+                SiteGroup.LoadCompanys();
+
+                $("#btnQuery").click(function () {
+                    SiteGroup.SerarchGroup();
+                    new comTab().fnResizeTable();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="com_TextCenter com_font13Px com_DivBorderGray">
+            所属公司&nbsp;<select class="com_w15pen" id="ddlCompany" ></select>
+            <input id="btnQuery" type="button" value="查询" class="buttonVer2" />
+            <input type="button" class="buttonVer2" value="添加"  onclick="Common.WinTopBox('分组添加', '38%', '35%', '25%', '33%', 'SiteGroup/ShowDetail?oper=Add&groupCode=null')" />
+        </div>
+        <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+            <table id="GroupList" class="ui-com-tab" rules="all">
+                    <thead>
+                        <tr align="left" class="panel-header">
+                            <th class="com_TextCenter com_w25pen">
+                                分组名称
+                            </th>
+                            <th class="com_TextCenter com_w25pen">
+                                分组描述
+                            </th>
+                            <th class="com_TextCenter com_w30pen">
+                                父级分组
+                            </th>
+                            <th class="com_TextCenter com_w20pen">
+                                操作
+                            </th>
+                            </tr>
+                    </thead>
+                <tbody></tbody>
+            </table>
+        </div>   
+        <div id="loading"></div>
+    </body>
+</html>

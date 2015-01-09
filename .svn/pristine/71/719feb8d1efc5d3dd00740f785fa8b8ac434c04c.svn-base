@@ -1,0 +1,366 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using Com.Winfotian.DB.SqlHelper;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class DtuConfigProvider
+    {
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public bool Add(T_DTU_Config model)
+        {
+            bool result = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("insert into [Infa]..[T_DTU_Config](");
+            sb.Append("ConfigCode,ConfigName,ConfigDesc,FlowNum,AINum,DINum,IsAlert,IsCreate,Status,UpdateFlag,BoardInfo,CType)");
+            sb.Append(" values (");
+            sb.Append("@ConfigCode,@ConfigName,@ConfigDesc,@FlowNum,@AINum,@DINum,@IsAlert,@IsCreate,@Status,@UpdateFlag,@BoardInfo,@CType)");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ConfigCode", SqlDbType.VarChar,30),
+					new SqlParameter("@ConfigName", SqlDbType.VarChar,50),
+					new SqlParameter("@ConfigDesc", SqlDbType.VarChar,100),
+					new SqlParameter("@FlowNum", SqlDbType.SmallInt,2),
+					new SqlParameter("@AINum", SqlDbType.SmallInt,2),
+					new SqlParameter("@DINum", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsAlert", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsCreate", SqlDbType.SmallInt,2),
+					new SqlParameter("@Status", SqlDbType.SmallInt,2),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@BoardInfo", SqlDbType.VarChar,400),
+					new SqlParameter("@CType", SqlDbType.SmallInt,2)};
+            parameters[0].Value = model.ConfigCode;
+            parameters[1].Value = model.ConfigName;
+            parameters[2].Value = model.ConfigDesc;
+            parameters[3].Value = model.FlowNum;
+            parameters[4].Value = model.AINum;
+            parameters[5].Value = model.DINum;
+            parameters[6].Value = model.IsAlert;
+            parameters[7].Value = model.IsCreate;
+            parameters[8].Value = model.Status;
+            parameters[9].Value = model.UpdateFlag;
+            parameters[10].Value = model.BoardInfo;
+            parameters[11].Value = model.CType;
+
+            int rows = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (rows > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(T_DTU_Config model)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("update [Infa]..[T_DTU_Config] set ");
+            sb.Append("ConfigName=@ConfigName,");
+            sb.Append("ConfigDesc=@ConfigDesc,");
+            sb.Append("FlowNum=@FlowNum,");
+            sb.Append("AINum=@AINum,");
+            sb.Append("DINum=@DINum,");
+            sb.Append("IsAlert=@IsAlert,");
+            sb.Append("IsCreate=@IsCreate,");
+            sb.Append("Status=@Status,");
+            sb.Append("UpdateFlag=@UpdateFlag,");
+            sb.Append("BoardInfo=@BoardInfo,");
+            sb.Append("CType=@CType");
+            sb.Append(" where ConfigCode=@ConfigCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ConfigName", SqlDbType.VarChar,50),
+					new SqlParameter("@ConfigDesc", SqlDbType.VarChar,100),
+					new SqlParameter("@FlowNum", SqlDbType.SmallInt,2),
+					new SqlParameter("@AINum", SqlDbType.SmallInt,2),
+					new SqlParameter("@DINum", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsAlert", SqlDbType.SmallInt,2),
+					new SqlParameter("@IsCreate", SqlDbType.SmallInt,2),
+					new SqlParameter("@Status", SqlDbType.SmallInt,2),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@BoardInfo", SqlDbType.VarChar,400),
+					new SqlParameter("@CType", SqlDbType.SmallInt,2),
+					new SqlParameter("@ConfigCode", SqlDbType.VarChar,30)};
+            parameters[0].Value = model.ConfigName;
+            parameters[1].Value = model.ConfigDesc;
+            parameters[2].Value = model.FlowNum;
+            parameters[3].Value = model.AINum;
+            parameters[4].Value = model.DINum;
+            parameters[5].Value = model.IsAlert;
+            parameters[6].Value = model.IsCreate;
+            parameters[7].Value = model.Status;
+            parameters[8].Value = model.UpdateFlag;
+            parameters[9].Value = model.BoardInfo;
+            parameters[10].Value = model.CType;
+            parameters[11].Value = model.ConfigCode;
+
+            int rows = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(string configCode)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from [Infa]..[T_DTU_Config] ");
+            sb.Append(" where ConfigCode=@ConfigCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ConfigCode", SqlDbType.VarChar,50)};
+            parameters[0].Value = configCode;
+
+            int rows = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 获取所有站点配置
+        /// </summary>
+        public List<T_DTU_Config> GetDtuConfigList()
+        {
+            List<T_DTU_Config> list = new List<T_DTU_Config>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append(" select * FROM [Infa]..[T_DTU_Config] ");
+            using (SqlDataReader reader = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), null))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataT_DTU_ConfigReader(reader);
+                        if (model != null)
+                        {
+                            list.Add(model);
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+        /// <summary>
+        /// 获取站点配置By站点名称or是否加臭(1/0)
+        /// </summary>
+        public List<T_DTU_Config_Ext> GetDtuConfigList(string siteName, params int[] cType)
+        {
+            List<T_DTU_Config_Ext> list = new List<T_DTU_Config_Ext>();
+            List<SqlParameter> parms = new List<SqlParameter>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT A.ConfigCode,A.ConfigName,A.ConfigDesc,A.FlowNum,A.AINum,A.DINum,A.IsAlert,A.IsCreate,A.Status");
+            SqlStr.Append(" ,A.UpdateFlag,A.BoardInfo,A.CType,B.Dtuid,B.DtuidName");
+            SqlStr.Append(" FROM [Infa]..[T_DTU_Config] (NOLOCK) AS A INNER JOIN [Infa]..[T_DTU] (NOLOCK) AS B");
+            SqlStr.Append(" ON A.ConfigCode=B.ConfigCode");
+
+            if (!string.IsNullOrWhiteSpace(siteName) && siteName.Length > 0)
+            {
+                SqlStr.Append(" AND B.DtuidName LIKE @siteName");
+                parms.Add(new SqlParameter("@siteName", siteName + "%"));
+            }
+            for (int i = 0; i < cType.Length; i++)
+            {
+                if (i == 0)
+                    SqlStr.Append(" AND (");
+                else
+                    SqlStr.Append(" OR ");
+                SqlStr.AppendFormat("cType=@cType{0}", i);
+                parms.Add(new SqlParameter("cType" + i, cType[i]));
+            }
+            if (cType.Length > 0)
+                SqlStr.Append(")");
+
+            using (SqlDataReader reader = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), parms.ToArray()))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataT_DTU_Config_ExtReader(reader);
+                        if (model != null)
+                        {
+                            list.Add(model);
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+
+        /// <summary>
+        /// T_DTU_Config 数据读取
+        /// </summary>
+        private T_DTU_Config_Ext IDataT_DTU_Config_ExtReader(IDataReader dr)
+        {
+            T_DTU_Config_Ext model = new T_DTU_Config_Ext();
+            try
+            {
+                model.ConfigCode = (dr["ConfigCode"] is DBNull) ? string.Empty : dr["ConfigCode"].ToString();
+                model.ConfigName = (dr["ConfigName"] is DBNull) ? string.Empty : dr["ConfigName"].ToString();
+                model.ConfigDesc = (dr["ConfigDesc"] is DBNull) ? string.Empty : dr["ConfigDesc"].ToString();
+                model.FlowNum = (dr["FlowNum"] is DBNull) ? 0 : Convert.ToInt32(dr["FlowNum"].ToString());
+                model.AINum = (dr["AINum"] is DBNull) ? 0 : Convert.ToInt32(dr["AINum"].ToString());
+                model.DINum = (dr["DINum"] is DBNull) ? 0 : Convert.ToInt32(dr["DINum"].ToString());
+                model.IsAlert = (dr["IsAlert"] is DBNull) ? 0 : Convert.ToInt32(dr["IsAlert"].ToString());
+                model.IsCreate = (dr["IsCreate"] is DBNull) ? 0 : Convert.ToInt32(dr["IsCreate"].ToString());
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+                model.BoardInfo = (dr["BoardInfo"] is DBNull) ? string.Empty : dr["BoardInfo"].ToString();
+                model.CType = (dr["CType"] is DBNull) ? 0 : Convert.ToInt32(dr["CType"].ToString());
+                model.DtuidName = (dr["DtuidName"] is DBNull) ? string.Empty : dr["DtuidName"].ToString();
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+            }
+            catch
+            {
+
+                return null;
+            }
+            return model;
+        }
+
+        //根据配置名称查询
+        public List<T_DTU_Config> GetListByConfigName(string configName)
+        {
+            List<T_DTU_Config> list = new List<T_DTU_Config>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT * FROM [Infa]..[T_DTU_Config] where CType=0 ");
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            if (!string.IsNullOrEmpty(configName))
+            {
+                sb.Append("and ConfigName like @ConfigName");
+                parameters.Add(new SqlParameter("@ConfigName", "%" + configName + "%"));
+            }
+            using (var reader = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters.ToArray()))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataT_DTU_ConfigReader(reader);
+                        if (model != null)
+                        {
+                            list.Add(model);
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        //根据配置名称查询（加臭）
+        public List<T_DTU_Config> GetMalodorListByConfigName(string configName)
+        {
+            List<T_DTU_Config> list = new List<T_DTU_Config>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT * FROM [Infa]..[T_DTU_Config] where CType=1 ");
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            if (!string.IsNullOrEmpty(configName))
+            {
+                sb.Append("and ConfigName like @ConfigName");
+                parameters.Add(new SqlParameter("@ConfigName", "%" + configName + "%"));
+            }
+            using (var reader = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters.ToArray()))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataT_DTU_ConfigReader(reader);
+                        if (model != null)
+                        {
+                            list.Add(model);
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        //T_DTU_Config 数据读取
+        private T_DTU_Config IDataT_DTU_ConfigReader(IDataReader dr)
+        {
+            T_DTU_Config model = new T_DTU_Config();
+            try
+            {
+                model.ConfigCode = (dr["ConfigCode"] is DBNull) ? string.Empty : dr["ConfigCode"].ToString();
+                model.ConfigName = (dr["ConfigName"] is DBNull) ? string.Empty : dr["ConfigName"].ToString();
+                model.ConfigDesc = (dr["ConfigDesc"] is DBNull) ? string.Empty : dr["ConfigDesc"].ToString();
+                model.FlowNum = (dr["FlowNum"] is DBNull) ? 0 : Convert.ToInt32(dr["FlowNum"].ToString());
+                model.AINum = (dr["AINum"] is DBNull) ? 0 : Convert.ToInt32(dr["AINum"].ToString());
+                model.DINum = (dr["DINum"] is DBNull) ? 0 : Convert.ToInt32(dr["DINum"].ToString());
+                model.IsAlert = (dr["IsAlert"] is DBNull) ? 0 : Convert.ToInt32(dr["IsAlert"].ToString());
+                model.IsCreate = (dr["IsCreate"] is DBNull) ? 0 : Convert.ToInt32(dr["IsCreate"].ToString());
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+                model.BoardInfo = (dr["BoardInfo"] is DBNull) ? string.Empty : dr["BoardInfo"].ToString();
+                model.CType = (dr["CType"] is DBNull) ? 0 : Convert.ToInt32(dr["CType"].ToString());
+            }
+            catch
+            {
+                return null;
+            }
+            return model;
+        }
+
+        //得到一个对象实体
+        public T_DTU_Config GetModel(string configCode)
+        {
+            T_DTU_Config model = new T_DTU_Config();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select top 1 ConfigCode,ConfigName,ConfigDesc,FlowNum,AINum,DINum,IsAlert,IsCreate,Status,UpdateFlag,BoardInfo,CType from [Infa]..[T_DTU_Config] ");
+            sb.Append("where ConfigCode=@ConfigCode");
+            SqlParameter[] parameters = {
+					       new SqlParameter("@ConfigCode", configCode)
+                                        };
+            using (IDataReader reader = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters))
+            {
+                if (reader.Read())
+                {
+                    model = IDataT_DTU_ConfigReader(reader);
+                }
+            }
+            return model;
+        }
+
+        public T_DTU_Config GetModelByDtuid(string dtuid)
+        {
+            T_DTU_Config model = new T_DTU_Config();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(" select a.* from [Infa]..[T_DTU_Config]  as a ");
+            sb.Append("left join [Infa]..[T_DTU] as b ");
+            sb.Append(" on a.ConfigCode=b.ConfigCode where b.Dtuid=@dtuid");
+            SqlParameter[] parameters = {
+					       new SqlParameter("@dtuid", dtuid)
+                                        };
+            using (IDataReader reader = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters))
+            {
+                if (reader.Read())
+                {
+                    model = IDataT_DTU_ConfigReader(reader);
+                }
+            }
+            return model;
+        }
+    }
+}

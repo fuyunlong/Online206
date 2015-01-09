@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>重要设备详细</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/SiteMng/VipDevice.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script>
+        $(function () {
+            $("#Company").val("@ViewBag.model.CompanyId");
+        });
+    </script>
+</head>
+<body>
+    <div class="com_DivBor">
+        <table class="ui-com-tabFrm" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>所属公司</td>
+                <td>
+                    <select id="Company" onchange="VipDevice.GetSiteList(this.value)">
+                        @{
+                            foreach (var a in ViewBag.CompanyList)
+                            {
+                            <option value=@a.CompanyId>@a.CompanyName</option>
+                            }
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>设备名称</td>
+                <td>
+                    <input type="text" id="DeviceName" value="@ViewBag.model.device.DeviceName" />
+                </td>
+                <td>站点名称</td>
+                <td>
+                    <select id="SiteName" class="com_w100pen"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>设备品牌</td>
+                <td></td>
+                <td>规格型号</td>
+                <td>
+                    <input type="text" id="DeviceSN"  value="@ViewBag.model.device.DeviceSN"/>
+                </td>
+            </tr>
+            <tr>
+                <td>设备编号</td>
+                <td>
+                    <input type="text" id="ModelCode" value="@ViewBag.model.device.ModelCode" />
+
+                </td>
+                <td>出厂日期</td>
+                <td>
+                    <input type="text" id="ProduceDate" value="@ViewBag.model.Date"  onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" />
+                </td>
+            </tr>
+            <tr>
+                <td>设备参数</td>
+                <td colspan="3">
+                    <textarea class="com_w90pen" id="DeviceParams">@ViewBag.model.device.DeviceParams</textarea></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="3">
+                    <textarea id="Memo" class="com_w90pen">@ViewBag.model.device.Memo</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="com_TextCenter" id="OperArea"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

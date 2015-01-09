@@ -1,0 +1,116 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Com.Winfotian.Model;
+using System.Text;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserGroupController : Controller
+    {
+        //
+        // GET: /UserGroup/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据名称查询分组信息
+        public string GetUserGroupByCompanyID(string companyId)
+        {
+            StringBuilder sb = new StringBuilder();
+            List<T_User_GroupExt> list = new ServiceProxyRead().GetProxy().GetGroupListByCompanyID(PmsMng.ActiveKey, companyId);
+            for (int i = 0; i < list.Count; i++)
+            {
+                var data = (from row in list
+                            where row.ParentCode == list[i].GroupCode
+                            select row).ToList();
+                if (data.Count() > 0)
+                {
+                    //是父分组，有子分组
+                    sb.Append("<tr><td class='com_w25pen'><img src='/Images/tag_add.png' isHide='" + list[i].GroupCode + "' onclick='Group.Collapse(this)' style='padding-right:3px;margin-bottom:-3px;cursor:pointer'/>" + list[i].GroupName + "</td>");
+                    sb.Append("<td class='com_w25pen'>" + list[i].GroupDesc + "</td>");
+                    sb.Append("<td class='com_w30pen'>" + GetCompanyNameById(list[i].CompanyId.ToString()) + "</td>");
+                    sb.Append("<td class='com_w20pen'>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Common.WindowBox('分组查看','80%','80%','UserGroup/Operation/Show/" + list[i].GroupCode + "')>查看|</a>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Common.WindowBox('分组修改','80%','80%','UserGroup/Operation/Edit/" + list[i].GroupCode + "')>修改|</a>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Config.DeleteConfig(" + list[i].GroupCode + ")>删除</a></tr>");
+
+                    //是子分组
+                    for (int j = 0; j < data.Count(); j++)
+                    {
+                        sb.Append("<tr class='com_hide' isHide='" + data[j].ParentCode + "'>");
+                        sb.Append("<td class='com_w25pen' style='padding-left:18px'>" + data[j].GroupName + "</td>");
+                        sb.Append("<td class='com_w25pen'>" + data[j].GroupDesc + "</td>");
+                        sb.Append("<td class='com_w30pen'>" + GetCompanyNameById(data[j].CompanyId.ToString()) + "</td>");
+                        sb.Append("<td class='com_w20pen'>");
+                        sb.Append("<a href='javascript:void(0)' onclick=Common.WindowBox('分组查看','80%','80%','UserGroup/Operation/Show/" + data[j].GroupCode + "')>查看|</a>");
+                        sb.Append("<a href='javascript:void(0)' onclick=Common.WindowBox('分组修改','80%','80%','UserGroup/Operation/Edit/" + data[j].GroupCode + "')>修改|</a>");
+                        sb.Append("<a href='javascript:void(0)' onclick=Config.DeleteConfig(" + data[j].GroupCode + ")>删除</a></tr>");
+                    }
+                }
+                else if (string.IsNullOrEmpty(list[i].ParentName))
+                {
+                    //是父分组，但是没有子分组
+                    sb.Append("<tr><td class='com_w25pen'>" + list[i].GroupName + "</td>");
+                    sb.Append("<td class='com_w25pen'>" + list[i].GroupDesc + "</td>");
+                    sb.Append("<td class='com_w30pen'>" + GetCompanyNameById(list[i].CompanyId.ToString()) + "</td>");
+                    sb.Append("<td class='com_w20pen'>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Common.WindowBox('分组查看','80%','80%','UserGroup/Operation/Show/" + list[i].GroupCode + "')>查看|</a>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Common.WindowBox('分组修改','80%','80%','UserGroup/Operation/Edit/" + list[i].GroupCode + "')>修改|</a>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Config.DeleteConfig(" + list[i].GroupCode + ")>删除</a></tr>");
+                }
+            }
+            return sb.ToString();
+        }  
+
+        //分组详细、修改、添加
+        public ActionResult Operation(string Oper, string ConfigId)
+        {
+            StringBuilder sb = new StringBuilder();
+            T_User_GroupExt model = new ServiceProxyRead().GetProxy().GetGroupByCode(PmsMng.ActiveKey, ConfigId);
+
+            switch (Oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='' />");
+                    break;
+                default:
+                    break;
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            ViewBag.Button = sb.ToString();
+            return View(model);
+        }
+
+        ////////////////////////
+
+        //根据公司Id查询名称
+        public string GetCompanyNameById(string companyId)
+        {
+            string result = string.Empty;
+            ServiceCrmGet.T_CompanyInfos model = new ServiceCrmGet.CRMSGetClient().GetCompanyInfoList(companyId, "");
+            if (model != null)
+            {
+                result = model.CompanyName;
+            }
+            return result;
+        }
+    }
+}

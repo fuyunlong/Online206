@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="74f393fc-5a81-4e3f-8b88-f79e0cc15b31" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://sms.scadacn.com/Services/MSService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MSService.wsdl" MetadataType="Wsdl" ID="02395184-439f-48a6-bfbf-22a69eb3e7ac" SourceId="1" SourceUrl="http://sms.scadacn.com/Services/MSService.svc?wsdl" />
+    <MetadataFile FileName="MSService.disco" MetadataType="Disco" ID="e5163851-4275-4df8-b95a-11b3c8e516e8" SourceId="1" SourceUrl="http://sms.scadacn.com/Services/MSService.svc?disco" />
+    <MetadataFile FileName="MSService.xsd" MetadataType="Schema" ID="fbddbd87-4bf1-4af4-b3fc-396e042142fa" SourceId="1" SourceUrl="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MSService1.xsd" MetadataType="Schema" ID="a1635df8-2d50-4266-9a2d-3f51e185689c" SourceId="1" SourceUrl="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MSService2.xsd" MetadataType="Schema" ID="ab548468-c7a9-496b-896a-8f9eb510cf85" SourceId="1" SourceUrl="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd3" />
+    <MetadataFile FileName="MSService3.xsd" MetadataType="Schema" ID="3afdb32d-fbee-42f3-bae9-40baeffde926" SourceId="1" SourceUrl="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd2" />
+    <MetadataFile FileName="MSService4.xsd" MetadataType="Schema" ID="819fbcad-34b0-47a0-892c-b6df4b21b3b5" SourceId="1" SourceUrl="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

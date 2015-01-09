@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加远控</title>
+
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/SiteMng/RemoteControl.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+        <link href="~/Style/Stip.css" rel="stylesheet" />
+    <script src="~/Scripts/Stip.js"></script>
+</head>
+ <body onload="$('#loading').hide()">
+    <div>
+        <table class="ui-com-tabFrm">
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div class="com_DivBor com_font10size">
+                            <font class="com_red">*操作说明:</font>
+                            <br />
+                            1、双击[配置列表]，可修改、删除对应配置信息；<br />
+                            2、点击【取消】按钮后，可添加配置信息；<br />
+                            3、【字段名称】即输入信号对应的字段名称（如DI1,DI2...）；<br />
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>站点编号</td>
+                    <td>
+                        <select id="DtuidList">
+                            @foreach (var a in ViewBag.DtuList)
+                            {
+                                <option value="@a.Dtuid">@a.Dtuid</option>
+                            }
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>字段名称</td>
+                    <td>
+                        <input type="text" id="FieldName" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>输出序号</td>
+                    <td>
+                        <input type="text" id="DO_Index" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>输入序号</td>
+                    <td>
+                        <input type="text" id="DI_Index" /></td>
+                </tr>
+                <tr>
+                    <td>控制到位值</td>
+                    <td>
+                        <input type="text" id="ReturnState" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="button" class="buttonVer2" value="添加" onclick="RemoteControl.AddControl()" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿//数据转发
+var DataTrans = {
+    //获取转发列表
+    GetTransList: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: $("#SiteName").val() },
+            url: "/FieldInfo/GetFiledList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data)
+            {
+
+            }
+        });
+    }
+};

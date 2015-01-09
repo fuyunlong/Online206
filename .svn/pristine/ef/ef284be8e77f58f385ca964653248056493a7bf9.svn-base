@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace WinfoToolSys.Pms
+{
+    /// <summary>
+    /// 数据权限筛选类
+    /// </summary>
+    public class DataPermission
+    {
+
+        /// <summary>
+        /// 根据用户ID获取当前用户拥有的站点列表，返回list
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public List<string> PermisSites(string UserId)
+        {
+            //掉接口获取
+            return new List<string>();
+        }
+
+
+    }
+}

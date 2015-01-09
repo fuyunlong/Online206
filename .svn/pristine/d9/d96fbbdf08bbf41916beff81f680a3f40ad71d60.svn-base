@@ -1,0 +1,510 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using Proxy;
+using Com.Winfotian.Common;
+using System.Web.Script.Serialization;
+using Com.Winfotian.DB;
+using WinfoToolSys.Pms;
+using Proxy.ServiceWinToolWrite;
+using Winfotian.Permission.HttpModule;
+using Proxy.CrmServiceGet;
+
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserInfoController : Controller
+    {
+        //用户信息管理
+        public ActionResult Index()
+        {
+
+            return View();
+        }
+
+        //站点用户管理
+        public ActionResult SiteUser()
+        {
+            return View();
+        }
+
+        //根据分组编码查询站点信息
+        public JsonResult GetDTUByGroupCode(string companyId, string groupCode)
+        {
+            List<Proxy.ServiceWinToolRead.T_DTU> list = new List<Proxy.ServiceWinToolRead.T_DTU>();
+            try
+            {
+                var model = ServcieTool.WinToolServiceReadInstance.GetSiteByCompanyIdAndGroupCode(PmsMng.ActiveKey, companyId, groupCode);
+                if (PmsMng.CompanyId != 12)
+                {
+                    //当前用户可以访问的站点
+                    var dtuIds = DataPermission.PermisSites(PmsMng.LogUser);
+                    foreach (var item in model)
+                    {
+                        if (dtuIds.Contains(item.Dtuid))
+                        {
+                            list.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    list = model;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+
+
+        //根据站点编号查找用户信息
+        public JsonResult GetUserInfoByDtuId(string dtuId)
+        {
+            List<Proxy.ServiceWinToolRead.T_User_Info> list = new List<Proxy.ServiceWinToolRead.T_User_Info>();
+            try
+            {
+                list = ServcieTool.WinToolServiceReadInstance.GetUserListByDTUId(PmsMng.ActiveKey, dtuId);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取用户列表
+        public JsonResult GetUserList(string companyId, string groupCode)
+        {
+            List<Proxy.CrmServiceGet.T_UserNewInfo> list = null;
+            try
+            {
+                list = ServcieTool.CrmServiceGetInstance.GetEmployeeInfoTwo(companyId, PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (list == null)
+            {
+                list = new List<Proxy.CrmServiceGet.T_UserNewInfo>();
+            }
+            return Json(list);
+        }
+
+        //添加页面
+        public ActionResult AddUser(string companyId, string dtuId)
+        {
+            List<Proxy.ServiceWinToolRead.T_User_Info> list = new List<Proxy.ServiceWinToolRead.T_User_Info>();
+            try
+            {
+                if (dtuId != null)
+                {
+                    list = ServcieTool.WinToolServiceReadInstance.GetUserInfroByCompanyId(PmsMng.ActiveKey, companyId, dtuId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            ViewBag.DTUId = dtuId;
+            return View(list);
+        }
+
+        public ActionResult AddUserV2()
+        {
+            ViewBag.Pwd = new Random().Next(000000, 1000000);
+            return View();
+        }
+
+        public int AddUserV2Oper(Proxy.CrmServicePost.T_EmployeeInfo obj)
+        {
+            int rlst = 0;
+            try
+            {
+                obj.IsBuild = 1;
+                string Group = obj.EmpSex;
+                obj.EmpSex = "";
+                obj.DepartName = "";
+                obj.RegDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                obj.Remark = "";
+                string dd = ServcieTool.CrmServicePostInstance.AddEMployeeInfoTwo(obj, PmsMng.ActiveKey);
+                if (dd.ToLower() == "true")
+                {
+                    if (obj.DepartName != null)
+                    {
+                        List<string> SiteLit = obj.DepartName.Split(',').ToList();
+                        if (SiteLit.Count > 0)
+                        {
+                            List<Proxy.ServiceWinToolWrite.T_User_UserDtuid> dtus = new List<T_User_UserDtuid>();
+                            string logUser = obj.UserName;
+                            foreach (var a in SiteLit)
+                            {
+                                if (a.Length > 0)
+                                    dtus.Add(new Proxy.ServiceWinToolWrite.T_User_UserDtuid { Dtuid = a, UserId = logUser, Status = 1 });
+                            }
+                            ServcieTool.WinToolServiceWriteInstance.AddUserUserDtuid(PmsMng.ActiveKey, PmsMng.LogUser, logUser, dtus);
+                            rlst = 1;
+                        }
+                    }
+                }
+            }
+            catch
+            { }
+            return rlst;
+        }
+
+        //根据用户Id获取用户信息
+        public JsonResult GetUserInfo(string id)
+        {
+            var UserObj = ServcieTool.CrmServiceGetInstance.QueryTool(id, PmsMng.ActiveKey);
+            return Json(UserObj);
+        }
+
+
+        /// <summary>
+        /// 更新用户信息包括配置
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public int UpdateUser(Proxy.CrmServicePost.T_EmployeeInfo obj)
+        {
+            bool rlst = false;
+            try
+            {
+                if (DataPermission.IsUserCanUpdateUserInfo())
+                {
+                    obj.IsBuild = 1;
+                    List<string> SiteLit = new List<string>();
+                    if (obj.DepartName != null)
+                        SiteLit = obj.DepartName.Split(',').ToList();
+                    List<Proxy.ServiceWinToolWrite.T_User_UserDtuid> dtus = new List<T_User_UserDtuid>();
+                    string logUser = obj.UserName;
+                    foreach (var a in SiteLit)
+                    {
+                        if (a.Length > 0)
+                            dtus.Add(new Proxy.ServiceWinToolWrite.T_User_UserDtuid { Dtuid = a, UserId = logUser, Status = 1 });
+                    }
+                    bool aa = ServcieTool.WinToolServiceWriteInstance.AddUserUserDtuid(PmsMng.ActiveKey, PmsMng.LogUser, logUser, dtus);
+                    rlst = ServcieTool.CrmServicePostInstance.UpdateTool(obj, Pms.PmsMng.ActiveKey);
+                }
+                else
+                {
+                    return 4;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            if (rlst)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// 删除用户信息，包括配置
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <returns></returns>
+        public int DeleteUserInfo(string UserId, string EmployeeId)
+        {
+            bool rlst = false;
+            try
+            {
+                if (DataPermission.IsUserCanDeleteUserInfo())
+                {
+                    rlst = ServcieTool.CrmServicePostInstance.UpdateToolStatus(0, UserId, EmployeeId, PmsMng.ActiveKey);
+                    //删除用户所在的配置
+                    ServcieTool.WinToolServiceWriteInstance.AddUserUserDtuid(PmsMng.ActiveKey, PmsMng.LogUser, UserId, new List<T_User_UserDtuid>());
+                }
+                else
+                { return 4; }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (rlst)
+            { return 1; }
+            else
+            { return 0; }
+
+        }
+
+        public ActionResult UserDeatail(string Oper, string UserId)
+        {
+            var PerList = PermissionWCFProxy.GetUserRolesByDomain(UserId, PmsMng.DomainId);
+            //获取用户基本信息
+            Proxy.CrmServiceGet.T_EmployeeInfo obj = ServcieTool.CrmServiceGetInstance.QueryTool(UserId, PmsMng.ActiveKey);
+            ViewBag.UserObj = obj;
+            ViewBag.UserFee = GetUserFeeList(obj.BillCode);//获取计费方式列表
+            ViewBag.UserConfig = GetUserConfigList(obj.CCode);//获取用户配置
+            ViewBag.ddlCompanyV2 = GetCompanyList(obj.CompanyID.ToString());  //获取当前用户公司及列表
+            ViewBag.Departs = GetDepartList(obj.DepartID);//获取当前用户的部门及列表
+            int Posid = 0;
+            int.TryParse(obj.PosID, out Posid);
+            ViewBag.PostionList = GetPosiontionList(obj.DepartID, Posid);
+            //获取用户分组名字
+            ViewBag.GroupCode = ServcieTool.WinToolServiceReadInstance.GetUserGroupCodeByUserId(PmsMng.ActiveKey, UserId);
+            //获取当前用户拥有的站点列表
+            ViewBag.UserDtuList = ServcieTool.WinToolServiceReadInstance.GetUserUserDtuListByUserId(Pms.PmsMng.ActiveKey, UserId);
+            if (Oper == "Show")
+            {
+                ViewBag.Oper = "";
+            }
+            else
+            {
+                ViewBag.Oper = " <input type='button' class='buttonVer2' value='修改' onclick='UserDTU.UpdateUser()' />";
+            }
+            return View();
+        }
+
+        //添加
+        public string Add(string userId, string dtuId)
+        {
+            string result = "false";
+            try
+            {
+                string[] ids = userId.Split(',');
+                foreach (var id in ids)
+                {
+                    T_User_UserDtuid user = new T_User_UserDtuid();
+                    user.UserId = id;
+                    user.Dtuid = dtuId;
+                    user.Status = 1;
+                    if (ServcieTool.WinToolServiceWriteInstance.AddDTUUser(PmsMng.ActiveKey, user))
+                    {
+                        result = "true";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //删除
+        public string Delete(string userId, string dtuId)
+        {
+            string result = string.Empty;
+            try
+            {
+                if (Pms.DataPermission.IsUserCanDeleteSite())
+                {
+                    if (ServcieTool.WinToolServiceWriteInstance.DeleteDTUUser(PmsMng.ActiveKey, userId, dtuId))
+                    {
+                        result = "删除成功";
+                    }
+                    else
+                    {
+                        result = "删除失败";
+                    }
+                }
+                else
+                {
+                    result = "没有权限";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //*********************************
+
+        private List<SelectListItem> GetUserFeeList(string BillCode = "")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.SmsService.T_SMS_Bill> FeeList = null;
+            try
+            {
+                FeeList = ServcieTool.SmsServiceInstance.GetBillConfigList(PmsMng.StaticKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (FeeList != null)
+            {
+                foreach (var a in FeeList)
+                {
+                    if (BillCode.Length > 0 && BillCode == a.BillCode)
+                    {
+                        list.Add(new SelectListItem { Text = a.BillName, Value = a.BillCode, Selected = true });
+                    }
+                    else
+                    {
+                        list.Add(new SelectListItem { Text = a.BillName, Value = a.BillCode });
+                    }
+                }
+            }
+            return list;
+        }
+
+        private List<SelectListItem> GetUserConfigList(string config = "")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.ServiceWinToolRead.T_User_Config> ConfigList = new List<Proxy.ServiceWinToolRead.T_User_Config>();
+            try
+            {
+                ConfigList = ServcieTool.WinToolServiceReadInstance.GetUserConfigListByName(PmsMng.ActiveKey, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (ConfigList != null)
+            {
+                foreach (var a in ConfigList)
+                {
+                    if (config.Length > 0 && a.CCode == config)
+                    {
+                        list.Add(new SelectListItem { Text = a.ConfigName, Value = a.CCode, Selected = true });
+                    }
+                    else
+                    {
+                        list.Add(new SelectListItem { Text = a.ConfigName, Value = a.CCode });
+                    }
+                }
+            }
+            return list;
+        }
+
+        private List<SelectListItem> GetUserRoleList(string RoleCode = "")
+        {
+            List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto> list = new List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto>();
+            try
+            {
+                list = PermissionWCFProxy.QueryRoles("", Pms.PmsMng.DomainId);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            List<SelectListItem> list1 = new List<SelectListItem>();
+            foreach (var a in list)
+            {
+                if (RoleCode == a.RoleCode)
+                {
+                    list1.Add(new SelectListItem { Value = a.RoleCode, Text = a.Name, Selected = true });
+                }
+                else
+                {
+                    list1.Add(new SelectListItem { Value = a.RoleCode, Text = a.Name });
+                }
+            }
+            return list1;
+        }
+         
+        private List<SelectListItem> GetCompanyList(string Company = "")
+        {
+            List<T_Companys> list = new List<T_Companys>();
+            try
+            {
+                var model = ServcieTool.CrmServiceGetInstance.GetCompanyLists("", "", PmsMng.ActiveKey);
+                if (PmsMng.CompanyId == 12)
+                {
+                    foreach (var a in model)
+                    {
+                        if (a.CompanyID == 12)
+                            list.Insert(0, a);
+                        else
+                        {
+                            list.Add(a);
+                        }
+                    }
+                }
+                else
+                {
+                    list = (from row in model where row.CompanyID == PmsMng.CompanyId select row).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            List<SelectListItem> Clist = new List<SelectListItem>();
+            if (list != null)
+            {
+                foreach (var a in list)
+                {
+                    if (Company.Length > 0 && Company == a.CompanyID.ToString())
+                        Clist.Add(new SelectListItem { Text = a.CompanyName, Value = a.CompanyID.ToString(), Selected = true });
+                    else
+                        Clist.Add(new SelectListItem { Text = a.CompanyName, Value = a.CompanyID.ToString() });
+                }
+            }
+            return Clist;
+        }
+
+        private List<SelectListItem> GetDepartList(int Company, int Depart = 0)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.CrmServiceGet.T_DepartmentInfos> departs = null;
+            try
+            {
+                departs = ServcieTool.CrmServiceGetInstance.GetDepartmentInfoList(Company.ToString(), PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (departs == null)
+            {
+                departs = new List<T_DepartmentInfos>();
+            }
+            foreach (var a in departs)
+            {
+                if (Depart != 0 && a.DepartID == Depart)
+                {
+                    list.Add(new SelectListItem { Text = a.DepartName, Value = a.DepartID.ToString(), Selected = true });
+                }
+                else
+                {
+                    list.Add(new SelectListItem { Text = a.DepartName, Value = a.DepartID.ToString() });
+                }
+            }
+            return list;
+        }
+
+        private List<SelectListItem> GetPosiontionList(int Depart, int Postion = 0)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.CrmServiceGet.T_PostInfos> postion = null;
+            try
+            {
+                postion = new JavaScriptSerializer().Deserialize<List<Proxy.CrmServiceGet.T_PostInfos>>(ServcieTool.CrmServiceGetInstance.GetPostinfo(Depart, PmsMng.ActiveKey));
+            }
+            catch
+            { }
+            if (postion == null)
+            {
+                return null;
+            }
+            foreach (var a in postion)
+            {
+                if (a.PosID == Postion)
+                    list.Add(new SelectListItem { Text = a.PostName, Value = a.PosID.ToString(), Selected = true });
+                else
+                    list.Add(new SelectListItem { Text = a.PostName, Value = a.PosID.ToString() });
+            }
+            return list;
+        }
+    }
+}

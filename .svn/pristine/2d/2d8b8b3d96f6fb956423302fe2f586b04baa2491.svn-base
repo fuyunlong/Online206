@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Proxy;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteInfoMalodorController : Controller
+    {
+        //
+        // GET: /SiteInfoMalodor/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = ServcieTool.WinToolServiceReadInstance.GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        //获取加臭站点列表
+        public JsonResult GetOdorSite(string Company, string Group, string SiteName)
+        {
+            var lis = ServcieTool.WinToolServiceReadInstance.GetSite("", Company, Group, SiteName, true);
+            return Json(lis);
+        }
+
+        //显示加臭站点详细信息
+        public ActionResult SiteDeatailMalodor(string Oper, string DtuId)
+        {
+            ViewBag.Oper = Oper;
+            ViewBag.CompanyList = ServcieTool.WinToolServiceReadInstance.GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.DtuConfigList = ServcieTool.WinToolServiceReadInstance.DtuConfigListV2(PmsMng.ActiveKey);
+            ViewBag.VerList = ServcieTool.WinToolServiceReadInstance.GetVerList(PmsMng.ActiveKey);
+            ViewBag.PressureLevelList = ServcieTool.WinToolServiceReadInstance.GetPressureLevelList(PmsMng.ActiveKey, "");
+            ViewBag.DTU_Ex = ServcieTool.WinToolServiceReadInstance.GetSiteById(PmsMng.ActiveKey, DtuId);
+            if(Oper == "Show")
+            {
+                ViewBag.OperAreaText = "";
+            }
+            else
+            {
+                ViewBag.OperAreaText = "<input type='button' class='buttonVer2' value='修改' onclick='SiteMng.UpdateSiteInfo()' />";
+            }
+            return View();
+        }
+    }
+}

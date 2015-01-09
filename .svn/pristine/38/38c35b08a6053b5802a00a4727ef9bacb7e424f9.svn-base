@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserRoleController : Controller
+    {
+        //
+        // GET: /UserRole/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //查询角色信息
+        public JsonResult GetListByName(string roleName)
+        {
+            return Json("");
+        }
+    }
+}

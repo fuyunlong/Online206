@@ -1,0 +1,142 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.ServiceProxy;
+using Com.Winfotian.ServiceProxy.UpdateService;
+using System.Text;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class ConfigController : Controller
+    {
+        //
+        // GET: /Config/
+        private List<Com.Winfotian.Model.T_Company_Config> ConfigList = null;
+        public ActionResult ShowConfigList()
+        {
+            GetConfigList("");
+            ViewBag.ConfigList = ConfigList;
+            GetClientTypeList("");
+            return View();
+        }
+
+        private void GetClientTypeList(string TypeId)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+        }
+
+        private void GetConfigList(string ConfigId)
+        {
+            try
+            {
+
+                ConfigList = new ServiceProxyRead().GetProxy().GetConfigList(PmsMng.ActiveKey, ConfigId);
+
+
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+        }
+
+        public JsonResult GetConfigList()
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetCompanyConfigs("");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        public JsonResult GetCompanyConfig(string CompanyId)
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetCompanyConfig(CompanyId, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        //显示操作界面
+        public JavaScriptResult ShowOper(string Oper, string ConfigId)
+        {
+            try
+            {
+
+                new ServiceProxyRead().GetProxy().GetConfigList(PmsMng.ActiveKey, ConfigId);
+
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            StringBuilder Str = new StringBuilder();
+            Str.Append("<table>");
+            Str.Append("<tr>");
+            Str.Append("<td>配置名称</td>");
+            switch (Oper)
+            {
+                case "Show":
+
+                    break;
+                case "Edit":
+
+                    break;
+                case "Add":
+
+                    break;
+                default:
+                    break;
+            }
+            return JavaScript("");
+        }
+
+        public string Add(string companyName, string[] arr)
+        {
+            string result = "";
+
+            try
+            {
+                if (new ServiceCrmPost.CRMSPostClient().AddCompanyConfig(companyName, arr, ""))
+                {
+                    result = "1";
+                }
+                else
+                {
+                    result = "0";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+
+            return result;
+        }
+    }
+}

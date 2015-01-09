@@ -1,0 +1,195 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class DtuValueInfluenceProvider
+    {
+
+
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public void Add(T_DTU_ValveEffect model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into [Infa]..[T_DTU_ValveEffect](");
+            strSql.Append("ValveCode,ClosedTime,EffctArea,EffctUserNum,ValveName,Dtuid)");
+            strSql.Append(" values (");
+            strSql.Append("@ValveCode,@ClosedTime,@EffctArea,@EffctUserNum,@ValveName,@Dtuid)");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ValveCode", SqlDbType.VarChar,30),
+					new SqlParameter("@ClosedTime", SqlDbType.DateTime),
+					new SqlParameter("@EffctArea", SqlDbType.NVarChar,50),
+					new SqlParameter("@EffctUserNum", SqlDbType.Int,4),
+					new SqlParameter("@ValveName", SqlDbType.NVarChar,30),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8)};
+            parameters[0].Value = model.ValveCode;
+            parameters[1].Value = model.ClosedTime;
+            parameters[2].Value = model.EffctArea;
+            parameters[3].Value = model.EffctUserNum;
+            parameters[4].Value = model.ValveName;
+            parameters[5].Value = model.Dtuid;
+            SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+        }
+
+        public List<T_DTU_ValveEffect> GetInfluencList(string Company, string Group, string SiteName)
+        {
+            List<T_DTU_ValveEffect> list = new List<T_DTU_ValveEffect>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("  SELECT FROM [Infa]..[T_DTU] as a ");
+            SqlStr.Append("   inner join [infa]..[T_DTU_Group] as b on a.GroupCode= b.GroupCode  where 1=1 ");
+            if(Company != "0")
+            {
+                SqlStr.Append(" and b.CompanyId=@CompanyId ");
+            }
+            if(Group != "0")
+            {
+                SqlStr.Append(" and b.GroupCode=@GroupCode ");
+            }
+            if(SiteName.Length > 0)
+            {
+                SqlStr.Append(" and a.DtuidName like   @SiteName   ");
+            }
+            SqlParameter[] pars = { 
+                                new SqlParameter("@CompanyId",Company),
+                                new SqlParameter("@GroupCode",Group),
+                                new SqlParameter("@SiteName","%"+SiteName+"%")
+                                  };
+
+            using(IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+            {
+                while(dr.Read())
+                {
+                    try
+                    {
+                        T_DTU_ValveEffect Ex = IDataT_DTU_ValveEffectReader(dr);
+                        list.Add(Ex);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(T_DTU_ValveEffect model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_DTU_ValveEffect] set ");
+            strSql.Append("ClosedTime=@ClosedTime,");
+            strSql.Append("EffctArea=@EffctArea,");
+            strSql.Append("EffctUserNum=@EffctUserNum,");
+            strSql.Append("ValveName=@ValveName,");
+            strSql.Append("Dtuid=@Dtuid");
+            strSql.Append(" where ValveCode=@ValveCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ClosedTime", SqlDbType.DateTime),
+					new SqlParameter("@EffctArea", SqlDbType.NVarChar,50),
+					new SqlParameter("@EffctUserNum", SqlDbType.Int,4),
+					new SqlParameter("@ValveName", SqlDbType.NVarChar,30),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@ValveCode", SqlDbType.VarChar,30)};
+            parameters[0].Value = model.ClosedTime;
+            parameters[1].Value = model.EffctArea;
+            parameters[2].Value = model.EffctUserNum;
+            parameters[3].Value = model.ValveName;
+            parameters[4].Value = model.Dtuid;
+            parameters[5].Value = model.ValveCode;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if(rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(string ValveCode)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from [Infa]..[T_DTU_ValveEffect] ");
+            strSql.Append(" where ValveCode=@ValveCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ValveCode", SqlDbType.VarChar,50)};
+            parameters[0].Value = ValveCode;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if(rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public T_DTU_ValveEffect GetModel(string ValveCode)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 ValveCode,ClosedTime,EffctArea,EffctUserNum,ValveName,Dtuid from [Infa]..[T_DTU_ValveEffect] ");
+            strSql.Append(" where ValveCode=@ValveCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ValveCode", SqlDbType.VarChar,50)};
+            parameters[0].Value = ValveCode;
+
+            T_DTU_ValveEffect model = null;
+            using(IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if(dr.Read())
+                {
+                    model = IDataT_DTU_ValveEffectReader(dr);
+                }
+            }
+            return model;
+        }
+
+
+        /// <summary>
+        /// T_DTU_ValveEffect 数据读取
+        /// </summary>
+        private T_DTU_ValveEffect IDataT_DTU_ValveEffectReader(IDataReader dr)
+        {
+            T_DTU_ValveEffect model = new T_DTU_ValveEffect();
+            try
+            {
+                model.ValveCode = (dr["ValveCode"] is DBNull) ? string.Empty : dr["ValveCode"].ToString();
+                model.ClosedTime = (dr["ClosedTime"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["ClosedTime"].ToString());
+                model.EffctArea = (dr["EffctArea"] is DBNull) ? string.Empty : dr["EffctArea"].ToString();
+                model.EffctUserNum = (dr["EffctUserNum"] is DBNull) ? 0 : Convert.ToInt32(dr["EffctUserNum"].ToString());
+                model.ValveName = (dr["ValveName"] is DBNull) ? string.Empty : dr["ValveName"].ToString();
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+            }
+            catch(Exception ex)
+            {
+
+                return null;
+            }
+            return model;
+        }
+
+    }
+}

@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CRMSPost" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd1" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICRMSPost_UpLoadImg_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpLoadImg" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpLoadImg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpLoadImgResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpLoadComanyImg_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpLoadComanyImg" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpLoadComanyImg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpLoadComanyImgResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_RegisterCompanyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_RegisterCompanyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterCompanyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeCompanyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeCompanyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCompanyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDepartment" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddDepartment_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddDepartment" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddDepartment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeletePost_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePost" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeletePost_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdatePost_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePost" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdatePost_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddPost_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPost" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddPost_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeletePaper_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePaper" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeletePaper_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePaperResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdatePaper_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePaper" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdatePaper_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePaperResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddPaperInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPaperInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddPaperInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPaperInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddCompanyConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCompanyConfig" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddCompanyConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCompanyConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateCompanyConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompanyConfig" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateCompanyConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCompanyConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteCompanyConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCompanyConfig" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteCompanyConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCompanyConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteConfig" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeConfigStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeConfigStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeConfigStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeConfigStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeCompanyStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCompanyStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeCompanyStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeCompanyStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddConfigInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddConfigInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddConfigInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddConfigInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteList_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_RegisterUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUser" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_RegisterUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeUserConfigUp_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeUserConfigUp" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangeUserConfigUp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeUserConfigUpResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangEMployeeInfoADD_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangEMployeeInfoADD" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangEMployeeInfoADD_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangEMployeeInfoADDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddEMployeeInfoTwo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEMployeeInfoTwo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddEMployeeInfoTwo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEMployeeInfoTwoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangEMployeeInfoUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangEMployeeInfoUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangEMployeeInfoUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangEMployeeInfoUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangEMployeeUpdateStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangEMployeeUpdateStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ChangEMployeeUpdateStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangEMployeeUpdateStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccount" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddCredit_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCredit" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddCredit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCreditResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteCredit_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCredit" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteCredit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCreditResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateCredit_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCredit" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateCredit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCreditResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UPStat_InputMessage">
+    <wsdl:part name="parameters" element="tns:UPStat" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UPStat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UPStatResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ADDIMG_InputMessage">
+    <wsdl:part name="parameters" element="tns:ADDIMG" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_ADDIMG_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ADDIMGResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteEmploy_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEmploy" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteEmploy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEmployResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteHave_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteHave" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteHave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteHaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddHave_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddHave" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddHave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddHaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateTool_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTool" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateTool_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateToolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateToolStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateToolStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateToolStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateToolStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddSMSAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSMSAccount" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddSMSAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSMSAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddUserConfigInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserConfigInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddUserConfigInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserConfigInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteUserConfigInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserConfigInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteUserConfigInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserConfigInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateUserConfigInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserConfigInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateUserConfigInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserConfigInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStatus" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddUser_UserGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser_UserGroup" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_AddUser_UserGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser_UserGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteUser_UserGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser_UserGroup" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_DeleteUser_UserGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser_UserGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateUser_UserGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser_UserGroup" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSPost_UpdateUser_UserGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser_UserGroupResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICRMSPost">
+    <wsdl:operation name="UpLoadImg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpLoadImg" message="tns:ICRMSPost_UpLoadImg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpLoadImgResponse" message="tns:ICRMSPost_UpLoadImg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpLoadComanyImg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpLoadComanyImg" message="tns:ICRMSPost_UpLoadComanyImg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpLoadComanyImgResponse" message="tns:ICRMSPost_UpLoadComanyImg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCompanyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/RegisterCompanyInfo" message="tns:ICRMSPost_RegisterCompanyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/RegisterCompanyInfoResponse" message="tns:ICRMSPost_RegisterCompanyInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCompanyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/ChangeCompanyInfo" message="tns:ICRMSPost_ChangeCompanyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/ChangeCompanyInfoResponse" message="tns:ICRMSPost_ChangeCompanyInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/Delete" message="tns:ICRMSPost_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeleteResponse" message="tns:ICRMSPost_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdateDepartment" message="tns:ICRMSPost_UpdateDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdateDepartmentResponse" message="tns:ICRMSPost_UpdateDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddDepartment">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddDepartment" message="tns:ICRMSPost_AddDepartment_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddDepartmentResponse" message="tns:ICRMSPost_AddDepartment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePost">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeletePost" message="tns:ICRMSPost_DeletePost_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeletePostResponse" message="tns:ICRMSPost_DeletePost_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePost">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdatePost" message="tns:ICRMSPost_UpdatePost_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdatePostResponse" message="tns:ICRMSPost_UpdatePost_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPost">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddPost" message="tns:ICRMSPost_AddPost_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddPostResponse" message="tns:ICRMSPost_AddPost_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePaper">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeletePaper" message="tns:ICRMSPost_DeletePaper_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeletePaperResponse" message="tns:ICRMSPost_DeletePaper_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePaper">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdatePaper" message="tns:ICRMSPost_UpdatePaper_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdatePaperResponse" message="tns:ICRMSPost_UpdatePaper_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPaperInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddPaperInfo" message="tns:ICRMSPost_AddPaperInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddPaperInfoResponse" message="tns:ICRMSPost_AddPaperInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCompanyConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddCompanyConfig" message="tns:ICRMSPost_AddCompanyConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddCompanyConfigResponse" message="tns:ICRMSPost_AddCompanyConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompanyConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdateCompanyConfig" message="tns:ICRMSPost_UpdateCompanyConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/UpdateCompanyConfigResponse" message="tns:ICRMSPost_UpdateCompanyConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCompanyConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeleteCompanyConfig" message="tns:ICRMSPost_DeleteCompanyConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeleteCompanyConfigResponse" message="tns:ICRMSPost_DeleteCompanyConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeleteConfig" message="tns:ICRMSPost_DeleteConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeleteConfigResponse" message="tns:ICRMSPost_DeleteConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeConfigStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/ChangeConfigStatus" message="tns:ICRMSPost_ChangeConfigStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/ChangeConfigStatusResponse" message="tns:ICRMSPost_ChangeConfigStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCompanyStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/ChangeCompanyStatus" message="tns:ICRMSPost_ChangeCompanyStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/ChangeCompanyStatusResponse" message="tns:ICRMSPost_ChangeCompanyStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddConfigInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddConfigInfo" message="tns:ICRMSPost_AddConfigInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/AddConfigInfoResponse" message="tns:ICRMSPost_AddConfigInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeleteList" message="tns:ICRMSPost_DeleteList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/DeleteListResponse" message="tns:ICRMSPost_DeleteList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_RegisterUser/RegisterUser" message="tns:ICRMSPost_RegisterUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_RegisterUser/RegisterUserResponse" message="tns:ICRMSPost_RegisterUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserConfigUp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_RegisterUser/ChangeUserConfigUp" message="tns:ICRMSPost_ChangeUserConfigUp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_RegisterUser/ChangeUserConfigUpResponse" message="tns:ICRMSPost_ChangeUserConfigUp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_RegisterUser/ChangePassword" message="tns:ICRMSPost_ChangePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_RegisterUser/ChangePasswordResponse" message="tns:ICRMSPost_ChangePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangEMployeeInfoADD">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeInfoADD" message="tns:ICRMSPost_ChangEMployeeInfoADD_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeInfoADDResponse" message="tns:ICRMSPost_ChangEMployeeInfoADD_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddEMployeeInfoTwo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddEMployeeInfoTwo" message="tns:ICRMSPost_AddEMployeeInfoTwo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddEMployeeInfoTwoResponse" message="tns:ICRMSPost_AddEMployeeInfoTwo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangEMployeeInfoUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeInfoUpdate" message="tns:ICRMSPost_ChangEMployeeInfoUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeInfoUpdateResponse" message="tns:ICRMSPost_ChangEMployeeInfoUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangEMployeeUpdateStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeUpdateStatus" message="tns:ICRMSPost_ChangEMployeeUpdateStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeUpdateStatusResponse" message="tns:ICRMSPost_ChangEMployeeUpdateStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateAccount" message="tns:ICRMSPost_UpdateAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateAccountResponse" message="tns:ICRMSPost_UpdateAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCredit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddCredit" message="tns:ICRMSPost_AddCredit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddCreditResponse" message="tns:ICRMSPost_AddCredit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCredit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/DeleteCredit" message="tns:ICRMSPost_DeleteCredit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/DeleteCreditResponse" message="tns:ICRMSPost_DeleteCredit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCredit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateCredit" message="tns:ICRMSPost_UpdateCredit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateCreditResponse" message="tns:ICRMSPost_UpdateCredit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UPStat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UPStat" message="tns:ICRMSPost_UPStat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UPStatResponse" message="tns:ICRMSPost_UPStat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ADDIMG">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ADDIMG" message="tns:ICRMSPost_ADDIMG_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ADDIMGResponse" message="tns:ICRMSPost_ADDIMG_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEmploy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/DeleteEmploy" message="tns:ICRMSPost_DeleteEmploy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/DeleteEmployResponse" message="tns:ICRMSPost_DeleteEmploy_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteHave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/DeleteHave" message="tns:ICRMSPost_DeleteHave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/DeleteHaveResponse" message="tns:ICRMSPost_DeleteHave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddHave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddHave" message="tns:ICRMSPost_AddHave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddHaveResponse" message="tns:ICRMSPost_AddHave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTool">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateTool" message="tns:ICRMSPost_UpdateTool_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateToolResponse" message="tns:ICRMSPost_UpdateTool_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateToolStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateToolStatus" message="tns:ICRMSPost_UpdateToolStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UpdateToolStatusResponse" message="tns:ICRMSPost_UpdateToolStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSMSAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddSMSAccount" message="tns:ICRMSPost_AddSMSAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/AddSMSAccountResponse" message="tns:ICRMSPost_AddSMSAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserConfigInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_Config/AddUserConfigInfo" message="tns:ICRMSPost_AddUserConfigInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_Config/AddUserConfigInfoResponse" message="tns:ICRMSPost_AddUserConfigInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserConfigInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_Config/DeleteUserConfigInfo" message="tns:ICRMSPost_DeleteUserConfigInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_Config/DeleteUserConfigInfoResponse" message="tns:ICRMSPost_DeleteUserConfigInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserConfigInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_Config/UpdateUserConfigInfo" message="tns:ICRMSPost_UpdateUserConfigInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_Config/UpdateUserConfigInfoResponse" message="tns:ICRMSPost_UpdateUserConfigInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_Config/UpdateStatus" message="tns:ICRMSPost_UpdateStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_Config/UpdateStatusResponse" message="tns:ICRMSPost_UpdateStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser_UserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_UserGroup/AddUser_UserGroup" message="tns:ICRMSPost_AddUser_UserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_UserGroup/AddUser_UserGroupResponse" message="tns:ICRMSPost_AddUser_UserGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser_UserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_UserGroup/DeleteUser_UserGroup" message="tns:ICRMSPost_DeleteUser_UserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_UserGroup/DeleteUser_UserGroupResponse" message="tns:ICRMSPost_DeleteUser_UserGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser_UserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_UserGroup/UpdateUser_UserGroup" message="tns:ICRMSPost_UpdateUser_UserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_UserGroup/UpdateUser_UserGroupResponse" message="tns:ICRMSPost_UpdateUser_UserGroup_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICRMSPost" type="tns:ICRMSPost">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpLoadImg">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/UpLoadImg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpLoadComanyImg">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/UpLoadComanyImg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterCompanyInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/RegisterCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCompanyInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/ChangeCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDepartment">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/UpdateDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddDepartment">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/AddDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePost">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/DeletePost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePost">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/UpdatePost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPost">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/AddPost" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePaper">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/DeletePaper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePaper">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/UpdatePaper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPaperInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/AddPaperInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCompanyConfig">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/AddCompanyConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCompanyConfig">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/UpdateCompanyConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCompanyConfig">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/DeleteCompanyConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteConfig">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/DeleteConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeConfigStatus">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/ChangeConfigStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeCompanyStatus">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/ChangeCompanyStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddConfigInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/AddConfigInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteList">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/DeleteList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterUser">
+      <soap:operation soapAction="http://tempuri.org/IT_RegisterUser/RegisterUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUserConfigUp">
+      <soap:operation soapAction="http://tempuri.org/IT_RegisterUser/ChangeUserConfigUp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="http://tempuri.org/IT_RegisterUser/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangEMployeeInfoADD">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeInfoADD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEMployeeInfoTwo">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/AddEMployeeInfoTwo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangEMployeeInfoUpdate">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeInfoUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangEMployeeUpdateStatus">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/ChangEMployeeUpdateStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCredit">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/AddCredit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCredit">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/DeleteCredit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCredit">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/UpdateCredit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UPStat">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/UPStat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ADDIMG">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/ADDIMG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEmploy">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/DeleteEmploy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteHave">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/DeleteHave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddHave">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/AddHave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTool">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/UpdateTool" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateToolStatus">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/UpdateToolStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSMSAccount">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/AddSMSAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserConfigInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_User_Config/AddUserConfigInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserConfigInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_User_Config/DeleteUserConfigInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserConfigInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_User_Config/UpdateUserConfigInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStatus">
+      <soap:operation soapAction="http://tempuri.org/IT_User_Config/UpdateStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser_UserGroup">
+      <soap:operation soapAction="http://tempuri.org/IT_User_UserGroup/AddUser_UserGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser_UserGroup">
+      <soap:operation soapAction="http://tempuri.org/IT_User_UserGroup/DeleteUser_UserGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser_UserGroup">
+      <soap:operation soapAction="http://tempuri.org/IT_User_UserGroup/UpdateUser_UserGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CRMSPost">
+    <wsdl:port name="BasicHttpBinding_ICRMSPost" binding="tns:BasicHttpBinding_ICRMSPost">
+      <soap:address location="http://test_crm.scadacn.com/Service/CrmsPostService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

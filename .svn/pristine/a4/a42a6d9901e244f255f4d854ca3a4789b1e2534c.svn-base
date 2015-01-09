@@ -1,0 +1,148 @@
+﻿@model Com.Winfotian.Model.T_DTU_FieldDescEX
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>客户信息</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+        <script src="~/Scripts/Common/ui_common.js"></script>
+        <script>
+            $(function () {
+                var Oper = "@Model.Oper";
+                $("#txtsitecode").val("@Model.FieldObj.Dtuid");
+                $("#fileduint").val("@Model.FieldObj.FieldUnit");
+                $("#fieldshordesc").val("@Model.FieldObj.FieldShortDesc");
+                $("#FieldDesc").val("@Model.FieldObj.FieldDesc");
+            });
+        </script>
+    </head>
+    <body>
+        <div class="com_DivBor">
+            <table class="ui-com-tabFrm" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>站点编号</td>
+                    <td class="com_w10pen">
+                        <input type="text" class="com_w70pen" id="txtSiteCode" />
+                    </td>
+                    <td>字段名称</td>
+                    <td colspan="2">
+                        <input id="ss" class="easyui-numberspinner com_w50pen" min="1" value="1" max="100" required="true" />
+                        <select id="FiledName">
+                            <option>全部</option>
+                            <option>QB </option>
+                            <option>Q </option>
+                            <option>VB </option>
+                            <option>V </option>
+                            <option>P </option>
+                            <option>T</option>
+                            <option>AI </option>
+                            <option>DI </option>
+                            <option>AO </option>
+                            <option>BO </option>
+                            <option>TC </option>
+                            <option>PC </option>
+                            <option>VC </option>
+                        </select>
+                    </td>
+                    <td>字段单位</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="FiledUint" />
+                    </td>
+                    <td>开启采集</td>
+                    <td>
+                        是
+                        <input type="radio" name="IsCollect" value="1">
+                        否
+                        <input type="radio" name="IsCollect" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>短描述</td>
+                    <td>
+                        <input type="text" id="FieldShorDesc"></input>
+                    </td>
+                    <td>字段描述</td>
+                    <td colspan="2">
+                        <input type="text" id="FieldDesc" class="com_w80pen" />
+                    </td>
+                    <td>是否显示</td>
+                    <td>
+                        是<input type="radio" name="IsShow" value="1" />
+                        否<input type="radio" name="IsShow" value="0" />
+                    </td>
+                    <td>报警检查</td>
+                    <td>
+                        是<input type="radio" name="IsAlearm" value="1" />
+                        否<input type="radio" name="IsAlearm" value="0" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>最小值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="MinValue" />
+                    </td>
+                    <td>最大值</td>
+                    <td colspan="2">
+                        <input type="text" class="com_w70pen" id="MaxValue" />
+                    </td>
+                    <td>进出口类型</td>
+                    <td>
+                        <select id="InOutType">
+                            <option value="0">不分进出</option>
+                            <option value="1">进口</option>
+                            <option value="2">出口</option>
+                        </select>
+
+                    </td>
+                    <td>排序序号</td>
+                    <td></td>
+
+
+                </tr>
+                <tr>
+                    <td>低报警值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="LowAlermValue" />
+                    </td>
+                    <td>高报警值</td>
+                    <td colspan="2">
+                        <input type="text" class="com_w70pen" id="HighAlermValue" />
+                    </td>
+                    <td>最低报警值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="MinAlermValue" />
+                    </td>
+                    <td>最高报警值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="MaxAlermValue" />
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="10" class="com_TextCenter" id="OperArea">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="font-size: 9px;" class="com_DivBor">
+            <ul>
+                <li>1、字段短描述只能为：标况累计流量、标况瞬时流量、工况累计流量、工况瞬时流量、管道温度、流量计压力、进口压力、出口压力、天然气泄漏报警，
+                    另DI根据实际情况描述</li>
+                <li>2、字段描述：尽量描述管道的去向等，如：去XXX地方+短描述内容; </li>
+                <li>3、进出口类型：流量计压力可以不分进出口，也可同时作为进/出口及流量计压力;</li>
+                <li>4、字段高/低报警值，不启用低报警设置为-1，不启用高报警设置为9999999999999;报警逻辑：实际值是否在高低阀值区间以内
+    (DI说明：【1】报警设置为：低报警值为-1，高报警值为1；【0】报警设置为：低报警值为0，高报警值为2)</li>
+                <li>5、DI字段时，需要定义1表示的中文意义、0表示的中文意义；</li>
+                <li class="com_red">注：同一站点字段长描述不能有相同</li>
+            </ul>
+        </div>
+    </body>
+</html>

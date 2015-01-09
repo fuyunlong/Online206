@@ -1,0 +1,191 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class UserGroupProvider
+    {
+        //根据公司ID称查询分组信息
+        public List<T_User_GroupExt> GetGroupByCompanyID(string companyId)
+        {
+            List<T_User_GroupExt> list = new List<T_User_GroupExt>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT a.[GroupCode] ,a.[GroupName],a.[GroupDesc],a.[ParentCode] ,a.[Status],a.[CompanyId],a.[UpdateFlag],b.GroupName as ParentName ");
+            sb.Append("FROM [Infa]..[T_User_Group] as a left join [Infa]..[T_User_Group] as b on a.ParentCode=b.GroupCode where a.[status]=1 and a.CompanyId=@CompanyId");
+            SqlParameter[] parameters = { 
+                           new SqlParameter("@CompanyId",companyId)            
+                                        };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, sb.ToString(), parameters))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataReaderT_User_Group(reader);
+                        if (model != null)
+                        {
+                            list.Add(new T_User_GroupExt
+                            {
+                                GroupCode = model.GroupCode,
+                                GroupName = model.GroupName,
+                                GroupDesc = model.GroupDesc,
+                                ParentCode = model.ParentCode,
+                                Status = model.Status,
+                                CompanyId = model.CompanyId,
+                                UpdateFlag = model.UpdateFlag,
+                                ParentName = reader["ParentName"] == DBNull.Value ? "" : reader["ParentName"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            return list;
+        }
+
+        //T_User_Group数据读取
+        private T_User_Group IDataReaderT_User_Group(IDataReader dr)
+        {
+            T_User_Group model = new T_User_Group();
+            try
+            {
+                model.GroupCode = (dr["GroupCode"] is DBNull) ? string.Empty : dr["GroupCode"].ToString();
+                model.GroupName = (dr["GroupName"] is DBNull) ? string.Empty : dr["GroupName"].ToString();
+                model.GroupDesc = (dr["GroupDesc"] is DBNull) ? string.Empty : dr["GroupDesc"].ToString();
+                model.ParentCode = (dr["ParentCode"] is DBNull) ? string.Empty : dr["ParentCode"].ToString();
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.CompanyId = (dr["CompanyId"] is DBNull) ? 0 : Convert.ToInt32(dr["CompanyId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch
+            {
+                return null;
+            }
+            return model;
+        }
+
+        //根据分组编码查询分组信息
+        public T_User_GroupExt GetGroupByCode(string groupCode)
+        {
+            T_User_GroupExt group = new T_User_GroupExt();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("SELECT a.[GroupCode] ,a.[GroupName],a.[GroupDesc],a.[ParentCode] ,a.[Status],a.[CompanyId],a.[UpdateFlag],b.GroupName as ParentName ");
+            sb.Append("FROM [Infa]..[T_User_Group] as a left join [Infa]..[T_User_Group] as b on a.ParentCode=b.GroupCode where a.GroupCode=@GroupCode and a.Status=1");
+            SqlParameter[] pars = { 
+                           new SqlParameter("@GroupCode",groupCode)
+                                  };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, sb.ToString(), pars))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataReaderT_User_Group(reader);
+                        if (model != null)
+                        {
+                            group.GroupCode = model.GroupCode;
+                            group.GroupName = model.GroupName;
+                            group.GroupDesc = model.GroupDesc;
+                            group.ParentCode = model.ParentCode;
+                            group.Status = model.Status;
+                            group.CompanyId = model.CompanyId;
+                            group.UpdateFlag = model.UpdateFlag;
+                            group.ParentName = reader["ParentName"] == DBNull.Value ? "" : reader["ParentName"].ToString();
+                        }
+                    }
+                }
+            }
+            return group;
+        }
+
+        public string GetGroupByUserId(string UserId)
+        {
+
+            string Code = "";
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT GroupCode ");
+            SqlStr.Append("FROM [Infa]..[T_User_UserGroup] where UserId=@UserId");
+            SqlParameter[] pars = { 
+                           new SqlParameter("@UserId",UserId)
+                                  };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        Code = reader["GroupCode"].ToString();
+                    }
+                }
+            }
+            return Code;
+        }
+
+        //添加分组
+        public bool AddGroup(T_User_Group model)
+        {
+            bool result = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("insert into [Infa]..[T_User_Group] (GroupCode,GroupName,GroupDesc,ParentCode,Status,CompanyId,UpdateFlag) ");
+            sb.Append("values(@GroupCode,@GroupName,@GroupDesc,@ParentCode,@Status,@CompanyId,@UpdateFlag)");
+            SqlParameter[] parameters = { 
+                           new SqlParameter("@GroupCode",model.GroupCode),
+                           new SqlParameter("@GroupName",model.GroupName),
+                           new SqlParameter("@GroupDesc",model.GroupDesc),
+                           new SqlParameter("@ParentCode",model.ParentCode),
+                           new SqlParameter("@Status",model.Status),
+                           new SqlParameter("@CompanyId",model.CompanyId),
+                           new SqlParameter("@UpdateFlag",model.UpdateFlag)
+                                  };
+            int count = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        //修改用户分组
+        public bool UpdateGroup(T_User_Group model)
+        {
+            bool result = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("update [Infa]..[T_User_Group] set ");
+            sb.Append("GroupName=@GroupName,GroupDesc=@GroupDesc,ParentCode=@ParentCode,CompanyId=@CompanyId where GroupCode=@GroupCode");
+            SqlParameter[] parameters = {                          
+                           new SqlParameter("@GroupName",model.GroupName),
+                           new SqlParameter("@GroupDesc",model.GroupDesc),
+                           new SqlParameter("@ParentCode",model.ParentCode),
+                           new SqlParameter("@CompanyId",model.CompanyId),
+                           new SqlParameter("@GroupCode",model.GroupCode)
+                                  };
+            int count = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        //删除分组
+        public bool DeleteGroup(string groupCode)
+        {
+            bool result = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from [Infa]..[T_User_Group] where GroupCode=@GroupCode");
+            SqlParameter[] parameters = { 
+                           new SqlParameter("@GroupCode",groupCode),
+                                  };
+            int count = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (count > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+    }
+}

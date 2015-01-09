@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IWinfoToolServiceRead" />
+                <binding name="BasicHttpBinding_IWinfoToolServiceWrite" />
+                <binding name="BasicHttpBinding_IMSService" />
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:5644/WinfoToolServiceRead.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IWinfoToolServiceRead"
+                contract="ServiceWinToolRead.IWinfoToolServiceRead" name="BasicHttpBinding_IWinfoToolServiceRead" />
+            <endpoint address="http://localhost:5644/WinfoToolServiceWrite.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IWinfoToolServiceWrite"
+                contract="ServiceWinToolWrite.IWinfoToolServiceWrite" name="BasicHttpBinding_IWinfoToolServiceWrite" />
+            <endpoint address="http://sms.scadacn.com/Services/MSService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IMSService"
+                contract="SmsService.IMSService" name="BasicHttpBinding_IMSService" />
+        </client>
+    </system.serviceModel>
+</configuration>

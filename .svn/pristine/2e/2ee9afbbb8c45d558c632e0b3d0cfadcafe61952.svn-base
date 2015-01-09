@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d6ee7378-0f32-4664-b3f5-93c662f9b7cd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:5644/WinfoToolServiceRead.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WinfoToolServiceRead.wsdl" MetadataType="Wsdl" ID="b5ab1238-2e4b-42c0-8183-c7c049b5b5c1" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceRead.svc?wsdl" />
+    <MetadataFile FileName="WinfoToolServiceRead.disco" MetadataType="Disco" ID="c8b331a8-2d9d-476a-ac41-fd4322611952" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceRead.svc?disco" />
+    <MetadataFile FileName="WinfoToolServiceRead.xsd" MetadataType="Schema" ID="d18d0d8d-dba1-45f9-a365-cb4ac3e68f9e" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd2" />
+    <MetadataFile FileName="WinfoToolServiceRead1.xsd" MetadataType="Schema" ID="33086452-0f95-4f6f-8711-c0a2f631b928" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd3" />
+    <MetadataFile FileName="WinfoToolServiceRead2.xsd" MetadataType="Schema" ID="11054e68-e97d-4021-a155-bcf2200a89da" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd1" />
+    <MetadataFile FileName="WinfoToolServiceRead3.xsd" MetadataType="Schema" ID="f6836012-52f4-4843-bb9c-05ff7e168007" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceRead.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

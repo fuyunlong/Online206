@@ -1,0 +1,236 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+
+namespace Com.Winfotian.DB.Provider
+{
+
+    public class DtuDataTransProvider
+    {
+        /// <summary>
+        /// 获取配置列表根据公司ID
+        /// </summary>
+        /// <param name="CompanyID"></param>
+        /// <returns></returns>
+        public List<T_DTU_DataTransmit> GetTransList(string CompanyID)
+        {
+            List<T_DTU_DataTransmit> list = new List<T_DTU_DataTransmit>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT c.*,a.DtuidName  FROM [Infa]..[T_DTU_DataTransmit] as c  left join [Infa]..[T_DTU] as a ");
+            SqlStr.Append("on a.Dtuid=c.Dtuid ");
+            SqlStr.Append("left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode where 1=1  and b.CompanyId=@CompanyId");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@CompanyId",CompanyID)
+                                  };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = DatatableToList(reader);
+                        if (model == null)
+                            continue;
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+
+
+        private T_DTU_DataTransmit DatatableToList(SqlDataReader reader)
+        {
+            T_DTU_DataTransmit obj = new T_DTU_DataTransmit();
+            try
+            {
+
+                obj.Dtuid = reader["Dtuid"].ToString();
+                obj.Id = Convert.ToInt32(reader["Id"].ToString());
+                obj.IsTransmit = Convert.ToInt32(reader["IsTransmit"].ToString());
+                obj.OrderNum = Convert.ToInt32(reader["OrderNum"].ToString());
+                obj.TargetId = Convert.ToInt32(reader["TargetId"].ToString());
+                obj.TargetIP = reader["TargetIP"].ToString();
+                obj.TargetPhoneNum = reader["TargetPhoneNum"].ToString();
+                obj.TargetPort = Convert.ToInt32(reader["TargetPort"].ToString());
+                obj.TargetVersion = reader["TargetVersion"].ToString();
+                obj.TransDesc = reader["TransDesc"].ToString();
+                obj.TransProtocol = reader["TransProtocol"].ToString();
+                obj.DtuidName = reader["DtuidName"].ToString();
+                obj.Id = Convert.ToInt32(reader["Id"].ToString());
+            }
+            catch { }
+            return obj;
+        }
+
+        /// <summary>
+        /// 根据ID获取配置
+        /// </summary>
+        /// <param name="TransId"></param>
+        /// <returns></returns>
+        public T_DTU_DataTransmit GetTransById(string TransId)
+        {
+            T_DTU_DataTransmit model = null;
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append(" SELECT c.*,a.DtuidName FROM [Infa]..[T_DTU_DataTransmit] as c  left join [Infa]..[T_DTU] as a on a.Dtuid=c.Dtuid left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode where 1=1  and c.Id=@Id");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@Id",TransId)
+                                  };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        model = DatatableToList(reader);
+
+                    }
+                }
+            }
+            return model;
+        }
+
+        /// <summary>
+        /// 获取配置列表
+        /// </summary>
+        /// <returns></returns>
+        public List<T_DTU_DataTransmit> GetTransVerList()
+        {
+            List<T_DTU_DataTransmit> list = new List<T_DTU_DataTransmit>();
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append(" select distinct(TargetVersion),TransDesc from [Infa]..[T_DTU_DataTransmit]");
+                using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), null))
+                {
+                    if (reader != null)
+                    {
+                        while (reader.Read())
+                        {
+                            if (reader["TargetVersion"] != DBNull.Value)
+                            {
+                                try
+                                {
+                                    list.Add(new T_DTU_DataTransmit { TargetVersion = reader["TargetVersion"].ToString(), TransDesc = (reader["TransDesc"] == DBNull.Value ? "" : reader["TransDesc"].ToString()) });
+                                }
+                                catch
+                                { }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 添加转发配置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool AddTrans(T_DTU_DataTransmit model)
+        {
+            bool rlst = false;
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append("insert into [Infa]..[T_DTU_DataTransmit] (Dtuid,TargetIP,TargetPort,TargetVersion,TargetId,OrderNum,TransProtocol,TargetPhoneNum,IsTransmit,TransDesc) ");
+                SqlStr.Append("values(@Dtuid,@TargetIP,@TargetPort,@TargetVersion,@TargetId,@OrderNum,@TransProtocol,@TargetPhoneNum,@IsTransmit,@TransDesc) ");
+                SqlParameter[] pars = { 
+                                  new SqlParameter("@Dtuid",model.Dtuid),
+                                  new SqlParameter("@TargetIP",model.TargetIP),
+                                  new SqlParameter("@TargetPort",model.TargetPort),
+                                  new SqlParameter("@TargetVersion", model.TargetVersion),
+                                  new SqlParameter("@TargetId",model.TargetId),
+                                  new SqlParameter("@OrderNum", model.OrderNum),
+                                  new SqlParameter("@TransProtocol", model.TransProtocol),
+                                  new SqlParameter("@TargetPhoneNum", model.TargetPhoneNum),
+                                  new SqlParameter("@IsTransmit",model.IsTransmit),
+                                  new SqlParameter("@TransDesc", model.TransDesc)
+                                  };
+                if (SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, System.Data.CommandType.Text, SqlStr.ToString(), pars) == 1)
+                { rlst = true; }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        /// <summary>
+        /// 更新转发配置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public bool UpdateTrans(T_DTU_DataTransmit model)
+        {
+            bool rlst = false;
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append("update [Infa]..[T_DTU_DataTransmit] ");
+                SqlStr.Append("set Dtuid=@Dtuid,TargetIP=@TargetIP, ");
+                SqlStr.Append("TargetPort=@TargetPort,TargetVersion=@TargetVersion, ");
+                SqlStr.Append("TargetId=@TargetId,OrderNum=@OrderNum, ");
+                SqlStr.Append("TransProtocol=@TransProtocol,TargetPhoneNum=@TargetPhoneNum, ");
+                SqlStr.Append("IsTransmit=@IsTransmit,TransDesc=@TransDesc ");
+                SqlStr.Append("where Id=@Id");
+                SqlParameter[] pars = { 
+                                   new SqlParameter("@Id",model.Id),
+                                  new SqlParameter("@Dtuid",model.Dtuid),
+                                  new SqlParameter("@TargetIP",model.TargetIP),
+                                  new SqlParameter("@TargetPort",model.TargetPort),
+                                  new SqlParameter("@TargetVersion", model.TargetVersion),
+                                  new SqlParameter("@TargetId",model.TargetId),
+                                  new SqlParameter("@OrderNum", model.OrderNum),
+                                  new SqlParameter("@TransProtocol", model.TransProtocol),
+                                  new SqlParameter("@TargetPhoneNum", model.TargetPhoneNum),
+                                  new SqlParameter("@IsTransmit",model.IsTransmit),
+                                  new SqlParameter("@TransDesc", model.TransDesc)
+                                  };
+                if (SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, System.Data.CommandType.Text, SqlStr.ToString(), pars) == 1)
+                { rlst = true; }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        /// <summary>
+        /// 删除配置根据ID
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public bool DeleteTrans(int Id)
+        {
+            bool rlst = false;
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append("delete from [Infa]..[T_DTU_DataTransmit] where Id=@Id");
+                SqlParameter[] pars = { 
+                                      new SqlParameter("@Id",Id)
+                                      };
+                if (SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, System.Data.CommandType.Text, SqlStr.ToString(), pars) == 1)
+                { rlst = true; }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+    }
+
+}

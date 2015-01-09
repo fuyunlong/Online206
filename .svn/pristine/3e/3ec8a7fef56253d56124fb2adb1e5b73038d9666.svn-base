@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Proxy;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class DataTransController : Controller
+    {
+        //
+        // GET: /DataTrans/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = ServcieTool.WinToolServiceReadInstance.GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        public ActionResult AddTrans()
+        {
+            return View();
+        }
+
+        public string AddTransOper(Proxy.ServiceWinToolWrite.T_DTU_DataTransmit model)
+        {
+            int rlst = 0;
+            try
+            {
+                if (ServcieTool.WinToolServiceWriteInstance.AddTrans(PmsMng.ActiveKey, PmsMng.LogUser, model))
+                {
+                    rlst = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst.ToString();
+        }
+
+        public JsonResult GetVerList()
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                ServcieTool.WinToolServiceReadInstance.GetTransVerList(PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        public JsonResult GetTransSetList(string Company)
+        {
+            var list = ServcieTool.WinToolServiceReadInstance.GetTransSetList(PmsMng.ActiveKey, Company);
+            return Json(list);
+        }
+
+        public ActionResult DataTransDetail(string Oper, string TransId, string CompanyId)
+        {
+            var list = ServcieTool.WinToolServiceReadInstance.GetTransSetList(PmsMng.ActiveKey, CompanyId);
+            ViewBag.DtuList = list;
+            ViewBag.TransObj = ServcieTool.WinToolServiceReadInstance.GetTransById(PmsMng.ActiveKey, TransId);
+            return View();
+        }
+    }
+}

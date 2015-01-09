@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>用户计费管理</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/UserMng/UserFee.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                //初始化
+                $("#tbDiv").css("height", $(window).height() * 0.87);
+                new comTab().fnInit();
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+                <table id="FeeList" class="ui-com-tab" rules="all">
+                    <thead>
+                        <tr align="left" class="panel-header">
+                            <th class="com_w15pen com_TextCenter">
+                                计费名称
+                            </th>
+                            <th class="com_w10pen com_TextCenter">
+                                报警费用(元/条)
+                            </th>
+                            <th class="com_w10pen com_TextCenter">
+                                数据查询(元/条)
+                            </th>
+                            <th class="com_w10pen com_TextCenter">
+                                定时短信(元/条)
+                            </th>
+                            <th class="com_w10pen com_TextCenter">
+                                报表短信(元/条)
+                            </th>
+                            <th class="com_w10pen com_TextCenter">
+                                每天最多(元/条)
+                            </th>
+                            <th class="com_w10pen com_TextCenter">
+                                每月最多(元/条)
+                            </th>
+                            <th class="com_w10pen com_TextCenter">
+                                其他费用(元/条)
+                            </th>
+                            <th class="com_w15pen com_TextCenter">
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>  
+                       @{
+                           foreach (var item in ViewBag.FeeList)
+                           {
+                               <tr>
+                                   <td class="com_w15pen com_TextCenter">@item.BillName</td>
+                                   <td class="com_w10pen com_TextCenter">@item.AlertFee</td>
+                                   <td class="com_w10pen com_TextCenter">@item.DataFee</td>
+                                   <td class="com_w10pen com_TextCenter">@item.BookFee</td>
+                                   <td class="com_w10pen com_TextCenter">@item.RptFee</td>
+                                   <td class="com_w10pen com_TextCenter">@item.DayMax</td>
+                                   <td class="com_w10pen com_TextCenter">@item.MonthMax</td>
+                                   <td class="com_w10pen com_TextCenter">@item.OtherFee</td>
+                                   <td class="com_w15pen com_TextCenter">
+                                       <a href="javascript:void(0)" onclick="Common.WinTopBox('计费添加', '42%', '28%', '25%', '32%', 'UserFee/Add')">添加|</a>
+                                       <a href="javascript:void(0)" onclick="Common.WinTopBox('计费查看', '42%', '28%', '25%', '32%', 'UserFee/Detail?billCode=@item.BillCode')">查看|</a>
+                                       <a href="javascript:void(0)" onclick="Common.WinTopBox('计费修改', '42%', '28%', '25%', '32%', 'UserFee/Edit?billCode=@item.BillCode')">修改|</a>
+                                       <a href="javascript:void(0)" onclick="UserFee.Delete('@item.BillCode')">删除</a>
+                                   </td>
+                               </tr>
+                           }
+                        }     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="loading"></div>
+    </body>
+</html>

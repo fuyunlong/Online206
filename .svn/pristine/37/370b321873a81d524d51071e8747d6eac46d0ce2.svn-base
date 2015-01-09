@@ -1,0 +1,237 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.SqlClient;
+using Com.Winfotian.Model;
+using System.Data;
+using Com.Winfotian.Common;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class UserDTUProvider
+    {
+        /// <summary>
+        /// 根据公司Id和分组编码查询站点信息
+        /// </summary>
+        public List<T_DTU> GetDTUsByGroupCode(string companyId, string groupCode)
+        {
+            List<T_DTU> list = new List<T_DTU>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select a.* from [Infa]..[T_DTU] as a ");
+            sb.Append("left join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode ");
+            sb.Append("left join [Infa]..[T_Company] as c on b.CompanyId=c.CompanyId where 1=1 ");
+            if (companyId.Length > 0 && companyId != "0")
+            {
+                sb.Append("and c.CompanyId=@CompanyId ");
+            }
+            if (groupCode.Length > 0 && groupCode != "0")
+            {
+                sb.Append("and a.GroupCode=@GroupCode");
+            }
+            SqlParameter[] parameters = {
+                           new SqlParameter("@CompanyId",companyId),
+                           new SqlParameter("@GroupCode",groupCode)             
+                                        };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataT_DTUReader(reader);
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// T_DTU 数据读取
+        /// </summary>
+        private T_DTU IDataT_DTUReader(IDataReader dr)
+        {
+            T_DTU model = new T_DTU();
+            try
+            {
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.DtuidName = (dr["DtuidName"] is DBNull) ? string.Empty : dr["DtuidName"].ToString();
+                model.Skidbrand = (dr["Skidbrand"] is DBNull) ? string.Empty : dr["Skidbrand"].ToString();
+                model.Supplier = (dr["Supplier"] is DBNull) ? string.Empty : dr["Supplier"].ToString();
+                model.FlowBrand = (dr["FlowBrand"] is DBNull) ? string.Empty : dr["FlowBrand"].ToString();
+                model.FlowType = (dr["FlowType"] is DBNull) ? string.Empty : dr["FlowType"].ToString();
+                model.PressureLevel = (dr["PressureLevel"] is DBNull) ? string.Empty : dr["PressureLevel"].ToString();
+                model.DtuidLocation = (dr["DtuidLocation"] is DBNull) ? string.Empty : dr["DtuidLocation"].ToString();
+                model.RegDate = (dr["RegDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RegDate"].ToString());
+                model.RunDate = (dr["RunDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RunDate"].ToString());
+                model.Longitude = (dr["Longitude"] is DBNull) ? 0 : Convert.ToDecimal(dr["Longitude"].ToString());
+                model.Latitude = (dr["Latitude"] is DBNull) ? 0 : Convert.ToDecimal(dr["Latitude"].ToString());
+                model.DayFrom = (dr["DayFrom"] is DBNull) ? 0 : Convert.ToInt32(dr["DayFrom"].ToString());
+                model.MonthFrom = (dr["MonthFrom"] is DBNull) ? 0 : Convert.ToInt32(dr["MonthFrom"].ToString());
+                model.LgPwd = (dr["LgPwd"] is DBNull) ? string.Empty : dr["LgPwd"].ToString();
+                model.PhoneNum = (dr["PhoneNum"] is DBNull) ? string.Empty : dr["PhoneNum"].ToString();
+                model.DataInterval = (dr["DataInterval"] is DBNull) ? 0 : Convert.ToInt32(dr["DataInterval"].ToString());
+                model.UpLoadInterval = (dr["UpLoadInterval"] is DBNull) ? 0 : Convert.ToInt32(dr["UpLoadInterval"].ToString());
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.GroupCode = (dr["GroupCode"] is DBNull) ? string.Empty : dr["GroupCode"].ToString();
+                model.ConfigCode = (dr["ConfigCode"] is DBNull) ? string.Empty : dr["ConfigCode"].ToString();
+                model.ProtocolVersion = (dr["ProtocolVersion"] is DBNull) ? string.Empty : dr["ProtocolVersion"].ToString();
+                model.OrderId = (dr["OrderId"] is DBNull) ? 0 : Convert.ToInt32(dr["OrderId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch
+            {
+                return null;
+            }
+            return model;
+        }
+
+        /// <summary>
+        /// 根据站点Id查询用户信息
+        /// </summary>
+        public List<T_User_Info> GetUsersByDTUId(string dtuId)
+        {
+            List<T_User_Info> list = new List<T_User_Info>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select a.* from [Infa]..[T_User_Info] as a left join [Infa]..[T_User_UserDtuid] as b on a.UserId=b.UserId where a.Status=1 and b.Dtuid=@Dtuid");
+            SqlParameter[] parameters = { 
+                           new SqlParameter("@Dtuid",dtuId)
+                                        };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataT_User_InfoReader(reader);
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 根据公司Id和站点Id查询用户信息
+        /// </summary>
+        public List<T_User_Info> GetUsersByCompanyId(string companyId, string dtuId)
+        {
+            List<T_User_Info> list = new List<T_User_Info>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select UserId,TrueName,UserPwd,UserPhone,UserMail,UserPosition,LinkAddr,RegDate,BirthDay,CompanyId,CCode,BillCode,Status,ParentUser,UpdateFlag from [Infa]..[T_User_Info] where Status=1 and (CompanyId=12 or CompanyId=@CompanyId) and UserId not in (select UserId from [Infa]..[T_User_UserDtuid] where Dtuid=@Dtuid)");
+            SqlParameter[] parameters = { 
+                           new SqlParameter("@CompanyId",companyId),
+                           new SqlParameter("@Dtuid",dtuId)
+                                        };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        var model = IDataT_User_InfoReader(reader);
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// T_User_Info 数据读取
+        /// </summary>
+        private T_User_Info IDataT_User_InfoReader(IDataReader dr)
+        {
+            T_User_Info model = new T_User_Info();
+            try
+            {
+                model.UserId = (dr["UserId"] is DBNull) ? string.Empty : dr["UserId"].ToString();
+                model.TrueName = (dr["TrueName"] is DBNull) ? string.Empty : dr["TrueName"].ToString();
+                model.UserPwd = (dr["UserPwd"] is DBNull) ? string.Empty : dr["UserPwd"].ToString();
+                model.UserPhone = (dr["UserPhone"] is DBNull) ? string.Empty : dr["UserPhone"].ToString();
+                model.UserMail = (dr["UserMail"] is DBNull) ? string.Empty : dr["UserMail"].ToString();
+                model.UserPosition = (dr["UserPosition"] is DBNull) ? string.Empty : dr["UserPosition"].ToString();
+                model.LinkAddr = (dr["LinkAddr"] is DBNull) ? string.Empty : dr["LinkAddr"].ToString();
+                model.RegDate = (dr["RegDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["RegDate"]);
+                model.BirthDay = (dr["BirthDay"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["BirthDay"]);
+                model.CompanyId = (dr["CompanyId"] is DBNull) ? 0 : Convert.ToInt32(dr["CompanyId"]);
+                model.CCode = (dr["CCode"] is DBNull) ? string.Empty : dr["CCode"].ToString();
+                model.BillCode = (dr["BillCode"] is DBNull) ? string.Empty : dr["BillCode"].ToString();
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"]);
+                model.ParentUser = (dr["ParentUser"] is DBNull) ? string.Empty : dr["ParentUser"].ToString();
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch
+            {
+                return null;
+            }
+            return model;
+        }
+
+        /// <summary>
+        /// 添加站点用户
+        /// </summary>
+        public bool AddDTUUser(T_User_UserDtuid model)
+        {
+            bool result = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("insert into [Infa]..[T_User_UserDtuid] (UserId,Dtuid,Status) values (@UserId,@Dtuid,@Status)");
+            SqlParameter[] parameters = { 
+                           new SqlParameter("@UserId",model.UserId),
+                           new SqlParameter("@Dtuid",model.Dtuid),
+                           new SqlParameter("@Status",model.Status)
+                                        };
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (rows > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 删除站点用户
+        /// </summary>
+        public bool DeleteDTUUser(string userId, string dtuid)
+        {
+            bool result = false;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("delete from [Infa]..[T_User_UserDtuid] where UserId=@UserId and Dtuid=@Dtuid");
+            SqlParameter[] parameters = {         
+                           new SqlParameter("@UserId",userId),
+                           new SqlParameter("@Dtuid",dtuid)
+                                        };
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, sb.ToString(), parameters);
+            if (rows > 0)
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 根据用户Id查询允许可以访问的站点Id
+        /// </summary>
+        public List<string> GetDTUByUserId(string userId)
+        {
+            List<string> list = new List<string>();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("select Dtuid from [Infa]..[T_User_UserDtuid] where UserId=@UserId");
+            SqlParameter[] parameters = { 
+                           new SqlParameter("@UserId",userId)             
+                                        };
+            using (SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, sb.ToString(), parameters))
+            {
+                if (reader != null)
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(reader["Dtuid"].ToString());
+                    }
+                }
+            }
+            return list;
+        }
+    }
+}

@@ -1,0 +1,9 @@
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Debug\Proxy.dll.config
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Debug\Proxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Debug\Proxy.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Debug\InfaCommon.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Debug\InfaCompact.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Debug\InfaEncrypt.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\bin\Debug\Newtonsoft.Json.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\obj\Debug\Proxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Proxy\obj\Debug\Proxy.pdb

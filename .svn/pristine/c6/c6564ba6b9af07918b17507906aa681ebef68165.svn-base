@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.ServiceProxy;
+using WinfoToolSys.Pms;
+using Proxy;
+using Proxy.ServiceWinToolRead;
+using Proxy.CrmServiceGet;
+using System.Web.Script.Serialization;
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class CompanyController : Controller
+    {
+        //客户信息管理
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //获取省份信息 
+        public JsonResult GetProvince()
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                list = ServcieTool.CrmServiceGetInstance.GetProvinceList(PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取城市
+        public JsonResult GetCity(string province)
+        {
+            List<Proxy.CrmServiceGet.T_CityInfo> list = new List<Proxy.CrmServiceGet.T_CityInfo>();
+            try
+            {
+
+                list = ServcieTool.CrmServiceGetInstance.GetCityList(PmsMng.ActiveKey, province);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取公司信息
+        public JsonResult GetComany(string cityId)
+        {
+            List<T_Companys> list = new List<T_Companys>();
+            try
+            {
+                var model = ServcieTool.CrmServiceGetInstance.GetCompanyLists(cityId, "", PmsMng.ActiveKey);
+                if (PmsMng.CompanyId == 12)
+                {
+                    foreach (var a in model)
+                    {
+                        if (a.CompanyID == 12)
+                        {
+                            list.Insert(0, a);
+                        }
+                        else
+                        {
+                            list.Add(a);
+                        }
+                    }
+                }
+                else
+                {
+                    list = (from row in model where row.CompanyID == PmsMng.CompanyId select row).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取母公司
+        public JsonResult GetParentCompanyList(string parentCompanyId)
+        {
+            List<T_ParentCompany> list = new List<T_ParentCompany>();
+            try
+            {
+                list = ServcieTool.CrmServiceGetInstance.ParmCompanyInfo(parentCompanyId, PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+
+        public ActionResult GetCmpIdAndNameList(int cityID, string txtQCompanyName)
+        {
+            List<Com.Winfotian.ServiceProxy.CompanyService.CompanyIDAndName> list = new List<Com.Winfotian.ServiceProxy.CompanyService.CompanyIDAndName>();
+            try
+            {
+                list = CompanyServiceProxy.GetCmpIdAndNameListBy(WinManager.GetPublicIP(), cityID, txtQCompanyName.Trim(), 1);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return View("ClientInfo", list);
+        }
+
+
+        public JsonResult GetDepartListByCompany(string id)
+        {
+            List<Proxy.CrmServiceGet.T_DepartmentInfos> departs = null;
+            try
+            {
+                departs = ServcieTool.CrmServiceGetInstance.GetDepartmentInfoList(id, PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (departs == null)
+            {
+                departs = new List<T_DepartmentInfos>();
+            }
+            return Json(departs);
+        }
+
+        public JsonResult GetPostinfo(int id)
+        {
+            List<Proxy.CrmServiceGet.T_PostInfos> postion = null;
+            try
+            {
+                postion = new JavaScriptSerializer().Deserialize<List<Proxy.CrmServiceGet.T_PostInfos>>(ServcieTool.CrmServiceGetInstance.GetPostinfo(id, PmsMng.ActiveKey));
+            }
+            catch
+            { }
+            if (postion == null)
+            {
+                return null;
+            }
+            return Json(postion);
+        }
+
+
+    }
+}

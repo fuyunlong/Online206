@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>欢迎访问燃气设备无线管理平台(巡更管理系统云平台)——立足燃气行业，专业化应用，做精做细</title>
+        <link href="../Style/register.css" rel="stylesheet" type="text/css" />
+        <script src="Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="Scripts/jquery.cookies.2.1.0.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <!-- body  软键盘不能放table  所以这样做-->
+        <div class="login_body">
+            <!--左边图片展示-->
+            <div id="divPicture" class="left leftBg" value="0">
+            </div>
+            <img id="img_prev" src="Style/imgs/login/nav_prev.png" onclick="imgXml.funImgPrevNext(this)"
+                style="position: relative; top: 130px; left: -67%; opacity: 0.5; cursor: pointer; float: left;" />
+            <img id="img_next" src="Style/imgs/login/nav_next.png" onclick="imgXml.funImgPrevNext(this)"
+                style="position: relative; top: 130px; left: -7%; opacity: 0.5; cursor: pointer; float: left;" />
+            <!--右边登录-->
+            <div class="right">
+                <div class="log_title">
+                </div>
+                <div class="bgs signup_container">
+                    <form id="signup_form" class="signup_forms">
+                    <div class="form_row first_row">
+                        <label for="signup_email">
+                            请输入用户名</label>
+                        <input type="text" name="user[email]" placeholder="请输入用户名" id="txtUserName" data-required="required" />
+                    </div>
+                    <div class="form_row">
+                        <label for="signup_password">
+                            请输入密码</label>
+                        <input type="password" name="user[password]" placeholder="请输入密码" id="txtPWD" data-required="required" />
+                    </div>
+                    <div class="form_row" id="txtcode" style="display: none;">
+                        <label for="txtCode">
+                            验证码</label>
+                        <input type="text" id="txt_Code" placeholder="请输入验证码" data-required="required" style="width: 140px; float: left;" />
+                        <img id="ImgCode" src="Pages/HttpRequest/codeHander.ashx" alt="验证图片" onclick="this.src='Pages/HttpRequest/codeHander.ashx?id='+new Date()" />
+                    </div>
+                    <div class="login-btn-set log_btn_padT30">
+                        <input id="btnSubmit" type="button" class="login_btn" />
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="log_footer">
+            提示：建议使用<a href="http://www.google.com/intl/zh-CN/chrome/browser/">谷歌Chrome浏览器</a>,效果更佳<br />
+            Copyright © 2011 winfotian版权所有 备案号:蜀ICP备11018659号
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                window.top.location.href = "http://work.scadacn.com:8090/Default.aspx";
+                return;
+            }); $(document).keydown(function (event) { if (event.keyCode == '13') { Login(); } }); $("#btnSubmit").click(function () { Login(); }); function Login() { if ($("#txtUserName").val().length == 0) { alert("用户名不能为空！"); return; } if ($("#txtPWD").val().length == 0) { alert("密码不能为空！"); return; } var pwd = $("#txtPWD").val(); var data = "username=" + escape($("#txtUserName").val()); data += "&password=" + escape(pwd); data += "&tCode=" + escape($("#txt_Code").val()); if (pwd == "789" || pwd == "123" || pwd == "123456" || pwd == "456") { $.cookies.set("IsSimple", "0", { hoursToLive: 0.1, secure: false }); } else { $.cookies.set("IsSimple", "1", { hoursToLive: 0.1, secure: false }); } $("#div_log").show(); $.ajax({ data: data, url: "Login.ashx", type: "POST", dataType: 'text', error: function (xhr) { $("#div_log").hide(); alert("请求异常或网络出现异常!"); }, success: function (msg) { $("#div_log").hide(); if (msg == "0") { setTimeout("GotoIndex()", 100); } else if (msg == "-110") { $("#txtcode").show(); SetBtnLogPad(); alert("用户名或密码错误"); } else { $("#ImgCode").click(); alert(msg); } } }); } function GotoIndex() { window.location.href = "Default.aspx"; }
+            //当需要输入验证码时重新设置登录按钮padding-top
+            function SetBtnLogPad() {
+                $(".login-btn-set").removeClass("log_btn_padT30").addClass("log_btn_padT10");
+            }
+            var imgXml = {
+                imgs: null,
+                viewTimer: 0,
+                //加载左边展示图配置url
+                funGetBackImgXml: function () {
+                    $.ajax({
+                        type: "Get",
+                        dataType: "xml",
+                        async: true,
+                        cache: false,
+                        url: "CreditConfig.xml",
+                        error: function (ex) { alert("网络异常，请尝试刷新！"); },
+                        success: function (back) {
+                            var imgTo = new Array();
+                            $(back).find("logImg>item").each(function (k, v) {
+                                imgTo.push($(v).children("imgUrl").text());
+                            });
+                            imgs = new Array();
+                            if (imgTo.length < 6) {
+                                imgs = imgTo;
+                            } else {
+                                while (imgs.length < 5) {
+                                    var flag = true;
+                                    //Math.random()*(上限-下限+1)+下限
+                                    r = parseInt(Math.random() * (imgTo.length));
+                                    $(imgs).each(function (k, v) {
+                                        if (v == imgTo[r]) {
+                                            flag = false;
+                                            return false;
+                                        }
+                                    });
+                                    if (flag) {
+                                        imgs.push(imgTo[r]);
+                                    }
+                                }
+                            }
+                            imgXml.imgs = imgs;
+                            imgXml.viewTimer = setInterval('imgXml.funSelfView()', 3000);
+                        }
+                    });
+                },
+                //产品图上下浏览
+                funImgPrevNext: function (obj) {
+                    if (imgXml.imgs == null || imgXml.imgs.length <= 0) {
+                        return false;
+                    }
+                    var current = parseInt($("#divPicture").attr("value"));
+                    if ($(obj).attr("id") == "img_prev") {
+                        if (current == 0) {
+                            current = imgXml.imgs.length - 1;
+                        } else {
+                            current -= 1;
+                        }
+                    } else if ($(obj).attr("id") == "img_next") {
+                        if (current == imgXml.imgs.length - 1) {
+                            current = 0;
+                        } else {
+                            current += 1;
+                        }
+                    }
+                    $("#divPicture").removeClass("leftBg");
+                    $("#divPicture").css({ background: "url(" + imgXml.imgs[current] + ")" });
+                    $("#divPicture").attr("value", current);
+                    clearInterval(imgXml.viewTimer);
+                },
+                //产品展示图自动浏览
+                funSelfView: function () {
+                    var current = parseInt($("#divPicture").attr("value"));
+                    if (current == imgXml.imgs.length - 1) {
+                        current = 0;
+                    } else {
+                        current += 1;
+                    }
+                    $("#divPicture").css({ background: "url(" + imgXml.imgs[current] + ")" });
+                    $("#divPicture").attr("value", current);
+                }
+            }
+        </script>
+    </body>
+</html>

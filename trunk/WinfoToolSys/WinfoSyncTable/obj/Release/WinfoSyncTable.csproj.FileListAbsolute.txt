@@ -1,0 +1,12 @@
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\bin\Release\WinfoSyncTable.exe.config
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\bin\Release\WinfoSyncTable.exe
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\bin\Release\WinfoSyncTable.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\bin\Release\InfaCommon.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\bin\Release\InfaEncrypt.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\bin\Release\ServiceProxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\obj\Release\WinfoSyncTable.ProjectInstaller.resources
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\obj\Release\WinfoSyncTable.csproj.GenerateResource.Cache
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\obj\Release\WinfoSyncTable.exe
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\obj\Release\WinfoSyncTable.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\obj\Release\WinfoSyncTable.WinSyncService.resources
+E:\project\Winfo-Tool\trunk\WinfoToolSys\WinfoSyncTable\obj\Release\WinfoSyncTable.csprojResolveAssemblyReference.cache

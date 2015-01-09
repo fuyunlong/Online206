@@ -1,0 +1,114 @@
+﻿var SiteSet = {
+    //获取站点配置列表
+    GetSiteSetList: function () {
+        var configName = $("#txtConfigName").val().trim();
+        $.ajax({
+            type: "post",
+            url: "/SiteSet/GetSiteSetList",
+            data: { configName: configName },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询配置信息失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<tr>";
+                    html += "<td class='com_TextCenter com_w25pen'>" + data[i].ConfigName + "</td>";
+                    html += "<td class='com_TextCenter com_w25pen com_disnote'>" + data[i].ConfigDesc + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].FlowNum + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].AINum + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].DINum + "</td>";
+                    html += "<td class='com_TextCenter com_w20pen'>";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置查看','38%','38%','25%','35%','SiteSet/ShowDetail?oper=Show&configId=" + data[i].ConfigCode + "')>查看|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置修改','38%','38%','25%','35%','SiteSet/ShowDetail?oper=Edit&configId=" + data[i].ConfigCode + "')>修改|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=SiteSet.Delete('" + data[i].ConfigCode + "')>删除</a> ";
+                    html += "</td>";
+                    html += "</tr>";
+                }
+                $("#ConfigList tbody").html(html);
+            }
+        });
+    },
+    //新增
+    Add: function () {
+        var model = SiteSet.GetData();
+        $.ajax({
+            type: "post",
+            url: "/SiteSet/Add",
+            data: model,
+            dataType: "text",
+            error: function (ex) {
+                Common.MsgBox("添加配置信息失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    Common.layoutTopClose();
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        });
+    },
+    //更改配置
+    Update: function () {
+        var model = SiteSet.GetData();
+        $.ajax({
+            type: "post",
+            url: "/SiteSet/Update",
+            data: model,
+            dataType: "text",
+            error: function (ex) {
+                Common.MsgBox("修改配置信息失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    Common.layoutTopClose();
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        });
+    },
+    //删除配置
+    Delete: function (configCode) {
+        if (confirm("确定要删除吗?")) {
+            $.ajax({
+                type: "post",
+                url: "/SiteSet/Delete",
+                data: { configCode: configCode },
+                dataType: "text",
+                error: function (ex) {
+                    Common.MsgBox("删除配置信息失败,请稍后再试" + ex.responseText);
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    },
+    //获取数据
+    GetData: function () {
+        var model = {
+            ConfigCode: $("#txtConfigName").attr("name"),
+            ConfigName: $("#txtConfigName").val().trim(),
+            ConfigDesc: $("#txtDesc").val().trim(),
+            FlowNum: $("#txtFlowNum").val().trim(),
+            AINum: $("#txtAINum").val().trim(),
+            DINum: $("#txtDINum").val().trim(),
+            IsAlert: $("input[type=radio][name=IsAlert]:checked").val(),
+            IsCreate: $("input[type=radio][name=IsCreate]:checked").val()
+        };
+        return model;
+    }
+};

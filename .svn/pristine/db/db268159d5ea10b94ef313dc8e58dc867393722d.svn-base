@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Proxy;
+using Proxy.ServiceWinToolRead;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.DataSearch
+{
+    public class AlearmRecordController : Controller
+    {
+        //报警记录查询页面
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //查询记录列表
+        public JsonResult GetRecordList(string siteId, DateTime begain, DateTime end)
+        {
+            List<T_Alert_Info> list = new List<T_Alert_Info>();
+            try
+            {
+                //当前用户可以访问的站点
+                List<string> dtuIds = DataPermission.PermisSites(PmsMng.LogUser);
+                if (dtuIds.Contains(siteId))
+                {
+                    list = ServcieTool.WinToolServiceReadInstance.GetAlertListBySiteIdAndDate(PmsMng.ActiveKey, siteId, begain, end);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+    }
+}

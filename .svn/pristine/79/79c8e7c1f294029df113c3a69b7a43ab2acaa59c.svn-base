@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+@model Proxy.SmsService.T_SMS_Bill
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>计费详细</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/Common/ui_common.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <style type="text/css">
+        table td
+        {
+            padding-left: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $(".oper").attr("disabled", "disabled");
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <table class="ui-com-tabFrm">
+            <tr>
+                <td style="width: 100px">计费名称</td>
+                <td style="width: 120px">
+                    <input id="txtFeeName" type="text" class="oper" style="width:100px;" value="@Model.BillName" />
+                </td>
+                <td style="width: 100px">报警费用(元/条)</td>
+                <td>
+                    <input id="txtAlertFee" type="text" class="oper" style="width:70px;" value="@Model.AlertFee" />
+                </td>
+            </tr>
+            <tr>
+                <td>数据查询(元/条)</td>
+                <td>
+                    <input id="txtDataFee" type="text" class="oper" style="width:100px;" value="@Model.DataFee" />
+                </td>
+                <td>定时短信(元/条)</td>
+                <td>
+                    <input id="txtBookFee" type="text" class="oper" style="width:70px;" value="@Model.BookFee" />
+                </td>
+            </tr>
+            <tr>
+                <td>报表短信(元/条)</td>
+                <td>
+                    <input id="txtRptFee" type="text" class="oper" style="width:100px;" value="@Model.RptFee" />
+                </td>
+                <td>其他费用(元/条)</td>
+                <td>
+                    <input id="txtOtherFee" type="text" class="oper" style="width:70px;" value="@Model.OtherFee" />
+                </td>
+            </tr>
+            <tr>
+                <td>每天最多(元/条)</td>
+                <td>
+                    <input id="txtDayMax" type="text" class="oper" style="width:100px;" value="@Model.DayMax" />
+                </td>
+                <td>每月最多(元/条)</td>
+                <td>
+                    <input id="txtMonthMax" type="text" class="oper" style="width:70px;" value="@Model.MonthMax" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

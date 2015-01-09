@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Proxy;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserRoleController : Controller
+    {
+        //
+        // GET: /UserRole/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 查询角色信息
+        /// </summary>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
+
+        public JsonResult GetListByName(string roleName)
+        {
+            List<Proxy.ServiceWinToolRead.T_User_Role> list = ServcieTool.WinToolServiceReadInstance.GetRoleList(Pms.PmsMng.ActiveKey, roleName);
+            return Json(list);
+        }
+
+        public ActionResult AddRole()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加角色
+        /// </summary>
+        /// <param name="UserRole"></param>
+        /// <returns></returns>
+        public int AddUserRole(Proxy.ServiceWinToolWrite.T_User_Role UserRole)
+        {
+            int rlst = 0;
+            try
+            {
+                UserRole.UpdateFlag = 1;
+                UserRole.Status = 1;
+                var RoleObj = ServcieTool.WinToolServiceReadInstance.GetRoleByCode(Pms.PmsMng.ActiveKey, UserRole.RoleCode);
+                if (RoleObj.RoleCode!= null)
+                {
+                    rlst = 3;
+                }
+                else
+                {
+                    if (ServcieTool.WinToolServiceWriteInstance.AddUserRole(Pms.PmsMng.ActiveKey, Pms.PmsMng.LogUser, UserRole))
+                    { rlst = 1; }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        /// <summary>
+        /// 更新角色
+        /// </summary>
+        /// <param name="UserRole"></param>
+        /// <returns></returns>
+        public int UpdateUserRole(Proxy.ServiceWinToolWrite.T_User_Role UserRole)
+        {
+            int rlst = 0;
+            try
+            {
+                UserRole.UpdateFlag = 1;
+                UserRole.Status = 1;
+                if (ServcieTool.WinToolServiceWriteInstance.UpdateUserRole(Pms.PmsMng.ActiveKey, Pms.PmsMng.LogUser, UserRole))
+                {
+                    rlst = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        /// <param name="RoleCode"></param>
+        /// <returns></returns>
+        public int DeleteUserRole(string RoleCode)
+        {
+            int rlst = 0;
+            try
+            {
+                if (ServcieTool.WinToolServiceWriteInstance.DelUserRole(Pms.PmsMng.ActiveKey, Pms.PmsMng.LogUser, RoleCode))
+                {
+                    rlst = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        public ActionResult RoleDetail(string Oper, string RoleCode)
+        {
+            ViewBag.RoleObj = ServcieTool.WinToolServiceReadInstance.GetRoleByCode(Pms.PmsMng.ActiveKey, RoleCode);
+            if (Oper == "Show")
+            { ViewBag.Oper = ""; }
+            if (Oper == "Edit")
+            {
+                ViewBag.Oper = "<input type='button' class='buttonVer2' value='修改' onclick='UserRole.UpdateUserRole()' />";
+            }
+            return View();
+        }
+    }
+}

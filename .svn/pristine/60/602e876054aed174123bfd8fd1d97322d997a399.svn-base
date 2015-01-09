@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>压力等级</title>
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script>
+            $(function () {   
+                $("#OperArea").html("@Html.Raw(ViewBag.OperArea)");
+            });
+
+        </script>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td>压力名称:</td>
+                    <td>
+                        <input type="text" id="PreLevelName" /></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">压力描述:</td>
+                    <td>
+                        <textarea style="width:800px; height:100px;max-height:100px;max-width:800px;" id="PreLevelDesc"></textarea></td>
+                </tr>
+            </table>
+            <div id="OperArea"></div>
+        </div>
+    </body>
+</html>

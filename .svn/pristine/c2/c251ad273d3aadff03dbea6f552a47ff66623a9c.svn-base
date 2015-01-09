@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2BB2A48F-ED1F-4015-84EA-E46D21B6D123}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Proxy</RootNamespace>
+    <AssemblyName>Proxy</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="InfaCommon">
+      <HintPath>..\Libs\InfaCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="InfaCompact">
+      <HintPath>..\Libs\InfaCompact.dll</HintPath>
+    </Reference>
+    <Reference Include="InfaEncrypt">
+      <HintPath>..\Libs\InfaEncrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServcieTool.cs" />
+    <Compile Include="Service References\CrmServiceGet\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\CrmServicePost\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceWinToolRead\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceWinToolWrite\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceBindings.cs" />
+    <Compile Include="ServiceInstance\CrmProxyGet.cs" />
+    <Compile Include="ServiceInstance\CrmProxyPost.cs" />
+    <Compile Include="ServiceInstance\WinToolProxyRead.cs" />
+    <Compile Include="ServiceInstance\WinToolProxyWrite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\CrmServiceGet\CRMSGet.wsdl" />
+    <None Include="Service References\CrmServiceGet\CrmsGetService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServiceGet\CrmsGetService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServiceGet\CrmsGetService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServiceGet\CrmsGetService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_CompanyComfigs.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_CompanyInfos.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_Companys.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_DepartmentInfos.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_ParentCompany.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_PostInfos.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_UserNewInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_User_Config.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServiceGet\Proxy.CrmServiceGet.T_User_UserGroup.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\CrmServicePost\CRMSPost.wsdl" />
+    <None Include="Service References\CrmServicePost\CrmsPostService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServicePost\CrmsPostService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServicePost\CrmsPostService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServicePost\CrmsPostService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CrmServicePost\CrmsPostService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_CityInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_Company.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_CompanyExtension.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_Company_Config.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_Config.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_Config_Ext.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_DataTransmit.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_Device.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_Device_Ex.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_Dtu_Ex.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_FieldDesc.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_Group.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_GroupEx.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_PressureLevel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_ValveEffect.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_DTU_ValveEffectEx.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_User_Config.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_User_GroupExt.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\Proxy.ServiceWinToolRead.T_User_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\WinfoToolServiceRead.wsdl" />
+    <None Include="Service References\ServiceWinToolRead\WinfoToolServiceRead.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\WinfoToolServiceRead1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\WinfoToolServiceRead2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolRead\WinfoToolServiceRead3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolWrite\Proxy.ServiceWinToolWrite.EmReStatus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceWinToolWrite\WinfoToolServiceWrite.wsdl" />
+    <None Include="Service References\ServiceWinToolWrite\WinfoToolServiceWrite.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolWrite\WinfoToolServiceWrite1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolWrite\WinfoToolServiceWrite2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWinToolWrite\WinfoToolServiceWrite3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CrmServiceGet\" />
+    <WCFMetadataStorage Include="Service References\CrmServicePost\" />
+    <WCFMetadataStorage Include="Service References\ServiceWinToolRead\" />
+    <WCFMetadataStorage Include="Service References\ServiceWinToolWrite\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServiceGet\CrmsGetService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServiceGet\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServiceGet\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServiceGet\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServicePost\CrmsPostService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServicePost\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServicePost\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CrmServicePost\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolRead\WinfoToolServiceRead.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolRead\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolRead\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolRead\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolWrite\WinfoToolServiceWrite.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolWrite\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolWrite\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceWinToolWrite\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

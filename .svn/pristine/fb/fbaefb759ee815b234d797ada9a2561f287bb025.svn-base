@@ -1,0 +1,118 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using WinfoToolSys.Pms;
+using Proxy;
+using Proxy.ServiceWinToolRead;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserSettingController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据名称查询
+        public JsonResult GetUserConfigByName(string configName)
+        {
+            List<T_User_Config> list = ServcieTool.WinToolServiceReadInstance.GetUserConfigListByName("", configName);
+            return Json(list);
+        }
+
+        //详细、修改、添加
+        public ActionResult Operation(string oper, string configId)
+        {
+            StringBuilder sb = new StringBuilder();
+            var model = ServcieTool.WinToolServiceReadInstance.GetUserConfigByCode("", configId);
+
+            switch (oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='UserConfig.UpdateConfig();' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='UserConfig.AddConfig();' />");
+                    break;
+                default:
+                    break;
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            ViewBag.Button = sb.ToString();
+            return View(model);
+        }
+
+        //获取客户端类型
+        public JsonResult GetUsers()
+        {
+            Dictionary<int, string> dic = ServcieTool.CrmServiceGetInstance.diclEnum(PmsMng.ActiveKey);
+            return Json(dic.ToList());
+        }
+
+        //添加
+        public string Add(T_User_Config model)
+        {
+            string result = "false";
+            string cCode = "" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond;
+
+            Proxy.ServiceWinToolWrite.T_User_Config config = new Proxy.ServiceWinToolWrite.T_User_Config();
+            config.CCode = cCode;
+            config.ConfigName = model.ConfigName;
+            config.ConfigDesc = model.ConfigDesc;
+            config.SoftInterval = model.SoftInterval;
+            config.IsAlert = model.IsAlert;
+            config.IsRpt = model.IsRpt;
+            config.Status = 1;
+            config.PopCode = model.PopCode;
+            config.UpdateFlag = 1;
+
+            if (ServcieTool.WinToolServiceWriteInstance.AddUserConfig("", config))
+            {
+                result = "true";
+            }
+            return result;
+        }
+
+        //修改
+        public string Update(Proxy.ServiceWinToolWrite.T_User_Config model)
+        {
+            string result = "false";
+
+            Proxy.ServiceWinToolWrite.T_User_Config config = new Proxy.ServiceWinToolWrite.T_User_Config();
+            config.CCode = model.CCode;
+            config.ConfigName = model.ConfigName;
+            config.ConfigDesc = model.ConfigDesc;
+            config.SoftInterval = model.SoftInterval;
+            config.IsAlert = model.IsAlert;
+            config.IsRpt = model.IsRpt;
+            config.PopCode = model.PopCode;
+
+            if (ServcieTool.WinToolServiceWriteInstance.UpdateUserConfig("", config))
+            {
+                result = "true";
+            }
+            return result;
+        }
+
+        //删除
+        public string Delete(string cCode)
+        {
+            string result = "false";
+            if (ServcieTool.WinToolServiceWriteInstance.DeleteUserConfig("", cCode))
+            {
+                result = "true";
+            }
+            return result;
+        }
+    }
+}

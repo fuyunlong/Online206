@@ -1,0 +1,21 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.DB.Provider;
+using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Com.Winfotian.TestAPI
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            new FieldProvider().GetAddOrUpdateFiledList("00010003");
+            
+            Console.Read();
+        }
+    }
+}

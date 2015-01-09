@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Proxy;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class DataTransController : Controller
+    {
+        //
+        // GET: /DataTrans/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = ServcieTool.WinToolServiceReadInstance.GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+
+        public JsonResult GetTransSetList(string Company)
+        {
+            var list = ServcieTool.WinToolServiceReadInstance.GetTransSetList(PmsMng.ActiveKey, Company);
+            return Json(list);
+        }
+
+        public ActionResult DataTransDetail(string Oper, string TransId, string CompanyId)
+        {
+            var list = ServcieTool.WinToolServiceReadInstance.GetTransSetList(PmsMng.ActiveKey, CompanyId);
+            ViewBag.DtuList = list;
+            ViewBag.TransObj = ServcieTool.WinToolServiceReadInstance.GetTransById(PmsMng.ActiveKey, TransId);
+            return View();
+        }
+    }
+}

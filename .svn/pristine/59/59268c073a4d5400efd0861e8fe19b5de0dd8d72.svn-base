@@ -1,0 +1,143 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Com.Winfotian.Model;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteInfoController : Controller
+    {
+        //
+        // GET: /SiteInfo/
+
+        public SiteInfoController()
+        {
+
+        }
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        //获取站点列表
+        public JsonResult GetSite(string Company, string Group, string SiteName)
+        {
+            var list = new ServiceProxyRead().GetProxy().GetSite("", Company, Group, SiteName, false);
+            return Json(list);
+        }
+
+        //获取站点详细
+        public ActionResult SiteDetail(string Oper, string DtuId)
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.DtuConfigList = new ServiceProxyRead().GetProxy().DtuConfigList(PmsMng.ActiveKey);
+            ViewBag.VerList = new ServiceProxyRead().GetProxy().GetVerList(PmsMng.ActiveKey);
+            ViewBag.PressureLevelList = new ServiceProxyRead().GetProxy().GetPressureLevelList(PmsMng.ActiveKey, "");
+            ViewBag.Oper = Oper;
+            ViewBag.DTU_Ex = null;
+            if(Oper == "Add")
+            {
+                ViewBag.OperVisiable = "true";
+                ViewBag.OperAreaText = "<input type='button' class='buttonVer2' value='增加' />";
+            }
+            else
+            {
+                if(Oper == "Show")
+                {
+                    ViewBag.OperAreaText = "";
+                }
+                else
+                {
+                    ViewBag.OperAreaText = "<input type='button' class='buttonVer2' value='修改' onclick='SiteMng.UpdateSiteInfo()' />";
+                }
+                ViewBag.OperVisiable = "false";
+                var dtu = new ServiceProxyRead().GetProxy().GetSiteById("", DtuId);
+                ViewBag.DTU_Ex = dtu;
+            }
+            return View();
+        }
+
+        //打开分组树
+        public string OpenGroupTree()
+        {
+            StringBuilder Str = new StringBuilder();
+            Str.Append("  [");
+            Str.Append("{ text: '节点1', children: [");
+            Str.Append("    { text: '节点1.1' },");
+            Str.Append("    { text: '节点1.2' },");
+            Str.Append("  { text: '节点1.3', children: [");
+            Str.Append("        { text: '节点1.3.1' ,children: [");
+            Str.Append("			{ text: '节点1.3.1.1' },");
+            Str.Append("			{ text: '节点1.3.1.2' }]");
+            Str.Append("		},");
+            Str.Append("     { text: '节点1.3.2' }");
+            Str.Append(" ]");
+            Str.Append("  },");
+            Str.Append("  { text: '节点1.4' }");
+            Str.Append("  ]");
+            Str.Append("  },");
+            Str.Append(" { text: '节点2' },");
+            Str.Append(" { text: '节点3' },");
+            Str.Append(" { text: '节点4' }");
+            Str.Append("]");
+            return Str.ToString();
+        }
+
+        //添加站点
+        public string AddSite(T_DTU dtu)
+        {
+            string rlst = "添加失败";
+            try
+            {
+                if(new ServiceProxyWrite().GetProxy().AddSite(PmsMng.ActiveKey, PmsMng.LogUser, dtu))
+                {
+                    rlst = "ok";
+                }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+
+            }
+            return rlst;
+        }
+
+        public ActionResult ShowSite()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.DtuConfigList = new ServiceProxyRead().GetProxy().DtuConfigList(PmsMng.ActiveKey);
+            ViewBag.VerList = new ServiceProxyRead().GetProxy().GetVerList(PmsMng.ActiveKey);
+            ViewBag.PressureLevelList = new ServiceProxyRead().GetProxy().GetPressureLevelList(PmsMng.ActiveKey, "");
+            return View();
+        }
+
+        public string UpdateSite(T_DTU dtu)
+        {
+            string rlst = "修改失败";
+            try
+            {
+                if(new ServiceProxyWrite().GetProxy().UpdateSite(PmsMng.ActiveKey, PmsMng.LogUser, dtu))
+                {
+                    rlst = "ok";
+
+                }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+
+            }
+            return rlst;
+        }
+
+
+    }
+}

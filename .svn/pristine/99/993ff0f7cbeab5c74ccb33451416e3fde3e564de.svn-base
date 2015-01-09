@@ -1,0 +1,22 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.DB.Provider;
+using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Com.Winfotian.TestAPI
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string aa= new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(new T_DTU_FieldDesc ());
+            Console.WriteLine(aa);
+            FileHelper.WriteFile("D:\\test.txt", aa);
+            Console.Read();
+        }
+    }
+}

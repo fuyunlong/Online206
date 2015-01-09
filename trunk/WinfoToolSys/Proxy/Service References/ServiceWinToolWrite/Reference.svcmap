@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3d521735-92b1-451e-b162-12b4f1865fbb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:5644/WinfoToolServiceWrite.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WinfoToolServiceWrite.disco" MetadataType="Disco" ID="81d894ad-dd97-44eb-af85-d944bf4d0936" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceWrite.svc?disco" />
+    <MetadataFile FileName="WinfoToolServiceWrite.xsd" MetadataType="Schema" ID="23fd5883-7ba8-402a-bfd3-d0de8cc0485d" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd2" />
+    <MetadataFile FileName="WinfoToolServiceWrite.wsdl" MetadataType="Wsdl" ID="ad1a9a2e-01b6-4b9b-bd9e-e166cb80ae1e" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceWrite.svc?wsdl" />
+    <MetadataFile FileName="WinfoToolServiceWrite1.xsd" MetadataType="Schema" ID="8ca574fb-99b7-468d-821a-aa9e147fd6ee" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd1" />
+    <MetadataFile FileName="WinfoToolServiceWrite2.xsd" MetadataType="Schema" ID="2b3842f0-0b20-4901-87a0-eec2b633786a" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd3" />
+    <MetadataFile FileName="WinfoToolServiceWrite3.xsd" MetadataType="Schema" ID="47007696-565e-437a-84fa-5894703d1efd" SourceId="1" SourceUrl="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

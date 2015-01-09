@@ -1,0 +1,259 @@
+﻿var ClientMng = {
+    flag: true,
+    //查询公司
+    SerarchCompany: function () {
+        var cityId = $("#ddlCity").val() || "";
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            data: { cityId: cityId },
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询公司信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<tr>";
+                    str += "<td class='com_TextCenter com_w35pen'>" + data[i].CompanyName + "</td>";
+                    str += "<td class='com_TextCenter com_w10pen'>" + data[i].LinkPerson + "</td>";
+                    str += "<td class='com_TextCenter com_w10pen'>" + data[i].MobilePhone + "</td>";
+                    str += "<td class='com_TextCenter com_w12pen'>" + data[i].CmpWebSite + "</td>";
+                    str += "<td class='com_TextCenter com_w13pen'>" + data[i].Email + "</td>";
+                    str += "<td class='com_TextCenter com_w20pen'>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('公司查看','45%','80%','12%','28%','ClientInfo/ClientDetail?oper=Show&companyId=" + data[i].CompanyID + "')>查看|</a>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('公司修改','45%','80%','12%','28%','ClientInfo/ClientDetail?oper=Edit&companyId=" + data[i].CompanyID + "')>修改|</a>";
+                    str += "<a href='javascript:void(0)' onclick=ClientMng.DeleteCompany(" + data[i].CompanyID + ")>删除</a>";
+                    str += "</td>";
+                    str += "</tr>";
+                }
+                $("#ComList tbody").html(str);
+            }
+        });
+    },
+    //查询母公司
+    LoadParentCompany: function (parentCompanyId) {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetParentCompanyList",
+            data: { parentCompanyId: parentCompanyId },
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("获取母公司信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                if (data.length == 0) {
+                    str = "<option value='-1'>--无母公司--</option>";
+                }
+                else {
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                    }
+                }
+                $("#ddlMonCompany").html(str);
+            }
+        });
+    },
+    //查询所有公司
+    GetAllParentCompany: function () {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("获取公司信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "<option value='-1'>--无母公司--</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                $("#ddlMonCompany").append(str);
+            }
+        });
+    },
+    //加载指定公司的配置信息
+    GetCompanyConfig: function (companyId) {
+        $.ajax({
+            type: "post",
+            url: "/Config/GetCompanyConfig",
+            dataType: "json",
+            data: { companyId: companyId },
+            error: function () {
+                Common.MsgBox("获取公司配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < $("#divComCoinfig input[type=checkbox]").length; j++) {
+                        if (data[i].ConfigId == $("#divComCoinfig input[type=checkbox]")[j].value) {
+                            $("#divComCoinfig input[type=checkbox]")[j].checked = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+        });
+    },
+    //添加公司
+    AddCompany: function () {
+        var model = ClientMng.GetData();
+        ClientMng.CheckData();
+        if (ClientMng.flag) {
+            $.ajax({
+                type: "post",
+                url: "/ClientInfo/Add",
+                data: model,
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("添加公司信息失败, 请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "注册成功!") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+            });
+        }
+    },
+    //修改公司信息
+    UpdateCompany: function () {
+        var model = ClientMng.GetData();
+        ClientMng.CheckData();
+        if (ClientMng.flag) {
+            $.ajax({
+                type: "post",
+                url: "/ClientInfo/Update",
+                data: model,
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("修改公司信息失败, 请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "更新成功") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+            });
+        }
+    },
+    //删除公司信息
+    DeleteCompany: function (companyId) {
+        if (confirm("确定要删除吗?")) {
+            $.ajax({
+                type: "post",
+                url: "/ClientInfo/Delete",
+                data: { companyID: companyId },
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("删除公司信息失败, 请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        alert("删除成功!");
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("删除失败!");
+                    }
+                }
+            });
+        }
+    },
+    //获取数据
+    GetData: function () {
+        var checkeds = $("#divComCoinfig input[type=checkbox]:checked");
+        var config = [];
+        $.each(checkeds, function (i, n) {
+            config.push($(n).val());
+        });
+        var model = {
+            CompanyID: $("#txtCompanyName").attr("name"),
+            CompanyName: $("#txtCompanyName").val().trim(),
+            LinkPerson: $("#txtLinkMan").val().trim(),
+            Telphone: $("#txtPhone").val().trim(),
+            Email: $("#txtEmail").val().trim(),
+            FaxTel: $("#txtFax").val().trim(),
+            CmpWebSite: $("#txtWebSite").val().trim(),
+            CmpAddress: $("#txtAddress").val().trim(),
+            MobilePhone: $("#txtMobile").val().trim(),
+            Remark: $("#txtComDesc").val().trim(),
+            ParentCompanyID: $("#ddlMonCompany option:selected").text(),
+            CityID: $("#ddlCity").val(),
+            CityName: $("#ddlCity option:selected").text(),
+            Province: config.toString()//to do：用这个字段保存公司配置信息，实际添加过程没有用到这个字段
+        };
+        return model;
+    },
+    //数据验证
+    CheckData: function () {
+        ClientMng.flag = true;
+        if (!Validate.IsRequired($("#txtCompanyName").val())) {
+            ClientMng.flag = false;
+            Stip("txtCompanyName").show({ content: "名称不能为空", kind: "error", time: 3000 });
+            $("#txtCompanyName").focus();
+            return;
+        }
+        if (!Validate.IsRequired($("#txtLinkMan").val())) {
+            ClientMng.flag = false;
+            Stip("txtLinkMan").show({ content: "联系人不能为空", kind: "error", time: 3000 });
+            $("#txtLinkMan").focus();
+            return;
+        }
+        if (!Validate.IsRequired($("#txtPhone").val())) {
+            ClientMng.flag = false;
+            Stip("txtPhone").show({ content: "电话不能为空", kind: "error", time: 3000 });
+            $("#txtPhone").focus();
+            return;
+        }
+        if (!Validate.IsTelePhone($("#txtPhone").val())) {
+            ClientMng.flag = false;
+            Stip("txtPhone").show({ content: "电话号码错误", kind: "error", time: 3000 });
+            $("#txtPhone").focus();
+            return;
+        }
+        if ($("#txtMobile").val() != "" && !Validate.IsCellPhone($("#txtMobile").val())) {
+            ClientMng.flag = false;
+            Stip("txtMobile").show({ content: "手机号码错误", kind: "error", time: 3000 });
+            $("#txtMobile").focus();
+            return;
+        }
+        if (!Validate.IsRequired($("#txtEmail").val())) {
+            ClientMng.flag = false;
+            Stip("txtEmail").show({ content: "邮箱不能为空", kind: "error", time: 3000 });
+            $("#txtEmail").focus();
+            return;
+        }
+        if (!Validate.IsEmail($("#txtEmail").val())) {
+            ClientMng.flag = false;
+            Stip("txtEmail").show({ content: "邮箱格式错误", kind: "error", time: 3000 });
+            $("#txtEmail").focus();
+            return;
+        }
+        if ($("#txtFax").val() != "" && !Validate.IsTelePhone($("#txtFax").val())) {
+            ClientMng.flag = false;
+            Stip("txtFax").show({ content: "传真不正确", kind: "error", time: 3000 });
+            $("#txtFax").focus();
+            return;
+        }
+        if ($("#txtWebSite").val() != "" && !Validate.IsUrl($("#txtWebSite").val())) {
+            ClientMng.flag = false;
+            Stip("txtWebSite").show({ content: "网址不正确", kind: "error", time: 3000 });
+            $("#txtWebSite").focus();
+            return;
+        }
+        if ($("#divComCoinfig input[type=checkbox]:checked").size() == 0) {
+            ClientMng.flag = false;
+            Stip("divComCoinfig").show({ content: "请选择配置", kind: "error", time: 3000 });
+            return;
+        }
+    }
+}

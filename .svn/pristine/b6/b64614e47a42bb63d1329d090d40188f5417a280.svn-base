@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Com.Winfotian.Model;
+using System.Text;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserGroupController : Controller
+    {
+        //
+        // GET: /UserGroup/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据名称查询分组信息
+        public JsonResult GetUserGroupByCompanyID(string companyId)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetGroupListByCompanyID(PmsMng.ActiveKey, companyId));
+        }
+
+        //分组详细、修改、添加
+        public ActionResult Operation(string Oper, string ConfigId)
+        {
+            StringBuilder sb = new StringBuilder();
+            T_User_GroupExt model = new ServiceProxyRead().GetProxy().GetGroupByCode(PmsMng.ActiveKey, ConfigId);
+
+            switch (Oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='' />");
+                    break;
+                default:
+                    break;
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            ViewBag.Button = sb.ToString();
+            return View(model);
+        }
+    }
+}

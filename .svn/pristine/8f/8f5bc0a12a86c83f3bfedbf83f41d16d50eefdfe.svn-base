@@ -1,0 +1,138 @@
+﻿<?xml version="1.0"?>
+<!--
+  有关如何配置 ASP.NET 应用程序的详细信息，请访问
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+  </configSections>
+  <appSettings>
+    <add key="SysCode" value="WinfoTool"/>
+    <add key="UnModulePage" value="Login.ashx,Login.html,codeHander.ashx"/>
+    <add key="UnPmsPage" value=""/>
+    <add key="Extension" value=".aspx,.html,.htm,.ashx"/>
+    <add key="ChartImageHandler" value="Storage=memory; Timeout=180;Url=~/Style/temp/;"/>
+    <!--权限接入-->
+    <add key="Winfotian.Permission.AppCode" value="WinTool"/>
+    <add key="Winfotian.Permission.Extension" value=".aspx,.html,.htm"/>
+    <add key="Winfotian.Permission.IsMVC" value="true"/>
+    <add key="Winfotian.Permission.SSOLoginUrl" value="http://test_pms.scadacn.com/Login.aspx"/>
+    <add key="Winfotian.Permission.SSOTimeOut" value="600"/>
+    <add key="Winfotian.Permission.UnHttpModuleUrl" value="/Login.html,/FieldPower/UpLoadFile"/>
+    <add key="Winfotian.Permission.ServiceUrl" value="http://test_pms.scadacn.com/service/PermissionWCF.svc/mex"/>
+    <add key="webpages:Version" value="2.0.0.0"/>
+    <add key="webpages:Enabled" value="false"/>
+    <add key="PreserveLoginUrl" value="true"/>
+    <add key="ClientValidationEnabled" value="true"/>
+    <add key="UnobtrusiveJavaScriptEnabled" value="true"/>
+  </appSettings>
+  <connectionStrings>
+    <!--只读库连接字符串-->
+    <add name="ConnOnlyrRead" connectionString="A20B4AC0896FCE0CEF53059591DFF8801C48A52F81003DACF3F78989F50934A420D9E7DCFCDF088BF315A715608D346C52D57A689D69340AC9A9889172E6A55E2E2D1A121CEE5926E1CDDB92BA5F048CFB" providerName="System.Data.EntityClient"/>
+    <!--只写库连接字符串-->
+    <add name="ConnOnlyrWrite" connectionString="A20B4AC0896FCE0CEF53059591DFF8801C48A52F81003DACF3F78989F50934A420D9E7DCFCDF088BF315A715608D346C52D57A689D69340AC9A9889172E6A55E2E2D1A121CEE5926E1CDDB92BA5F048CFB" providerName="System.Data.EntityClient"/>
+  </connectionStrings>
+  <system.web>
+    <customErrors mode="Off"></customErrors>
+    <compilation debug="true" targetFramework="4.0"/>
+    <httpRuntime maxRequestLength="4096"
+     useFullyQualifiedRedirectUrl="true"
+     executionTimeout="6000"
+     minFreeThreads="8"
+     minLocalRequestFreeThreads="4"
+     appRequestQueueLimit="100"
+     enableVersionHeader="true" />
+    <httpModules>
+      <add name="PermissionModule" type="Winfotian.Permission.HttpModule.PermissionModule, Winfotian.Permission.HttpModule" />
+    </httpModules>
+    <authentication mode="Forms">
+      <forms loginUrl="~/Account/Login" timeout="2880"/>
+    </authentication>
+    <pages controlRenderingCompatibilityVersion="4.0">
+      <namespaces>
+        <add namespace="System.Web.Helpers"/>
+        <add namespace="System.Web.Mvc"/>
+        <add namespace="System.Web.Mvc.Ajax"/>
+        <add namespace="System.Web.Mvc.Html"/>
+        <add namespace="System.Web.Optimization"/>
+        <add namespace="System.Web.Routing"/>
+        <add namespace="System.Web.WebPages"/>
+      </namespaces>
+    </pages>
+  </system.web>
+  <system.serviceModel>
+    <client />
+    <services>
+      <!--只读服务-->
+      <service name="Com.Winfotian.Service.WinfoToolServiceRead"  >
+        <endpoint address=""    binding="basicHttpBinding" bindingConfiguration="basicBinding"  contract="Com.Winfotian.Service.IWinfoToolServiceRead"/>
+
+      </service>
+      <!--只写服务-->
+      <service name="Com.Winfotian.Service.WinfoToolServiceWrite" >
+        <endpoint address=""    bindingConfiguration="basicBinding"  binding="basicHttpBinding" contract="Com.Winfotian.Service.IWinfoToolServiceWrite" />
+      </service>
+    </services>
+    <behaviors >
+      <serviceBehaviors>
+        <behavior name="">
+          <serviceMetadata httpGetEnabled="true" />
+          <serviceDebug includeExceptionDetailInFaults="true"/>
+          <dataContractSerializer maxItemsInObjectGraph="2147483647" />
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="basicBinding" closeTimeout="00:05:00" openTimeout="00:10:00"
+          receiveTimeout="00:20:00" sendTimeout="00:30:00" allowCookies="false"
+          bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard"
+          maxBufferPoolSize="52428800" maxBufferSize="26214400" maxReceivedMessageSize="26214400"
+          textEncoding="utf-8" transferMode="Buffered" useDefaultWebProxy="true"
+          messageEncoding="Text">
+          <readerQuotas maxDepth="32" maxStringContentLength="819200" maxArrayLength="16384"
+            maxBytesPerRead="409600" maxNameTableCharCount="16384" />
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    <protocolMapping>
+      <add binding="basicHttpsBinding" scheme="https"/>
+    </protocolMapping>
+    <serviceHostingEnvironment aspNetCompatibilityEnabled="false" multipleSiteBindingsEnabled="true"/>
+  </system.serviceModel>
+  <system.webServer>
+    <validation validateIntegratedModeConfiguration="false"/>
+    <modules>
+      <add name="PermissionModule" type="Winfotian.Permission.HttpModule.PermissionModule, Winfotian.Permission.HttpModule" />
+    </modules>
+    <handlers>
+      <remove name="ExtensionlessUrlHandler-ISAPI-4.0_32bit"/>
+      <remove name="ExtensionlessUrlHandler-ISAPI-4.0_64bit"/>
+      <remove name="ExtensionlessUrlHandler-Integrated-4.0"/>
+      <add name="ExtensionlessUrlHandler-ISAPI-4.0_32bit" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE,PATCH,OPTIONS" modules="IsapiModule" scriptProcessor="%windir%\Microsoft.NET\Framework\v4.0.30319\aspnet_isapi.dll" preCondition="classicMode,runtimeVersionv4.0,bitness32" responseBufferLimit="0"/>
+      <add name="ExtensionlessUrlHandler-ISAPI-4.0_64bit" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE,PATCH,OPTIONS" modules="IsapiModule" scriptProcessor="%windir%\Microsoft.NET\Framework64\v4.0.30319\aspnet_isapi.dll" preCondition="classicMode,runtimeVersionv4.0,bitness64" responseBufferLimit="0"/>
+      <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="GET,HEAD,POST,DEBUG,PUT,DELETE,PATCH,OPTIONS" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0"/>
+    </handlers>
+  </system.webServer>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35"/>
+        <bindingRedirect oldVersion="1.0.0.0-2.0.0.0" newVersion="2.0.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35"/>
+        <bindingRedirect oldVersion="1.0.0.0-4.0.0.0" newVersion="4.0.0.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35"/>
+        <bindingRedirect oldVersion="1.0.0.0-2.0.0.0" newVersion="2.0.0.0"/>
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.SqlConnectionFactory, EntityFramework"/>
+  </entityFramework>
+</configuration>

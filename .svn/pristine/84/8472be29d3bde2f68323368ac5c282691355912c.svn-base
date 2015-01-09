@@ -1,0 +1,90 @@
+﻿var HeartRecord = {
+    //加载公司列表
+    LoadCompanys: function () {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取公司信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                $("#ddlCompany").append(str);
+                HeartRecord.GetGroupsByComId($("#ddlCompany").val());
+            }
+        });
+    },
+    //加载分组
+    GetGroupsByComId: function (companyId) {
+        $.ajax({
+            type: "post",
+            data: { id: companyId },
+            url: "/SiteGroup/GetGroup",
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取分组信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "<option value=-1>全部</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].GroupCode + '">' + data[i].GroupName + '</option>';
+                }
+                $("#ddlGroup").html(str);
+                $("#ddlSite").html("");
+                HeartRecord.GetSiteList();
+            }
+        });
+    },
+    //根据分组编码查询站点
+    GetSiteList: function () {
+        var companyId = $("#ddlCompany").val();
+        var groupCode = $("#ddlGroup").val();
+        $.ajax({
+            type: "post",
+            url: "/UserInfo/GetDTUByGroupCode",
+            data: { companyId: companyId, groupCode: groupCode },
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取站点信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].Dtuid + '">' + data[i].DtuidName + '</option>';
+                }
+                $("#ddlSite").html(str);
+            }
+        });
+    },
+    //查询心跳记录
+    SearchHeartRecord: function () {
+        var dtuId = $("#ddlSite").val();
+        var date = $("#txtDate").val();
+        $.ajax({
+            type: "post",
+            url: "/HeartBeat/GetBeatRecordListByDTUId",
+            data: { dtuId: dtuId, date: date },
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询心跳记录失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<tr>";
+                    str += "<td class='com_TextCenter'>" + $("#ddlSite option:selected").text() + "</td>";
+                    str += "<td class='com_TextCenter'>" + data[i] + "</td>";
+                    str += "</tr>";
+                }
+                $("#RecordList tbody").html(str);
+            }
+        });
+    }
+};

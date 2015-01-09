@@ -1,0 +1,12 @@
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\Com.Winfotian.Model.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\Com.Winfotian.Model.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\EntityFramework.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\InfaCommon.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\InfaEncrypt.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\Newtonsoft.Json.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\ServiceProxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\EntityFramework.xml
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\obj\Debug\Com.Winfotian.Model.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\obj\Debug\Com.Winfotian.Model.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Model\obj\Debug\Com.Winfotian.Model.csprojResolveAssemblyReference.cache

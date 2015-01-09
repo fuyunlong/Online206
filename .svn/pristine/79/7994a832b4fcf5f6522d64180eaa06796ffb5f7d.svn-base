@@ -1,0 +1,96 @@
+﻿var RemoteControl = {
+    getControlList: function () {
+        $.ajax({
+            type: "post",
+            url: "/RemoteControlSet/GetRemoteControlList",
+            data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: $("#ddlSite").val() },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+
+                var str = "";
+                for (var a in data) {
+                    str += "<tr>";
+                    str += "<td>" + data[a].Dtuid + "</td>";
+                    str += "<td>" + data[a].FieldName + "</td>";
+                    str += "<td>" + data[a].DO_Index + "</td>"
+                    str += "<td>" + data[a].DI_Index + "</td>";
+                    str += "<td>" + data[a].ReturnState + "</td>";
+                    str += "<td>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('查看控制','50%','50%','20%','30%','/RemoteControlSet/ControlDetail?Oper=Show&Dtuid=" + data[a].Dtuid + "&FieldName=" + data[a].FieldName + "')>查看|</a>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('修改控制','50%','50%','20%','30%','/RemoteControlSet/ControlDetail?Oper=Edit&Dtuid=" + data[a].Dtuid + "&FieldName=" + data[a].FieldName + "'))>修改|</a>";
+                    str += "<a href='javascript:void(0)' onclick=RemoteControl.DelControl(" + data[a].Dtuid + "," + data[a].FieldName + ")>删除|</a>";
+                    str += "</td>";
+                    str += "</tr>";
+                }
+                $("#ComList").html(str);
+            }
+        });
+    },
+    DelControl: function () {
+        $.ajax({
+            type: "post",
+            url: "/RemoteControlSet/GetRemoteControlList",
+            data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: $("#ddlSite").val() },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "1") {
+                    alert("删除成功");
+                }
+                else {
+                    alert("删除失败");
+                }
+            }
+        });
+    },
+    EditContrl: function () {
+  
+        $.ajax({
+            type: "post",
+            url: "/RemoteControlSet/GetRemoteControlList",
+            data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: $("#ddlSite").val() },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "1") {
+                    alert("修改成功");
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        });
+    },
+    AddControl: function () {
+        $.ajax({
+            type: "post",
+            url: "/RemoteControlSet/GetRemoteControlList",
+            data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: $("#ddlSite").val() },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                if (data == "1") {
+                    alert("添加成功");
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        });
+    },
+    GetControlObj: function () {
+        var ControlObj = {
+
+        };
+        return ControlObj;
+    }
+}

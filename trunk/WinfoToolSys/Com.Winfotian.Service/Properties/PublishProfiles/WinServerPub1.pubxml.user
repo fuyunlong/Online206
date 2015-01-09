@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Com.Winfotian.Common.dll">
+      <publishTime>12/05/2014 13:53:56</publishTime>
+    </File>
+    <File Include="bin/Com.Winfotian.DB.dll">
+      <publishTime>12/05/2014 15:10:51</publishTime>
+    </File>
+    <File Include="bin/Com.Winfotian.Model.dll">
+      <publishTime>12/05/2014 10:10:27</publishTime>
+    </File>
+    <File Include="bin/Com.Winfotian.Service.dll">
+      <publishTime>12/05/2014 17:05:35</publishTime>
+    </File>
+    <File Include="bin/InfaCommon.dll">
+      <publishTime>03/03/2014 11:17:07</publishTime>
+    </File>
+    <File Include="bin/InfaEncrypt.dll">
+      <publishTime>11/08/2013 01:35:23</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>11/08/2013 01:35:23</publishTime>
+    </File>
+    <File Include="bin/ServiceProxy.dll">
+      <publishTime>08/26/2014 13:07:09</publishTime>
+    </File>
+    <File Include="bin/Winfotian.Permission.Common.dll">
+      <publishTime>10/16/2014 17:34:32</publishTime>
+    </File>
+    <File Include="bin/Winfotian.Permission.HttpModule.dll">
+      <publishTime>10/16/2014 17:34:32</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/05/2014 15:51:49</publishTime>
+    </File>
+    <File Include="WinfoToolServiceRead.svc">
+      <publishTime>09/04/2014 10:43:49</publishTime>
+    </File>
+    <File Include="WinfoToolServiceWrite.svc">
+      <publishTime>09/04/2014 10:45:21</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

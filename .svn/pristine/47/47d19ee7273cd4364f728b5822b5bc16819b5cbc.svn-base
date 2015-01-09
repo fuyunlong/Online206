@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+    @model WinfoToolSys.ServiceCrmGet.T_CompanyComfigs
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>公司配置信息</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/Config/Config.js"></script>
+        <script src="~/Scripts/Common/ui_common.js"></script>
+        <script>
+            $(function () {
+                Config.GetClienType();
+                var Oper = "@ViewBag.Oper";
+                if (Oper != null && Oper != "null" && Oper.length > 0) {
+                    setTimeout(function () {
+                        for (var i = 0; i < $("#ddlClienType option").length ; i++) {
+                            if ("@Model.ClientType" == $("#ddlClienType option")[i].value) {
+                                $("#ddlClienType option")[i].selected = true;
+                                break;
+                            }
+                        }
+                    }, 50);
+                    
+                    //详细
+                    if (Oper == "Show") {
+                        $(".oper").attr("disabled", "disabled");
+                    }
+                    //添加
+                    if (Oper == "Add") {
+                        $("input[type=text]").val("");
+                    }
+                }
+                $('#OperArea').html(@Html.Raw(ViewBag.Button));
+            });
+        </script>
+        <style type="text/css">
+            .titleTD
+            {
+                padding-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td class="titleTD">配置名称</td>
+                    <td colspan="3" class="titleTD">
+                        <input type="text" class="oper" id="txtConfigName" style="width:402px;" value="@Model.ConfigName" name="@Model.ConfigId" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="titleTD">配置描述</td>
+                    <td colspan="3" class="titleTD">
+                        <input type="text" class="oper" id="txtDesc" style="width:402px;" value="@Model.ConfigDesc" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="titleTD">IP地址</td>
+                    <td class="titleTD">
+                        <input type="text" style="width:152px" id="txtIP"  class="oper" value="@Model.IP"/>
+                    </td>
+                    <td class="titleTD">端口号</td>
+                    <td class="titleTD">
+                        <input type="text" style="width:152px" id="txtPort" class="oper" value="@Model.Port">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="titleTD">客户端类型</td>
+                    <td class="titleTD">
+                        <select id="ddlClienType" class="oper" style="border: thin solid #2DAAE2;width:154px;border-radius: 3px;">                           
+                        </select>
+                    </td>
+                    <td class="titleTD">客户端数量</td>
+                    <td class="titleTD">
+                        <input type="text" id="txtClientNum" style="width:152px;" class="oper" value="@Model.ClientNum">
+                    </td>
+                </tr>
+                <tr>
+                   <td colspan="4" class="com_TextCenter" id="OperArea">
+                   </td>
+               </tr>
+            </table>
+        </div>
+    </body>
+</html>

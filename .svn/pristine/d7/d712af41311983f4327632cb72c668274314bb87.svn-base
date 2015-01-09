@@ -1,0 +1,97 @@
+﻿
+<!DOCTYPE html>
+<html>
+    @model Proxy.ServiceWinToolRead.T_DTU_GroupEx
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点分组信息</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/Common/ui_common.js"></script>
+        <script src="~/Scripts/SiteGropMng/SiteGrop.js"></script>
+        <script>
+            $(function () {
+                SiteGroup.LoadCompanys();
+                var oper = "@ViewBag.Oper";
+                if (oper != null && oper != "null" && oper.length > 0) {
+                    if (oper == "Show" || oper == "Edit") {
+                        for (var i = 0; i < $("#ddlCompany option").length ; i++) {
+                            if ("@Model.CompanyId" == $("#ddlCompany option")[i].value) {
+                                $("#ddlCompany option")[i].selected = true;
+                                break;
+                            }
+                        }
+                        if (oper == "Show") {
+                            $(".oper").attr("disabled", "disabled");
+                            var option = "<option>" + "@Model.ParentName" + "</option>";
+                            $("#ddlParentGroup").append(option);
+                        }
+                        if (oper == "Edit") {
+                            SiteGroup.GetGroup();
+                            $("#ddlCompany").attr("disabled", "disabled");
+                            setTimeout(function () {
+                                for (var i = 0; i < $("#ddlParentGroup option").length; i++) {
+                                    if ("@Model.ParentCode" == $("#ddlParentGroup option")[i].value) {
+                                        $("#ddlParentGroup option")[i].selected = true;
+                                        break;
+                                    }
+                                }
+                            }, 100);
+                        }
+                    }
+                    if (oper == "Add") {
+                        setTimeout(SiteGroup.GetGroup, 100);
+                    }
+                }
+                $("#OperArea").html(@Html.Raw(ViewBag.Button));
+            });
+        </script>
+        <style type="text/css">
+            table td
+            {
+                padding-left: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td>所属公司</td>
+                    <td colspan="3">
+                        <select id="ddlCompany" class="oper" style="width:411px;border: thin solid #2DAAE2;border-radius: 3px;" onchange="SiteGroup.GetGroup();"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分组名称</td>
+                    <td>
+                        <input id="txtGroupName" type="text" style="width:166px;" class="com_w50pen oper" value="@Model.GroupName" name="@Model.GroupCode" />
+                    </td>
+                    <td>父分组</td>
+                    <td>
+                        <select id="ddlParentGroup" class="oper" style="width:166px;border: thin solid #2DAAE2;border-radius: 3px;">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分组描述</td>
+                    <td colspan="3" style="padding-top:3px;">
+                        <textarea id="txtGroupDesc" class="oper" style="width:405px;height:100px;border: thin solid #2DAAE2;border-radius: 3px;">@Model.GroupDesc</textarea>
+                    </td>
+                </tr>
+                <tr>
+                   <td colspan="4" class="com_TextCenter" id="OperArea">
+                   </td>
+               </tr>
+            </table>
+        </div>
+    </body>
+</html>

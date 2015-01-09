@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
+using Com.Winfotian.Proxy;
+ 
+ 
+namespace Com.Winfotian.TestAPI
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+          var list=   ServiceProxy.UserServiceProxy.GetSMSBillsByName("192.168.1.1", "");
+          Console.Write(list.Count);
+           Console.Read();
+        }
+    }
+}

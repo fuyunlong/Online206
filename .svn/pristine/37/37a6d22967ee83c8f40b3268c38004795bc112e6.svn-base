@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Com.Winfotian.Model;
+using System.Text;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserGroupController : Controller
+    {
+        //
+        // GET: /UserGroup/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据名称查询分组信息
+        public JsonResult GetUserGroupByCompanyID(string companyId)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetGroupListByCompanyID(PmsMng.ActiveKey, companyId));
+        }
+
+        //分组详细、修改、添加
+        public ActionResult Operation(string Oper, string ConfigId)
+        {
+            T_User_GroupEx model = new ServiceProxyRead().GetProxy().GetGroupByCode(PmsMng.ActiveKey, ConfigId);
+
+            switch (Oper)
+            {
+                case "Show":
+                    ViewBag.OperationText = "Show";
+                    ViewBag.Available = "false";
+                    break;
+                case "Edit":
+                    ViewBag.OperationText = "Edit";
+                    ViewBag.Available = "true";
+                    ViewBag.ShowButton = "<input type='button' class='buttonVer2' value='修改' onclick='Config.UpdateConfig()' />";
+                    break;
+                case "Add":
+                    ViewBag.OperationText = "Add";
+                    ViewBag.ShowButton = "<input type='button' class='buttonVer2' value='添加' onclick='Config.AddConfig()' />";
+                    break;
+                default:
+                    break;
+            }
+            ViewBag.Group = model;
+            return View();
+        }
+    }
+}

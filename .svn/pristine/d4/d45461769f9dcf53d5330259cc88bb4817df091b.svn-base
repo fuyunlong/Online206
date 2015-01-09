@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MSService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" />
+      <xsd:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Web.Servies" />
+      <xsd:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMSService_SendSMS_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMS" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_SendSMS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_SendSMSCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMSCount" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_SendSMSCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendSMSCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_ReceiveSMS_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveSMS" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_ReceiveSMS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReceiveSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_CancelBilling_InputMessage">
+    <wsdl:part name="parameters" element="tns:CancelBilling" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_CancelBilling_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CancelBillingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_ChangeSmsState_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeSmsState" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_ChangeSmsState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeSmsStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_GetSmsTypeSentSum_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSmsTypeSentSum" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_GetSmsTypeSentSum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSmsTypeSentSumResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_GetBillConfigList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBillConfigList" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_GetBillConfigList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBillConfigListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_UpdateBillConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBillConfig" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_UpdateBillConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBillConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_DeleteBillConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBillConfig" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_DeleteBillConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBillConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_AddBillConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddBillConfig" />
+  </wsdl:message>
+  <wsdl:message name="IMSService_AddBillConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddBillConfigResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMSService">
+    <wsdl:operation name="SendSMS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/SendSMS" message="tns:IMSService_SendSMS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/SendSMSResponse" message="tns:IMSService_SendSMS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSMSCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/SendSMSCount" message="tns:IMSService_SendSMSCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/SendSMSCountResponse" message="tns:IMSService_SendSMSCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveSMS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/ReceiveSMS" message="tns:IMSService_ReceiveSMS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/ReceiveSMSResponse" message="tns:IMSService_ReceiveSMS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelBilling">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/CancelBilling" message="tns:IMSService_CancelBilling_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/CancelBillingResponse" message="tns:IMSService_CancelBilling_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeSmsState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/ChangeSmsState" message="tns:IMSService_ChangeSmsState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/ChangeSmsStateResponse" message="tns:IMSService_ChangeSmsState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSmsTypeSentSum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/GetSmsTypeSentSum" message="tns:IMSService_GetSmsTypeSentSum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/GetSmsTypeSentSumResponse" message="tns:IMSService_GetSmsTypeSentSum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBillConfigList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/GetBillConfigList" message="tns:IMSService_GetBillConfigList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/GetBillConfigListResponse" message="tns:IMSService_GetBillConfigList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBillConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/UpdateBillConfig" message="tns:IMSService_UpdateBillConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/UpdateBillConfigResponse" message="tns:IMSService_UpdateBillConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBillConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/DeleteBillConfig" message="tns:IMSService_DeleteBillConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/DeleteBillConfigResponse" message="tns:IMSService_DeleteBillConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBillConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMSService/AddBillConfig" message="tns:IMSService_AddBillConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMSService/AddBillConfigResponse" message="tns:IMSService_AddBillConfig_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMSService" type="tns:IMSService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendSMS">
+      <soap:operation soapAction="http://tempuri.org/IMSService/SendSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSMSCount">
+      <soap:operation soapAction="http://tempuri.org/IMSService/SendSMSCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReceiveSMS">
+      <soap:operation soapAction="http://tempuri.org/IMSService/ReceiveSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelBilling">
+      <soap:operation soapAction="http://tempuri.org/IMSService/CancelBilling" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeSmsState">
+      <soap:operation soapAction="http://tempuri.org/IMSService/ChangeSmsState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSmsTypeSentSum">
+      <soap:operation soapAction="http://tempuri.org/IMSService/GetSmsTypeSentSum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBillConfigList">
+      <soap:operation soapAction="http://tempuri.org/IMSService/GetBillConfigList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBillConfig">
+      <soap:operation soapAction="http://tempuri.org/IMSService/UpdateBillConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBillConfig">
+      <soap:operation soapAction="http://tempuri.org/IMSService/DeleteBillConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBillConfig">
+      <soap:operation soapAction="http://tempuri.org/IMSService/AddBillConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MSService">
+    <wsdl:port name="BasicHttpBinding_IMSService" binding="tns:BasicHttpBinding_IMSService">
+      <soap:address location="http://sms.scadacn.com/Services/MSService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

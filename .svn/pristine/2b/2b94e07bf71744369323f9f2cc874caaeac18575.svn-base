@@ -1,0 +1,91 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteGroupController : Controller
+    {
+        /// <summary>
+        /// 内部方法-递归子分组
+        /// </summary>
+        /// <param name="list">原子分组</param>
+        /// <param name="models">新分组集-output</param>
+        /// <param name="depth">当前子分组层次深度</param>
+        private void SubGroup(IList<Com.Winfotian.Model.T_DTU_GroupEx> list, IList<Com.Winfotian.Model.T_DTU_GroupEx> models, int depth)
+        {
+            int index = 0;
+            foreach(var m in list)
+            {
+                ++index;
+                var origin = from rs in models
+                             where rs.GroupCode == m.GroupCode
+                             select rs;
+                if(origin.Count() > 0)
+                    continue;
+                var arr = from row in list
+                          where row.ParentCode == m.GroupCode
+                          select row;
+                if(m.ParentCode == "" || m.ParentCode == "0")
+                {
+                    depth = 0;
+                }
+                m.GroupName = GetTreeviewMarks(depth, (index == list.Count)) + m.GroupName;
+                models.Add(m);
+                if(arr.Count() > 0)
+                    SubGroup(arr.ToList(), models, ++depth);
+            }
+        }
+        private string GetTreeviewMarks(int sum, bool isLast)
+        {
+            if(sum == 0)
+                return "";
+            string mark = "";
+            for(int i = 0; i < sum; i++)
+            {
+                mark += " ";
+            }
+            if(isLast)
+                mark += "└ ";
+            else
+                mark += "├ ";
+            return mark;
+        }
+
+        //站点分组
+        // GET: /SiteGroup/
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        public JsonResult GetGroup(string id)
+        {
+            if(id == "0" || id == "")
+                return Json(new List<int>());
+            var list = new ServiceProxyRead().GetProxy().GetGroupByComId(PmsMng.ActiveKey, id);
+            if(list.Count == 0)
+                return Json(list);
+            var models = new List<Com.Winfotian.Model.T_DTU_GroupEx>();
+            SubGroup(list, models, 0);
+            return Json(models);
+        }
+
+        public JsonResult GetGroupDeatail(string id)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetGroupDeatail(PmsMng.ActiveKey, id));
+        }
+
+        public ActionResult ChoseSiteGroup()
+        {
+           string aa= new ServiceCrmGet.CRMSGetClient().GetListCompany(0, PmsMng.ActiveKey);
+           ViewBag.CompanyList = aa;
+            return View();
+        }
+    }
+}

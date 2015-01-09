@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>站点配置详细</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script src="~/Scripts/Common/ui_common.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <link href="~/Style/Stip.css" rel="stylesheet" />
+    <script src="~/Scripts/Stip.js"></script>
+    <script>
+        $(function () {
+            $("#OperArea").html("@Html.Raw(ViewBag.Oper)");
+        });
+    </script>
+</head>
+<body onload="$('#loading').hide()">
+    <div class="com_DivBor">
+        <table class="ui-com-tabFrm" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>配置名称</td>
+                <td colspan="5">
+                    <input type="hidden" value="@ViewBag.SiteSetObj.ConfigName" />
+                    <input type="text"  value="@ViewBag.SiteSetObj.ConfigName"/>
+                </td>
+            </tr>
+            <tr>
+                <td>配置描述</td>
+                <td colspan="5">
+                    <textarea style="width: 90%; height: 100px;">@ViewBag.SiteSetObj.ConfigDesc</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>流量计个数</td>
+                <td>
+                    <input type="text" value="@ViewBag.SiteSetObj.FlowNum" /></td>
+                <td>模拟量个数</td>
+                <td>
+                    <input type="text"value="@ViewBag.SiteSetObj.AINum" /></td>
+                <td>开关量个数</td>
+                <td>
+                    <input type="text" value="@ViewBag.SiteSetObj.DINum"/>
+                </td>
+            </tr>
+            <tr>
+                <td>报警通知</td>
+                <td>
+                是 @Html.RadioButton("IsAlert", 1, @ViewBag.SiteSetObj.IsAlert == 1 ? true : false)
+                否 @Html.RadioButton("IsAlert", 0, @ViewBag.SiteSetObj.IsAlert == 0 ? true : false)
+
+                <td>是否已创建</td>
+                <td>是 @Html.RadioButton("IsCreate", 1, @ViewBag.SiteSetObj.IsCreate == 1 ? true : false)
+                    否 @Html.RadioButton("IsCreate", 0, @ViewBag.SiteSetObj.IsCreate == 0 ? true : false)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" class="com_TextCenter" id="OperArea"></td>
+            </tr>
+        </table>
+    </div>
+    <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+</html>

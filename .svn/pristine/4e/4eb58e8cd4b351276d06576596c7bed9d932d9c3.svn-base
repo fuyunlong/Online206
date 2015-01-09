@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加转发</title>
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <script src="~/Scripts/DataSerach/DataTrans.js"></script>
+    <script>
+        $(function () {
+            DataTrans.GetVerList();
+        });
+    </script>
+</head>
+ <body onload="$('#loading').hide()">
+    <div>
+        <table class="ui-com-tabFrm" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>站点名称:</td>
+                <td>
+                    <input type="hidden" value="@ViewBag.TransObj.Id" id="TransId" />
+                    <input type="text" disabled="disabled" class="com_w34pen" id="ddlDtu" value="@ViewBag.TransObj.Dtuid"/></td>
+            </tr>
+            <tr>
+                <td>协议版本</td>
+                <td>
+                    <div style="position: relative;">
+                        <span id="Ver" style="margin-left: 100px; width: 18px; overflow: hidden;">
+                            <select class="com_w34pen" style="width: 118px; margin-left: -100px" id="TargetVersion" onchange="$('#box').val(this.value)">
+                            </select></span>
+                        <input name="box" id="box" value="@ViewBag.TransObj.TargetVersion"  style="width: 100px; position: absolute; left: 0px;">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>IP地址</td>
+                <td>
+                    <input type="text" id="TargetIP" value="@ViewBag.TransObj.TargetIP" />
+                </td>
+            </tr>
+            <tr>
+                <td>端口号</td>
+                <td>
+                    <input type="text" id="TargetPort"   value="@ViewBag.TransObj.TargetPort"/>
+                </td>
+            </tr>
+            <tr>
+                <td>目标手机号</td>
+                <td>
+                    <input type="text" id="TargetPhoneNum"   value="@ViewBag.TransObj.TargetPhoneNum"/>
+                </td>
+            </tr>
+            <tr>
+                <td>设备ID</td>
+                <td>
+                    <input type="tel" id="TargetId"  value="@ViewBag.TransObj.TargetId" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>序号</td>
+                <td>
+                    <input type="text" id="OrderNum"  value="@ViewBag.TransObj.OrderNum" />
+                </td>
+            </tr>
+            <tr>
+                <td>通信协议</td>
+                <td>TCP  @Html.RadioButton("TransProtocol", 1, ViewBag.TransObj.TransProtocol == "1" ? true : false)
+                    UDP @Html.RadioButton("TransProtocol", 0, ViewBag.TransObj.TransProtocol == "0" ? true : false)
+                </td>
+            </tr>
+            <tr>
+                <td>开启转发</td>
+                <td>是  @Html.RadioButton("IsTransmit", 1, ViewBag.TransObj.IsTransmit == 1 ? true : false)
+                    否  @Html.RadioButton("IsTransmit", 0, ViewBag.TransObj.IsTransmit == 0 ? true : false)
+                </td>
+            </tr>
+            <tr>
+                <td>转发描述</td>
+                <td>
+                    <textarea id="TransDesc" style="height: 50px; width: 70%"> @ViewBag.TransObj.TransDesc</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center">
+                    @Html.Raw(ViewBag.Oper)
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+</html>

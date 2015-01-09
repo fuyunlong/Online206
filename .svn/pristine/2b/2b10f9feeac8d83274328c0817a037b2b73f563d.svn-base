@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="04d1585f-aae5-40da-b5a4-0ba8c313f658" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://test_tool.scadacn.com/WinfoToolServiceRead.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WinfoToolServiceRead4.xsd" MetadataType="Schema" ID="e61d3761-7c95-469c-8293-ea419d45ffa3" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceRead.svc?xsd=xsd2" />
+    <MetadataFile FileName="WinfoToolServiceRead41.xsd" MetadataType="Schema" ID="477cdafb-bb8f-47df-9aff-061edce6c839" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceRead.svc?xsd=xsd1" />
+    <MetadataFile FileName="WinfoToolServiceRead1.disco" MetadataType="Disco" ID="1b2cc9a8-1cef-47e7-bf3a-4139e8b29bdb" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceRead.svc?disco" />
+    <MetadataFile FileName="WinfoToolServiceRead1.wsdl" MetadataType="Wsdl" ID="485a34b3-daaa-4189-9ee0-f3beca963f01" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceRead.svc?wsdl" />
+    <MetadataFile FileName="WinfoToolServiceRead42.xsd" MetadataType="Schema" ID="d7c6c52e-2665-4652-a12f-9d386c34237d" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceRead.svc?xsd=xsd0" />
+    <MetadataFile FileName="WinfoToolServiceRead43.xsd" MetadataType="Schema" ID="29d0ebd2-34a7-4cc0-9fb3-1aaf0fdfcf72" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceRead.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

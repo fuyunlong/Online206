@@ -1,0 +1,167 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Proxy;
+using Winfotian.Permission.HttpModule;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserRoleController : Controller
+    {
+        //用户分组管理
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 根据名称查询角色信息
+        /// </summary>
+        public JsonResult GetListByName(string roleName)
+        {
+            List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto> list = new List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto>();
+            try
+            {
+                list = PermissionWCFProxy.QueryRoles(roleName, Pms.PmsMng.DomainId);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //添加页面
+        public ActionResult AddRole()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加角色
+        /// </summary>
+        public int AddUserRole(Winfotian.Permission.HttpModule.PermissionWCF.RoleDto model)
+        {
+            int reslut = 0;
+            Winfotian.Permission.HttpModule.PermissionWCF.RoleDto role = new Winfotian.Permission.HttpModule.PermissionWCF.RoleDto();
+
+            try
+            {
+                role.Name = model.Name;
+                role.RoleCode = model.RoleCode == null ? string.Empty : model.RoleCode;
+                role.Status = 1;
+                role.Description = model.Description == null ? string.Empty : model.Description;
+                role.DomainId = Pms.PmsMng.DomainId;
+
+                //to do:添加前验证是否存在
+                int count = PermissionWCFProxy.SaveRole(role);
+                if (count > 0)
+                {
+                    reslut = 1;
+                }
+                if (count == -1)
+                {
+                    reslut = -1;
+                }
+
+                //UserRole.UpdateFlag = 1;
+                //UserRole.Status = 1;
+                //var RoleObj = ServcieTool.WinToolServiceReadInstance.GetRoleByCode(Pms.PmsMng.ActiveKey, UserRole.RoleCode);
+                //if (RoleObj.RoleCode != null)
+                //{
+                //    rlst = 3;
+                //}
+                //else
+                //{
+                //    if (ServcieTool.WinToolServiceWriteInstance.AddUserRole(Pms.PmsMng.ActiveKey, Pms.PmsMng.LogUser, UserRole))
+                //    { rlst = 1; }
+                //}
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return reslut;
+        }
+
+        /// <summary>
+        /// 更新角色
+        /// </summary>
+        public int UpdateUserRole(Winfotian.Permission.HttpModule.PermissionWCF.RoleDto model)
+        {
+            int result = 0;
+            Winfotian.Permission.HttpModule.PermissionWCF.RoleDto role = new Winfotian.Permission.HttpModule.PermissionWCF.RoleDto();
+
+            try
+            {
+                role.Id = model.Id;
+                role.Name = model.Name;
+                role.RoleCode = model.RoleCode == null ? string.Empty : model.RoleCode;
+                role.Status = 1;
+                role.Description = model.Description == null ? string.Empty : model.Description;
+                role.DomainId = Pms.PmsMng.DomainId;
+
+                int count = PermissionWCFProxy.UpdateRole(role);
+                if (count > 0)
+                {
+                    result = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        public int DeleteUserRole(string id)
+        {
+            int result = 0;
+            try
+            {
+                int count = PermissionWCFProxy.DeleteRole(Convert.ToInt32(id));
+                if (count > 0)
+                {
+                    result = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //详细、修改页面
+        public ActionResult RoleDetail(string oper, string id)
+        {
+            List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto> list = new List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto>();
+            if (oper == "Show")
+            {
+                ViewBag.Oper = "";
+            }
+            if (oper == "Edit")
+            {
+                ViewBag.Oper = "<input type='button' class='buttonVer2' value='修改' onclick='UserRole.UpdateUserRole();' />";
+            }
+
+            try
+            {
+                list = PermissionWCFProxy.QueryRoles("", Pms.PmsMng.DomainId);
+                ViewBag.RoleObj = (from row in list where row.Id == Convert.ToInt32(id) select row).Single();
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return View();
+        }
+    }
+}

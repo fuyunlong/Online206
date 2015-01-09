@@ -1,0 +1,4 @@
+[ValidateName]
+cType=Winfo_Tool
+[NetworkConnect]
+connected=remote

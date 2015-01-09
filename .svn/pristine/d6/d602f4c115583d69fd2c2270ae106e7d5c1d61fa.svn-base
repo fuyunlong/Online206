@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IWinfoToolServiceRead" />
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:5644/WinfoToolServiceRead.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IWinfoToolServiceRead"
+                contract="ServiceWinToolRead.IWinfoToolServiceRead" name="BasicHttpBinding_IWinfoToolServiceRead" />
+        </client>
+    </system.serviceModel>
+</configuration>

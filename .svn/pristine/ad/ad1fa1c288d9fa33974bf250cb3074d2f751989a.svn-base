@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3d521735-92b1-451e-b162-12b4f1865fbb" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WinfoToolServiceWrite4.xsd" MetadataType="Schema" ID="71aed458-862d-4a37-8d6b-366ac0a48960" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc?xsd=xsd3" />
+    <MetadataFile FileName="WinfoToolServiceWrite1.wsdl" MetadataType="Wsdl" ID="4bafd551-3525-4921-abd6-a711a4351f17" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc?wsdl" />
+    <MetadataFile FileName="WinfoToolServiceWrite41.xsd" MetadataType="Schema" ID="294aca78-0ee2-4491-8f2c-22a12313ad79" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc?xsd=xsd0" />
+    <MetadataFile FileName="WinfoToolServiceWrite1.disco" MetadataType="Disco" ID="ac8c5226-6aa2-41e6-a564-feed81ef09a8" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc?disco" />
+    <MetadataFile FileName="WinfoToolServiceWrite42.xsd" MetadataType="Schema" ID="7d89071f-2fa0-4558-91ea-99c0c18dc464" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc?xsd=xsd1" />
+    <MetadataFile FileName="WinfoToolServiceWrite43.xsd" MetadataType="Schema" ID="4111a814-c5a6-4648-8c19-ce39a9a07dbc" SourceId="1" SourceUrl="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1b07036f-0706-42a6-bdcc-b4f55ddce610" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://test_crm.scadacn.com/Service/crmspostservice.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CrmsPostService.xsd" MetadataType="Schema" ID="49cf961a-091d-4654-b4fc-216b2c150b49" SourceId="1" SourceUrl="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CrmsPostService1.xsd" MetadataType="Schema" ID="dc26f820-1748-42cb-a0e8-cfcaae0b0b85" SourceId="1" SourceUrl="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd2" />
+    <MetadataFile FileName="CrmsPostService2.xsd" MetadataType="Schema" ID="d4d6f30b-7d67-4d2e-a288-54f6f0cdbc9a" SourceId="1" SourceUrl="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd4" />
+    <MetadataFile FileName="CRMSPost.wsdl" MetadataType="Wsdl" ID="7ff348bc-9b55-4a9c-a5ee-6f48d2cfb424" SourceId="1" SourceUrl="http://test_crm.scadacn.com/Service/CrmsPostService.svc?wsdl" />
+    <MetadataFile FileName="CrmsPostService3.xsd" MetadataType="Schema" ID="ac5c637a-ff0b-4f5c-8fbd-4750a3b62a66" SourceId="1" SourceUrl="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd1" />
+    <MetadataFile FileName="CrmsPostService4.xsd" MetadataType="Schema" ID="6d4f68fa-bfd0-4c94-a0d5-06666f7dcd91" SourceId="1" SourceUrl="http://test_crm.scadacn.com/Service/CrmsPostService.svc?xsd=xsd3" />
+    <MetadataFile FileName="CrmsPostService.disco" MetadataType="Disco" ID="ecfd7574-b9ed-4805-a93b-03348eff212c" SourceId="1" SourceUrl="http://test_crm.scadacn.com/Service/CrmsPostService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

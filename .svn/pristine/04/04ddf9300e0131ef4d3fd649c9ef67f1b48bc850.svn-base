@@ -1,0 +1,126 @@
+﻿var Config = {
+    //搜索配置信息
+    SerarchConfig: function () {
+        var configName = $("#txtConfigName").val().trim() || "";
+        $.ajax({
+            type: "POST",
+            data: "configName=" + configName,
+            url: "/Config/GetConfigByName",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("查询配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w30pen com_TextCenter com_disnote' title='" + data[i].ConfigName + "'>" + data[i].ConfigName + "</td>";
+                    Str += "<td class='com_w25pen com_TextCenter com_disnote' title='" + data[i].IP + "'>" + data[i].IP + "</td>";
+                    Str += "<td class='com_w20pen com_TextCenter com_disnote' title='" + data[i].Port + "'>" + data[i].Port + "</td>";
+                    Str += "<td class='com_w25pen com_TextCenter'>";
+                     
+                    Str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置查看','38%','30%','25%','35%','Config/ShowOper?Oper=Show&ConfigId=" + data[i].ConfigId + "')>查看|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置修改','38%','30%','25%','35%','Config/ShowOper?Oper=Edit&ConfigId=" + data[i].ConfigId + "')>修改|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=Config.DeleteConfig(" + data[i].ConfigId + ")>删除</a>";
+                    Str += "</tr>";
+                }
+                $("#ConfigList tbody").html(Str);
+            }
+        });
+    },
+    //获取客户端类型
+    GetClienType: function () {
+        $.ajax({
+            type: "post",
+            url: "/Config/GetClienType",
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("查询客户端类型失败,请稍后再试");
+            },
+            success: function (data) {
+                $("#ddlClienType").html(data);
+            }
+        });
+    },
+    //添加配置
+    AddConfig: function () {
+        var model = {
+            "ConfigName": $("#txtConfigName").val().trim(),
+            "ConfigDesc": $("#txtDesc").val().trim(),
+            "IP": $("#txtIP").val().trim(),
+            "Port": $("#txtPort").val().trim(),
+            "ClientNum": $("#txtClientNum").val().trim(),
+            "ClientType": $("#ddlClienType").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Config/Add",
+            data: model,
+            dataType: "text",
+            error: function () {
+                Common.MsgBox("添加配置失败,请稍后再试");
+            },
+            success: function (data) {
+                if (data == "true") {
+                    Common.layoutTopClose();
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert("添加失败");
+                }
+            }
+        });
+    },
+    //修改配置
+    UpdateConfig: function () {
+        var model = {
+            "ConfigId": $("#txtConfigName").attr("name"),
+            "ConfigName": $("#txtConfigName").val().trim(),
+            "ConfigDesc": $("#txtDesc").val().trim(),
+            "IP": $("#txtIP").val().trim(),
+            "Port": $("#txtPort").val().trim(),
+            "ClientNum": $("#txtClientNum").val().trim(),
+            "ClientType": $("#ddlClienType").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Config/Update",
+            data: model,
+            dataType: "text",
+            error: function () {
+                Common.MsgBox("修改配置失败,请稍后再试");
+            },
+            success: function (data) {
+                if (data == "true") {
+                    Common.layoutTopClose();
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert("修改失败");
+                }
+            }
+        });
+    },
+    //删除配置
+    DeleteConfig: function (configId) {
+        if (confirm("确定要删除吗？")) {
+            $.ajax({
+                type: "post",
+                url: "/Config/Delete",
+                data: "configId=" + configId,
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("删除配置失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        alert("删除成功");
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    }
+};

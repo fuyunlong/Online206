@@ -1,0 +1,247 @@
+﻿var Common = {
+    //添加一个tab页面
+    AddTab: function (title, src) {
+        $('#mytab').tabs('add', {
+            title: title,
+            content: " <iframe src=" + src + " width='99%' height='98.5%' over-flow:hidden ></iframe>",
+            closable: true
+        });
+    },
+    //获取城市
+    GetCity: function () {
+        var Str = "";
+        var province = $('#ddlProvice').val() || "";
+        $.ajax({
+            async: false,
+            type: "post",
+            data: "Province=" + province,
+            url: "/company/GetCity",
+            datatype: "json",
+            error: function (xhr) {
+                Common.MsgBox("加载失败，请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option value=" + data[i].CityId + ">" + data[i].CityName + "</option>"
+                }
+                $("#ddlCity").html(Str);
+            }
+        });
+    },
+    //获取省份
+    GetProvince: function () {
+        var Str = "";
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "/Company/GetProvince",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option>" + data[i] + "</option>"
+                }
+                $("#ddlProvice").append(Str);
+            }
+        });
+    },
+    //查询站点
+    SerarchSite: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: $("#SiteName").val() },
+            url: "/SiteInfo/GetSite",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w10pen com_TextCenter com_disnote'>" + data[i].Dtuid + "</td>";
+                    Str += "<td class='com_w25pen com_disnote' title='" + data[i].DtuidName + "'>" + data[i].DtuidName + "</td><td class=' com_disnote com_TextCenter' title='" + data[i].Skidbrand + "'>" + data[i].Skidbrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].Supplier + "'>" + data[i].Supplier + "</td><td class=' com_disnote' title='" + data[i].FlowBrand + "'>" + data[i].FlowBrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].FlowType + "'>" + data[i].FlowType + "</td>";
+                    Str += "<td class='com_TextCenter com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','80%','ClientInfo/ClientDetail?Oper=Show&ComId=" + data[i].CompanyId + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','80%','SiteInfo/SiteDetail?OperRation=Edit&DtuId=" + data[i].Dtuid + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.DeleteCompany(" + data[i].CompanyId + ")>删除</a> ";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    //获取公司Id下的分组群
+    GetGroupsByComId: function (compId) {
+        $.ajax({
+            type: "POST",
+            data: { id: compId },
+            url: "/SiteGroup/GetGroup",
+            dataType: "json",
+            error: function (xhr) {
+                console.dir(xhr.responseText);
+                //Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (back) {
+                var htm = '<option value="">全部</option>';                
+                for (var i = 0; i < back.length; i++)
+                    htm += '<option value="' + back[i].GroupCode + '">' + back[i].GroupName + '</option>';
+                $("#Group").html(htm);
+            }
+        });
+    },
+    //加载指定公司的配置信息
+    GetCompanyConfig: function (CompanyId) {
+        $.ajax({
+            type: "POST",
+            url: "/Config/GetCompanyConfig",
+            dataType: "json",
+            data: "CompanyId=" + CompanyId,
+            error: function (xhr) {
+                Common.MsgBox("查询当前公司配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < $("#divComCoinfig input[type=checkbox]").length; j++) {
+                        if (data[i].ConfigId == $("#divComCoinfig input[type=checkbox]")[j].value) {
+                            $("#divComCoinfig input[type=checkbox]")[j].checked = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+        });
+    },
+    //加载所有公司配置信息
+    LoadConfig: function () {
+        $.ajax({
+            type: "POST",
+            url: "/Config/GetConfigList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("查询公司配置信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<input class='oper' type=checkbox value=" + data[i].ConfigId + ">" + data[i].ConfigName + "<br/>";
+                }
+                $("#divComCoinfig").html(Str);
+            }
+        });
+    },
+    DeleteCompany: function (ComId) {
+        if (confirm("确定要删除该公司信息？？？")) {
+
+        }
+    },
+    //提示框
+    MsgBox: function (content, callOpt) {
+        var htm = '<div class="l-window-header">';
+        htm += '<div class="dialog-header-logo"></div><div class="dialog-header-title">\u4FE1\u606F\u63D0\u793A</div>';
+        htm += '<div class="icon-imgs icon-minWH dialog-header-right" title="isOk"></div>';
+        htm += '<div class="dialog-header-close l-window-close" title="isCancel"></div>';
+        htm += '</div>';
+        htm += '<div class="msgContent dialog-msg-content"><div>' + content + '</div></div>';
+        var doc = document.createElement("div"), doca = doc.cloneNode(0);
+        doc.className = "dialog-ownDiv"; doc.innerHTML = htm;
+        doca.className = "com_baffle"; doca.style.zIndex = 20000;
+        document.body.appendChild(doca);
+        document.body.appendChild(doc);
+        doc.firstChild.onclick = function (e) {
+            var target = e.target || e.srcElement || e;
+            if (["isOk","isCancel"].indexOf(target.title) !=-1) {
+                document.body.removeChild(doca);
+                document.body.removeChild(doc);
+                if (!callOpt)
+                    return;
+                var cb = callOpt[target.title];
+                if (!cb) return;
+                if (typeof cb === 'string')
+                    cb = new Function(cb);
+                if (typeof cb.constructor === 'function')
+                    cb.call(this);
+            }
+        };
+    },
+    //弹出窗体
+    WindowBox: function (title, widthPercent, heightPercent, url) {
+        var doc = $("#ifrHTML", parent.document);
+        if(doc.length==0) return;
+        doc.attr("src", url);
+        $("#meLayout", parent.document).css({ "width": widthPercent, "height": heightPercent }).find(".dialog-header-title").text(title);
+        $('.msbgs', parent.document).show();
+        $('.msbgs .myBG', parent.document).fadeTo("slow", 0.9);
+        setTimeout(function () {
+            doc[0].contentDocument.onkeydown = Common.fnKeydown;
+        }, 1500);
+    },
+    //弹出顶层窗口
+    WinTopBox: function (title, widthPercent, heightPercent, top, left, url) {
+        var doc = $("#ifrHTMLTop", parent.document);
+        if (doc.length == 0) return;
+        doc.attr("src", url);
+        $("#WinTop", parent.document).css({ "width": widthPercent, "height": heightPercent, "left": left, "top": top, "z-index": "10010" }).show().find(".dialog-header-title").text(title);
+        $('.myBGTop', parent.document).fadeTo("slow", 0.9).css("z-index", "10009");
+        setTimeout(function () {
+            doc[0].contentDocument.onkeydown = Common.fnKeydown;
+        }, 1500);
+    },
+    //关闭弹出层
+    layoutClose: function () {
+        $('.msbgs .myBG', parent.document).fadeTo("slow", 0);
+        $("#ifrHTML", parent.document).attr("src", "");
+        setTimeout(function () { $('.msbgs', parent.document).hide(); }, "500");
+    },
+    //关闭弹出顶层
+    layoutTopClose: function () {
+        $('.myBGTop', parent.document).fadeTo("slow", 0).css("z-index", 1);
+        $('#WinTop', parent.document).hide().css("z-index", 1);;
+        $("#ifrHTMLTop", parent.document).attr("src", "");
+    },
+    //展开弹出层  可以自己传入宽度和高度   支持百分比   根据页面大小合理设置
+    //meWidth meHeight meSrc
+    layoutShow: function (jason) {
+        var isHave = false; //不是百分比
+        if (arguments.length != 0) {
+            var thisWidth = typeof (jason.meWidth) == "undefined" ? "80%" : jason.meWidth;
+            var thisHeight = typeof (jason.meHeight) == "undefined" ? "90%" : jason.meHeight;
+            var thisLeft = 0;
+            if (thisWidth.indexOf("%") > -1) {
+                var newWidth = thisWidth.replace("%", "");
+                thisLeft = newWidth / 2;
+                isHave = true;
+            } else {
+                thisLeft = thisWidth / 2;
+            }
+            $("#meLayout").css({ "width": thisWidth, "height": thisHeight });
+            if (isHave) { //有%
+                $("#meLayout").css({ "margin-left": "-" + thisLeft + "%" });
+            } else {
+                $("#meLayout").css({ "margin-left": "-" + thisLeft + "px" });
+            }
+
+        } else {
+            $("#meLayout").css({ "width": "80%", "height": "90%", "margin-left": "-40%" });
+        }
+        $('.msbgs').show();
+        $('.msbgs .myBG').fadeTo("slow", 0.9)
+        $("#ifrHTML").attr("src", jason.meSrc);
+    },
+    //弹出窗口的Esc键盘事件
+    fnKeydown: function (evt) {
+        if (evt.keyCode == 27) {
+            var oTopWin = $("#WinTop", parent.document);
+            if (oTopWin.is(":visible")) {
+                Common.layoutTopClose();
+                return;
+            }
+            var oWin = $("#div_show", parent.document);
+            if (oWin.is(":visible"))
+                Common.layoutClose();
+        }
+    }
+}

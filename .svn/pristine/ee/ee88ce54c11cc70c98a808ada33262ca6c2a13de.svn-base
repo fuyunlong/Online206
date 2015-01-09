@@ -1,0 +1,111 @@
+﻿var Group = {
+    //查询用户分组
+    SearchUserGroup: function () {
+        var companyId = $("#ddlCompany").val();
+        $.ajax({
+            type: "post",
+            url: "/UserGroup/GetUserGroupByCompanyID",
+            data: "companyId=" + companyId,
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询分组失败,请稍后再试");
+            },
+            success: function (data) {
+                var temp = "";
+                for (var i = 0; i < data.length; i++) {
+                    temp += "<tr><td class='com_w20pen'><input type='hidden' value=" + data[i].GroupCode + ">" + data[i].GroupName + "</td>";
+                    temp += "<td class='com_w20pen'>" + Group.GetCompanyNameById(data[i].CompanyId) + "</td>";
+                    temp += "<td class='com_w20pen'>" + data[i].GroupDesc + "</td>";
+                    temp += "<td class='com_w20pen'>" + data[i].ParentName + "</td>";
+                    temp += "<td class='com_w20pen'>";
+                    temp += "<a href='javascript:void(0)' onclick=Common.WindowBox('分组查看',0.8,0.8,'UserGroup/Operation/Show/" + data[i].GroupCode + "')>查看|</a>";
+                    temp += "<a href='javascript:void(0)' onclick=Common.WindowBox('分组修改',0.8,0.8,'UserGroup/Operation/Edit/" + data[i].GroupCode + "')>修改|</a>";
+                    temp += "<a href='javascript:void(0)' onclick=Config.DeleteConfig(" + data[i].GroupCode + ")>删除</a>";
+                    temp += "</tr>";
+                }
+                $("#GroupList tbody").html(temp);
+            }
+        });
+    },
+    //加载公司列表
+    LoadCompanys: function () {
+        var str = "";
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询公司失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                $("#ddlCompany").append(str);
+            }
+        });
+    },
+    //根据公司Id查询公司名称
+    GetCompanyNameById: function (companyId) {
+        var companyName = "";
+        for (var i = 0; i < $("#ddlCompany option").length ; i++) {
+            if (companyId == "") {
+                continue;
+            }
+            if (companyId == $("#ddlCompany option")[i].value) {
+                companyName = $("#ddlCompany option")[i].text;
+            }
+        }
+        return companyName;
+    },
+    //树形展开
+    Collapse: function (obj) {
+        var isHide = false;
+        if ($(obj).attr("src") == "/Style/imgs/site/tag_plus.png") {
+            $(obj).attr("src", "/Style/imgs/site/tag_add.png");
+            isHide = true;
+        }
+        else {
+            $(obj).attr("src", "/Style/imgs/site/tag_plus.png");
+        }
+
+        var tr = $(obj).parents('tr'); //当前行
+        var areaLevel = $(obj).parents('tr').children('td:last').text(); //层次
+        var nextTR = $(obj).parents('tr').next(); //下一行
+        while (nextTR.children("td:last").text() > areaLevel) {//下一行的areaLevel大于本行的areaLevel
+            if (!isHide) {
+                if (areaLevel == nextTR.children("td:last").text() - 1) {
+                    nextTR.show(50);
+                    if (nextTR.children("td:eq(0)").children("img")) {
+                        nextTR.children("td:eq(0)").children("img").attr("src", "/Style/imgs/site/tag_add.png");
+                    }
+                }
+                else {
+                    nextTR.hide(50);
+                }
+            }
+            else {
+                nextTR.hide(50);
+                if (nextTR.children("d:eq(0)").children("img")) {
+                    nextTR.children("td:eq(0)").children("img").attr("src", isHide ? "/Style/imgs/site/tag_add.png" : "/Style/imgs/site/tag_plus.png");
+                }
+            }
+            nextTR = nextTR.next();
+        }
+    },
+    //根据公司Id查询父分组信息
+    GetParentNameByCompanyId: function (companyId) {
+        $.ajax({
+            type: "post",
+            url: "",
+            data: "",
+            dataType: "",
+            error: function () {
+
+            },
+            success: function () {
+
+            }
+        });
+    }
+};

@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加远控</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/SiteMng/VipDevice.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>站点编号</td>
+                <td>
+                    <select id="DtuidList">
+                        @foreach (var a in ViewBag.DtuList)
+                        {
+                            <option value="@a.Dtuid">@a.Dtuid</option>
+                        }
+                    </select></td>
+            </tr>
+            <tr>
+                <td>字段名称</td>
+                <td>
+                    <input id="ss" id="FiledOrder" class="easyui-numberspinner com_w50pen" min="1" value="1" max="100" required="true" />
+                    <select id="FiledName">
+                        <option>全部</option>
+                        <option>QB </option>
+                        <option>Q </option>
+                        <option>VB </option>
+                        <option>V </option>
+                        <option>P </option>
+                        <option>T</option>
+                        <option>AI </option>
+                        <option>DI </option>
+                        <option>AO </option>
+                        <option>BO </option>
+                        <option>TC </option>
+                        <option>PC </option>
+                        <option>VC </option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>输出序号</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>输入序号</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>控制到位值</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" class="buttonVer2" value="添加" onclick="FiledMng.AddFiled()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

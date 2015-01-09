@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class VipDeviceController : Controller
+    {
+        //
+        // GET: /VipDevice/
+
+        public ActionResult Index()
+        {
+            var List = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.CompanyList = List;
+            return View();
+        }
+
+
+        public JsonResult GetVipDeviceList(string DtuId)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetVipDeviceList(PmsMng.ActiveKey, DtuId));
+        }
+
+        public ActionResult VipDeviceDetail(string Oper, string Id,string CType)
+        {
+            var List = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.CompanyList = List;
+            var model = new ServiceProxyRead().GetProxy().GetVipDeviceExById(PmsMng.ActiveKey, Id);
+            ViewBag.model = model;
+            ViewBag.Oper = "";
+            if (Oper == "Edit")
+            {
+                ViewBag.Oper = "<input type=button class=buttonVer2 value=修改 onclick='VipDevice.UpdateDevice()'>";
+            
+            }
+            return View();
+        }
+
+        public ActionResult GetSiteList(string ComId)
+        {
+            var DtuList = new ServiceProxyRead().GetProxy().GetSiteListByComId(PmsMng.ActiveKey, ComId);
+            return Json(DtuList);
+        }
+    }
+}

@@ -1,0 +1,49 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.DataProvider;
+using Com.Winfotian.SyncTool;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Linq;
+using System.ServiceProcess;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WinfoSyncTable
+{
+    public partial class ServiceWinSync : ServiceBase
+    {
+        
+        public ServiceWinSync()
+        {
+            InitializeComponent();
+        }
+        System.Timers.Timer timer = null;
+        protected override void OnStart(string[] args)
+        {
+            timer = new System.Timers.Timer(1000*60*60);//设置定时器，1小时执行一次
+            timer.Elapsed += timer_Elapsed;
+            timer.Start();
+        }
+
+        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            try
+            {
+                new SyncMng().SyncData();
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+        }
+
+        protected override void OnStop()
+        {
+            timer.Stop();
+        }
+    }
+}

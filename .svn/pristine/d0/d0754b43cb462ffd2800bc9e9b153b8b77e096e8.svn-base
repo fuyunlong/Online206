@@ -1,0 +1,138 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Com.Winfotian.Common;
+using Com.Winfotian.Model;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace Com.Winfotian.DB
+{
+    public class CompanyProvider
+    {
+
+        public List<T_Company> GetCompanyList(string CityId, string ComName)
+        {
+            List<T_Company> list = new List<T_Company>();
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append("select * from [Infa]..[T_Company]");
+                if(CityId != "null" && CityId.Length > 0)
+                {
+                    SqlStr.Append(" where CityId=@CityId ");
+                }
+                if(ComName.Length > 0)
+                {
+                    SqlStr.Append(" and CompanyName like %'@CompanyName'%");
+                }
+                SqlParameter[] pars = { 
+                                      new SqlParameter("@CompanyName",ComName),
+                                      new SqlParameter("@CityId",CityId)
+                                      };
+                using(SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+                {
+                    if(reader != null)
+                    {
+                        while(reader.Read())
+                        {
+                            var model = IDataT_CompanyReader(reader);
+                            if(model != null)
+                            {
+                                list.Add(model);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+        public T_CompanyExtension GetCompanyById(string ComapnyId)
+        {
+            T_CompanyExtension model = new T_CompanyExtension();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("select a.*,b.Province from [Infa]..[T_Company] as a ,  [Infa]..[T_CityInfo] as b where CompanyId=@CompanyId and a.CityId=b.CityId ");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@CompanyId",ComapnyId)
+                                  };
+            using(SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if(reader != null)
+                {
+                    while(reader.Read())
+                    {
+                        model= IDataT_CompanyExtReader(reader);
+                    }
+                }
+            }
+            return model;
+        }
+
+        private T_Company IDataT_CompanyReader(IDataReader dr)
+        {
+            T_Company model = new T_Company();
+            try
+            {
+                model.CompanyId = (dr["CompanyId"] is DBNull) ? 0 : Convert.ToInt32(dr["CompanyId"].ToString());
+                model.CompanyName = (dr["CompanyName"] is DBNull) ? string.Empty : dr["CompanyName"].ToString();
+                model.LinkPerson = (dr["LinkPerson"] is DBNull) ? string.Empty : dr["LinkPerson"].ToString();
+                model.CmpTel = (dr["CmpTel"] is DBNull) ? string.Empty : dr["CmpTel"].ToString();
+                model.CmpMobile = (dr["CmpMobile"] is DBNull) ? string.Empty : dr["CmpMobile"].ToString();
+                model.CmpEmail = (dr["CmpEmail"] is DBNull) ? string.Empty : dr["CmpEmail"].ToString();
+                model.FaxTel = (dr["FaxTel"] is DBNull) ? string.Empty : dr["FaxTel"].ToString();
+                model.CmpWebSite = (dr["CmpWebSite"] is DBNull) ? string.Empty : dr["CmpWebSite"].ToString();
+                model.CmpAddress = (dr["CmpAddress"] is DBNull) ? string.Empty : dr["CmpAddress"].ToString();
+                model.CityId = (dr["CityId"] is DBNull) ? 0 : Convert.ToInt32(dr["CityId"].ToString());
+                model.CmpDesc = (dr["CmpDesc"] is DBNull) ? string.Empty : dr["CmpDesc"].ToString();
+                model.OrderId = (dr["OrderId"] is DBNull) ? 0 : Convert.ToInt32(dr["OrderId"].ToString());
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.ParentId = (dr["ParentId"] is DBNull) ? 0 : Convert.ToInt32(dr["ParentId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch(Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+                return null;
+            }
+            return model;
+        }
+
+        private T_CompanyExtension IDataT_CompanyExtReader(IDataReader dr)
+        {
+            T_CompanyExtension model = new T_CompanyExtension();
+            try
+            {
+                model.CompanyId = (dr["CompanyId"] is DBNull) ? 0 : Convert.ToInt32(dr["CompanyId"].ToString());
+                model.CompanyName = (dr["CompanyName"] is DBNull) ? string.Empty : dr["CompanyName"].ToString();
+                model.LinkPerson = (dr["LinkPerson"] is DBNull) ? string.Empty : dr["LinkPerson"].ToString();
+                model.CmpTel = (dr["CmpTel"] is DBNull) ? string.Empty : dr["CmpTel"].ToString();
+                model.CmpMobile = (dr["CmpMobile"] is DBNull) ? string.Empty : dr["CmpMobile"].ToString();
+                model.CmpEmail = (dr["CmpEmail"] is DBNull) ? string.Empty : dr["CmpEmail"].ToString();
+                model.FaxTel = (dr["FaxTel"] is DBNull) ? string.Empty : dr["FaxTel"].ToString();
+                model.CmpWebSite = (dr["CmpWebSite"] is DBNull) ? string.Empty : dr["CmpWebSite"].ToString();
+                model.CmpAddress = (dr["CmpAddress"] is DBNull) ? string.Empty : dr["CmpAddress"].ToString();
+                model.CityId = (dr["CityId"] is DBNull) ? 0 : Convert.ToInt32(dr["CityId"].ToString());
+                model.CmpDesc = (dr["CmpDesc"] is DBNull) ? string.Empty : dr["CmpDesc"].ToString();
+                model.OrderId = (dr["OrderId"] is DBNull) ? 0 : Convert.ToInt32(dr["OrderId"].ToString());
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.ParentId = (dr["ParentId"] is DBNull) ? 0 : Convert.ToInt32(dr["ParentId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+                model.Oper = (dr["Oper"] is DBNull) ? string.Empty : dr["UpdateFlag"].ToString();
+                model.Province = (dr["Province"] is DBNull) ? string.Empty : dr["Province"].ToString();
+            }
+            catch(Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+                return null;
+            }
+            return model;
+        }
+    }
+
+}

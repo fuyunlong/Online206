@@ -1,0 +1,41 @@
+﻿body, html { height: 100%; }
+body { padding: 0px; margin: 0; overflow: hidden; }
+.l-layout-top1 {
+    background: url(imgs/cloud_1.png) 0 bottom repeat-x #049ec4;
+    -webkit-animation: animate-cloud 40s linear infinite;
+    -moz-animation: animate-cloud 40s linear infinite;
+    -ms-animation: animate-cloud 40s linear infinite;
+    -o-animation: animate-cloud 40s linear infinite;
+}
+.l-layout-top { background-color: aliceblue; }
+.l-layout-bottom { background: url(imgs/linen.jpg) repeat; }
+.l-layout-content { background: none!important; }
+.top-company-logo { float: left; }
+.top-company-name { display: inline-table; padding: 3px 5px; font-size: 240%; color: #BB7A06; /*65B8E7*/ font-family: cursive; font-weight: bolder; }
+.top-right-desc { display: inline-table; float: right; position: relative; top: 30px; right: 10px; }
+.top-right-desc > span { margin: 0 10px; }
+.icon-pointer { cursor:pointer;}
+.icon-minWH { width:16px;height:16px;}
+.icon-maxWH { width:24px;height:24px;}
+.icon-imgs { background: url(imgs/icons.png) no-repeat;cursor:pointer; }
+.icon-user { display: inline-table; vertical-align: sub; background-position: 0 -60px; }
+.icon-user-hover { background-position: -24px -60px; }
+.icon-syshelp { display: inline-table; vertical-align: sub; background-position: 0 -20px; }
+.icon-syshelp-hover { background-position: -24px -20px; }
+.icon-sysout { display: inline-table; vertical-align: sub; background-position: 0 0; }
+.icon-sysout-hover { background-position: -24px 0; }
+.top-text-desc { text-decoration: none; color: #65B8E7; }
+.l-link { display: block; height: 26px; line-height: 26px; padding-left: 10px; text-decoration: underline; color: #333; }
+.l-link2 { text-decoration: underline; color: white; }
+.l-link { display: block; line-height: 22px; height: 22px; padding-left: 20px; border: 1px solid white; margin: 4px; }
+.l-link-over { background: #FFEEAC; border: 1px solid #DB9F00; }
+.l-winbar { background: #2B5A76; height: 30px; position: absolute; left: 0px; bottom: 0px; width: 100%; z-index: 99999; }
+.myMsgBody{ position:absolute;left:10%; top:10%;z-index: 10001;border-radius:3px;}
+.msgContent { background-color:#F1F1F1;height: 95%; min-height:100px;min-width:180px; }
+.dialog-header-logo { background:url(imgs/messager_warning.gif) no-repeat; width:18px;height:18px;margin:2px 0 0 -5px;}
+.dialog-header-title { position: absolute;top: 0px;left: 25px;font-size: larger;}
+.dialog-header-close { position: absolute;top: 3px;right: 3px;}
+.dialog-header-right { background-position:-24px -115px;position:absolute;top:3px;right:30px;}
+.dialog-msg-content { border: 1px solid;border-color:#B8DDED;border-top: 0;padding:10px;position: relative;}
+.dialog-msg-content > div { max-height:360px;max-width:360px;overflow-x:hidden;overflow-y:auto; }
+.dialog-ownDiv { position: fixed;top: 35%;left: 40%;z-index: 20001;}

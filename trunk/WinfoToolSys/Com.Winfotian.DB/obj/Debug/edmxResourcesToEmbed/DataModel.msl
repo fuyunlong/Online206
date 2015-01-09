@@ -1,0 +1,583 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InfaModelStoreContainer" CdmEntityContainer="InfaEntities">
+    <EntitySetMapping Name="T_Alert_Info">
+      <EntityTypeMapping TypeName="InfaModel.T_Alert_Info">
+        <MappingFragment StoreEntitySet="T_Alert_Info">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+          <ScalarProperty Name="AlertDesc" ColumnName="AlertDesc" />
+          <ScalarProperty Name="AlertTime" ColumnName="AlertTime" />
+          <ScalarProperty Name="AlertLevel" ColumnName="AlertLevel" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="FieldValue" ColumnName="FieldValue" />
+          <ScalarProperty Name="SMSContent" ColumnName="SMSContent" />
+          <ScalarProperty Name="AlertType" ColumnName="AlertType" />
+          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+          <ScalarProperty Name="AlertState" ColumnName="AlertState" />
+          <ScalarProperty Name="RecentTime" ColumnName="RecentTime" />
+          <ScalarProperty Name="IsReply" ColumnName="IsReply" />
+          <ScalarProperty Name="IsSend" ColumnName="IsSend" />
+          <ScalarProperty Name="CurSendTimes" ColumnName="CurSendTimes" />
+          <ScalarProperty Name="CurAlertCount" ColumnName="CurAlertCount" />
+          <ScalarProperty Name="SendTimes" ColumnName="SendTimes" />
+          <ScalarProperty Name="AlertCount" ColumnName="AlertCount" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_BusinessSystem">
+      <EntityTypeMapping TypeName="InfaModel.T_BusinessSystem">
+        <MappingFragment StoreEntitySet="T_BusinessSystem">
+          <ScalarProperty Name="BusinessSystemID" ColumnName="BusinessSystemID" />
+          <ScalarProperty Name="BusinessSystemName" ColumnName="BusinessSystemName" />
+          <ScalarProperty Name="BusinessSystemDescribe" ColumnName="BusinessSystemDescribe" />
+          <ScalarProperty Name="BusType" ColumnName="BusType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_CityInfo">
+      <EntityTypeMapping TypeName="InfaModel.T_CityInfo">
+        <MappingFragment StoreEntitySet="T_CityInfo">
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="CityName" ColumnName="CityName" />
+          <ScalarProperty Name="PhoneCode" ColumnName="PhoneCode" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Company">
+      <EntityTypeMapping TypeName="InfaModel.T_Company">
+        <MappingFragment StoreEntitySet="T_Company">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="LinkPerson" ColumnName="LinkPerson" />
+          <ScalarProperty Name="CmpTel" ColumnName="CmpTel" />
+          <ScalarProperty Name="CmpMobile" ColumnName="CmpMobile" />
+          <ScalarProperty Name="CmpEmail" ColumnName="CmpEmail" />
+          <ScalarProperty Name="FaxTel" ColumnName="FaxTel" />
+          <ScalarProperty Name="CmpWebSite" ColumnName="CmpWebSite" />
+          <ScalarProperty Name="CmpAddress" ColumnName="CmpAddress" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CmpDesc" ColumnName="CmpDesc" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Company_CmpConfig">
+      <EntityTypeMapping TypeName="InfaModel.T_Company_CmpConfig">
+        <MappingFragment StoreEntitySet="T_Company_CmpConfig">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Company_Config">
+      <EntityTypeMapping TypeName="InfaModel.T_Company_Config">
+        <MappingFragment StoreEntitySet="T_Company_Config">
+          <ScalarProperty Name="ConfigId" ColumnName="ConfigId" />
+          <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+          <ScalarProperty Name="ConfigDesc" ColumnName="ConfigDesc" />
+          <ScalarProperty Name="ClientType" ColumnName="ClientType" />
+          <ScalarProperty Name="ClientNum" ColumnName="ClientNum" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="Port" ColumnName="Port" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Company_LineAction">
+      <EntityTypeMapping TypeName="InfaModel.T_Company_LineAction">
+        <MappingFragment StoreEntitySet="T_Company_LineAction">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LineId" ColumnName="LineId" />
+          <ScalarProperty Name="ReferSite" ColumnName="ReferSite" />
+          <ScalarProperty Name="ReferSiteParam" ColumnName="ReferSiteParam" />
+          <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+          <ScalarProperty Name="MinValue" ColumnName="MinValue" />
+          <ScalarProperty Name="ColorEnable" ColumnName="ColorEnable" />
+          <ScalarProperty Name="ActionColor" ColumnName="ActionColor" />
+          <ScalarProperty Name="GlintEnable" ColumnName="GlintEnable" />
+          <ScalarProperty Name="GlintColor1" ColumnName="GlintColor1" />
+          <ScalarProperty Name="GlintColor2" ColumnName="GlintColor2" />
+          <ScalarProperty Name="GlintColor3" ColumnName="GlintColor3" />
+          <ScalarProperty Name="RangeEnable" ColumnName="RangeEnable" />
+          <ScalarProperty Name="RangeMin" ColumnName="RangeMin" />
+          <ScalarProperty Name="RangeMax" ColumnName="RangeMax" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Company_LineCondition">
+      <EntityTypeMapping TypeName="InfaModel.T_Company_LineCondition">
+        <MappingFragment StoreEntitySet="T_Company_LineCondition">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LineId" ColumnName="LineId" />
+          <ScalarProperty Name="ActionColor" ColumnName="ActionColor" />
+          <ScalarProperty Name="ActionValue" ColumnName="ActionValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Company_PipeLine">
+      <EntityTypeMapping TypeName="InfaModel.T_Company_PipeLine">
+        <MappingFragment StoreEntitySet="T_Company_PipeLine">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="LineName" ColumnName="LineName" />
+          <ScalarProperty Name="PipeSize" ColumnName="PipeSize" />
+          <ScalarProperty Name="DrawType" ColumnName="DrawType" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="IsFill" ColumnName="IsFill" />
+          <ScalarProperty Name="FillColor" ColumnName="FillColor" />
+          <ScalarProperty Name="Transparency" ColumnName="Transparency" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="LineSize" ColumnName="LineSize" />
+          <ScalarProperty Name="LineType" ColumnName="LineType" />
+          <ScalarProperty Name="PressureLevel" ColumnName="PressureLevel" />
+          <ScalarProperty Name="PipeLength" ColumnName="PipeLength" />
+          <ScalarProperty Name="PipeDepth" ColumnName="PipeDepth" />
+          <ScalarProperty Name="RepairInterval" ColumnName="RepairInterval" />
+          <ScalarProperty Name="BelongArea" ColumnName="BelongArea" />
+          <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+          <ScalarProperty Name="Contructor" ColumnName="Contructor" />
+          <ScalarProperty Name="LinkMan" ColumnName="LinkMan" />
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+          <ScalarProperty Name="ProjectManager" ColumnName="ProjectManager" />
+          <ScalarProperty Name="Accepter" ColumnName="Accepter" />
+          <ScalarProperty Name="IsValve" ColumnName="IsValve" />
+          <ScalarProperty Name="ValveCode" ColumnName="ValveCode" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+          <ScalarProperty Name="LineDesc" ColumnName="LineDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Company_PipeLoLati">
+      <EntityTypeMapping TypeName="InfaModel.T_Company_PipeLoLati">
+        <MappingFragment StoreEntitySet="T_Company_PipeLoLati">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="LineId" ColumnName="LineId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Dictionary">
+      <EntityTypeMapping TypeName="InfaModel.T_Dictionary">
+        <MappingFragment StoreEntitySet="T_Dictionary">
+          <ScalarProperty Name="DicKey" ColumnName="DicKey" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="DicName" ColumnName="DicName" />
+          <ScalarProperty Name="DicDesc" ColumnName="DicDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU">
+        <MappingFragment StoreEntitySet="T_DTU">
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+          <ScalarProperty Name="DtuidName" ColumnName="DtuidName" />
+          <ScalarProperty Name="Skidbrand" ColumnName="Skidbrand" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="FlowBrand" ColumnName="FlowBrand" />
+          <ScalarProperty Name="FlowType" ColumnName="FlowType" />
+          <ScalarProperty Name="PressureLevel" ColumnName="PressureLevel" />
+          <ScalarProperty Name="DtuidLocation" ColumnName="DtuidLocation" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="RunDate" ColumnName="RunDate" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="DayFrom" ColumnName="DayFrom" />
+          <ScalarProperty Name="MonthFrom" ColumnName="MonthFrom" />
+          <ScalarProperty Name="LgPwd" ColumnName="LgPwd" />
+          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+          <ScalarProperty Name="DataInterval" ColumnName="DataInterval" />
+          <ScalarProperty Name="UpLoadInterval" ColumnName="UpLoadInterval" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+          <ScalarProperty Name="ConfigCode" ColumnName="ConfigCode" />
+          <ScalarProperty Name="ProtocolVersion" ColumnName="ProtocolVersion" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_Config">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_Config">
+        <MappingFragment StoreEntitySet="T_DTU_Config">
+          <ScalarProperty Name="ConfigCode" ColumnName="ConfigCode" />
+          <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+          <ScalarProperty Name="ConfigDesc" ColumnName="ConfigDesc" />
+          <ScalarProperty Name="FlowNum" ColumnName="FlowNum" />
+          <ScalarProperty Name="AINum" ColumnName="AINum" />
+          <ScalarProperty Name="DINum" ColumnName="DINum" />
+          <ScalarProperty Name="IsAlert" ColumnName="IsAlert" />
+          <ScalarProperty Name="IsCreate" ColumnName="IsCreate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+          <ScalarProperty Name="BoardInfo" ColumnName="BoardInfo" />
+          <ScalarProperty Name="CType" ColumnName="CType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_Device">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_Device">
+        <MappingFragment StoreEntitySet="T_DTU_Device">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+          <ScalarProperty Name="DeviceBrand" ColumnName="DeviceBrand" />
+          <ScalarProperty Name="DeviceSN" ColumnName="DeviceSN" />
+          <ScalarProperty Name="ModelCode" ColumnName="ModelCode" />
+          <ScalarProperty Name="DeviceParams" ColumnName="DeviceParams" />
+          <ScalarProperty Name="ProduceDate" ColumnName="ProduceDate" />
+          <ScalarProperty Name="DeviceSupplier" ColumnName="DeviceSupplier" />
+          <ScalarProperty Name="Memo" ColumnName="Memo" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_FieldDesc">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_FieldDesc">
+        <MappingFragment StoreEntitySet="T_DTU_FieldDesc">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+          <ScalarProperty Name="ColName" ColumnName="ColName" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="FieldShortDesc" ColumnName="FieldShortDesc" />
+          <ScalarProperty Name="FieldDesc" ColumnName="FieldDesc" />
+          <ScalarProperty Name="FieldUnit" ColumnName="FieldUnit" />
+          <ScalarProperty Name="ValueMin" ColumnName="ValueMin" />
+          <ScalarProperty Name="ValueMax" ColumnName="ValueMax" />
+          <ScalarProperty Name="Lowlimit" ColumnName="Lowlimit" />
+          <ScalarProperty Name="Highlimit" ColumnName="Highlimit" />
+          <ScalarProperty Name="Lololimit" ColumnName="Lololimit" />
+          <ScalarProperty Name="Hihilimit" ColumnName="Hihilimit" />
+          <ScalarProperty Name="ValueInOrOut" ColumnName="ValueInOrOut" />
+          <ScalarProperty Name="IsAlert" ColumnName="IsAlert" />
+          <ScalarProperty Name="IsCollect" ColumnName="IsCollect" />
+          <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="KeyValues" ColumnName="KeyValues" />
+          <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_Flow">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_Flow">
+        <MappingFragment StoreEntitySet="T_DTU_Flow">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+          <ScalarProperty Name="DtuidName" ColumnName="DtuidName" />
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="MadeDate" ColumnName="MadeDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_Group">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_Group">
+        <MappingFragment StoreEntitySet="T_DTU_Group">
+          <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="GroupDesc" ColumnName="GroupDesc" />
+          <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_PressureLevel">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_PressureLevel">
+        <MappingFragment StoreEntitySet="T_DTU_PressureLevel">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PressureName" ColumnName="PressureName" />
+          <ScalarProperty Name="PressureDesc" ColumnName="PressureDesc" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_RepairType">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_RepairType">
+        <MappingFragment StoreEntitySet="T_DTU_RepairType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DTUDevice" ColumnName="DTUDevice" />
+          <ScalarProperty Name="RepairDesc" ColumnName="RepairDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_Transmit">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_Transmit">
+        <MappingFragment StoreEntitySet="T_DTU_Transmit">
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+          <ScalarProperty Name="IsTransmit" ColumnName="IsTransmit" />
+          <ScalarProperty Name="TargetIP" ColumnName="TargetIP" />
+          <ScalarProperty Name="TargetPort" ColumnName="TargetPort" />
+          <ScalarProperty Name="TargetVersion" ColumnName="TargetVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_DTU_ValveEffect">
+      <EntityTypeMapping TypeName="InfaModel.T_DTU_ValveEffect">
+        <MappingFragment StoreEntitySet="T_DTU_ValveEffect">
+          <ScalarProperty Name="ValveCode" ColumnName="ValveCode" />
+          <ScalarProperty Name="ClosedTime" ColumnName="ClosedTime" />
+          <ScalarProperty Name="EffctArea" ColumnName="EffctArea" />
+          <ScalarProperty Name="EffctUserNum" ColumnName="EffctUserNum" />
+          <ScalarProperty Name="ValveName" ColumnName="ValveName" />
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Account">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Account">
+        <MappingFragment StoreEntitySet="T_User_Account">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserBalance" ColumnName="UserBalance" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreditGrade" ColumnName="CreditGrade" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_AccountLog">
+      <EntityTypeMapping TypeName="InfaModel.T_User_AccountLog">
+        <MappingFragment StoreEntitySet="T_User_AccountLog">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="OrderFrom" ColumnName="OrderFrom" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="ModMoney" ColumnName="ModMoney" />
+          <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="OperIP" ColumnName="OperIP" />
+          <ScalarProperty Name="OperTime" ColumnName="OperTime" />
+          <ScalarProperty Name="OrderDesc" ColumnName="OrderDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Config">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Config">
+        <MappingFragment StoreEntitySet="T_User_Config">
+          <ScalarProperty Name="CCode" ColumnName="CCode" />
+          <ScalarProperty Name="ConfigName" ColumnName="ConfigName" />
+          <ScalarProperty Name="ConfigDesc" ColumnName="ConfigDesc" />
+          <ScalarProperty Name="SoftInterval" ColumnName="SoftInterval" />
+          <ScalarProperty Name="IsAlert" ColumnName="IsAlert" />
+          <ScalarProperty Name="IsRpt" ColumnName="IsRpt" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PopCode" ColumnName="PopCode" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Contact">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Contact">
+        <MappingFragment StoreEntitySet="T_User_Contact">
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="CGDesc" ColumnName="CGDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_ContactGroup">
+      <EntityTypeMapping TypeName="InfaModel.T_User_ContactGroup">
+        <MappingFragment StoreEntitySet="T_User_ContactGroup">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupDescpt" ColumnName="GroupDescpt" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Group">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Group">
+        <MappingFragment StoreEntitySet="T_User_Group">
+          <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="GroupDesc" ColumnName="GroupDesc" />
+          <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Info">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Info">
+        <MappingFragment StoreEntitySet="T_User_Info">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="TrueName" ColumnName="TrueName" />
+          <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+          <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+          <ScalarProperty Name="UserMail" ColumnName="UserMail" />
+          <ScalarProperty Name="UserPosition" ColumnName="UserPosition" />
+          <ScalarProperty Name="LinkAddr" ColumnName="LinkAddr" />
+          <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CCode" ColumnName="CCode" />
+          <ScalarProperty Name="BillCode" ColumnName="BillCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ParentUser" ColumnName="ParentUser" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Log">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Log">
+        <MappingFragment StoreEntitySet="T_User_Log">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LastLogDate" ColumnName="LastLogDate" />
+          <ScalarProperty Name="LastValiTime" ColumnName="LastValiTime" />
+          <ScalarProperty Name="LastIP" ColumnName="LastIP" />
+          <ScalarProperty Name="LogFrom" ColumnName="LogFrom" />
+          <ScalarProperty Name="ValidateKey" ColumnName="ValidateKey" />
+          <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_LoginLog">
+      <EntityTypeMapping TypeName="InfaModel.T_User_LoginLog">
+        <MappingFragment StoreEntitySet="T_User_LoginLog">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LoginFrom" ColumnName="LoginFrom" />
+          <ScalarProperty Name="FromCode" ColumnName="FromCode" />
+          <ScalarProperty Name="LgClient" ColumnName="LgClient" />
+          <ScalarProperty Name="LgResult" ColumnName="LgResult" />
+          <ScalarProperty Name="LgTime" ColumnName="LgTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Menu">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Menu">
+        <MappingFragment StoreEntitySet="T_User_Menu">
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuDesc" ColumnName="MenuDesc" />
+          <ScalarProperty Name="DomainId" ColumnName="DomainId" />
+          <ScalarProperty Name="ParentCode" ColumnName="ParentCode" />
+          <ScalarProperty Name="OperForm" ColumnName="OperForm" />
+          <ScalarProperty Name="TargetName" ColumnName="TargetName" />
+          <ScalarProperty Name="NeedPermission" ColumnName="NeedPermission" />
+          <ScalarProperty Name="IsDisplay" ColumnName="IsDisplay" />
+          <ScalarProperty Name="IsMenu" ColumnName="IsMenu" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_OperLog">
+      <EntityTypeMapping TypeName="InfaModel.T_User_OperLog">
+        <MappingFragment StoreEntitySet="T_User_OperLog">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="OperatorTime" ColumnName="OperatorTime" />
+          <ScalarProperty Name="OperType" ColumnName="OperType" />
+          <ScalarProperty Name="OperFunc" ColumnName="OperFunc" />
+          <ScalarProperty Name="OperFunCode" ColumnName="OperFunCode" />
+          <ScalarProperty Name="OperMsg" ColumnName="OperMsg" />
+          <ScalarProperty Name="OperResult" ColumnName="OperResult" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Opinion">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Opinion">
+        <MappingFragment StoreEntitySet="T_User_Opinion">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+          <ScalarProperty Name="SubTime" ColumnName="SubTime" />
+          <ScalarProperty Name="SubUserId" ColumnName="SubUserId" />
+          <ScalarProperty Name="SubMemo" ColumnName="SubMemo" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_Role">
+      <EntityTypeMapping TypeName="InfaModel.T_User_Role">
+        <MappingFragment StoreEntitySet="T_User_Role">
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleDesc" ColumnName="RoleDesc" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="UpdateFlag" ColumnName="UpdateFlag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_RoleMenu">
+      <EntityTypeMapping TypeName="InfaModel.T_User_RoleMenu">
+        <MappingFragment StoreEntitySet="T_User_RoleMenu">
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_UserContact">
+      <EntityTypeMapping TypeName="InfaModel.T_User_UserContact">
+        <MappingFragment StoreEntitySet="T_User_UserContact">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_UserDtuid">
+      <EntityTypeMapping TypeName="InfaModel.T_User_UserDtuid">
+        <MappingFragment StoreEntitySet="T_User_UserDtuid">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Dtuid" ColumnName="Dtuid" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_UserGroup">
+      <EntityTypeMapping TypeName="InfaModel.T_User_UserGroup">
+        <MappingFragment StoreEntitySet="T_User_UserGroup">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_UserMenu">
+      <EntityTypeMapping TypeName="InfaModel.T_User_UserMenu">
+        <MappingFragment StoreEntitySet="T_User_UserMenu">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="MenuCode" ColumnName="MenuCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_User_UserRole">
+      <EntityTypeMapping TypeName="InfaModel.T_User_UserRole">
+        <MappingFragment StoreEntitySet="T_User_UserRole">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="45235186-ac34-4f53-9e7d-2b63af6f5d38" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://crm.scadacn.com/Service/UserLoginService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="UserLogincs.wsdl" MetadataType="Wsdl" ID="390f2836-d3b3-49c1-8fd4-7df5345d9bd4" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/UserLoginService.svc?wsdl" />
+    <MetadataFile FileName="UserLoginService.xsd" MetadataType="Schema" ID="cfceeeb9-88f1-48f2-bd46-5a5002d4b69a" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/UserLoginService.svc?xsd=xsd0" />
+    <MetadataFile FileName="UserLoginService.wsdl" MetadataType="Wsdl" ID="8cabc72a-c2bc-4faf-bc0e-e71a6121c489" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/UserLoginService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="UserLoginService.disco" MetadataType="Disco" ID="e3818b92-a2f0-4a04-8407-c99a412a310a" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/UserLoginService.svc?disco" />
+    <MetadataFile FileName="UserLoginService1.xsd" MetadataType="Schema" ID="50bed317-134b-4a96-812c-03d35a23c22d" SourceId="1" SourceUrl="http://crm.scadacn.com/Service/UserLoginService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

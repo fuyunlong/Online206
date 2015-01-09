@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加站点</title>
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+    <script>
+        $(function ()
+        {
+            //加载公司
+            UserDTU.LoadCompanys();
+            //获取类型列表
+            Common.GetVerTypeList();
+            //获取压力等级列表
+            Common.PressureLevelList();
+            //获取配置列表
+            Common.DtuConfigList();
+        });
+
+    </script>
+</head>
+<body>
+    <div>
+        <table class="ui-com-tabFrm">
+            <tbody>
+                <tr>
+
+                    <td>站点名称 
+                    </td>
+                    <td colspan="8">
+                        <input class="com_w80pen oper" type="text" id="DtuidName" /><font class="com_red">*</font>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>所属公司</td>
+                    <td colspan="6">
+                        <select id="ddlCompany" onchange="UserDTU.GetGroupsByComId(this.value)" class=" com_DivBor com_w80pen oper">
+                           
+                        </select>
+                    </td>
+                    <td>
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>站点编号</td>
+                    <td colspan="2">
+                        <input type="text" id="Dtuid" class="oper " disabled="disabled" />
+                        <font class="com_red">*</font>
+                    </td>
+                    <td>压力等级</td>
+                    <td colspan="4">
+                        <select id="PressureLevel">
+                          
+                        </select>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>调压器品牌</td>
+                    <td colspan="2">
+                        <input type="text" id="Skidbrand" class="oper " />
+                    </td>
+                    <td>调压器供应商</td>
+                    <td colspan="4">
+                        <input type="text" id="Supplier" class="oper " />
+                    </td>
+                </tr>
+                <tr>
+                    <td>流量计品牌</td>
+                    <td colspan="2">
+                        <input type="text" id="FlowBrand" class="oper " />
+                    </td>
+                    <td>流量计型号</td>
+                    <td colspan="4">
+                        <input type="text" id="FlowType" class="oper " />
+                    </td>
+                </tr>
+                <tr>
+                    <td>具体位置</td>
+                    <td colspan="7">
+                        <input type="text" id="DtuidLocation" class="com_w80pen  oper" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>注册时间</td>
+                    <td colspan="2">
+                        <input class=" oper " type="text" id="RegDate" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" />
+                    </td>
+                    <td>运行时间</td>
+                    <td colspan="4">
+                        <input class=" oper " type="text" id="RunDate" onclick="WdatePicker({ dateFmt: 'yyyy/MM/dd HH:mm:ss' })" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>经度</td>
+                    <td colspan="2">
+                        <input type="text" id="Longitude" class=" oper" />
+                        <font class="com_red">*</font>
+                    </td>
+                    <td>纬度</td>
+                    <td colspan="2">
+                        <input type="text" id="Latitude" class="oper " />
+                        <font class="com_red">*</font>
+                    </td>
+
+                    <td colspan="2">
+                        <input type="button" value="获取经纬度" class="buttonVer2 oper" onclick="Common.WinTopBox('选择经纬度', '70%', '70%', '10%', '15%', 'Map/Index')" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>时间起始点</td>
+                    <td colspan="2">
+                        <input type="text" id="DayFrom" class=" oper" />
+                    </td>
+                    <td>月起止日</td>
+                    <td colspan="4">
+                        <input type="text" id="MonthFrom" class="oper " />
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>站点分组</td>
+                    <td colspan="2">
+                        <select id="ddlGroup">
+                           
+                        </select>
+                        <font class="com_red">*</font>
+                    </td>
+                    <td>配置信息</td>
+                    <td colspan="4">
+
+                        <select id="DtuConfig" class="oper">
+                           
+                        </select>
+
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>排序</td>
+                    <td colspan="2">
+                        <input type="text" id="OrderId" class="oper " />
+                    </td>
+                    <td>登陆密码</td>
+                    <td colspan="4">
+                        <input type="text" id="LgPwd" class=" oper" />
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>终端卡号</td>
+                    <td colspan="2">
+                        <input type="text" id="PhoneNum" class=" oper" />
+                        <font class="com_red">*</font>
+                    </td>
+                    <td>终端类型</td>
+                    <td colspan="4">
+                        <select id="VerType">
+                            
+                        </select>
+                        <font class="com_red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td>数据采集频率</td>
+                    <td colspan="2">
+                        <input type="text" id="DataInterval" class="oper " />
+                        分<font class="com_red">*</font>
+                    </td>
+
+                    <td>数据上传频率</td>
+                    <td colspan="4">
+                        <input type="text" id="UpLoadInterval" class="oper " />
+                        分<font class="com_red">*</font>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="8">
+                        <div class="com_DivBor com_font10size">
+                            <font class="com_red">*说明:</font>
+                            <br />
+
+                            1、数据上传频率：（区间1-1440分钟）会根据该值判断是否超时报警
+   数据采集频率：（区间1-1440分钟）会根据该值绘制实时曲线图
+                                <br />
+
+                            2、【上传频率】 必须大于等于 【采集频率】 
+                                <br />
+                            3、登录密码：必须和终端上面一致 
+                                <br />
+                            4、终端卡号：终端使用的电话卡号码 
+                                <br />
+                            5、站点编号：默认情况尽量自动生成 
+                                <br />
+                            6、带  号的必须慎重填写！！ 
+                                <br />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8" style="text-align: center" id="OperArea">
+                        <input type="button" class="buttonVer2 " value="添加"  onclick="SiteMng.AddSite()"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="ShowTree" style="width: auto; position: absolute; background-color: white; z-index: 999999; display: none; height: 200px; margin: 10px; float: left; border: 1px solid #ccc; overflow: auto;">
+            <ul id="tree1">
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿var userRole = {
+    //查询用户角色
+    SearchUserRole: function () {
+        var roleName = $("#txtRoleName").val().trim();
+        $.ajax({
+            type: "post",
+            url: "/UserRole/GetListByName",
+            data: "roleName=" + roleName,
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询角色失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w20pen'><input type='hidden' />" + data[i].RoleCode + "</td>";
+                    Str += "<td class='com_w30pen'>" + data[i].RoleName + "</td>";
+                    Str += "<td class='com_w30pen'>" + data[i].RoleDesc + "</td>";
+                    Str += "<td class='com_w20pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('角色查看','80%','80%','UserRole/RoleDetail?Oper=Show&RoleCode=" + data[i].RoleCode + "')>查看|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('角色修改','80%','80%','UserRole/RoleDetail?Oper=Edit&RoleCode=" + data[i].RoleCode + "')>修改|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=userRole.DeleteUserRole(" + data[i].RoleCode + ")>删除</a>";
+                    Str += "</tr>";
+                }
+             
+                $("#UserRoleList tbody").html(Str);
+            }
+        });
+    },
+    //添加角色
+    AddUserRole: function () {
+
+    },
+    //修改角色
+    UpdateUserRole: function () {
+
+    },
+    //删除角色
+    DeleteUserRole: function () {
+
+    }
+};

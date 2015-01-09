@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>站点故障分析</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/layer/layer.min.js"></script>
+    <script src="~/Scripts/SiteMng/SiteAnalysis.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //初始化
+            $("#tbDiv").css("height", $(window).height() * 0.6);
+            new comTab().fnInit();
+
+            //获取公司、分组、站点信息
+            var company = $("#ddlCompany");
+            var group = $("#ddlGroup");
+            var site = $("#ddlSite");
+            Common.GetCompany(company, function () { Common.GetGroup(group, company.val(), function () { Common.GetSite(site, company.val(), group.val(), null); }); });
+
+            //分析
+            $("#btnQuery").click(function () {
+                var siteId = $("#ddlSite").val();
+                SiteAnalysis.GetLastPower(siteId, function () { SiteAnalysis.GetResult(); });
+                SiteAnalysis.GetLastHeartRecord(siteId, function () { SiteAnalysis.GetResult(); });
+                SiteAnalysis.GetTop2AlertRecord(siteId);
+                SiteAnalysis.GetTop5Data(siteId);
+                new comTab().fnResizeTable();
+            });
+        });
+    </script>
+</head>
+<body onload="$('#loading').hide()">
+    <div class="com_TextCenter com_font13Px com_DivBorderGray">
+        所属公司&nbsp;<select id="ddlCompany" class="com_w14pen" onchange="SiteAnalysis.CompanyChange();"></select>
+        所属分组&nbsp;<select id="ddlGroup" class="com_w10pen" onchange="SiteAnalysis.GroupChange();"></select>
+        站点名称&nbsp;<select id="ddlSite" class="com_w10pen"></select>
+        <input id="btnQuery" type="button" value="分析" class="buttonVer2" />
+    </div>
+    <div>
+        <div style="width: 600px; margin: 10px auto; text-align: center;">
+            <div id="div_power" style="width: 150px; height: 60px; line-height: 60px; border: 1px solid #ccc; float: left; margin-left: 80px; font-size: 14px;">电量</div>
+            <div id="div_Heart" style="width: 220px; height: 60px; line-height: 60px; border: 1px solid #ccc; float: left; margin-left: 80px; font-size: 14px;">心跳记录</div>
+            <div style="clear: both;"></div>
+        </div>
+        <div id="tbDiv" class="com_fl com_font13Px"></div>
+    </div>
+    <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+</html>

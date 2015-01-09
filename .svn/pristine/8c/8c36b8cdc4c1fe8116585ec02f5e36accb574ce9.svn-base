@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteGroupController : Controller
+    {
+        //站点分组
+        // GET: /SiteGroup/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        public JsonResult GetGroup(string Company)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetGroupByComId(PmsMng.ActiveKey, Company));
+        }
+
+        public JsonResult GetGroupDeatail(string GroupId)
+        {
+            return Json(new ServiceProxyRead().GetProxy().GetGroupDeatail(PmsMng.ActiveKey, GroupId));
+        }
+
+        public ActionResult ChoseSiteGroup()
+        {
+           string aa= new ServiceCrmGet.CRMSGetClient().GetListCompany(0, PmsMng.ActiveKey);
+           ViewBag.CompanyList = aa;
+            return View();
+        }
+    }
+}

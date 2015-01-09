@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="fd75b9b3-4b49-4033-ade4-dc5179275468" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://test_pms.scadacn.com/service/PermissionWCF.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PermissionWCF.disco" MetadataType="Disco" ID="df8d41dc-3434-408d-ae58-ab4efcd95e3a" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?disco" />
+    <MetadataFile FileName="PermissionWCF.xsd" MetadataType="Schema" ID="54436702-d07a-482d-bff7-0bf158d761c9" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd2" />
+    <MetadataFile FileName="PermissionWCF1.xsd" MetadataType="Schema" ID="b57e985e-a636-4e1c-8025-bf013a52185a" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd3" />
+    <MetadataFile FileName="PermissionWCF2.xsd" MetadataType="Schema" ID="d3552af0-9c24-4cf6-bc6c-2eef5b127ec8" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd0" />
+    <MetadataFile FileName="PermissionWCF3.xsd" MetadataType="Schema" ID="e90ded26-37a5-408a-b18b-f610e35a664e" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd1" />
+    <MetadataFile FileName="PermissionWCF4.xsd" MetadataType="Schema" ID="2b5c7b97-bfb6-4eda-80fb-a01b14962907" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd4" />
+    <MetadataFile FileName="PermissionWCF5.xsd" MetadataType="Schema" ID="c004c58a-1114-4e21-9699-a221d863e611" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd5" />
+    <MetadataFile FileName="PermissionWCF.wsdl" MetadataType="Wsdl" ID="6dc0a66f-6550-4bfc-8f04-7c37fe4f9249" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?wsdl" />
+    <MetadataFile FileName="PermissionWCF1.wsdl" MetadataType="Wsdl" ID="d7cf58a0-7281-4202-a37f-e9d29d7ea4cb" SourceId="1" SourceUrl="http://test_pms.scadacn.com/service/PermissionWCF.svc?wsdl=wsdl0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

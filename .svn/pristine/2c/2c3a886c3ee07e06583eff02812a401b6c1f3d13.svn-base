@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>报警记录查询</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/DataSearch/AlertRecord.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#tbDiv").css("height", $(window).height() * 0.87);
+            new comTab().fnInit();
+
+            ////查询所有站点
+            //HeartRecord.GetSiteList();
+
+            ////默认查询全部
+            //HeartRecord.SiteChanged("");
+
+            ////查询
+            //$("#btnQuery").click(function () {
+            //    HeartRecord.SearchHeartRecord();
+            //    new comTab().fnResizeTable();
+            //});
+        });
+    </script>
+</head>
+<body>
+    <div class="com_TextCenter com_font13Px com_DivBorderGray">
+        选择站点&nbsp;<select id="ddlSite" class="com_w15pen" onchange=""></select>
+        <span>起始时间&nbsp;<input id="txtBeginDate" class="com_w15pen" type="text" onclick="" />
+            结束时间&nbsp;<input id="txtEndDate" class="com_w15pen" type="text" onclick="" />
+        </span>
+        <input type="button" value="查询" class="buttonVer2" id="btnQuery" />
+        <input type="button" value="导出" class="buttonVer2" id="btnExport" />
+    </div>
+    <div>
+        <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+            <table id="RecordList" class="ui-com-tab" rules="all">
+                <thead>
+                    <tr align="left" class="panel-header">
+                        <th class="com_TextCenter">
+                            站点名称
+                        </th>
+                        <th class="com_TextCenter">
+                            总警告次数
+                        </th>
+                        <th class="com_TextCenter">
+                            告警简述
+                        </th>
+                        <th class="com_TextCenter">
+                            告警状态
+                        </th>
+                        <th class="com_TextCenter">
+                            最新告警时间
+                        </th>
+                        <th class="com_TextCenter">
+                            告警时间
+                        </th>
+                        <th class="com_TextCenter">
+                            当前警告次数
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="loading"></div>
+</body>
+</html>

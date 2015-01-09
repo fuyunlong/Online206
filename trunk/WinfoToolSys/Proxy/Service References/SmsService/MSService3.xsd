@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="T_SMS_SmsSend">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="PlanTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RealTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ReceivePhoneNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SMSContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SMSCount" type="xs:int" />
+      <xs:element minOccurs="0" name="SMSSendTimes" type="xs:int" />
+      <xs:element minOccurs="0" name="SMSState" type="xs:int" />
+      <xs:element minOccurs="0" name="SMSTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SMSType" type="xs:int" />
+      <xs:element minOccurs="0" name="SendPhoneNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sender" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_SMS_SmsSend" nillable="true" type="tns:T_SMS_SmsSend" />
+  <xs:simpleType name="MsTypesEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="QueryData">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AlertSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TimingSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CrowdSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InformSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BlessingSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BlessingTimingSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InvalidSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WorkInformSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReceiveQuerySMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">12</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReceiveAlertDisposeSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">11</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReceiveQueryMMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">13</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReceiveWorkDisposeSMS">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">15</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TimingDailyRptData">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">21</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TimingMonthlyRptData">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">22</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MsTypesEnum" nillable="true" type="tns:MsTypesEnum" />
+  <xs:simpleType name="MsStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Invalid" />
+      <xs:enumeration value="Sent" />
+      <xs:enumeration value="Sending" />
+      <xs:enumeration value="UnSent" />
+      <xs:enumeration value="Failed" />
+      <xs:enumeration value="Canceled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MsStatus" nillable="true" type="tns:MsStatus" />
+  <xs:complexType name="T_SMS_SmsReceive">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dtuid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ReceivePhoneNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SMSContent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SMSCount" type="xs:int" />
+      <xs:element minOccurs="0" name="SMSTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SMSType" type="xs:int" />
+      <xs:element minOccurs="0" name="SendPhoneNum" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_SMS_SmsReceive" nillable="true" type="tns:T_SMS_SmsReceive" />
+  <xs:complexType name="ArrayOfT_DtuAlter">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="T_DtuAlter" nillable="true" type="tns:T_DtuAlter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfT_DtuAlter" nillable="true" type="tns:ArrayOfT_DtuAlter" />
+  <xs:complexType name="T_DtuAlter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlterDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AlterSum" type="xs:int" />
+      <xs:element minOccurs="0" name="DtuName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DtuAlter" nillable="true" type="tns:T_DtuAlter" />
+  <xs:complexType name="ArrayOfT_SMS_Bill">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="T_SMS_Bill" nillable="true" type="tns:T_SMS_Bill" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfT_SMS_Bill" nillable="true" type="tns:ArrayOfT_SMS_Bill" />
+  <xs:complexType name="T_SMS_Bill">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AlertFee" type="xs:double" />
+      <xs:element minOccurs="0" name="BillCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookFee" type="xs:double" />
+      <xs:element minOccurs="0" name="DataFee" type="xs:double" />
+      <xs:element minOccurs="0" name="DayMax" type="xs:int" />
+      <xs:element minOccurs="0" name="ExtendFee" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MonthMax" type="xs:int" />
+      <xs:element minOccurs="0" name="OtherFee" type="xs:double" />
+      <xs:element minOccurs="0" name="RptFee" type="xs:double" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_SMS_Bill" nillable="true" type="tns:T_SMS_Bill" />
+</xs:schema>

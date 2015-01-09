@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>用户分组信息</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/Common/ui_common.js"></script>
+        <script src="~/Scripts/UserMng/UserGroup.js"></script>
+        <script>
+            $(function () {
+                var oper = "@ViewBag.OperationText";
+                switch (oper) {
+                    case "Show":
+                    case "Update":
+                        if ("@ViewBag.Group" != "null") {
+                            $("#txtGroupName").val = "@ViewBag.GroupName";
+
+                        }
+                        break;
+                    case "Add":
+                        break;
+                    default:
+                        break;
+                }
+                $('#OperArea').html(@Html.Raw(ViewBag.Oper));
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <table class="ui-com-tabFrm">
+                <tr>
+                    <td>所属公司</td>
+                    <td colspan="3">
+                        <select id="ddlOperCompany" class="oper"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分组名称</td>
+                    <td>
+                        <input type="text" id="txtGroupName"  class="com_w50pen oper" />
+                    </td>
+                    <td>父分组</td>
+                    <td>
+                        <select id="ddlParentGroup" class="oper"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>分组描述</td>
+                    <td colspan="3">
+                        <input type="text" id="txtGroupDesc" class="com_w98pen oper" value="">
+                    </td>
+                </tr>
+                <tr>
+                   <td colspan="4" class="com_TextCenter" id="OperArea">
+                   </td>
+               </tr>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,5 @@
+﻿@{
+    ViewBag.Title = "AddUer";
+}
+
+<h2>AddUer</h2>

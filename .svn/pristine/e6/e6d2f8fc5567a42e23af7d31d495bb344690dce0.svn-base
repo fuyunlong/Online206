@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<repositories>
+  <repository path="..\Com.Winfotian.DB\packages.config" />
+  <repository path="..\Com.Winfotian.Model\packages.config" />
+  <repository path="..\WinfoToolSys.Tests\packages.config" />
+  <repository path="..\WinfoToolSys\packages.config" />
+</repositories>

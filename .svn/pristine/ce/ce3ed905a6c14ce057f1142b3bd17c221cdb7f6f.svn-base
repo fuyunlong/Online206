@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.Model;
+using System.Text;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using WinfoToolSys.Models;
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class ClientInfoController : Controller
+    {
+        //
+        // GET: /ClientInfo/
+        public ActionResult ClientInfo()
+        {
+            return View();
+        }
+
+        public ActionResult ClientDetail(string Oper, string ComId)
+        {
+            T_CompanyExt company = new T_CompanyExt();
+            StringBuilder OperStr = new StringBuilder();
+
+            try
+            {
+                ServiceCrmGet.T_CompanyInfos info = new ServiceCrmGet.CRMSGetClient().GetCompanyInfoList(ComId, "");
+                company.CompanyInfo = info;
+                company.Province = info.Province;
+
+                switch (Oper)
+                {
+                    case "Show":
+                        company.Oper = "Show";
+                        break;
+                    case "Edit":
+                        OperStr.Append("<input type='button' class='buttonVer2' value='修改' id='btnUpdateCompany' />");
+                        company.Oper = "Edit";
+                        break;
+                    case "Add":
+                        company.Oper = "Add";
+                        OperStr.Append("<input type='button' class='buttonVer2' value='添加' id='btnAddCompany' onclick='ClientMng.AddCompany()' />");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            OperStr.Insert(0, "\"");
+            OperStr.Append("\"");
+            //用户操作按钮
+            ViewBag.Oper = OperStr.ToString();
+            //用户添加配置权限
+
+            return View(company);
+        }
+
+        //添加公司
+        public string Add(ServiceCrmPost.T_Companys model)
+        {
+            string result = "";
+
+            ServiceCrmPost.T_Companys company = new ServiceCrmPost.T_Companys();
+            company.CompanyName = model.CompanyName;
+            company.LinkPerson = model.LinkPerson;
+            company.Telphone = model.Telphone;
+            company.Email = model.Email;
+            company.FaxTel = model.FaxTel;
+            company.CmpWebSite = model.CmpWebSite;
+            company.CmpAddress = model.CmpAddress;
+            company.MobilePhone = model.MobilePhone;
+            company.Remark = model.Remark;
+            company.ParentCompanyID = model.ParentCompanyID;
+            company.CityID = model.CityID;
+            company.CityName = model.CityName;
+            company.Status = true;
+
+            try
+            {
+                result = new ServiceCrmPost.CRMSPostClient().RegisterCompanyInfo(company, "");
+                if (result == "注册成功!")
+                {
+                    new ServiceCrmPost.CRMSPostClient().AddCompanyConfig(model.CompanyName, model.Province.Split(','), "");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+
+            return result;
+        }
+    }
+}

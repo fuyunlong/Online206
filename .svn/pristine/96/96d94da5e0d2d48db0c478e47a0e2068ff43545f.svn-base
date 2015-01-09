@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加转发</title>  
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+      <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+    <script src="~/Scripts/DataSerach/DataTrans.js"></script>
+       <script src="~/Scripts/Common/Validate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            UserDTU.LoadCompanys();//加载公司
+            DataTrans.GetVerList();
+        });
+    </script>
+</head>
+ <body onload="$('#loading').hide()">
+    <div>
+        <table class="ui-com-tabFrm" cellspacing="0" cellpadding="0">
+            <tr>
+                <td>所属公司:</td>
+                <td>
+                    <select id="ddlCompany" onchange="UserDTU.GetGroupsByComId(this.value)">
+                       
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>所属分组:</td>
+                <td>
+                    <select class="com_w34pen" id="ddlGroup" onchange="UserDTU.GetDTUByGroupCode(this.value)">
+                    </select></td>
+            </tr>
+            <tr>
+                <td>站点名称:</td>
+                <td>
+                    <select class="com_w34pen" id="ddlDtu"></select></td>
+            </tr>
+            <tr>
+                <td>协议版本</td>
+                <td>
+                    <div style="position: relative;">
+                        <span style="margin-left: 100px; width: 18px; overflow: hidden;">
+                            <select class="com_w34pen" style="width: 118px; margin-left: -100px" id="TargetVersion" onchange="$('#box').val(this.value);$('#TransDesc').html($('#TargetVersion :selected').attr('tt'))">
+                                
+                            </select></span>
+                        <input name="box" id="box" style="width: 100px; position: absolute; left: 0px;">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>IP地址</td>
+                <td>
+                    <input type="text" id="TargetIP" />
+                </td>
+            </tr>
+            <tr>
+                <td>端口号</td>
+                <td>
+                    <input type="text"  onkeydown="Validate.funOnlyNumber(this);" id="TargetPort" />
+                </td>
+            </tr>
+            <tr>
+                <td>目标手机号</td>
+                <td>
+                    <input type="text"  onkeydown="Validate.funOnlyNumber(this);" id="TargetPhoneNum" />
+                </td>
+            </tr>
+            <tr>
+                <td>设备ID</td>
+                <td>
+                    <input type="tel"  onkeydown="Validate.funOnlyNumber(this);" id="TargetId" />
+
+                </td>
+            </tr>
+            <tr>
+                <td>序号</td>
+                <td>
+                    <input type="text"  onkeydown="Validate.funOnlyNumber(this);" id="OrderNum" />
+                </td>
+            </tr>
+            <tr>
+                <td>通信协议</td>
+                <td>
+                    TCP @Html.RadioButton("TransProtocol", 1, true)
+                    UDP @Html.RadioButton("TransProtocol", 0, false)
+                    </td>
+            </tr>
+            <tr>
+                <td>开启转发</td>
+                <td>是 &nbsp; @Html.RadioButton("IsTransmit", 1, true)
+                    否  @Html.RadioButton("IsTransmit", 0, false)
+                </td>
+            </tr>
+            <tr>
+                <td>转发描述</td>
+                <td>
+                    <textarea id="TransDesc" style="height: 50px; width:70%"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"  style="text-align:center">
+                    <input type="button" class="buttonVer2" value="添加" onclick="DataTrans.AddTrans()" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+</html>

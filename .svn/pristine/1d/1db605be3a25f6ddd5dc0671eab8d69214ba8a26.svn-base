@@ -1,0 +1,547 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>我的首页</title>
+    <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1133" height="484">
+            <defs />
+            <g transform="translate(0,0)">
+                <g>
+                    <rect fill="#FFFFFF" stroke="none" x="0" y="0" width="1133" height="484" />
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,160,20)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="#ffffff" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 100 Q 100 100 100 100 L 0 100 Q 0 100 0 100 L 0 0 Q 0 0 0 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="none" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 0 0 M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,162,20) translate(8,9)">
+                    <text fill="#000000" stroke="none" font-family="Arial" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">公司管理</text>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,210,90)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,210,160)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,184.78932188134524,55.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-186,-62) translate(1.210678118654755,6.500000000000007) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 189.28932188134524 59.99999999999999 L 189.28932188134524 108.2842712474619 Q 189.28932188134524 118.2842712474619 199.28932188134524 118.2842712474619 L 210 118.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,184.78932188134524,55.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-188,-104) translate(3.210678118654755,48.50000000000001) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 189.28932188134524 59.99999999999999 L 189.28932188134524 178.2842712474619 Q 189.28932188134524 188.2842712474619 199.28932188134524 188.2842712474619 L 210 188.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,342,22)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="#ffffff" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 100 Q 100 100 100 100 L 0 100 Q 0 100 0 100 L 0 0 Q 0 0 0 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="none" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 0 0 M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,344,22) translate(8,9)">
+                    <text fill="#000000" stroke="none" font-family="Arial" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">用户管理</text>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,392,89.5)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,393,158.5)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,366.78932188134524,57.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-386,-57.5) translate(19.210678118654755,7.105427357601002e-15) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 371.28932188134524 61.99999999999999 L 371.28932188134524 107.7842712474619 Q 371.28932188134524 117.7842712474619 381.28932188134524 117.7842712474619 L 392 117.7842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,366.78932188134524,57.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-388,-99.5) translate(21.210678118654755,42.00000000000001) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 371.28932188134524 61.99999999999999 L 371.28932188134524 176.7842712474619 Q 371.28932188134524 186.7842712474619 381.28932188134524 186.7842712474619 L 393 186.7842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,565,19)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="#ffffff" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 100 Q 100 100 100 100 L 0 100 Q 0 100 0 100 L 0 0 Q 0 0 0 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="none" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 0 0 M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,567,19) translate(8,9)">
+                    <text fill="#000000" stroke="none" font-family="Arial" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">站点管理
+          
+                    </text>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,606.2106781186548,99.5)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,589.7893218813452,54.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-582.2106781186548,-71.5) translate(-7.57864376269049,17.000000000000007) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 594.2893218813452 58.99999999999999 L 594.2893218813452 117.7842712474619 Q 594.2893218813452 127.7842712474619 600.25 127.7842712474619 L 606.2106781186548 127.7842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,589.7893218813452,54.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-584.2106781186548,-113.5) translate(-5.57864376269049,59.00000000000001) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 594.2893218813452 58.99999999999999 L 594.2893218813452 175.64213562373095 Q 594.2893218813452 185.64213562373095 603.1446609406726 185.64213562373095 L 603.1446609406726 185.64213562373095 Q 612 185.64213562373095 612 191.96320343559643 L 612 198.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,772,19)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="#ffffff" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 100 Q 100 100 100 100 L 0 100 Q 0 100 0 100 L 0 0 Q 0 0 0 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="none" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 0 0 M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,774,19) translate(8,9)">
+                    <text fill="#000000" stroke="none" font-family="Arial" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">数据管理</text>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,822,89)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,822,159)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,796.7893218813452,54.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-798,-61) translate(1.210678118654755,6.500000000000007) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 801.2893218813452 58.99999999999999 L 801.2893218813452 107.2842712474619 Q 801.2893218813452 117.2842712474619 811.2893218813452 117.2842712474619 L 822 117.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,796.7893218813452,54.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-800,-103) translate(3.210678118654755,48.50000000000001) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 801.2893218813452 58.99999999999999 L 801.2893218813452 177.2842712474619 Q 801.2893218813452 187.2842712474619 811.2893218813452 187.2842712474619 L 822 187.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,606.2106781186549,164.5)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,610,233)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,589.5,64.5)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-594.2106781186548,-123.5) translate(4.710678118654755,59) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 594 69 L 594 243 Q 594 253 602 253 L 610 253" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,395,224)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,615,369)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,589.5,131.5)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-594.2106781186548,-190.5) translate(4.710678118654755,59) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 594 136 L 594 310 Q 594 320 602 320 L 610 320" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,367.28932188134524,60.5)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-372,-119.5) translate(4.710678118654755,59) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 371.78932188134524 65 L 371.78932188134524 242.2842712474619 Q 371.78932188134524 252.2842712474619 381.78932188134524 252.2842712474619 L 395 252.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,952,22)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="#ffffff" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 100 Q 100 100 100 100 L 0 100 Q 0 100 0 100 L 0 0 Q 0 0 0 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="none" stroke="none" d="M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 0 0 M 0 0 L 100 0 Q 100 0 100 0 L 100 40 Q 100 40 100 40 L 0 40 Q 0 40 0 40 L 0 0 Q 0 0 0 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,954,22) translate(8,9)">
+                    <text fill="#000000" stroke="none" font-family="Arial" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">数据转发</text>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,1002,92)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,1002,162)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,976.7893218813452,57.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-978,-64) translate(1.210678118654755,6.500000000000007) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 981.2893218813452 61.99999999999999 L 981.2893218813452 110.2842712474619 Q 981.2893218813452 120.2842712474619 991.2893218813452 120.2842712474619 L 1002 120.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,976.7893218813452,57.49999999999999)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-980,-106) translate(3.210678118654755,48.50000000000001) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 981.2893218813452 61.99999999999999 L 981.2893218813452 180.2842712474619 Q 981.2893218813452 190.2842712474619 991.2893218813452 190.2842712474619 L 1002 190.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,822,229)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,797.7893218813452,116.5)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-801,-165) translate(3.210678118654755,48.5) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 802.2893218813452 121 L 802.2893218813452 239.2842712474619 Q 802.2893218813452 249.2842712474619 812.2893218813452 249.2842712474619 L 823 249.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,617,424)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,589.5,183.5)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-594.2106781186548,-242.5) translate(4.710678118654755,59) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 594 188 L 594 379 Q 594 389 604 389 L 615 389" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,1007,220)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,977.7893218813452,113.5)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-981,-162) translate(3.210678118654755,48.5) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 982.2893218813452 118 L 982.2893218813452 236.2842712474619 Q 982.2893218813452 246.2842712474619 992.2893218813452 246.2842712474619 L 1003 246.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="translate(0,0) matrix(1,0,0,1,612,295)">
+                    <g>
+                        <g transform="translate(0,0) scale(1,0.4)">
+                            <g>
+                                <path fill="none" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 90 Q 100 100 90 100 L 10 100 Q 0 100 0 90 L 0 10 Q 0 0 10 0 Z" />
+                                <g transform="scale(1,2.5)">
+                                    <path fill="#ffffff" stroke="none" d="M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" />
+                                    <path fill="none" stroke="#cfe2f3" d="M 10 0 M 10 0 L 90 0 Q 100 0 100 10 L 100 30 Q 100 40 90 40 L 10 40 Q 0 40 0 30 L 0 10 Q 0 0 10 0 Z" stroke-miterlimit="10" stroke-width="2" />
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="matrix(1,0,0,1,589.5,262.5)">
+                    <g transform="translate(0,0)">
+                        <g transform="translate(-594.2106781186548,-321.5) translate(4.710678118654755,59) matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path fill="none" stroke="#000000" d="M 594 267 L 594 442.2842712474619 Q 594 452.2842712474619 604 452.2842712474619 L 617 452.2842712474619" stroke-miterlimit="10" stroke-width="2" />
+                            </g>
+                        </g>
+                    </g>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,212,90) translate(8,10)">
+                    <a xlink:href="/Config/ShowConfigList">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">公司配置</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,212,160) translate(8,10)">
+                    <a xlink:href="/ClientInfo/ClientInfo">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">查询公司</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,394,89.5) translate(8,10)">
+                    <a xlink:href="/UserInfo/SiteUser">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">站点用户</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,395,158.5) translate(8,10)">
+                    <a xlink:href="/UserInfo/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">查询用户</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,608.2106781186548,99.5) translate(8,10)">
+                    <a xlink:href="/SiteInfo/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">站点信息                       
+</a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,824,89) translate(8,10)">
+                    <a xlink:href="/HeartBeat/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">心跳查询</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,824,159) translate(8,10)">
+                    <a xlink:href="/SiteProblem/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">故障分析</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,608.2106781186549,164.5) translate(8,0)">
+                    <a xlink:href="/SiteInfoMalodor/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">站点信息</text></a><a xlink:href="/SiteInfoMalodor/Index">
+                            <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="13.33984375" y="40">(加臭)</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,612,233) translate(8,10)">
+                    <a xlink:href="/SiteSet/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">配置站点</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,397,224) translate(8,10)">
+                    <a xlink:href="/UserGroup/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">用户分组</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,617,369) translate(8,0)">
+                    <a xlink:href="/SiteInfoMalodor/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">站点信息</text></a><a xlink:href="/SiteInfoMalodor/Index">
+                            <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="13.33984375" y="40">(加臭)</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,1004,92) translate(8,10)">
+                    <a xlink:href="/DataTrans/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="underline" x="0" y="20">数据转发</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,1004,162) translate(8,10)">
+                    <a xlink:href="/ValveInfluence/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">阀门影响</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,824,229) translate(8,10)">
+                    <a xlink:href="/AlearmRecord/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="underline" x="0" y="20">报警查询</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,619,424) translate(8,10)">
+                    <a xlink:href="/FieldInfo/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">字段信息</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,1009,220) translate(8,10)">
+                    <a xlink:href="/RemoteControlSet/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="none" x="0" y="20">远程控制</text></a>
+                </g>
+                <g transform="scale(1,1) matrix(1,0,0,1,614,295) translate(8,0)">
+                    <a xlink:href="/SiteSetMalodor/Index">
+                        <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="underline" x="0" y="20">配置站点</text></a><a xlink:href="/SiteSetMalodor/Index">
+                            <text fill="blue" stroke="none" font-family="Helvetica" font-size="20px" font-style="normal" font-weight="normal" text-decoration="underline" x="13.33984375" y="40">(加臭)</text></a>
+                </g>
+            </g></svg>
+    </div>
+</body>
+</html>

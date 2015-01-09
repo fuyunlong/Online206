@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+ 
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteInfoMalodorController : Controller
+    {
+        //
+        // GET: /SiteInfoMalodor/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+        public JsonResult GetOdorSite(string Company, string Group, string SiteName)
+        {
+            var lis = new ServiceProxyRead().GetProxy().GetSite("", Company, Group, SiteName, true);
+            return Json(lis);
+        }
+    }
+}

@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+ 
+ 
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteSetMalodorController : Controller
+    {
+        //
+        // GET: /SiteSetMalodor/
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = new ServiceProxyRead().GetProxy().GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+        [HttpPost]
+        public JsonResult GetOdorizationList(string Oper, int ComId, int FieldName)
+        {
+            var list = new ServiceProxyRead().GetProxy().DtuConfigList(PmsMng.ActiveKey, Oper, new int[] { 1 });
+            var model = from row in list
+                        select new
+                        {
+                            Dtuid = row.Dtuid,
+                            DtuidName = row.DtuidName,
+                            ConfigName = row.ConfigName,
+                            ConfigDesc = row.ConfigDesc,
+                            ConfigCode = row.ConfigCode
+                        };
+            return Json(model);
+        }
+    }
+}

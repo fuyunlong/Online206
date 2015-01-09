@@ -1,0 +1,177 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Data;
+using System.Runtime.Serialization;
+namespace Com.Winfotian.Model
+{
+    //公司信息表
+    [Serializable]
+    [DataContract]
+    public class T_Company
+    {
+
+        /// <summary>
+        /// 公司编码(自动增长)
+        /// </summary>		
+        [DataMember]
+        public int CompanyId
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司名称
+        /// </summary>		
+        [DataMember]
+        public string CompanyName
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司联系人
+        /// </summary>		
+        [DataMember]
+        public string LinkPerson
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司联系电话
+        /// </summary>		
+        [DataMember]
+        public string CmpTel
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司移动电话
+        /// </summary>		
+        [DataMember]
+        public string CmpMobile
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司邮箱
+        /// </summary>
+        [DataMember]
+        public string CmpEmail
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司传真
+        /// </summary>		
+        [DataMember]
+        public string FaxTel
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司网址
+        /// </summary>		
+        [DataMember]
+        public string CmpWebSite
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司地址
+        /// </summary>		
+        [DataMember]
+        public string CmpAddress
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 城市编号
+        /// </summary>		
+        [DataMember]
+        public int CityId
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 公司描述
+        /// </summary>		
+        [DataMember]
+        public string CmpDesc
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// OrderId
+        /// </summary>		
+        [DataMember]
+        public int OrderId
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// Status
+        /// </summary>		
+        [DataMember]
+        public int Status
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// ParentId
+        /// </summary>		
+        [DataMember]
+        public int ParentId
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// UpdateFlag
+        /// </summary>		
+        [DataMember]
+        public int UpdateFlag
+        {
+            set;
+            get;
+        }
+
+    }
+
+    [Serializable]
+    [DataContract]
+    public class T_CompanyExtension
+    {
+        [DataMember]
+        public string Oper
+        {
+            set;
+            get;
+        }
+        [DataMember]
+        public T_Company company
+        {
+            set;
+            get;
+        }
+        [DataMember]
+        public string Province
+        {
+            set;
+            get;
+        }
+    }
+
+}
+

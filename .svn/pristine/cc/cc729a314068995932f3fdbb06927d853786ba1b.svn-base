@@ -1,0 +1,170 @@
+﻿var VipDevice = {
+    flag: true,
+    //加载公司列表
+    LoadCompanys: function () {
+        $.ajax({
+            type: "post",
+            url: "/Company/GetComany",
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取公司信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                $("#ddlCompany").append(str);
+            }
+        });
+    },
+    //查询了站点列表
+    GetDTUList: function () {
+        var companyId = $("#ddlCompany").val();
+        $.ajax({
+            type: "post",
+            url: "/VipDevice/GetDTUListByComanyId",
+            data: { companyId: companyId },
+            dataType: "json",
+            async: false,
+            error: function () {
+                Common.MsgBox("获取站点信息失败,请稍后再试");
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value='" + data[i].Key + "'>" + data[i].Value + "</option>"
+                }
+                $("#ddlSite").html(str);
+            }
+        });
+    },
+    //查询设备信息
+    GetVipDevice: function () {
+        var dtuId = $("#ddlSite").val();
+        $.ajax({
+            type: "post",
+            url: "/VipDevice/GetVipDeviceList",
+            data: { dtuId: dtuId },
+            dataType: "json",
+            error: function () {
+                Common.MsgBox("查询重要设备失败,请稍后再试");
+            },
+            success: function (data) {
+                var html = "";
+                for (var a in data) {
+                    html += "<tr>";
+                    html += "<td class='com_w20pen com_TextCenter'>" + data[a].DeviceName + "</td>";
+                    html += "<td class='com_w20pen com_TextCenter'>" + data[a].DeviceBrand + "</td>";
+                    html += "<td class='com_w20pen com_TextCenter'>" + data[a].ModelCode + "</td>";
+                    html += "<td class='com_w20pen com_TextCenter'>" + Common.ChangeDateFormat(data[a].ProduceDate) + "</td>";
+                    html += "<td class='com_w20pen com_TextCenter'>";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('设备查看','40%','62%','12%','30%','VipDevice/VipDeviceDetail?oper=Show&Id=" + data[a].Id + "')>查看|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('设备修改','40%','62%','12%','30%','VipDevice/VipDeviceDetail?oper=Edit&Id=" + data[a].Id + "')>修改|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=VipDevice.DeleteDevice('" + data[a].Id + "')>删除</a> ";
+                    html += "</td>";
+                    html += "</tr>";
+                }
+                $("#DeviceList tbody").html(html);
+            }
+        });
+    },
+    //添加设备
+    AddDevice: function () {
+        var model = VipDevice.GetData();
+        VipDevice.CheckData();
+        if (VipDevice.flag) {
+            $.ajax({
+                type: "post",
+                url: "/VipDevice/AddDevice",
+                data: model,
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("添加设备信息失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+                }
+            });
+        }
+    },
+    //修改设备
+    UpdateDevice: function () {
+        var model = VipDevice.GetData();
+        VipDevice.CheckData();
+        if (VipDevice.flag) {
+            $.ajax({
+                type: "POST",
+                url: "/VipDevice/UpdateDevice",
+                data: model,
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("修改设备信息失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        Common.layoutTopClose();
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("修改失败");
+                    }
+                }
+            });
+        }
+    },
+    //删除设备
+    DeleteDevice: function (id) {
+        if (confirm("确定要删除吗?")) {
+            $.ajax({
+                type: "post",
+                url: "/VipDevice/DeleteDevice",
+                data: { id: id },
+                dataType: "text",
+                error: function () {
+                    Common.MsgBox("删除设备信息失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    },
+    //获取数据
+    GetData: function () {
+        var model = {
+            Id: $("#txtDeviceName").attr("name"),
+            DeviceName: $("#txtDeviceName").val().trim(),
+            Dtuid: $("#ddlSite").val(),
+            DeviceBrand: $("#txtBrand").val().trim(),
+            DeviceSN: $("#txtDeviceSN").val().trim(),
+            ModelCode: $("#txtModelCode").val().trim(),
+            DeviceParams: $("#txtParams").val().trim(),
+            ProduceDate: $("#txtDate").val(),
+            Memo: $("#txtDesc").val().trim()
+        };
+        return model;
+    },
+    //数据验证
+    CheckData: function () {
+        VipDevice.flag = true;
+        if (!Validate.IsRequired($("#txtDeviceName").val())) {
+            VipDevice.flag = false;
+            Stip("txtDeviceName").show({ content: "不能为空", kind: "error", time: 3000 });
+            $("#txtDeviceName").focus();
+            return;
+        }
+    }
+}

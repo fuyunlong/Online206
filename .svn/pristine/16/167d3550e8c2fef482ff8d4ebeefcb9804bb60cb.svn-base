@@ -1,0 +1,129 @@
+﻿var RemoteControl = {
+    getControlList: function () {
+
+        $.ajax({
+            type: "post",
+            data: { Id: $("#ddlDtu").val() },
+            url: "/RemoteControlSet/GetRemoteControlList",
+            dataType: "json",
+            error: function (ex) {
+                alert("查询站点失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var a in data) {
+                    str += "<tr>";
+                    str += "<td class='com_w10pen'>" + data[a].Dtuid + "</td>";
+                    str += "<td class='com_w25pen'>" + data[a].FieldName + "</td>";
+                    str += "<td class='com_w12pen'>" + data[a].DO_Index + "</td>"
+                    str += "<td class='com_w12pen'>" + data[a].DI_Index + "</td>";
+                    str += "<td>" + data[a].ReturnState + "</td>";
+                    str += "<td class='com_TextCenter com_w15pen'>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('查看控制','50%','50%','20%','30%','/RemoteControlSet/ControlDetail?Oper=Show&Dtuid=" + data[a].Dtuid + "&FieldName=" + data[a].FieldName + "')>查看|</a>";
+                    str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('修改控制','50%','50%','20%','30%','/RemoteControlSet/ControlDetail?Oper=Edit&Dtuid=" + data[a].Dtuid + "&FieldName=" + data[a].FieldName + "')>修改|</a>";
+                    str += "<a href='javascript:void(0)' onclick=RemoteControl.DelControl('" + data[a].Dtuid + "','" + data[a].FieldName + "')>删除|</a>";
+                    str += "</td>";
+                    str += "</tr>";
+                }
+                $("#ComList").html(str);
+            }
+        });
+    },
+    DelControl: function (Dtuid, FieldName) {
+       
+        $.ajax({
+            type: "post",
+            url: "/RemoteControlSet/DeleteControl",
+            data: { Dtuid: Dtuid, FieldName: FieldName },
+            dataType: "text",
+            error: function (ex) {
+                alert("查询站点失败,请稍后再试");
+            },
+            success: function (data) {
+                if (data == "1") {
+                    alert("删除成功");
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert("删除失败");
+                }
+            }
+        });
+    },
+    EditContrl: function () {
+        var obj = RemoteControl.GetControlObj();
+        if (obj != null) {
+            $.ajax({
+                type: "post",
+                url: "/RemoteControlSet/UpdateControl",
+                data: obj,
+                dataType: "text",
+                error: function (ex) {
+                    alert("查询站点失败,请稍后再试" + ex.responseText);
+                },
+                success: function (data) {
+                    if (data == "1") {
+                        alert("修改成功");
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("修改失败");
+                    }
+                }
+            });
+        }
+    },
+    AddControl: function () {
+        var obj = RemoteControl.GetControlObj();
+        if (obj != null) {
+            $.ajax({
+                type: "post",
+                url: "/RemoteControlSet/AddControl",
+                data: obj,
+                dataType: "text",
+                error: function (ex) {
+                    alert("请求失败,请稍后再试" + ex.responseText);
+                },
+                success: function (data) {
+                    if (data == "1") {
+                        alert("添加成功");
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("添加失败");
+                    }
+                }
+            });
+        }
+    },
+    ShowAddControlView: function () {
+        var url = "/RemoteControlSet/AddControlSet?Id=" + $("#ddlCompany").val();
+        Common.WinTopBox('添加控制', '50%', '40%', '20%', '30%', url);
+    },
+    GetControlObj: function () {
+        if (!Validate.IsRequired($("#FieldName").val())) {
+            alert("字段名称不能为空");
+            return null;
+        }
+        if (!Validate.IsNumber($("#DI_Index").val())) {
+            alert("输入值不能为空且为数字");
+            return null;
+        }
+        if (!Validate.IsNumber($("#DO_Index").val())) {
+            alert("输出值不能为空且为数字");
+            return null;
+        }
+        if (!Validate.IsNumber($("#ReturnState").val())) {
+            alert("控制到位值不能为空，且为数字");
+            return null;
+        }
+        var ControlObj = {
+            Dtuid: $("#DtuidList").val(),
+            FieldName: $("#FieldName").val(),
+            DI_Index: $("#DI_Index").val(),
+            DO_Index: $("#DO_Index").val(),
+            ReturnState: $("#ReturnState").val()
+        };
+        return ControlObj;
+    }
+}

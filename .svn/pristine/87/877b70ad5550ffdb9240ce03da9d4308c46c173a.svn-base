@@ -1,0 +1,112 @@
+﻿
+.buttonVer2 {
+    cursor: pointer;
+    height: 21px;
+    line-height: 21px;
+    width: auto;
+    color: #FFF;
+    background: #3C7ED2 url(/Images/sprites/system_btn_bg.gif) repeat-x left top;
+    border: solid 0px #3987D1;
+    color: #FFF;
+    text-align: center;
+    padding: 0px 10px 0px 10px;
+}
+
+table {
+    border: 0;
+    cellspacing: 0;
+    cellpadding: 0;
+}
+
+    table tr {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+
+table {
+    font-size: 12px;
+    width: 100%;
+}
+
+    table.list {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding: 0px;
+        border-top: 1px solid #aed8f0;
+        border-left: 1px solid #aed8f0;
+    }
+
+        table.list th {
+            font-size: 12px;
+            line-height: 20px;
+            color: #237abd;
+            text-decoration: none;
+            background: #cfeeff;
+            font-weight: bold;
+            padding: 0 2px;
+            border: thin #99BBE8 solid;
+        }
+
+            table.list th.title {
+                height: 22px;
+                line-height: 20px;
+                color: #000000;
+                background: #169fef;
+                color: #FFFFFF;
+                border: 0;
+                border-right: 1px solid #aed8f0;
+            }
+
+            table.list th.head {
+                background: #f3f3f3;
+                color: #000000;
+                font-weight: normal;
+            }
+
+        table.list tr:hover {
+            background-color: #c6ebff;
+        }
+
+        table.list td {
+            font-size: 12px;
+            line-height: 20px;
+            color: #000000;
+            text-decoration: none;
+            border: 1px solid #aed8f0;
+        }
+
+        table.list caption {
+            font-size: 12px;
+            line-height: 18px;
+            color: #FFFFFF;
+            text-decoration: none;
+            background-color: #0582DE;
+        }
+
+    table.MonitorTable td {
+        border: thin solid #99BBE8;
+    }
+
+    table.MonitorTable th {
+        border: thin solid #99BBE8;
+        color: #237ABD;
+        font-weight: bold;
+    }
+
+    table.MonitorTable tr:hover {
+        background-color: #c6ebff;
+    }
+
+    table.MonitorTable tr {
+        line-height: 25px;
+    }
+
+    table.MonitorTable {
+        border: 1px solid #99BBE8;
+    }
+
+    table.MonitorTable {
+        table-layout: fixed;
+    }
+

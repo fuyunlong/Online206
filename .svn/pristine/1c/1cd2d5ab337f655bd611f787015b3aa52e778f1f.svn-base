@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Proxy;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserRoleController : Controller
+    {
+        //
+        // GET: /UserRole/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //查询角色信息
+        public JsonResult GetListByName(string roleName)
+        {
+            List<Proxy.ServiceWinToolRead.T_User_Role> list = ServcieTool.WinToolServiceReadInstance.GetRoleList(Pms.PmsMng.ActiveKey, roleName);
+            return Json(list);
+        }
+
+        public ActionResult RoleDetail(string Oper, string RoleCode)
+        {
+            ViewBag.RoleObj = ServcieTool.WinToolServiceReadInstance.GetRoleByCode(Pms.PmsMng.ActiveKey, RoleCode);
+            return View();
+        }
+    }
+}

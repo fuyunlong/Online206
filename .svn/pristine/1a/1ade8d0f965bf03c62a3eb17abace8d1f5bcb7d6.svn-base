@@ -1,0 +1,1560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CRMSGet" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xsd:import schemaLocation="http://test_crm.scadacn.com/Service/CrmsGetService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICRMSGet_GetCompanyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyInfoList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfoList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyInfoList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfoListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetListCompany_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompany" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetListCompany_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListCompanyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_CompanyLogo_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyLogo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_CompanyLogo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyLogoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_LogoPath_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogoPath" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_LogoPath_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_LogoToCompanyName_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogoToCompanyName" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_LogoToCompanyName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoToCompanyNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyLists_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyLists" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyLists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyListsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfigs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigs" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfigs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyID" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfig" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfigID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigID" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfigID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfigName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigName" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyConfigName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyConfigNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetListConfiginfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListConfiginfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetListConfiginfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListConfiginfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_ParmCompanyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:ParmCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_ParmCompanyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ParmCompanyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_diclEnum_InputMessage">
+    <wsdl:part name="parameters" element="tns:diclEnum" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_diclEnum_OutputMessage">
+    <wsdl:part name="parameters" element="tns:diclEnumResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSMSCompanyList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSCompanyList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSMSCompanyList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSCompanyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCityList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCityList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCityList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCityListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetProvinceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProvinceList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetProvinceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProvinceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_Queryinfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:Queryinfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_Queryinfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryinfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryisCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryisCount" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryisCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryisCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryListChild_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryListChild" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryListChild_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryListChildResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_UpdateUserPhone_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPhone" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_UpdateUserPhone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUserNames_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserNames" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUserNames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserNamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUserNameToCompanyName_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserNameToCompanyName" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUserNameToCompanyName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserNameToCompanyNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetEmployeeInfoTwo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeInfoTwo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetEmployeeInfoTwo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeInfoTwoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isUserNameAndPwd_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUserNameAndPwd" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isUserNameAndPwd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUserNameAndPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSMSInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSMSInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetParentAndSonUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetParentAndSonUser" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetParentAndSonUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetParentAndSonUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSMSUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSUserId" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSMSUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSMSUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_ExistsUserAccountByUid_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExistsUserAccountByUid" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_ExistsUserAccountByUid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExistsUserAccountByUidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isUserNameSMS_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUserNameSMS" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isUserNameSMS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUserNameSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isPhoneSMSExist_InputMessage">
+    <wsdl:part name="parameters" element="tns:isPhoneSMSExist" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isPhoneSMSExist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isPhoneSMSExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isPhoneSMS_InputMessage">
+    <wsdl:part name="parameters" element="tns:isPhoneSMS" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isPhoneSMS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isPhoneSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isUserNameAcc_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUserNameAcc" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_isUserNameAcc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUserNameAccResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_LookAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:LookAll" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_LookAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LookAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_UserPhoneArray_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserPhoneArray" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_UserPhoneArray_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserPhoneArrayResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetUserConfig_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConfig" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetUserConfig_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserConfigResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetuserConfigList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetuserConfigList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetuserConfigList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetuserConfigListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostinfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostinfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostinfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostinfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostinfoList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostinfoList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostinfoList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostinfoListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetHavePaperInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHavePaperInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetHavePaperInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHavePaperInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPaperInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaperInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPaperInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaperInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPaperInfo1_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaperInfo1" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPaperInfo1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPaperInfo1Response" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetHaveInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetHaveInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetHaveInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetHaveInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryListPaper_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryListPaper" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryListPaper_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryListPaperResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryList_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetEmployeeInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetEmployeeInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmployeeInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_UserCreditList_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserCreditList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_UserCreditList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserCreditListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAccount" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_Exist_InputMessage">
+    <wsdl:part name="parameters" element="tns:Exist" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_Exist_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_ExistCredit_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExistCredit" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_ExistCredit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExistCreditResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSexAddress_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSexAddress" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSexAddress_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSexAddressResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryImg_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryImg" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryImg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryImgResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryEmployee_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEmployee" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryEmployee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEmployeeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostEmployID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostEmployID" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetPostEmployID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPostEmployIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryEmployeeID_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEmployeeID" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryEmployeeID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEmployeeIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryEmployeeName_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEmployeeName" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryEmployeeName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryEmployeeNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryName_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryName" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryTool_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryTool" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryTool_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryToolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyUsers" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetCompanyUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCompanyUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QuerySMSAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:QuerySMSAccount" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QuerySMSAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QuerySMSAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_updatesmsAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:updatesmsAccount" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_updatesmsAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updatesmsAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSonUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSonUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetSonUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSonUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_SMSPostInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SMSPostInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_SMSPostInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SMSPostInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetAccountByPaging_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountByPaging" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetAccountByPaging_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountByPagingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetUserBalanceOfUserExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBalanceOfUserExists" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetUserBalanceOfUserExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserBalanceOfUserExistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryListTool_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryListTool" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryListTool_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryListToolResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartmentInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartmentInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartmentInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartmentInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartmentInfoList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartmentInfoList" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartmentInfoList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartmentInfoListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList1_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList1" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList1Response" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList2_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList2" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList2_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList2Response" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList3_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList3" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList3_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList3Response" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList4_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList4" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartList4_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartList4Response" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartmentNEWInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartmentNEWInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_GetDepartmentNEWInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepartmentNEWInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUserConfigInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserConfigInfo" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUserConfigInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUserConfigInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUser_UserGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUser_UserGroup" />
+  </wsdl:message>
+  <wsdl:message name="ICRMSGet_QueryUser_UserGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryUser_UserGroupResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICRMSGet">
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyInfo" message="tns:ICRMSGet_GetCompanyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyInfoResponse" message="tns:ICRMSGet_GetCompanyInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfoList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyInfoList" message="tns:ICRMSGet_GetCompanyInfoList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyInfoListResponse" message="tns:ICRMSGet_GetCompanyInfoList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetListCompany" message="tns:ICRMSGet_GetListCompany_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetListCompanyResponse" message="tns:ICRMSGet_GetListCompany_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CompanyLogo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/CompanyLogo" message="tns:ICRMSGet_CompanyLogo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/CompanyLogoResponse" message="tns:ICRMSGet_CompanyLogo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogoPath">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/LogoPath" message="tns:ICRMSGet_LogoPath_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/LogoPathResponse" message="tns:ICRMSGet_LogoPath_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogoToCompanyName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/LogoToCompanyName" message="tns:ICRMSGet_LogoToCompanyName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/LogoToCompanyNameResponse" message="tns:ICRMSGet_LogoToCompanyName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyList" message="tns:ICRMSGet_GetCompanyList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyListResponse" message="tns:ICRMSGet_GetCompanyList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyLists" message="tns:ICRMSGet_GetCompanyLists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyListsResponse" message="tns:ICRMSGet_GetCompanyLists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfigs">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigs" message="tns:ICRMSGet_GetCompanyConfigs_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigsResponse" message="tns:ICRMSGet_GetCompanyConfigs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyID" message="tns:ICRMSGet_GetCompanyID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyIDResponse" message="tns:ICRMSGet_GetCompanyID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfig" message="tns:ICRMSGet_GetCompanyConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigResponse" message="tns:ICRMSGet_GetCompanyConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfigID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigID" message="tns:ICRMSGet_GetCompanyConfigID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigIDResponse" message="tns:ICRMSGet_GetCompanyConfigID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfigName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigName" message="tns:ICRMSGet_GetCompanyConfigName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigNameResponse" message="tns:ICRMSGet_GetCompanyConfigName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListConfiginfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetListConfiginfo" message="tns:ICRMSGet_GetListConfiginfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetListConfiginfoResponse" message="tns:ICRMSGet_GetListConfiginfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ParmCompanyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/ParmCompanyInfo" message="tns:ICRMSGet_ParmCompanyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/ParmCompanyInfoResponse" message="tns:ICRMSGet_ParmCompanyInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="diclEnum">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/diclEnum" message="tns:ICRMSGet_diclEnum_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/diclEnumResponse" message="tns:ICRMSGet_diclEnum_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSCompanyList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetSMSCompanyList" message="tns:ICRMSGet_GetSMSCompanyList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetSMSCompanyListResponse" message="tns:ICRMSGet_GetSMSCompanyList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCityList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCityList" message="tns:ICRMSGet_GetCityList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetCityListResponse" message="tns:ICRMSGet_GetCityList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProvinceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetProvinceList" message="tns:ICRMSGet_GetProvinceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_CompanyInfo/GetProvinceListResponse" message="tns:ICRMSGet_GetProvinceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/GetUserInfo" message="tns:ICRMSGet_GetUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/GetUserInfoResponse" message="tns:ICRMSGet_GetUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Queryinfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/Queryinfo" message="tns:ICRMSGet_Queryinfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/QueryinfoResponse" message="tns:ICRMSGet_Queryinfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryisCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/QueryisCount" message="tns:ICRMSGet_QueryisCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/QueryisCountResponse" message="tns:ICRMSGet_QueryisCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryListChild">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/QueryListChild" message="tns:ICRMSGet_QueryListChild_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/QueryListChildResponse" message="tns:ICRMSGet_QueryListChild_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPhone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/UpdateUserPhone" message="tns:ICRMSGet_UpdateUserPhone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/UpdateUserPhoneResponse" message="tns:ICRMSGet_UpdateUserPhone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserNames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/QueryUserNames" message="tns:ICRMSGet_QueryUserNames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/QueryUserNamesResponse" message="tns:ICRMSGet_QueryUserNames_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserNameToCompanyName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/QueryUserNameToCompanyName" message="tns:ICRMSGet_QueryUserNameToCompanyName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/QueryUserNameToCompanyNameResponse" message="tns:ICRMSGet_QueryUserNameToCompanyName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeInfoTwo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/GetEmployeeInfoTwo" message="tns:ICRMSGet_GetEmployeeInfoTwo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/GetEmployeeInfoTwoResponse" message="tns:ICRMSGet_GetEmployeeInfoTwo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isUserNameAndPwd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/isUserNameAndPwd" message="tns:ICRMSGet_isUserNameAndPwd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/isUserNameAndPwdResponse" message="tns:ICRMSGet_isUserNameAndPwd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/GetSMSInfo" message="tns:ICRMSGet_GetSMSInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/GetSMSInfoResponse" message="tns:ICRMSGet_GetSMSInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParentAndSonUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/GetParentAndSonUser" message="tns:ICRMSGet_GetParentAndSonUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/GetParentAndSonUserResponse" message="tns:ICRMSGet_GetParentAndSonUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/GetSMSUserId" message="tns:ICRMSGet_GetSMSUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/GetSMSUserIdResponse" message="tns:ICRMSGet_GetSMSUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExistsUserAccountByUid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/ExistsUserAccountByUid" message="tns:ICRMSGet_ExistsUserAccountByUid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/ExistsUserAccountByUidResponse" message="tns:ICRMSGet_ExistsUserAccountByUid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isUserNameSMS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/isUserNameSMS" message="tns:ICRMSGet_isUserNameSMS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/isUserNameSMSResponse" message="tns:ICRMSGet_isUserNameSMS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isPhoneSMSExist">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/isPhoneSMSExist" message="tns:ICRMSGet_isPhoneSMSExist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/isPhoneSMSExistResponse" message="tns:ICRMSGet_isPhoneSMSExist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isPhoneSMS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/isPhoneSMS" message="tns:ICRMSGet_isPhoneSMS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/isPhoneSMSResponse" message="tns:ICRMSGet_isPhoneSMS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isUserNameAcc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/isUserNameAcc" message="tns:ICRMSGet_isUserNameAcc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/isUserNameAccResponse" message="tns:ICRMSGet_isUserNameAcc_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LookAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/LookAll" message="tns:ICRMSGet_LookAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/LookAllResponse" message="tns:ICRMSGet_LookAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserPhoneArray">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserInfo/UserPhoneArray" message="tns:ICRMSGet_UserPhoneArray_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserInfo/UserPhoneArrayResponse" message="tns:ICRMSGet_UserPhoneArray_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConfig">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserConfig/GetUserConfig" message="tns:ICRMSGet_GetUserConfig_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserConfig/GetUserConfigResponse" message="tns:ICRMSGet_GetUserConfig_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetuserConfigList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_UserConfig/GetuserConfigList" message="tns:ICRMSGet_GetuserConfigList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_UserConfig/GetuserConfigListResponse" message="tns:ICRMSGet_GetuserConfigList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostinfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_Postinfo/GetPostinfo" message="tns:ICRMSGet_GetPostinfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_Postinfo/GetPostinfoResponse" message="tns:ICRMSGet_GetPostinfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostinfoList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_Postinfo/GetPostinfoList" message="tns:ICRMSGet_GetPostinfoList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_Postinfo/GetPostinfoListResponse" message="tns:ICRMSGet_GetPostinfoList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_Postinfo/GetPostInfo" message="tns:ICRMSGet_GetPostInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_Postinfo/GetPostInfoResponse" message="tns:ICRMSGet_GetPostInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHavePaperInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetHavePaperInfo" message="tns:ICRMSGet_GetHavePaperInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetHavePaperInfoResponse" message="tns:ICRMSGet_GetHavePaperInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetPaperInfo" message="tns:ICRMSGet_GetPaperInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetPaperInfoResponse" message="tns:ICRMSGet_GetPaperInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperInfo1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetPaperInfo1" message="tns:ICRMSGet_GetPaperInfo1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetPaperInfo1Response" message="tns:ICRMSGet_GetPaperInfo1_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_HavePaperInfo/QueryUpdate" message="tns:ICRMSGet_QueryUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_HavePaperInfo/QueryUpdateResponse" message="tns:ICRMSGet_QueryUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHaveInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetHaveInfo" message="tns:ICRMSGet_GetHaveInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_HavePaperInfo/GetHaveInfoResponse" message="tns:ICRMSGet_GetHaveInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryListPaper">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_HavePaperInfo/QueryListPaper" message="tns:ICRMSGet_QueryListPaper_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_HavePaperInfo/QueryListPaperResponse" message="tns:ICRMSGet_QueryListPaper_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_HavePaperInfo/QueryList" message="tns:ICRMSGet_QueryList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_HavePaperInfo/QueryListResponse" message="tns:ICRMSGet_QueryList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetEmployeeInfo" message="tns:ICRMSGet_GetEmployeeInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetEmployeeInfoResponse" message="tns:ICRMSGet_GetEmployeeInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserCreditList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UserCreditList" message="tns:ICRMSGet_UserCreditList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/UserCreditListResponse" message="tns:ICRMSGet_UserCreditList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryAccount" message="tns:ICRMSGet_QueryAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryAccountResponse" message="tns:ICRMSGet_QueryAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Exist">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/Exist" message="tns:ICRMSGet_Exist_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ExistResponse" message="tns:ICRMSGet_Exist_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExistCredit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ExistCredit" message="tns:ICRMSGet_ExistCredit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/ExistCreditResponse" message="tns:ICRMSGet_ExistCredit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSexAddress">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetSexAddress" message="tns:ICRMSGet_GetSexAddress_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetSexAddressResponse" message="tns:ICRMSGet_GetSexAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryImg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryImg" message="tns:ICRMSGet_QueryImg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryImgResponse" message="tns:ICRMSGet_QueryImg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryEmployee">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryEmployee" message="tns:ICRMSGet_QueryEmployee_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryEmployeeResponse" message="tns:ICRMSGet_QueryEmployee_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPostEmployID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetPostEmployID" message="tns:ICRMSGet_GetPostEmployID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetPostEmployIDResponse" message="tns:ICRMSGet_GetPostEmployID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryEmployeeID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryEmployeeID" message="tns:ICRMSGet_QueryEmployeeID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryEmployeeIDResponse" message="tns:ICRMSGet_QueryEmployeeID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryEmployeeName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryEmployeeName" message="tns:ICRMSGet_QueryEmployeeName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryEmployeeNameResponse" message="tns:ICRMSGet_QueryEmployeeName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryName" message="tns:ICRMSGet_QueryName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryNameResponse" message="tns:ICRMSGet_QueryName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryTool">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryTool" message="tns:ICRMSGet_QueryTool_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryToolResponse" message="tns:ICRMSGet_QueryTool_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetCompanyUsers" message="tns:ICRMSGet_GetCompanyUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetCompanyUsersResponse" message="tns:ICRMSGet_GetCompanyUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QuerySMSAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QuerySMSAccount" message="tns:ICRMSGet_QuerySMSAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QuerySMSAccountResponse" message="tns:ICRMSGet_QuerySMSAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updatesmsAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/updatesmsAccount" message="tns:ICRMSGet_updatesmsAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/updatesmsAccountResponse" message="tns:ICRMSGet_updatesmsAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSonUserInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetSonUserInfo" message="tns:ICRMSGet_GetSonUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetSonUserInfoResponse" message="tns:ICRMSGet_GetSonUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SMSPostInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/SMSPostInfo" message="tns:ICRMSGet_SMSPostInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/SMSPostInfoResponse" message="tns:ICRMSGet_SMSPostInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountByPaging">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetAccountByPaging" message="tns:ICRMSGet_GetAccountByPaging_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetAccountByPagingResponse" message="tns:ICRMSGet_GetAccountByPaging_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBalanceOfUserExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetUserBalanceOfUserExists" message="tns:ICRMSGet_GetUserBalanceOfUserExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/GetUserBalanceOfUserExistsResponse" message="tns:ICRMSGet_GetUserBalanceOfUserExists_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryListTool">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryListTool" message="tns:ICRMSGet_QueryListTool_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_EmployeeInfo/QueryListToolResponse" message="tns:ICRMSGet_QueryListTool_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartmentInfo" message="tns:ICRMSGet_GetDepartmentInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartmentInfoResponse" message="tns:ICRMSGet_GetDepartmentInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentInfoList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartmentInfoList" message="tns:ICRMSGet_GetDepartmentInfoList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartmentInfoListResponse" message="tns:ICRMSGet_GetDepartmentInfoList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList1">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList1" message="tns:ICRMSGet_GetDepartList1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList1Response" message="tns:ICRMSGet_GetDepartList1_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList2">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList2" message="tns:ICRMSGet_GetDepartList2_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList2Response" message="tns:ICRMSGet_GetDepartList2_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList3">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList3" message="tns:ICRMSGet_GetDepartList3_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList3Response" message="tns:ICRMSGet_GetDepartList3_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList4">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList4" message="tns:ICRMSGet_GetDepartList4_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartList4Response" message="tns:ICRMSGet_GetDepartList4_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetInfo" message="tns:ICRMSGet_GetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetInfoResponse" message="tns:ICRMSGet_GetInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentNEWInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartmentNEWInfo" message="tns:ICRMSGet_GetDepartmentNEWInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_DepartMent/GetDepartmentNEWInfoResponse" message="tns:ICRMSGet_GetDepartmentNEWInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserConfigInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_Config/QueryUserConfigInfo" message="tns:ICRMSGet_QueryUserConfigInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_Config/QueryUserConfigInfoResponse" message="tns:ICRMSGet_QueryUserConfigInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUser_UserGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/IT_User_UserGroup/QueryUser_UserGroup" message="tns:ICRMSGet_QueryUser_UserGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IT_User_UserGroup/QueryUser_UserGroupResponse" message="tns:ICRMSGet_QueryUser_UserGroup_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICRMSGet" type="tns:ICRMSGet">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCompanyInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfoList">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyInfoList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListCompany">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetListCompany" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyLogo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/CompanyLogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogoPath">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/LogoPath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogoToCompanyName">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/LogoToCompanyName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyList">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyLists">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyLists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfigs">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyID">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfig">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfigID">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyConfigName">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCompanyConfigName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListConfiginfo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetListConfiginfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ParmCompanyInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/ParmCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="diclEnum">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/diclEnum" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSCompanyList">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetSMSCompanyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCityList">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetCityList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProvinceList">
+      <soap:operation soapAction="http://tempuri.org/IT_CompanyInfo/GetProvinceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/GetUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Queryinfo">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/Queryinfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryisCount">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/QueryisCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryListChild">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/QueryListChild" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPhone">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/UpdateUserPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserNames">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/QueryUserNames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserNameToCompanyName">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/QueryUserNameToCompanyName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeInfoTwo">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/GetEmployeeInfoTwo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUserNameAndPwd">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/isUserNameAndPwd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/GetSMSInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParentAndSonUser">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/GetParentAndSonUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSMSUserId">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/GetSMSUserId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistsUserAccountByUid">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/ExistsUserAccountByUid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUserNameSMS">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/isUserNameSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isPhoneSMSExist">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/isPhoneSMSExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isPhoneSMS">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/isPhoneSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUserNameAcc">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/isUserNameAcc" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LookAll">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/LookAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserPhoneArray">
+      <soap:operation soapAction="http://tempuri.org/IT_UserInfo/UserPhoneArray" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserConfig">
+      <soap:operation soapAction="http://tempuri.org/IT_UserConfig/GetUserConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetuserConfigList">
+      <soap:operation soapAction="http://tempuri.org/IT_UserConfig/GetuserConfigList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostinfo">
+      <soap:operation soapAction="http://tempuri.org/IT_Postinfo/GetPostinfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostinfoList">
+      <soap:operation soapAction="http://tempuri.org/IT_Postinfo/GetPostinfoList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_Postinfo/GetPostInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHavePaperInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_HavePaperInfo/GetHavePaperInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_HavePaperInfo/GetPaperInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaperInfo1">
+      <soap:operation soapAction="http://tempuri.org/IT_HavePaperInfo/GetPaperInfo1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUpdate">
+      <soap:operation soapAction="http://tempuri.org/IT_HavePaperInfo/QueryUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHaveInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_HavePaperInfo/GetHaveInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryListPaper">
+      <soap:operation soapAction="http://tempuri.org/IT_HavePaperInfo/QueryListPaper" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryList">
+      <soap:operation soapAction="http://tempuri.org/IT_HavePaperInfo/QueryList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmployeeInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/GetEmployeeInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserCreditList">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/UserCreditList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryAccount">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Exist">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/Exist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExistCredit">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/ExistCredit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSexAddress">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/GetSexAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryImg">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryImg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryEmployee">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryEmployee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPostEmployID">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/GetPostEmployID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryEmployeeID">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryEmployeeID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryEmployeeName">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryEmployeeName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryName">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTool">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryTool" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyUsers">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/GetCompanyUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QuerySMSAccount">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QuerySMSAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updatesmsAccount">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/updatesmsAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSonUserInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/GetSonUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SMSPostInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/SMSPostInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountByPaging">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/GetAccountByPaging" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBalanceOfUserExists">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/GetUserBalanceOfUserExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryListTool">
+      <soap:operation soapAction="http://tempuri.org/IT_EmployeeInfo/QueryListTool" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetDepartmentInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentInfoList">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetDepartmentInfoList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList1">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetDepartList1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList2">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetDepartList2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList3">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetDepartList3" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartList4">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetDepartList4" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDepartmentNEWInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_DepartMent/GetDepartmentNEWInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserConfigInfo">
+      <soap:operation soapAction="http://tempuri.org/IT_User_Config/QueryUserConfigInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUser_UserGroup">
+      <soap:operation soapAction="http://tempuri.org/IT_User_UserGroup/QueryUser_UserGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CRMSGet">
+    <wsdl:port name="BasicHttpBinding_ICRMSGet" binding="tns:BasicHttpBinding_ICRMSGet">
+      <soap:address location="http://test_crm.scadacn.com/Service/CrmsGetService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

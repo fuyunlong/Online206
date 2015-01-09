@@ -1,0 +1,243 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.DB.SqlHelper;
+using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class VipDtuDevice
+    {
+
+        /// 增加一条数据
+        public int Add(T_DTU_Device model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into [Infa]..[T_DTU_Device](");
+            strSql.Append("DeviceName,Dtuid,DeviceBrand,DeviceSN,ModelCode,DeviceParams,ProduceDate,DeviceSupplier,Memo,UpdateFlag)");
+            strSql.Append(" values (");
+            strSql.Append("@DeviceName,@Dtuid,@DeviceBrand,@DeviceSN,@ModelCode,@DeviceParams,@ProduceDate,@DeviceSupplier,@Memo,@UpdateFlag)");
+            strSql.Append(";select @@IDENTITY");
+            SqlParameter[] parameters = {
+					new SqlParameter("@DeviceName", SqlDbType.VarChar,50),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@DeviceBrand", SqlDbType.VarChar,50),
+					new SqlParameter("@DeviceSN", SqlDbType.VarChar,50),
+					new SqlParameter("@ModelCode", SqlDbType.VarChar,50),
+					new SqlParameter("@DeviceParams", SqlDbType.NVarChar,120),
+					new SqlParameter("@ProduceDate", SqlDbType.DateTime),
+					new SqlParameter("@DeviceSupplier", SqlDbType.VarChar,50),
+					new SqlParameter("@Memo", SqlDbType.NVarChar,100),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4)};
+            parameters[0].Value = model.DeviceName;
+            parameters[1].Value = model.Dtuid;
+            parameters[2].Value = model.DeviceBrand;
+            parameters[3].Value = model.DeviceSN;
+            parameters[4].Value = model.ModelCode;
+            parameters[5].Value = model.DeviceParams;
+            parameters[6].Value = model.ProduceDate;
+            parameters[7].Value = model.DeviceSupplier;
+            parameters[8].Value = model.Memo;
+            parameters[9].Value = model.UpdateFlag;
+
+            object obj = DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (obj == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return Convert.ToInt32(obj);
+            }
+        }
+
+        /// 更新一条数据
+        public bool Update(T_DTU_Device model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_DTU_Device] set ");
+            strSql.Append("DeviceName=@DeviceName,");
+            strSql.Append("Dtuid=@Dtuid,");
+            strSql.Append("DeviceBrand=@DeviceBrand,");
+            strSql.Append("DeviceSN=@DeviceSN,");
+            strSql.Append("ModelCode=@ModelCode,");
+            strSql.Append("DeviceParams=@DeviceParams,");
+            strSql.Append("ProduceDate=@ProduceDate,");
+            strSql.Append("DeviceSupplier=@DeviceSupplier,");
+            strSql.Append("Memo=@Memo,");
+            strSql.Append("UpdateFlag=@UpdateFlag");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@DeviceName", SqlDbType.VarChar,50),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@DeviceBrand", SqlDbType.VarChar,50),
+					new SqlParameter("@DeviceSN", SqlDbType.VarChar,50),
+					new SqlParameter("@ModelCode", SqlDbType.VarChar,50),
+					new SqlParameter("@DeviceParams", SqlDbType.NVarChar,120),
+					new SqlParameter("@ProduceDate", SqlDbType.DateTime),
+					new SqlParameter("@DeviceSupplier", SqlDbType.VarChar,50),
+					new SqlParameter("@Memo", SqlDbType.NVarChar,100),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@Id", SqlDbType.Int,4)};
+            parameters[0].Value = model.DeviceName;
+            parameters[1].Value = model.Dtuid;
+            parameters[2].Value = model.DeviceBrand;
+            parameters[3].Value = model.DeviceSN;
+            parameters[4].Value = model.ModelCode;
+            parameters[5].Value = model.DeviceParams;
+            parameters[6].Value = model.ProduceDate;
+            parameters[7].Value = model.DeviceSupplier;
+            parameters[8].Value = model.Memo;
+            parameters[9].Value = model.UpdateFlag;
+            parameters[10].Value = model.Id;
+
+            int rows = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        /// 删除一条数据
+        public bool Delete(int Id)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from [Infa]..[T_DTU_Device] ");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+};
+            parameters[0].Value = Id;
+
+            int rows = DBHelper.ExecuteNonQuery(DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        /// 得到一个对象实体
+        public T_DTU_Device GetModel(int Id)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Id,DeviceName,Dtuid,DeviceBrand,DeviceSN,ModelCode,DeviceParams,ProduceDate,DeviceSupplier,Memo,UpdateFlag from [Infa]..[T_DTU_Device] ");
+            strSql.Append(" where Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+};
+            parameters[0].Value = Id;
+
+            T_DTU_Device model = null;
+            using (IDataReader dr = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if (dr.Read())
+                {
+                    model = IDataT_DTU_DeviceReader(dr);
+                }
+            }
+            return model;
+        }
+
+        public T_DTU_Device_Ex GetExModel(int Id)
+        {
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT  a.*,c.CompanyId ");
+            SqlStr.Append("FROM [Infa]..[T_DTU_Device] as a left join [Infa]..[T_DTU]  as b on a.Dtuid=b.Dtuid left join ");
+            SqlStr.Append("[Infa]..[T_DTU_Group] as c on b.GroupCode=c.GroupCode where a.Id=@Id");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Id", SqlDbType.Int,4)
+};
+            parameters[0].Value = Id;
+            T_DTU_Device_Ex model = new T_DTU_Device_Ex();
+            using (IDataReader dr = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), parameters))
+            {
+                if (dr.Read())
+                {         
+                    model.device = IDataT_DTU_DeviceReader(dr);
+                    model.CompanyId = dr["CompanyId"].ToString();
+                    model.Date = (dr["ProduceDate"] is DBNull) ? DateTime.MinValue.ToString("yyyy-MM-dd HH:mm:ss") : Convert.ToDateTime(dr["ProduceDate"].ToString()).ToString("yyyy-MM-dd HH:mm:ss");
+                }
+            }
+            return model;
+        }
+
+        /// T_DTU_Device 数据读取
+        private T_DTU_Device IDataT_DTU_DeviceReader(IDataReader dr)
+        {
+            T_DTU_Device model = new T_DTU_Device();
+            try
+            {
+                model.Id = (dr["Id"] is DBNull) ? 0 : Convert.ToInt32(dr["Id"].ToString());
+                model.DeviceName = (dr["DeviceName"] is DBNull) ? string.Empty : dr["DeviceName"].ToString();
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.DeviceBrand = (dr["DeviceBrand"] is DBNull) ? string.Empty : dr["DeviceBrand"].ToString();
+                model.DeviceSN = (dr["DeviceSN"] is DBNull) ? string.Empty : dr["DeviceSN"].ToString();
+                model.ModelCode = (dr["ModelCode"] is DBNull) ? string.Empty : dr["ModelCode"].ToString();
+                model.DeviceParams = (dr["DeviceParams"] is DBNull) ? string.Empty : dr["DeviceParams"].ToString();
+                model.ProduceDate = (dr["ProduceDate"] is DBNull) ? DateTime.MinValue : Convert.ToDateTime(dr["ProduceDate"].ToString());
+                model.DeviceSupplier = (dr["DeviceSupplier"] is DBNull) ? string.Empty : dr["DeviceSupplier"].ToString();
+                model.Memo = (dr["Memo"] is DBNull) ? string.Empty : dr["Memo"].ToString();
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+            return model;
+        }
+
+        public List<T_DTU_Device> GetVipDeviceList(string Dtuid)
+        {
+            List<T_DTU_Device> list = new List<T_DTU_Device>();
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append("SELECT * FROM [Infa]..[T_DTU_Device] ");
+                if (Dtuid != "0")
+                {
+                    SqlStr.Append(" where Dtuid=@Dtuid");
+                }
+                SqlParameter[] pars ={
+                                new SqlParameter("@Dtuid",Dtuid)
+                                };
+                using (var reader = DBHelper.ExecuteReader(DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+                {
+                    if (reader != null)
+                    {
+                        while (reader.Read())
+                        {
+                            var model = IDataT_DTU_DeviceReader(reader);
+                            if (model != null)
+                            {
+                                list.Add(model);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+    }
+}

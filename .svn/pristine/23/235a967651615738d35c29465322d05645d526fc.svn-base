@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class PreLevelController : Controller
+    {
+        //压力等级
+        // GET: /PreLevel/
+
+        public ActionResult Index()
+        {
+
+            return View();
+        }
+
+        //获取压力等级列表
+        [HttpPost]
+        public JsonResult GetLevelList(string LevelName)
+        {
+            var list = new ServiceProxyRead().GetProxy().GetPressureLevelList(PmsMng.ActiveKey, LevelName);
+            return Json(list);
+        }
+
+        //添加压力等级
+        [HttpGet]
+        public ActionResult ShowPreLevel(string id ="")
+        {
+            ViewBag.OperArea = "";
+            switch(id)
+            {
+                case "Add":
+                    ViewBag.OperArea = "<input type=button value='添加'>  <input type=button value='取消'>";
+                    break;
+                case "Edit":
+                    ViewBag.OperArea = "<input type=button value='修改'>  <input type=button value='取消'>";
+                    break;
+                default:
+                    break;
+            }
+            return View();
+        }
+    }
+}

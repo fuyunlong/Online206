@@ -1,0 +1,36 @@
+﻿var FiledMng = {
+    //获取字段列表
+    GetFiledList: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: $("#SiteName").val(), SiteFiled: $("#FiledName").val() },
+            url: "/FieldInfo/GetFiledList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_TextCenter com_disnote'>" + data[i].Dtuid + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].ColName + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].FieldName + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].FieldUnit + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].ValueMin + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].ValueMax + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].Lowlimit + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + data[i].Highlimit + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + (data[i].IsAlert == 1 ? "是" : "否") + "</td>";
+                    Str += "<td class=' com_TextCenter com_disnote'>" + (data[i].IsCollect == 1 ? "是" : "否") + "</td>";
+                    Str += "<td class='com_TextCenter'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司查看',0.8,0.8,'FieldInfo/FieldInfoDetail/Show/" + data[i].Dtuid + "/"+data[i].FieldName+"')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司修改',0.8,0.8,'FieldInfo/FieldInfoDetail/Edit/" + data[i].Dtuid + "/"+data[i].FieldName+"')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司删除',0.8,0.8,'FieldInfo/FieldInfoDetail/Delete/" + data[i].Dtuid + "/" + data[i].FieldName + "')>删除|</a> ";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    }
+}

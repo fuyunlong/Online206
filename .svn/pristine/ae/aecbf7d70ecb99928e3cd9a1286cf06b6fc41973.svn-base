@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserInfoController : Controller
+    {
+        //
+        // GET: /UserInfo/
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据分组编码查询站点信息
+        public JsonResult GetDTUByGroupCode(string groupCode)
+        {
+            List<T_DTU> list = new ServiceProxyRead().GetProxy().GetDTUListByGroupCode("", groupCode);
+            return Json(list);
+        }
+
+        //根据站点编号查找用户信息
+        public JsonResult GetUserInfoByDtuId(string dtuId)
+        {
+            List<T_User_Info> list = new ServiceProxyRead().GetProxy().GetUserListByDTUId("", dtuId);
+            return Json(list);
+        }
+
+        //添加
+        public string Add(T_User_UserDtuid model)
+        {
+            string result = "false";
+            T_User_UserDtuid user = new T_User_UserDtuid();
+            user.UserId = model.UserId;
+            user.Dtuid = model.Dtuid;
+            user.Status = 1;
+
+            if (new ServiceProxyWrite().GetProxy().AddDTUUser("", user))
+            {
+                result = "true";
+            }
+            return result;
+        }
+
+        //删除
+        public string Delete(string userId, string dtuId)
+        {
+            string result = "false";
+
+            if (new ServiceProxyWrite().GetProxy().DeleteDTUUser("", userId, dtuId))
+            {
+                result = "true";
+            }
+            return result;
+        }
+    }
+}

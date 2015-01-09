@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_ICRMSPost" />
+                <binding name="BasicHttpBinding_IWinfoToolServiceRead" />
+                <binding name="BasicHttpBinding_IWinfoToolServiceWrite" />
+                <binding name="BasicHttpBinding_ICRMSGet" />
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://test_crm.scadacn.com/Service/CrmsPostService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ICRMSPost"
+                contract="CrmServicePost.ICRMSPost" name="BasicHttpBinding_ICRMSPost" />
+            <endpoint address="http://test_tool.scadacn.com/WinfoToolServiceRead.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IWinfoToolServiceRead"
+                contract="ServiceWinToolRead.IWinfoToolServiceRead" name="BasicHttpBinding_IWinfoToolServiceRead" />
+            <endpoint address="http://test_tool.scadacn.com/WinfoToolServiceWrite.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IWinfoToolServiceWrite"
+                contract="ServiceWinToolWrite.IWinfoToolServiceWrite" name="BasicHttpBinding_IWinfoToolServiceWrite" />
+            <endpoint address="http://test_crm.scadacn.com/Service/CrmsGetService.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_ICRMSGet"
+                contract="CrmServiceGet.ICRMSGet" name="BasicHttpBinding_ICRMSGet" />
+        </client>
+    </system.serviceModel>
+</configuration>

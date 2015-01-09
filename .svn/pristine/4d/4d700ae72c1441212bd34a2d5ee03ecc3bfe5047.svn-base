@@ -1,0 +1,39 @@
+﻿using Com.Winfotian.DB.Provider;
+using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Com.Winfotian.TestAPI
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<T_DTU_FieldDesc> list = new List<T_DTU_FieldDesc>();
+            list.Add(new T_DTU_FieldDesc {
+                Dtuid = "1",
+                ColName = "1",
+                FieldDesc = "1",
+                FieldName = "1",
+                FieldShortDesc = "1",
+                 FieldType=1,
+                FieldUnit = "1",
+                 Highlimit=1,
+                Hihilimit = 1,
+                IsAlert = 1,
+                IsCollect = 1,
+                IsShow = 1,
+                KeyValues = "1",
+                Lololimit = 1,
+                Lowlimit = 1,
+                OrderId = 1,
+                ParentId = 0,
+                UpdateFlag = 1, ValueInOrOut=1, ValueMax=1, ValueMin=1
+            });
+            new FieldProvider().AddDtuFiledDescBatch(list);
+        }
+    }
+}

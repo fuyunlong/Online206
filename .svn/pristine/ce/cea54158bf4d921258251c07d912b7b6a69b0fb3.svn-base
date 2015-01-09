@@ -1,0 +1,5 @@
+@echo off
+sc create "MonitorService" type= interact type= own start= auto binPath= "%cd%\InfaMonitor.exe"
+sc description "MonitorService" "MonitorService"
+net start "MonitorService"
+pause

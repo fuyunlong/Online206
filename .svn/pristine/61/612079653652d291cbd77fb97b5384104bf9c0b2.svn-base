@@ -1,0 +1,92 @@
+﻿var HeartRecord = {
+    //查询站点列表
+    GetSiteList: function () {
+        $.ajax({
+            type: "post",
+            url: "/HeartBeat/GetDTUList",
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询站点信息失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "<option value=''>--全部--</option>";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<option value=" + data[i].Dtuid + ">" + data[i].DtuidName + "</option>";
+                }
+                $("#ddlSite").html(str);
+            }
+        });
+    },
+    //站点下拉列表变化
+    SiteChanged: function (dtuId) {
+        if (dtuId == "") {
+            $("#txtDate").parent("span").css("display", "none");
+        }
+        else {
+            var date = new Date();
+            var year = date.getFullYear();
+            var mouth = date.getMonth() + 1;
+            var day = date.getDate();
+            if (mouth < 10) {
+                mouth = "0" + mouth;
+            }
+            if (day < 10) {
+                day = "0" + day;
+            }
+            date = year + '-' + mouth + '-' + day;
+
+            $("#txtDate").val(date);
+            $("#txtDate").parent("span").css("display", "inline");
+        }
+    },
+    //日历控件
+    SetDateCtrl: function () {
+        return WdatePicker({ dateFmt: 'yyyy-MM-dd' });
+    },
+    //查询心跳记录
+    SearchHeartRecord: function () {
+        var dtuId = $("#ddlSite").val();
+        var date = $("#txtDate").val();
+        if (dtuId == "") {
+            $.ajax({
+                type: "post",
+                url: "/HeartBeat/GetBeatRecordList",
+                dataType: "json",
+                error: function (ex) {
+                    Common.MsgBox("查询心跳记录失败,请稍后再试" + ex.responseText);
+                },
+                success: function (data) {
+                    var str = "";
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<tr>";
+                        str += "<td class='com_TextCenter'>" + data[i].DtuidName + "</td>";
+                        str += "<td class='com_TextCenter'></td>";
+                        str += "</tr>";
+                    }
+                    $("#RecordList tbody").html(str);
+                }
+            });
+        }
+        else {
+            $.ajax({
+                type: "post",
+                url: "/HeartBeat/GetBeatRecordListByDTUId",
+                data: { dtuId: dtuId, date: date },
+                dataType: "json",
+                error: function (ex) {
+                    Common.MsgBox("查询心跳记录失败,请稍后再试" + ex.responseText);
+                },
+                success: function (data) {
+                    var str = "";
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<tr>";
+                        str += "<td class='com_TextCenter'>" + $("#ddlSite option:selected").text() + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i] + "</td>";
+                        str += "</tr>";
+                    }
+                    $("#RecordList tbody").html(str);
+                }
+            });
+        }
+    }
+};

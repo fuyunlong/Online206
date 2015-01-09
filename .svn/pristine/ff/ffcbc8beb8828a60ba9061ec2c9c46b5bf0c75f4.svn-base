@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>字段管理（加强）</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+    <script src="~/Scripts/FieldMng/FiledMng.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //初始化
+            $("#tbDiv").css("height", $(window).height() * 0.87);
+            new comTab().fnInit();
+
+            //获取公司、分组
+            Common.GetCompany($("#ddlCompany"), function () { Common.GetGroup($("#ddlGroup"), $("#ddlCompany").val(), null); });
+
+            //查询
+            $("#btnQuery").click(function () {
+                Search();
+                new comTab().fnResizeTable();
+            });
+        });
+
+        //查询
+        function Search() {
+            $.ajax({
+                type: "post",
+                data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: "" },
+                url: "/FieldInfo/GetFiledList",
+                dataType: "json",
+                error: function () {
+                    alert("查询字段信息失败,请稍后再试");
+                },
+                success: function (data) {
+                    var str = "";
+                    for (var i = 0; i < data.length; i++) {
+                        str += "<tr>";
+                        str += "<td class='com_TextCenter'>" + data[i].Dtuid + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i].ColName + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i].FieldName + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i].FieldUnit + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i].ValueMin + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i].ValueMax + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i].Lowlimit + "</td>";
+                        str += "<td class='com_TextCenter'>" + data[i].Highlimit + "</td>";
+                        str += "<td class='com_TextCenter'>" + (data[i].IsAlert == 1 ? "是" : "否") + "</td>";
+                        str += "<td class='com_TextCenter'>" + (data[i].IsCollect == 1 ? "是" : "否") + "</td>";
+                        str += "</tr>";
+                    }
+                    $("#FieldList tbody").html(str);
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="$('#loading').hide()">
+    <div class="com_TextCenter com_font13Px com_DivBorderGray">
+        所属公司&nbsp;<select class="com_w15pen" id="ddlCompany" onchange="Common.GetGroup($('#ddlGroup'), $('#ddlCompany').val(), null);"></select>
+        所属分组&nbsp;<select class="com_w15pen" id="ddlGroup"></select>
+        <input type="button" value="查询" class="buttonVer2" id="btnQuery" /><br />
+        <input type="file" id="file" name="file" />
+        <input type="button" value="上传" onclick="">
+        <a href="~/File/字段导入模板.xls">模板下载</a>
+    </div>
+    <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+        <table id="FieldList" class="ui-com-tab" rules="all">
+            <thead>
+                <tr align="left" class="panel-header">
+                    <th class=' com_TextCenter'>
+                        编号
+                    </th>
+                    <th class="com_TextCenter">
+                        采集名称
+                    </th>
+                    <th class='com_TextCenter'>
+                        名称
+                    </th>
+                    <th class='com_TextCenter'>
+                        单位
+                    </th>
+                    <th class='com_TextRight'>
+                        最小值
+                    </th>
+                    <th class='com_TextRight'>
+                        最大值
+                    </th>
+                    <th class='com_TextRight'>
+                        高报警值
+                    </th>
+                    <th class='com_TextRight'>
+                        低报警值
+                    </th>
+                    <th class='com_TextCenter'>
+                        报警检查
+                    </th>
+                    <th class='com_TextCenter'>
+                        开启采集
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+</html>

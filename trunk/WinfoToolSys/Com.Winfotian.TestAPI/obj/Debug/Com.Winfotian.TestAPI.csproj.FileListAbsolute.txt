@@ -1,0 +1,13 @@
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\obj\Debug\Com.Winfotian.TestAPI.csprojResolveAssemblyReference.cache
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\Com.Winfotian.TestAPI.exe.config
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\Com.Winfotian.TestAPI.exe
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\Com.Winfotian.TestAPI.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\Com.Winfotian.DB.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\Com.Winfotian.Model.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\ServiceProxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\InfaCommon.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\InfaEncrypt.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\obj\Debug\Com.Winfotian.TestAPI.exe
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\obj\Debug\Com.Winfotian.TestAPI.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\Com.Winfotian.DB.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.TestAPI\bin\Debug\Com.Winfotian.Model.pdb

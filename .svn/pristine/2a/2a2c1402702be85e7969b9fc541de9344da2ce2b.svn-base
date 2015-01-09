@@ -1,0 +1,33 @@
+﻿using Com.Winfotian.DB.Provider;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Com.Winfotian.TestAPI
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            new DtuProvider().UpdateSiteAndSetting(new Com.Winfotian.Model.T_DTU { 
+              
+                 DataInterval=1,
+                  DayFrom=8,
+                 Dtuid ="00000003",
+                  DtuidLocation="成都",
+                   DtuidName="测试003",
+                    FlowType="winfo", FlowBrand="winfo",
+                     Latitude=1,
+                      LgPwd="123456",
+                       Longitude=1,
+                        MonthFrom=3, 
+                         PressureLevel="4",
+
+                     
+                     
+            });
+        }
+    }
+}

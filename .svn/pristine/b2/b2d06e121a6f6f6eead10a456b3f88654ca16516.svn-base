@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
+using Com.Winfotian.Proxy;
+using Com.Winfotian.ServiceProxy;
+
+
+namespace Com.Winfotian.TestAPI
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var list = CommonServiceProxy.GetRecentlyBeatRecordList("182.139.161.28");
+            Console.Read();
+        }
+    }
+}

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="SysCode" value="WinfoTool"/>
+  </appSettings>
+  <connectionStrings>
+    <!--只读库连接字符串-->
+    <add name="ConnOnlyrRead" connectionString="A20B4AC0896FCE0CEF53059591DFF8801C48A52F81003DACF3F78989F50934A420D9E7DCFCDF088BF315A715608D346C52D57A689D69340AC9A9889172E6A55E2E2D1A121CEE5926E1CDDB92BA5F048CFB" providerName="System.Data.EntityClient"/>
+    <!--只写库连接字符串-->
+    <add name="ConnOnlyrWrite" connectionString="A20B4AC0896FCE0CEF53059591DFF8801C48A52F81003DACF3F78989F50934A420D9E7DCFCDF088BF315A715608D346C52D57A689D69340AC9A9889172E6A55E2E2D1A121CEE5926E1CDDB92BA5F048CFB" providerName="System.Data.EntityClient"/>
+  </connectionStrings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.0"/>
+    <httpRuntime/>
+    <httpModules>
+      <add name="PermissionModule" type="Winfotian.Permission.HttpModule.PermissionModule, Winfotian.Permission.HttpModule"/>
+    </httpModules>
+  </system.web>
+  <system.serviceModel>
+    <client />
+    <services>
+      <!--只读服务-->
+      <service name="Com.Winfotian.Service.WinfoToolServiceRead">
+        <endpoint address="" binding="basicHttpBinding" bindingConfiguration="basicBinding"  contract="Com.Winfotian.Service.IWinfoToolServiceRead"/>
+      </service>
+      <!--只写服务-->
+      <service name="Com.Winfotian.Service.WinfoToolServiceWrite">
+        <endpoint address="" bindingConfiguration="basicBinding"  binding="basicHttpBinding" contract="Com.Winfotian.Service.IWinfoToolServiceWrite" />
+      </service>
+    </services>
+    <behaviors>
+      <serviceBehaviors>
+        <behavior>
+          <serviceMetadata httpGetEnabled="true" httpsGetEnabled="true"/>
+          <serviceDebug includeExceptionDetailInFaults="true"/>
+         <dataContractSerializer maxItemsInObjectGraph="2147483647" />
+        </behavior>
+      </serviceBehaviors>
+    </behaviors>
+    <bindings>
+      <basicHttpBinding>
+        <binding name="basicBinding" closeTimeout="00:05:00" openTimeout="00:10:00"
+          receiveTimeout="00:20:00" sendTimeout="00:30:00" allowCookies="false"
+          bypassProxyOnLocal="false" hostNameComparisonMode="StrongWildcard"
+          maxBufferPoolSize="52428800" maxBufferSize="26214400" maxReceivedMessageSize="26214400"
+          textEncoding="utf-8" transferMode="Buffered" useDefaultWebProxy="true"
+          messageEncoding="Text">
+          <readerQuotas maxDepth="32" maxStringContentLength="819200" maxArrayLength="16384"
+            maxBytesPerRead="409600" maxNameTableCharCount="16384" />
+        </binding>
+      </basicHttpBinding>
+    </bindings>
+    
+    <protocolMapping>
+      <add binding="basicHttpsBinding" scheme="https"/>
+    </protocolMapping>
+    <serviceHostingEnvironment aspNetCompatibilityEnabled="false" multipleSiteBindingsEnabled="true"/>
+  </system.serviceModel>
+  <system.webServer>
+    <validation validateIntegratedModeConfiguration="false"/>
+  </system.webServer>
+</configuration>

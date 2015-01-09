@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class PreLevelController : Controller
+    {
+        //压力等级
+        // GET: /PreLevel/
+
+        public ActionResult Index()
+        {
+
+            return View();
+        }
+        [HttpPost]
+        public bool AddLevel(string Oper, string ConfigId)
+        {
+            T_DTU_PressureLevel model = new T_DTU_PressureLevel
+            {
+                PressureDesc = ConfigId,
+                PressureName = Oper,
+                UpdateFlag = 1,
+                Status = 1
+            };
+            EmReStatus state = new ServiceProxyWrite().GetProxy().AddLevel(PmsMng.ActiveKey, PmsMng.LogUser, model);
+            if(state == EmReStatus.success)
+                return true;
+            return false;
+        }
+
+        //获取压力等级列表
+        [HttpPost]
+        public JsonResult GetLevelList(string LevelName)
+        {
+            LevelName = HttpUtility.UrlDecode(LevelName);
+            var list = new ServiceProxyRead().GetProxy().GetPressureLevelList(PmsMng.ActiveKey, LevelName);
+            return Json(list);
+        }
+        //获取压力等级model
+        [HttpPost]
+        public JsonResult GetOneLevel(int id)
+        {
+            var model = new ServiceProxyRead().GetProxy().GetOnePressureLevel(PmsMng.ActiveKey, id);
+            return Json(model);
+        }
+        
+        //添加压力等级
+        [HttpGet]
+        public ActionResult ShowPreLevel(string Oper, string id)
+        {
+            ViewBag.OperArea = "";
+            switch(Oper)
+            {
+                case "Add":
+                    ViewBag.OperArea = "<input type='button' class='buttonVer2' name='add' value='添加'>  <input type='button' class='buttonVer2' name='cancel' value='取消'>";
+                    break;
+                case "Edit":
+                    ViewBag.OperArea = "<input type='button' class='buttonVer2' name='update' value='修改'>  <input type='button' class='buttonVer2' name='cancel' value='取消'>";
+                    break;
+                case"Show":
+                default:
+                    break;
+            }
+            return View();
+        }
+
+    }
+}

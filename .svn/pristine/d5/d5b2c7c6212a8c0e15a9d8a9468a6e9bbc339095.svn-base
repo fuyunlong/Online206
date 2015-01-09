@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>站点管理</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/Site.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/Common.js"></script>
+        <script src="~/Scripts/SiteMng/VipDevice.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $("#filedComList").css("height", $("#divRight").css("height"));
+                $("#tbDiv").css("height", $(window).height() * 0.87);
+                Common.GetProvince();
+                new comTab().fnInit();
+            });
+        </script>
+    </head>
+    <body>
+        <div class=" com_TextCenter com_font13Px com_DivBorderGray">
+            所属公司:<select class="com_w15pen" id="Company" onchange="VipDevice.GetSiteList(this.value)">
+                @{
+                    foreach(var a in ViewBag.CompanyList)
+                    {
+                    <option value=@a.CompanyId>@a.CompanyName</option>
+                    }
+                }
+            </select>
+            站点名称:<select class="com_w15pen" id="SiteName">
+            </select>
+            <input type="button" value="查询" class="buttonVer2" onclick="VipDevice.GetVipDevice()" />
+            <input type="button" class="buttonVer2" value="添加" />
+        </div>
+        <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+            <table id="ComList" class="ui-com-tab" rules="all">
+                    <thead>
+                        <tr align="left" class="panel-header">
+                            <th class=' com_TextCenter com_w10pen'>
+                                站点编号
+                            </th>
+                            <th class="com_TextCenter com_w25pen">
+                                站点名称
+                            </th>
+                            <th class='com_TextCenter com_w12pen'>
+                                调压站品牌
+                            </th>
+                            <th class='com_TextCenter com_w12pen'>
+                                调压站供应商
+                            </th>
+                            <th class='com_TextCenter'>
+                                流量计型号
+                            </th>
+                            <th class='com_TextCenter com_w15pen'>
+                                操作
+                            </th>
+                            </tr>
+                    </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="dd"></div>
+        <div id="loading"></div>
+    </body>
+</html>

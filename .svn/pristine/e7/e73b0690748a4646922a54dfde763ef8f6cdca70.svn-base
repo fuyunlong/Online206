@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://schemas.microsoft.com/ws/2005/02/mex/bindings" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PermissionWCF" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="compress_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="http://schemas.microsoft.com/ws/2005/02/mex/bindings" location="http://test_pms.scadacn.com/service/PermissionWCF.svc?wsdl=wsdl0" />
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Winfotian.Permission.Model" />
+      <xsd:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Winfotian.Permission.Web.Service" />
+      <xsd:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Winfotian.Permission.Model.Dto" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPermissionWCF_CheckPermission_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPermission" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_CheckPermission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_CheckResPermission_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckResPermission" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_CheckResPermission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckResPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_HasPermission_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasPermission" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_HasPermission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_HasPermissionWithPwd_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasPermissionWithPwd" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_HasPermissionWithPwd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasPermissionWithPwdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_HasResPermission_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasResPermission" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_HasResPermission_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasResPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedResourceIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedResourceIds" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedResourceIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedResourceIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllResourceIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResourceIds" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllResourceIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResourceIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedResourceDTO_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedResourceDTO" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedResourceDTO_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedResourceDTOResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllResourceDTO_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResourceDTO" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllResourceDTO_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResourceDTOResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllAppResourceDto_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAppResourceDto" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllAppResourceDto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAppResourceDtoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedAppResourceByPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedAppResourceByPage" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedAppResourceByPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedAppResourceByPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedAppResource_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedAppResource" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetGrantedAppResource_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGrantedAppResourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserId" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserById" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_ValidateLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateLogin" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_ValidateLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_ValidateLoginWithTimeOut_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateLoginWithTimeOut" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_ValidateLoginWithTimeOut_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateLoginWithTimeOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserRolesByDomain_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRolesByDomain" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserRolesByDomain_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRolesByDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightList" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightListByTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightListByTable" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightListByTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightListByTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightListByField_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightListByField" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightListByField_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightListByFieldResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightConditionStr_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightConditionStr" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightConditionStr_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightConditionStrResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightConditionStrByTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightConditionStrByTable" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightConditionStrByTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightConditionStrByTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightConditionStrByField_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightConditionStrByField" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserDataRightConditionStrByField_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserDataRightConditionStrByFieldResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetMenuRightList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuRightList" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetMenuRightList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuRightListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_CheckMenuPms_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckMenuPms" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_CheckMenuPms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckMenuPmsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDeptList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeptList" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDeptList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeptListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByDept_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByDept" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByDept_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByDeptResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SignOut_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignOut" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SignOut_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignOutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_AddLoginLog_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddLoginLog" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_AddLoginLog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddLoginLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_LoginError_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginError" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_LoginError_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginErrorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDataRightList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataRightList" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDataRightList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataRightListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveRoleDataRight_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoleDataRight" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveRoleDataRight_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoleDataRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetResourceByParent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetResourceByParent" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetResourceByParent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResourceByParentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveRoleResource_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoleResource" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveRoleResource_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoleResourceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetRoleByDomain_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByDomain" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetRoleByDomain_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetRoleByUserDomain_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByUserDomain" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetRoleByUserDomain_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByUserDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveUserRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveUserRole" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveUserRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveUserRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByRole" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRole" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetResourceByRoleId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetResourceByRoleId" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetResourceByRoleId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResourceByRoleIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDataRightListByRoleId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataRightListByRoleId" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDataRightListByRoleId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataRightListByRoleIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByDomain_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByDomain" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByDomain_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDomainByUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainByUser" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetDomainByUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDomainByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllDomains_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDomains" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetAllDomains_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllDomainsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveSingleUserRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSingleUserRole" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_SaveSingleUserRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveSingleUserRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByResourceId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByResourceId" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByResourceId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByResourceIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByRoleID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByRoleID" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_GetUserListByRoleID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserListByRoleIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_UserExists_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserExists" />
+  </wsdl:message>
+  <wsdl:message name="IPermissionWCF_UserExists_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserExistsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPermissionWCF">
+    <wsdl:operation name="CheckPermission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/CheckPermission" message="tns:IPermissionWCF_CheckPermission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/CheckPermissionResponse" message="tns:IPermissionWCF_CheckPermission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckResPermission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/CheckResPermission" message="tns:IPermissionWCF_CheckResPermission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/CheckResPermissionResponse" message="tns:IPermissionWCF_CheckResPermission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasPermission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/HasPermission" message="tns:IPermissionWCF_HasPermission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/HasPermissionResponse" message="tns:IPermissionWCF_HasPermission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasPermissionWithPwd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/HasPermissionWithPwd" message="tns:IPermissionWCF_HasPermissionWithPwd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/HasPermissionWithPwdResponse" message="tns:IPermissionWCF_HasPermissionWithPwd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasResPermission">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/HasResPermission" message="tns:IPermissionWCF_HasResPermission_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/HasResPermissionResponse" message="tns:IPermissionWCF_HasResPermission_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedResourceIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedResourceIds" message="tns:IPermissionWCF_GetGrantedResourceIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedResourceIdsResponse" message="tns:IPermissionWCF_GetGrantedResourceIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResourceIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllResourceIds" message="tns:IPermissionWCF_GetAllResourceIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllResourceIdsResponse" message="tns:IPermissionWCF_GetAllResourceIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedResourceDTO">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedResourceDTO" message="tns:IPermissionWCF_GetGrantedResourceDTO_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedResourceDTOResponse" message="tns:IPermissionWCF_GetGrantedResourceDTO_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResourceDTO">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllResourceDTO" message="tns:IPermissionWCF_GetAllResourceDTO_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllResourceDTOResponse" message="tns:IPermissionWCF_GetAllResourceDTO_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAppResourceDto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllAppResourceDto" message="tns:IPermissionWCF_GetAllAppResourceDto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllAppResourceDtoResponse" message="tns:IPermissionWCF_GetAllAppResourceDto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedAppResourceByPage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedAppResourceByPage" message="tns:IPermissionWCF_GetGrantedAppResourceByPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedAppResourceByPageResponse" message="tns:IPermissionWCF_GetGrantedAppResourceByPage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedAppResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedAppResource" message="tns:IPermissionWCF_GetGrantedAppResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetGrantedAppResourceResponse" message="tns:IPermissionWCF_GetGrantedAppResource_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserId" message="tns:IPermissionWCF_GetUserId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserIdResponse" message="tns:IPermissionWCF_GetUserId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserById" message="tns:IPermissionWCF_GetUserById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserByIdResponse" message="tns:IPermissionWCF_GetUserById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/ValidateLogin" message="tns:IPermissionWCF_ValidateLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/ValidateLoginResponse" message="tns:IPermissionWCF_ValidateLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateLoginWithTimeOut">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/ValidateLoginWithTimeOut" message="tns:IPermissionWCF_ValidateLoginWithTimeOut_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/ValidateLoginWithTimeOutResponse" message="tns:IPermissionWCF_ValidateLoginWithTimeOut_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllUsers" message="tns:IPermissionWCF_GetAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllUsersResponse" message="tns:IPermissionWCF_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRolesByDomain">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserRolesByDomain" message="tns:IPermissionWCF_GetUserRolesByDomain_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserRolesByDomainResponse" message="tns:IPermissionWCF_GetUserRolesByDomain_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightList" message="tns:IPermissionWCF_GetUserDataRightList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightListResponse" message="tns:IPermissionWCF_GetUserDataRightList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightListByTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightListByTable" message="tns:IPermissionWCF_GetUserDataRightListByTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightListByTableResponse" message="tns:IPermissionWCF_GetUserDataRightListByTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightListByField">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightListByField" message="tns:IPermissionWCF_GetUserDataRightListByField_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightListByFieldResponse" message="tns:IPermissionWCF_GetUserDataRightListByField_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightConditionStr">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStr" message="tns:IPermissionWCF_GetUserDataRightConditionStr_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStrResponse" message="tns:IPermissionWCF_GetUserDataRightConditionStr_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightConditionStrByTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStrByTable" message="tns:IPermissionWCF_GetUserDataRightConditionStrByTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStrByTableResponse" message="tns:IPermissionWCF_GetUserDataRightConditionStrByTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightConditionStrByField">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStrByField" message="tns:IPermissionWCF_GetUserDataRightConditionStrByField_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStrByFieldResponse" message="tns:IPermissionWCF_GetUserDataRightConditionStrByField_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMenuRightList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetMenuRightList" message="tns:IPermissionWCF_GetMenuRightList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetMenuRightListResponse" message="tns:IPermissionWCF_GetMenuRightList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckMenuPms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/CheckMenuPms" message="tns:IPermissionWCF_CheckMenuPms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/CheckMenuPmsResponse" message="tns:IPermissionWCF_CheckMenuPms_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/Login" message="tns:IPermissionWCF_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/LoginResponse" message="tns:IPermissionWCF_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeptList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetDeptList" message="tns:IPermissionWCF_GetDeptList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetDeptListResponse" message="tns:IPermissionWCF_GetDeptList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByDept">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByDept" message="tns:IPermissionWCF_GetUserListByDept_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByDeptResponse" message="tns:IPermissionWCF_GetUserListByDept_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignOut">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/SignOut" message="tns:IPermissionWCF_SignOut_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/SignOutResponse" message="tns:IPermissionWCF_SignOut_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddLoginLog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/AddLoginLog" message="tns:IPermissionWCF_AddLoginLog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/AddLoginLogResponse" message="tns:IPermissionWCF_AddLoginLog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginError">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/LoginError" message="tns:IPermissionWCF_LoginError_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/LoginErrorResponse" message="tns:IPermissionWCF_LoginError_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataRightList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetDataRightList" message="tns:IPermissionWCF_GetDataRightList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetDataRightListResponse" message="tns:IPermissionWCF_GetDataRightList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoleDataRight">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/SaveRoleDataRight" message="tns:IPermissionWCF_SaveRoleDataRight_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/SaveRoleDataRightResponse" message="tns:IPermissionWCF_SaveRoleDataRight_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceByParent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetResourceByParent" message="tns:IPermissionWCF_GetResourceByParent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetResourceByParentResponse" message="tns:IPermissionWCF_GetResourceByParent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoleResource">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/SaveRoleResource" message="tns:IPermissionWCF_SaveRoleResource_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/SaveRoleResourceResponse" message="tns:IPermissionWCF_SaveRoleResource_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByDomain">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetRoleByDomain" message="tns:IPermissionWCF_GetRoleByDomain_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetRoleByDomainResponse" message="tns:IPermissionWCF_GetRoleByDomain_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByUserDomain">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetRoleByUserDomain" message="tns:IPermissionWCF_GetRoleByUserDomain_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetRoleByUserDomainResponse" message="tns:IPermissionWCF_GetRoleByUserDomain_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveUserRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/SaveUserRole" message="tns:IPermissionWCF_SaveUserRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/SaveUserRoleResponse" message="tns:IPermissionWCF_SaveUserRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByRole" message="tns:IPermissionWCF_GetUserListByRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByRoleResponse" message="tns:IPermissionWCF_GetUserListByRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/SaveRole" message="tns:IPermissionWCF_SaveRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/SaveRoleResponse" message="tns:IPermissionWCF_SaveRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceByRoleId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetResourceByRoleId" message="tns:IPermissionWCF_GetResourceByRoleId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetResourceByRoleIdResponse" message="tns:IPermissionWCF_GetResourceByRoleId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataRightListByRoleId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetDataRightListByRoleId" message="tns:IPermissionWCF_GetDataRightListByRoleId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetDataRightListByRoleIdResponse" message="tns:IPermissionWCF_GetDataRightListByRoleId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByDomain">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByDomain" message="tns:IPermissionWCF_GetUserListByDomain_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByDomainResponse" message="tns:IPermissionWCF_GetUserListByDomain_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainByUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetDomainByUser" message="tns:IPermissionWCF_GetDomainByUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetDomainByUserResponse" message="tns:IPermissionWCF_GetDomainByUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDomains">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllDomains" message="tns:IPermissionWCF_GetAllDomains_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetAllDomainsResponse" message="tns:IPermissionWCF_GetAllDomains_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSingleUserRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/SaveSingleUserRole" message="tns:IPermissionWCF_SaveSingleUserRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/SaveSingleUserRoleResponse" message="tns:IPermissionWCF_SaveSingleUserRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByResourceId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByResourceId" message="tns:IPermissionWCF_GetUserListByResourceId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByResourceIdResponse" message="tns:IPermissionWCF_GetUserListByResourceId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByRoleID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByRoleID" message="tns:IPermissionWCF_GetUserListByRoleID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/GetUserListByRoleIDResponse" message="tns:IPermissionWCF_GetUserListByRoleID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserExists">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPermissionWCF/UserExists" message="tns:IPermissionWCF_UserExists_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPermissionWCF/UserExistsResponse" message="tns:IPermissionWCF_UserExists_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="compress" type="tns:IPermissionWCF">
+    <wsp:PolicyReference URI="#compress_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckPermission">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/CheckPermission" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckResPermission">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/CheckResPermission" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasPermission">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/HasPermission" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasPermissionWithPwd">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/HasPermissionWithPwd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HasResPermission">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/HasResPermission" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedResourceIds">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetGrantedResourceIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResourceIds">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetAllResourceIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedResourceDTO">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetGrantedResourceDTO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllResourceDTO">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetAllResourceDTO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAppResourceDto">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetAllAppResourceDto" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedAppResourceByPage">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetGrantedAppResourceByPage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGrantedAppResource">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetGrantedAppResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserId">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserById">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateLogin">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/ValidateLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateLoginWithTimeOut">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/ValidateLoginWithTimeOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRolesByDomain">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserRolesByDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightList">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserDataRightList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightListByTable">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserDataRightListByTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightListByField">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserDataRightListByField" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightConditionStr">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStr" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightConditionStrByTable">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStrByTable" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserDataRightConditionStrByField">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserDataRightConditionStrByField" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMenuRightList">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetMenuRightList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckMenuPms">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/CheckMenuPms" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeptList">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetDeptList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByDept">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserListByDept" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignOut">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/SignOut" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLoginLog">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/AddLoginLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginError">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/LoginError" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataRightList">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetDataRightList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoleDataRight">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/SaveRoleDataRight" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceByParent">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetResourceByParent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRoleResource">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/SaveRoleResource" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByDomain">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetRoleByDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByUserDomain">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetRoleByUserDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveUserRole">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/SaveUserRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByRole">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserListByRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveRole">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/SaveRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetResourceByRoleId">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetResourceByRoleId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataRightListByRoleId">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetDataRightListByRoleId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByDomain">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserListByDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDomainByUser">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetDomainByUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDomains">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetAllDomains" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSingleUserRole">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/SaveSingleUserRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByResourceId">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserListByResourceId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserListByRoleID">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/GetUserListByRoleID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserExists">
+      <soap12:operation soapAction="http://tempuri.org/IPermissionWCF/UserExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PermissionWCF">
+    <wsdl:port name="compress" binding="tns:compress">
+      <soap12:address location="http://test_pms.scadacn.com/service/PermissionWCF.svc/gzip" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://test_pms.scadacn.com/service/PermissionWCF.svc/gzip</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="mexHttpBindings" binding="i0:mexHttpBindings">
+      <soap12:address location="http://test_pms.scadacn.com/service/PermissionWCF.svc/mex" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://test_pms.scadacn.com/service/PermissionWCF.svc/mex</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

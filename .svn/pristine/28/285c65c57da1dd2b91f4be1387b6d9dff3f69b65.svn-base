@@ -1,0 +1,108 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.Proxy;
+using Com.Winfotian.ServiceProxy;
+using WinfoToolSys.Pms;
+using Proxy;
+using Proxy.ServiceWinToolRead;
+
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class CompanyController : Controller
+    {
+        //客户信息管理
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //获取省份信息 
+        public JsonResult GetProvince()
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                list = ServcieTool.WinToolServiceReadInstance.GetProvinceList(PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取城市
+        public JsonResult GetCity(string province)
+        {
+            List<T_CityInfo> list = new List<T_CityInfo>();
+            try
+            {
+                list = ServcieTool.WinToolServiceReadInstance.GetCityList(PmsMng.ActiveKey, province);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取公司信息
+        public JsonResult GetComany(string cityId)
+        {
+            List<ServiceCrmGet.T_Companys> list = new List<ServiceCrmGet.T_Companys>();
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetCompanyLists(cityId, "", "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //获取母公司
+        public JsonResult GetParentCompanyList(string parentCompanyId)
+        {
+            List<ServiceCrmGet.T_ParentCompany> list = new List<ServiceCrmGet.T_ParentCompany>();
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().ParmCompanyInfo(parentCompanyId, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+        
+
+        public ActionResult GetCmpIdAndNameList(int cityID, string txtQCompanyName)
+        {
+            List<Com.Winfotian.ServiceProxy.CompanyService.CompanyIDAndName> list = new List<Com.Winfotian.ServiceProxy.CompanyService.CompanyIDAndName>();
+            try
+            {
+                list = CompanyServiceProxy.GetCmpIdAndNameListBy(WinManager.GetPublicIP(), cityID, txtQCompanyName.Trim(), 1);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return View("ClientInfo", list);
+        }
+
+        
+
+        //添加公司信息
+        public string AddCompanyInfo(Com.Winfotian.ServiceProxy.CompanyService.T_Company company)
+        {
+
+            return "";
+        }
+    }
+}

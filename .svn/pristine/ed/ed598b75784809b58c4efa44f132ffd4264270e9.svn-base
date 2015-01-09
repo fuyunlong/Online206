@@ -1,0 +1,189 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.Model;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+
+namespace Com.Winfotian.DB.Provider
+{
+    //数据转发处理类
+    public class TransmitProvider
+    {
+        //获取转发配置列表
+        public List<T_DTU_Transmit> GetTransSetList(string company, string group, string SiteName)
+        {
+            List<T_DTU_Transmit> list = new List<T_DTU_Transmit>();
+            try
+            {
+                StringBuilder SqlStr = new StringBuilder();
+                SqlStr.Append("SELECT  c.*   FROM [Infa]..[T_DTU] as a  ");
+                SqlStr.Append("inner join [Infa]..[T_DTU_Group] as b on a.GroupCode=b.GroupCode ");
+                SqlStr.Append("inner join [infa]..[T_DTU_Transmit] as c on a.Dtuid=c.Dtuid ");
+                SqlStr.Append(" where 1=1 ");
+                if (company != "0")
+                {
+                    SqlStr.Append("and b.CompanyId=@CompanyId ");
+                }
+                if (group != "0")
+                {
+                    SqlStr.Append("and a.GroupCode=@GroupCode ");
+                }
+                if (!string.IsNullOrEmpty(SiteName))
+                {
+                    SqlStr.Append("and a.DtuidName like @SiteName ");
+                }
+                SqlParameter[] pars = { 
+                                new SqlParameter("@CompanyId",company),
+                                new SqlParameter("@GroupCode",group),
+                                new SqlParameter("@SiteName","%"+SiteName+"%")
+                                  };
+                using (IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+                {
+                    while (dr.Read())
+                    {
+                        try
+                        {
+                            var model = IDataT_DTU_TransmitReader(dr);
+                            if (model != null)
+                            {
+                                list.Add(model);
+                            }
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        /// 增加一条数据
+        public void Add(T_DTU_Transmit model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into [Infa]..[T_DTU_Transmit](");
+            strSql.Append("Dtuid,IsTransmit,TargetIP,TargetPort,TargetVersion)");
+            strSql.Append(" values (");
+            strSql.Append("@Dtuid,@IsTransmit,@TargetIP,@TargetPort,@TargetVersion)");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8),
+					new SqlParameter("@IsTransmit", SqlDbType.SmallInt,2),
+					new SqlParameter("@TargetIP", SqlDbType.VarChar,16),
+					new SqlParameter("@TargetPort", SqlDbType.Int,4),
+					new SqlParameter("@TargetVersion", SqlDbType.VarChar,4)};
+            parameters[0].Value = model.Dtuid;
+            parameters[1].Value = model.IsTransmit;
+            parameters[2].Value = model.TargetIP;
+            parameters[3].Value = model.TargetPort;
+            parameters[4].Value = model.TargetVersion;
+
+            SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+        }
+
+        /// 更新一条数据
+        public bool Update(T_DTU_Transmit model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_DTU_Transmit] set ");
+            strSql.Append("IsTransmit=@IsTransmit,");
+            strSql.Append("TargetIP=@TargetIP,");
+            strSql.Append("TargetPort=@TargetPort,");
+            strSql.Append("TargetVersion=@TargetVersion");
+            strSql.Append(" where Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@IsTransmit", SqlDbType.SmallInt,2),
+					new SqlParameter("@TargetIP", SqlDbType.VarChar,16),
+					new SqlParameter("@TargetPort", SqlDbType.Int,4),
+					new SqlParameter("@TargetVersion", SqlDbType.VarChar,4),
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,8)};
+            parameters[0].Value = model.IsTransmit;
+            parameters[1].Value = model.TargetIP;
+            parameters[2].Value = model.TargetPort;
+            parameters[3].Value = model.TargetVersion;
+            parameters[4].Value = model.Dtuid;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// 删除一条数据
+        public bool Delete(string Dtuid)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from [Infa]..[T_DTU_Transmit] ");
+            strSql.Append(" where Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+            parameters[0].Value = Dtuid;
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        /// 得到一个对象实体
+        public T_DTU_Transmit GetModel(string Dtuid)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 Dtuid,IsTransmit,TargetIP,TargetPort,TargetVersion from [Infa]..[T_DTU_Transmit] ");
+            strSql.Append(" where Dtuid=@Dtuid ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@Dtuid", SqlDbType.VarChar,50)};
+            parameters[0].Value = Dtuid;
+
+            T_DTU_Transmit model = null;
+            using (IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if (dr.Read())
+                {
+                    model = IDataT_DTU_TransmitReader(dr);
+                }
+            }
+            return model;
+        }
+
+        /// T_DTU_Transmit 数据读取
+        private T_DTU_Transmit IDataT_DTU_TransmitReader(IDataReader dr)
+        {
+            T_DTU_Transmit model = new T_DTU_Transmit();
+            try
+            {
+                model.Dtuid = (dr["Dtuid"] is DBNull) ? string.Empty : dr["Dtuid"].ToString();
+                model.IsTransmit = (dr["IsTransmit"] is DBNull) ? 0 : Convert.ToInt32(dr["IsTransmit"].ToString());
+                model.TargetIP = (dr["TargetIP"] is DBNull) ? string.Empty : dr["TargetIP"].ToString();
+                model.TargetPort = (dr["TargetPort"] is DBNull) ? 0 : Convert.ToInt32(dr["TargetPort"].ToString());
+                model.TargetVersion = (dr["TargetVersion"] is DBNull) ? string.Empty : dr["TargetVersion"].ToString();
+            }
+            catch (Exception ex)
+            {
+                //WebLog.WSLogger.Error(ex.Message);//Please add references(log4net.dll)
+                return null;
+            }
+            return model;
+        }
+    }
+}

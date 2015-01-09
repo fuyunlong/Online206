@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" />
+  <xs:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Web.Servies" />
+  <xs:import schemaLocation="http://sms.scadacn.com/Services/MSService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="SendSMS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="smsModel" nillable="true" type="q1:T_SMS_SmsSend" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="smsType" type="q2:MsTypesEnum" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendSMSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Com.Winfotian.Web.Servies" minOccurs="0" name="SendSMSResult" nillable="true" type="q3:ReturnInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendSMSCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="smsId" type="xs:int" />
+        <xs:element minOccurs="0" name="sendTimes" type="xs:int" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="smsStatu" type="q4:MsStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendSMSCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Com.Winfotian.Web.Servies" minOccurs="0" name="SendSMSCountResult" nillable="true" type="q5:ReturnInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReceiveSMS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="smsModel" nillable="true" type="q6:T_SMS_SmsReceive" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReceiveSMSResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Com.Winfotian.Web.Servies" minOccurs="0" name="ReceiveSMSResult" nillable="true" type="q7:ReturnInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelBilling">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="smsId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelBillingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Com.Winfotian.Web.Servies" minOccurs="0" name="CancelBillingResult" nillable="true" type="q8:ReturnInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeSmsState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="smsId" type="xs:int" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="smsStatu" type="q9:MsStatus" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeSmsStateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Com.Winfotian.Web.Servies" minOccurs="0" name="ChangeSmsStateResult" nillable="true" type="q10:ReturnInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSmsTypeSentSum">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endTime" type="xs:dateTime" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="dtuNames" nillable="true" type="q11:ArrayOfstring" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="alterDesc" nillable="true" type="q12:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSmsTypeSentSumResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="GetSmsTypeSentSumResult" nillable="true" type="q13:ArrayOfT_DtuAlter" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBillConfigList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBillConfigListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="GetBillConfigListResult" nillable="true" type="q14:ArrayOfT_SMS_Bill" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBillConfig">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="model" nillable="true" type="q15:T_SMS_Bill" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateBillConfigResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateBillConfigResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBillConfig">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="billcode" nillable="true" type="q16:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteBillConfigResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="DeleteBillConfigResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddBillConfig">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activeKey" nillable="true" type="xs:string" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Com.Winfotian.Components" minOccurs="0" name="model" nillable="true" type="q17:ArrayOfT_SMS_Bill" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddBillConfigResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddBillConfigResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

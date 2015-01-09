@@ -1,0 +1,316 @@
+﻿using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Proxy;
+using Proxy.CrmServiceGet;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Winfotian.Permission.HttpModule;
+using WinfoToolSys.Pms;
+
+namespace WinfoToolSys
+{
+    public class HtmlCommon
+    {
+        //获取用户计费方式
+        public SelectList GetUserFeeList(string BillCode = "")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.SmsService.T_SMS_Bill> FeeList = null;
+            try
+            {
+                FeeList = ServcieTool.SmsServiceInstance.GetBillConfigList(PmsMng.StaticKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (FeeList != null)
+            {
+                foreach (var a in FeeList)
+                {
+                    if (BillCode.Length > 0 && BillCode == a.BillCode)
+                    {
+                        list.Add(new SelectListItem { Text = a.BillName, Value = a.BillCode, Selected = true });
+                    }
+                    else
+                    {
+                        list.Add(new SelectListItem { Text = a.BillName, Value = a.BillCode });
+                    }
+                }
+            }
+            return  new SelectList(list, "Value", "Text",BillCode);;
+        }
+
+        //获取用户配置
+        public SelectList GetUserConfigList(string config = "")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.ServiceWinToolRead.T_User_Config> ConfigList = new List<Proxy.ServiceWinToolRead.T_User_Config>();
+            try
+            {
+                ConfigList = ServcieTool.WinToolServiceReadInstance.GetUserConfigListByName(PmsMng.ActiveKey, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (ConfigList != null)
+            {
+                foreach (var a in ConfigList)
+                {
+                    if (config.Length > 0 && a.CCode == config)
+                    {
+                        list.Add(new SelectListItem { Text = a.ConfigName, Value = a.CCode, Selected = true });
+                    }
+                    else
+                    {
+                        list.Add(new SelectListItem { Text = a.ConfigName, Value = a.CCode });
+                    }
+                }
+            }
+            return new SelectList(list, "Value", "Text",config);
+        }
+
+        //获取用户角色
+        public SelectList GetUserRoleList(string RoleCode = "")
+        {
+            List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto> list = new List<Winfotian.Permission.HttpModule.PermissionWCF.RoleDto>();
+            try
+            {
+                list = PermissionWCFProxy.QueryRoles("", Pms.PmsMng.DomainId);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), Pms.PmsMng.LogUser, ex);
+            }
+            List<SelectListItem> list1 = new List<SelectListItem>();
+            foreach (var a in list)
+            {
+                if (RoleCode == a.RoleCode)
+                {
+                    list1.Add(new SelectListItem { Value = a.RoleCode, Text = a.Name, Selected = true });
+                }
+                else
+                {
+                    list1.Add(new SelectListItem { Value = a.RoleCode, Text = a.Name });
+                }
+            }
+            return new SelectList(list, "Value", "Text");
+        }
+
+        //获取公司集合
+        public SelectList GetCompanyList(string Company = "")
+        {
+            List<T_Companys> list = new List<T_Companys>();
+            try
+            {
+                var model = ServcieTool.CrmServiceGetInstance.GetCompanyLists("", "", PmsMng.ActiveKey);
+                if (PmsMng.CompanyId == 12)
+                {
+                    foreach (var a in model)
+                    {
+                        if (a.CompanyID == 12)
+                            list.Insert(0, a);
+                        else
+                        {
+                            list.Add(a);
+                        }
+                    }
+                }
+                else
+                {
+                    list = (from row in model where row.CompanyID == PmsMng.CompanyId select row).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            List<System.Web.Mvc.SelectListItem> Clist = new List<SelectListItem>();
+            if (list != null)
+            {
+                foreach (var a in list)
+                {
+                    if (Company.Length > 0 && Company == a.CompanyID.ToString())
+                        Clist.Add(new SelectListItem { Text = a.CompanyName, Value = a.CompanyID.ToString(), Selected = true });
+                    else
+                        Clist.Add(new SelectListItem { Text = a.CompanyName, Value = a.CompanyID.ToString() });
+                }
+            }
+            return new SelectList(Clist, "Value", "Text");
+        }
+
+        //获取部门列表
+        public SelectList GetDepartList(int Company, int Depart = 0)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.CrmServiceGet.T_DepartmentInfos> departs = null;
+            try
+            {
+                departs = ServcieTool.CrmServiceGetInstance.GetDepartmentInfoList(Company.ToString(), PmsMng.ActiveKey);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            if (departs == null)
+            {
+                departs = new List<T_DepartmentInfos>();
+            }
+            list.Add(new SelectListItem { Text = "全部", Value = "0", Selected = true });
+            foreach (var a in departs)
+            {
+                if (Depart != 0 && a.DepartID == Depart)
+                {
+                    list.Add(new SelectListItem { Text = a.DepartName, Value = a.DepartID.ToString(), Selected = true });
+                }
+                else
+                {
+                    list.Add(new SelectListItem { Text = a.DepartName, Value = a.DepartID.ToString() });
+                }
+            }
+            return new SelectList(list, "Value", "Text", null);
+        }
+
+        //根据部门ID获取职位列表
+        public SelectList GetPosiontionList(int Depart, int Postion = 0)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.CrmServiceGet.T_PostInfos> postion = null;
+            try
+            {
+                postion = new JavaScriptSerializer().Deserialize<List<Proxy.CrmServiceGet.T_PostInfos>>(ServcieTool.CrmServiceGetInstance.GetPostinfo(Depart, PmsMng.ActiveKey));
+            }
+            catch
+            { }
+            if (postion == null)
+            {
+                return null;
+            }
+            foreach (var a in postion)
+            {
+                if (a.PosID == Postion)
+                    list.Add(new SelectListItem { Text = a.PostName, Value = a.PosID.ToString(), Selected = true });
+                else
+                    list.Add(new SelectListItem { Text = a.PostName, Value = a.PosID.ToString() });
+            }
+            return new SelectList(list, "Value", "Text", null);
+        }
+
+        //获取终端类型
+        public SelectList GetVerTypeList(string Ver = "")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            try
+            {
+                Dictionary<string, string> dic = ServcieTool.WinToolServiceReadInstance.GetVerList(PmsMng.ActiveKey);
+                foreach (var a in dic)
+                {
+                    if (a.Key == Ver)
+                    {
+                        list.Add(new SelectListItem { Value = a.Key, Text = a.Value, Selected = true });
+                    }
+                    else
+                    { list.Add(new SelectListItem { Value = a.Key, Text = a.Value }); }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return new SelectList(list, "Value", "Text", null);
+        }
+
+        //获取压力等级
+        public SelectList GetPressureLevelList(int Level = 0)
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            try
+            {
+                var LevelList = ServcieTool.WinToolServiceReadInstance.GetPressureLevelList(PmsMng.ActiveKey, "");
+                foreach (var a in LevelList)
+                {
+                    if (Level == a.Id)
+                    {
+                        list.Add(new SelectListItem { Selected = true, Text = a.PressureName, Value = a.Id.ToString() });
+                    }
+                    else
+                    {
+                        list.Add(new SelectListItem { Text = a.PressureName, Value = a.Id.ToString() });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return new SelectList(list, "Value", "Text", null);
+        }
+
+        //获取站点配置
+        public SelectList GetDtuConfigList(string ConfigCode = "")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            try
+            {
+                var DtuConfigList = ServcieTool.WinToolServiceReadInstance.DtuConfigListV2(PmsMng.ActiveKey);
+                foreach (var a in DtuConfigList)
+                {
+                    if (ConfigCode == a.ConfigCode)
+                    {
+                        list.Add(new SelectListItem { Text = a.ConfigName, Value = a.ConfigCode, Selected = true });
+                    }
+                    else
+                    {
+                        list.Add(new SelectListItem { Text = a.ConfigName, Value = a.ConfigCode });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return new SelectList(list, "Value", "Text", null);
+        }
+
+
+        public SelectList GetDtuList(string companyId, string groupCode = "0")
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+            List<Proxy.ServiceWinToolRead.T_DTU> DtuList = new List<Proxy.ServiceWinToolRead.T_DTU>();
+            try
+            {
+                var model = ServcieTool.WinToolServiceReadInstance.GetSiteByCompanyIdAndGroupCode(PmsMng.ActiveKey, companyId, groupCode);
+                if (PmsMng.CompanyId != 12)
+                {
+                    //当前用户可以访问的站点
+                    var dtuIds = DataPermission.PermisSites(PmsMng.LogUser);
+                    foreach (var item in model)
+                    {
+                        if (dtuIds.Contains(item.Dtuid))
+                        {
+                            DtuList.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    DtuList = model;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            foreach (var a in DtuList)
+            {
+                list.Add(new SelectListItem { Text = a.DtuidName, Value = a.Dtuid });
+            }
+            return new SelectList(list, "Value", "Text", null);
+        }
+    }
+}

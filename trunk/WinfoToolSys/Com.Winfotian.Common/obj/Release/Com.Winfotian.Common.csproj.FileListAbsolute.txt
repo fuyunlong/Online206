@@ -1,0 +1,8 @@
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\bin\Release\Com.Winfotian.Common.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\bin\Release\Com.Winfotian.Common.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\bin\Release\InfaCommon.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\bin\Release\Newtonsoft.Json.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\bin\Release\ServiceProxy.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\obj\Release\Com.Winfotian.Common.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\obj\Release\Com.Winfotian.Common.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.Winfotian.Common\obj\Release\Com.Winfotian.Common.csprojResolveAssemblyReference.cache

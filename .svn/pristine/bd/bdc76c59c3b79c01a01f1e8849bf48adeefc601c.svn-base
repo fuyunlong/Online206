@@ -1,0 +1,241 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Com.Winfotian.Model;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+using Proxy;
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class SiteInfoController : Controller
+    {
+        //
+        // GET: /SiteInfo/
+
+        public SiteInfoController()
+        {
+
+        }
+
+        public ActionResult Index()
+        {
+            ViewBag.CompanyList = ServcieTool.WinToolServiceReadInstance.GetCompanyList(PmsMng.ActiveKey, "", "");
+            return View();
+        }
+
+        //获取站点列表
+        public JsonResult GetSite(string Company, string Group, string SiteName)
+        {
+            var list = ServcieTool.WinToolServiceReadInstance.GetSite("", Company, Group, SiteName, false);
+
+            return Json(list);
+        }
+
+        //获取站点详细
+        public ActionResult SiteDetail(string OperRation, string DtuId)
+        {
+            //获取配置列表
+            ViewBag.DtuConfigList = ServcieTool.WinToolServiceReadInstance.DtuConfigListV2(PmsMng.ActiveKey);
+            //获取压力等级列表
+            ViewBag.PressureLevelList = ServcieTool.WinToolServiceReadInstance.GetPressureLevelList(PmsMng.ActiveKey, "");
+            ViewBag.Oper = OperRation;
+            ViewBag.DTU_Ex = null;
+            if (OperRation == "Add")
+            {
+                ViewBag.OperVisiable = "true";
+                ViewBag.OperAreaText = "<input type='button' class='buttonVer2' value='增加' />";
+            }
+            else
+            {
+                if (OperRation == "Show")
+                {
+                    ViewBag.OperAreaText = "";
+                }
+                else
+                {
+                    ViewBag.OperAreaText = "<input type='button' class='buttonVer2' value='修改' onclick='SiteMng.UpdateSiteInfo()' />";
+                }
+                ViewBag.OperVisiable = "false";
+                var dtu = ServcieTool.WinToolServiceReadInstance.GetSiteById("", DtuId);
+                ViewBag.DTU_Ex = dtu;
+
+            }
+            return View();
+        }
+
+        //获取终端类型列表
+        public ActionResult GetVerTypeList()
+        {
+            Dictionary<string, string> dic = ServcieTool.WinToolServiceReadInstance.GetVerList(PmsMng.ActiveKey);
+            List<object> list = new List<object>();
+            foreach (var a in dic)
+            {
+                list.Add(new { key = a.Key, value = a.Value });
+            }
+            return Json(list);
+        }
+
+        //获取压力等级列表
+        public ActionResult PressureLevelList()
+        {
+            return Json(ServcieTool.WinToolServiceReadInstance.GetPressureLevelList(PmsMng.ActiveKey, ""));
+        }
+
+        //获取配置列表 
+        public JsonResult DtuConfigList()
+        {
+            return Json(ServcieTool.WinToolServiceReadInstance.GetConfigList(PmsMng.ActiveKey, ""));
+        }
+
+        //打开分组树
+        public string OpenGroupTree()
+        {
+            StringBuilder Str = new StringBuilder();
+            Str.Append("  [");
+            Str.Append("{ text: '节点1', children: [");
+            Str.Append("    { text: '节点1.1' },");
+            Str.Append("    { text: '节点1.2' },");
+            Str.Append("  { text: '节点1.3', children: [");
+            Str.Append("        { text: '节点1.3.1' ,children: [");
+            Str.Append("			{ text: '节点1.3.1.1' },");
+            Str.Append("			{ text: '节点1.3.1.2' }]");
+            Str.Append("		},");
+            Str.Append("     { text: '节点1.3.2' }");
+            Str.Append(" ]");
+            Str.Append("  },");
+            Str.Append("  { text: '节点1.4' }");
+            Str.Append("  ]");
+            Str.Append("  },");
+            Str.Append(" { text: '节点2' },");
+            Str.Append(" { text: '节点3' },");
+            Str.Append(" { text: '节点4' }");
+            Str.Append("]");
+            return Str.ToString();
+        }
+
+        public ActionResult AddSite()
+        {
+            return View();
+        }
+        //添加站点
+        public string AddSiteOper(T_Dtu_Ex dtuex)
+        {
+            string rlst = "添加失败";
+            try
+            {
+                List<string> list = Com.Winfotian.ServiceProxy.DTUServiceProxy.GenerateDtuidList(WinManager.GetPublicIP(), dtuex.CompanyId, 1);
+                if (list.Count > 0)
+                {
+                    Proxy.ServiceWinToolWrite.T_DTU dtu = new Proxy.ServiceWinToolWrite.T_DTU();
+
+                    dtu.Dtuid = list[0];
+                    dtu.ConfigCode = dtuex.ConfigCode;
+                    dtu.DataInterval = dtuex.DataInterval;
+                    dtu.DayFrom = dtuex.DayFrom;
+                    dtu.DtuidLocation = dtuex.DtuidLocation;
+                    dtu.DtuidName = dtuex.DtuidName;
+                    dtu.FlowBrand = dtuex.FlowBrand;
+                    dtu.FlowType = dtuex.FlowType;
+                    dtu.GroupCode = dtuex.GroupCode;
+                    dtu.Latitude = dtuex.Latitude;
+                    dtu.LgPwd = dtuex.LgPwd;
+                    dtu.Longitude = dtuex.Longitude;
+                    dtu.MonthFrom = dtuex.MonthFrom;
+                    dtu.OrderId = dtuex.OrderId;
+                    dtu.PhoneNum = dtuex.PhoneNum;
+                    dtu.PressureLevel = dtuex.PressureLevel;
+                    dtu.ProtocolVersion = dtuex.ProtocolVersion;
+                    dtu.RegDate = dtuex.RegDate;
+                    dtu.RunDate = dtuex.RunDate;
+                    dtu.Skidbrand = dtuex.Skidbrand;
+                    dtu.Status = 1;
+                    dtu.Supplier = dtuex.Supplier;
+                    dtu.UpdateFlag = 1;
+                    dtu.UpLoadInterval = dtuex.UpLoadInterval;
+
+                    if (ServcieTool.WinToolServiceWriteInstance.AddSite(PmsMng.ActiveKey, PmsMng.LogUser, dtu))
+                    {
+                        rlst = "ok";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+
+            }
+            return rlst;
+        }
+
+        public ActionResult ShowSite()
+        {
+            ViewBag.CompanyList = ServcieTool.WinToolServiceReadInstance.GetCompanyList(PmsMng.ActiveKey, "", "");
+            ViewBag.DtuConfigList = ServcieTool.WinToolServiceReadInstance.DtuConfigListV2(PmsMng.ActiveKey);
+            ViewBag.VerList = ServcieTool.WinToolServiceReadInstance.GetVerList(PmsMng.ActiveKey);
+            ViewBag.PressureLevelList = ServcieTool.WinToolServiceReadInstance.GetPressureLevelList(PmsMng.ActiveKey, "");
+            return View();
+        }
+
+        public string UpdateSite(Proxy.ServiceWinToolWrite.T_DTU dtu)
+        {
+            string rlst = "修改失败";
+            try
+            {
+                dtu.Status = 1;
+                if (ServcieTool.WinToolServiceWriteInstance.UpdateSite(PmsMng.ActiveKey, PmsMng.LogUser, dtu))
+                {
+                    rlst = "ok";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+
+            }
+            return rlst;
+        }
+
+        /// <summary>
+        /// 删除站点
+        /// </summary>
+        /// <param name="id">Dtuid</param>
+        /// <returns></returns>
+        public int DeleteSite(string id)
+        {
+            int rlst = 0;
+            try
+            {
+                if (ServcieTool.WinToolServiceWriteInstance.DeleteSite(PmsMng.ActiveKey, id, PmsMng.LogUser))
+                {
+                    rlst = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return rlst;
+        }
+
+        //根据公司获取站点列表
+        public JsonResult GetSiteListByCompany(string Company)
+        {
+            List<T_DTU> DtuList = new List<T_DTU>();
+            try
+            {
+                ServcieTool.WinToolServiceReadInstance.GetDTUListByCompanyId(PmsMng.ActiveKey, Company);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(DtuList);
+        }
+    }
+}

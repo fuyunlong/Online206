@@ -1,0 +1,142 @@
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Data;
+using System.Runtime.Serialization;
+namespace Com.Winfotian.Model
+{
+    //无线终端配置信息
+    [Serializable]
+    [DataContract]
+    public class T_DTU_Config
+    {
+
+        /// <summary>
+        /// 配置编号
+        /// </summary>		
+        [DataMember]
+        public string ConfigCode
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 配置名称
+        /// </summary>		
+        [DataMember]
+        public string ConfigName
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// ConfigDesc
+        /// </summary>		
+        [DataMember]
+        public string ConfigDesc
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 流量计个数
+        /// </summary>		
+        [DataMember]
+        public int FlowNum
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 模拟量个数
+        /// </summary>		
+        [DataMember]
+        public int AINum
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 开关量个数
+        /// </summary>		
+        [DataMember]
+        public int DINum
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 是否报警通知
+        /// </summary>		
+        [DataMember]
+        public int IsAlert
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 是否已创建
+        /// </summary>		
+        [DataMember]
+        public int IsCreate
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 状态
+        /// </summary>		
+        [DataMember]
+        public int Status
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// 数据同步标记，修改则增长值
+        /// </summary>		
+        [DataMember]
+        public int UpdateFlag
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// BoardInfo
+        /// </summary>		
+        [DataMember]
+        public string BoardInfo
+        {
+            set;
+            get;
+        }
+        /// <summary>
+        /// CType
+        /// </summary>		
+        [DataMember]
+        public int CType
+        {
+            set;
+            get;
+        }
+
+    }
+    [Serializable]
+    [DataContract]
+    public class T_DTU_Config_Ext : T_DTU_Config
+    {
+        [DataMember]
+        public string DtuidName
+        {
+            get;
+            set;
+        }
+        [DataMember]
+        public string Dtuid
+        {
+            get;
+            set;
+        }
+    }
+}
+

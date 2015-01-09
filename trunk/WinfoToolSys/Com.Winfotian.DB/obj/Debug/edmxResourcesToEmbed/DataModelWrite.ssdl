@@ -1,0 +1,599 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InfaModelWrite.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="InfaModelWriteStoreContainer">
+    <EntitySet Name="T_Alert_Info" EntityType="InfaModelWrite.Store.T_Alert_Info" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_BusinessSystem" EntityType="InfaModelWrite.Store.T_BusinessSystem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_CityInfo" EntityType="InfaModelWrite.Store.T_CityInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Company" EntityType="InfaModelWrite.Store.T_Company" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Company_CmpConfig" EntityType="InfaModelWrite.Store.T_Company_CmpConfig" store:Type="Tables" store:Schema="dbo" store:Name="T_Company_CmpConfig">
+      <DefiningQuery>SELECT 
+      [T_Company_CmpConfig].[CompanyId] AS [CompanyId], 
+      [T_Company_CmpConfig].[ConfigId] AS [ConfigId], 
+      [T_Company_CmpConfig].[Status] AS [Status]
+      FROM [dbo].[T_Company_CmpConfig] AS [T_Company_CmpConfig]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="T_Company_Config" EntityType="InfaModelWrite.Store.T_Company_Config" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Company_LineAction" EntityType="InfaModelWrite.Store.T_Company_LineAction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Company_LineCondition" EntityType="InfaModelWrite.Store.T_Company_LineCondition" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Company_PipeLine" EntityType="InfaModelWrite.Store.T_Company_PipeLine" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Company_PipeLoLati" EntityType="InfaModelWrite.Store.T_Company_PipeLoLati" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_Dictionary" EntityType="InfaModelWrite.Store.T_Dictionary" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU" EntityType="InfaModelWrite.Store.T_DTU" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_Config" EntityType="InfaModelWrite.Store.T_DTU_Config" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_Device" EntityType="InfaModelWrite.Store.T_DTU_Device" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_FieldDesc" EntityType="InfaModelWrite.Store.T_DTU_FieldDesc" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_Flow" EntityType="InfaModelWrite.Store.T_DTU_Flow" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_Group" EntityType="InfaModelWrite.Store.T_DTU_Group" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_PressureLevel" EntityType="InfaModelWrite.Store.T_DTU_PressureLevel" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_RepairType" EntityType="InfaModelWrite.Store.T_DTU_RepairType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_Transmit" EntityType="InfaModelWrite.Store.T_DTU_Transmit" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_DTU_ValveEffect" EntityType="InfaModelWrite.Store.T_DTU_ValveEffect" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Account" EntityType="InfaModelWrite.Store.T_User_Account" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_AccountLog" EntityType="InfaModelWrite.Store.T_User_AccountLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Config" EntityType="InfaModelWrite.Store.T_User_Config" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Contact" EntityType="InfaModelWrite.Store.T_User_Contact" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_ContactGroup" EntityType="InfaModelWrite.Store.T_User_ContactGroup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Group" EntityType="InfaModelWrite.Store.T_User_Group" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Info" EntityType="InfaModelWrite.Store.T_User_Info" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Log" EntityType="InfaModelWrite.Store.T_User_Log" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_LoginLog" EntityType="InfaModelWrite.Store.T_User_LoginLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Menu" EntityType="InfaModelWrite.Store.T_User_Menu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_OperLog" EntityType="InfaModelWrite.Store.T_User_OperLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Opinion" EntityType="InfaModelWrite.Store.T_User_Opinion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_Role" EntityType="InfaModelWrite.Store.T_User_Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_RoleMenu" EntityType="InfaModelWrite.Store.T_User_RoleMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_UserContact" EntityType="InfaModelWrite.Store.T_User_UserContact" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_UserDtuid" EntityType="InfaModelWrite.Store.T_User_UserDtuid" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_UserGroup" EntityType="InfaModelWrite.Store.T_User_UserGroup" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_UserMenu" EntityType="InfaModelWrite.Store.T_User_UserMenu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="T_User_UserRole" EntityType="InfaModelWrite.Store.T_User_UserRole" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="T_Alert_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Dtuid" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="AlertDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="AlertTime" Type="datetime" />
+    <Property Name="AlertLevel" Type="smallint" />
+    <Property Name="FieldName" Type="varchar" MaxLength="30" />
+    <Property Name="FieldValue" Type="float" />
+    <Property Name="SMSContent" Type="text" />
+    <Property Name="AlertType" Type="smallint" Nullable="false" />
+    <Property Name="PhoneNum" Type="text" />
+    <Property Name="AlertState" Type="smallint" />
+    <Property Name="RecentTime" Type="datetime" />
+    <Property Name="IsReply" Type="smallint" Nullable="false" />
+    <Property Name="IsSend" Type="smallint" Nullable="false" />
+    <Property Name="CurSendTimes" Type="smallint" />
+    <Property Name="CurAlertCount" Type="int" Nullable="false" />
+    <Property Name="SendTimes" Type="int" />
+    <Property Name="AlertCount" Type="int" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <EntityType Name="T_BusinessSystem">
+    <Key>
+      <PropertyRef Name="BusinessSystemID" />
+    </Key>
+    <Property Name="BusinessSystemID" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="BusinessSystemName" Type="varchar" MaxLength="50" />
+    <Property Name="BusinessSystemDescribe" Type="varchar" MaxLength="150" />
+    <Property Name="BusType" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="T_CityInfo">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Province" Type="nvarchar" MaxLength="30" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="20" />
+    <Property Name="PhoneCode" Type="varchar" MaxLength="5" />
+    <Property Name="PostCode" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="T_Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LinkPerson" Type="varchar" MaxLength="20" />
+    <Property Name="CmpTel" Type="varchar" MaxLength="20" />
+    <Property Name="CmpMobile" Type="varchar" MaxLength="12" />
+    <Property Name="CmpEmail" Type="varchar" MaxLength="50" />
+    <Property Name="FaxTel" Type="varchar" MaxLength="20" />
+    <Property Name="CmpWebSite" Type="varchar" MaxLength="50" />
+    <Property Name="CmpAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="CityId" Type="int" Nullable="false" />
+    <Property Name="CmpDesc" Type="nvarchar" MaxLength="100" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“Infa.dbo.T_Company_CmpConfig”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="T_Company_CmpConfig">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+      <PropertyRef Name="ConfigId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="ConfigId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_Company_Config">
+    <Key>
+      <PropertyRef Name="ConfigId" />
+    </Key>
+    <Property Name="ConfigId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ConfigName" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ConfigDesc" Type="varchar" MaxLength="100" />
+    <Property Name="ClientType" Type="smallint" Nullable="false" />
+    <Property Name="ClientNum" Type="int" Nullable="false" />
+    <Property Name="IP" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Port" Type="int" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <EntityType Name="T_Company_LineAction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LineId" Type="int" Nullable="false" />
+    <Property Name="ReferSite" Type="varchar" MaxLength="8" />
+    <Property Name="ReferSiteParam" Type="varchar" MaxLength="10" />
+    <Property Name="MaxValue" Type="float" />
+    <Property Name="MinValue" Type="float" />
+    <Property Name="ColorEnable" Type="smallint" />
+    <Property Name="ActionColor" Type="varchar" MaxLength="10" />
+    <Property Name="GlintEnable" Type="smallint" />
+    <Property Name="GlintColor1" Type="varchar" MaxLength="10" />
+    <Property Name="GlintColor2" Type="varchar" MaxLength="10" />
+    <Property Name="GlintColor3" Type="varchar" MaxLength="10" />
+    <Property Name="RangeEnable" Type="smallint" />
+    <Property Name="RangeMin" Type="float" />
+    <Property Name="RangeMax" Type="float" />
+  </EntityType>
+  <EntityType Name="T_Company_LineCondition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LineId" Type="int" Nullable="false" />
+    <Property Name="ActionColor" Type="varchar" MaxLength="10" />
+    <Property Name="ActionValue" Type="float" />
+  </EntityType>
+  <EntityType Name="T_Company_PipeLine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="LineName" Type="nvarchar" MaxLength="30" />
+    <Property Name="PipeSize" Type="smallint" Nullable="false" />
+    <Property Name="DrawType" Type="smallint" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="20" />
+    <Property Name="IsFill" Type="smallint" Nullable="false" />
+    <Property Name="FillColor" Type="varchar" MaxLength="20" />
+    <Property Name="Transparency" Type="smallint" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="LineSize" Type="smallint" />
+    <Property Name="LineType" Type="nvarchar" MaxLength="30" />
+    <Property Name="PressureLevel" Type="nvarchar" MaxLength="30" />
+    <Property Name="PipeLength" Type="int" />
+    <Property Name="PipeDepth" Type="smallint" />
+    <Property Name="RepairInterval" Type="smallint" />
+    <Property Name="BelongArea" Type="nvarchar" MaxLength="30" />
+    <Property Name="FinishDate" Type="datetime" />
+    <Property Name="Contructor" Type="nvarchar" MaxLength="50" />
+    <Property Name="LinkMan" Type="nvarchar" MaxLength="30" />
+    <Property Name="ProjectCode" Type="varchar" MaxLength="50" />
+    <Property Name="ProjectManager" Type="nvarchar" MaxLength="30" />
+    <Property Name="Accepter" Type="nvarchar" MaxLength="30" />
+    <Property Name="IsValve" Type="smallint" />
+    <Property Name="ValveCode" Type="varchar" MaxLength="30" />
+    <Property Name="UpdateTime" Type="datetime" />
+    <Property Name="LineDesc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_Company_PipeLoLati">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="LineId" Type="int" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Dictionary">
+    <Key>
+      <PropertyRef Name="DicKey" />
+    </Key>
+    <Property Name="DicKey" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TypeId" Type="int" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="DicName" Type="varchar" MaxLength="50" />
+    <Property Name="DicDesc" Type="varchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="T_DTU">
+    <Key>
+      <PropertyRef Name="Dtuid" />
+    </Key>
+    <Property Name="Dtuid" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="DtuidName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="Skidbrand" Type="nvarchar" MaxLength="50" />
+    <Property Name="Supplier" Type="nvarchar" MaxLength="50" />
+    <Property Name="FlowBrand" Type="nvarchar" MaxLength="50" />
+    <Property Name="FlowType" Type="varchar" MaxLength="50" />
+    <Property Name="PressureLevel" Type="varchar" MaxLength="30" />
+    <Property Name="DtuidLocation" Type="nvarchar" MaxLength="50" />
+    <Property Name="RegDate" Type="datetime" Nullable="false" />
+    <Property Name="RunDate" Type="datetime" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="DayFrom" Type="smallint" Nullable="false" />
+    <Property Name="MonthFrom" Type="smallint" Nullable="false" />
+    <Property Name="LgPwd" Type="varchar" MaxLength="20" />
+    <Property Name="PhoneNum" Type="varchar" MaxLength="20" />
+    <Property Name="DataInterval" Type="smallint" Nullable="false" />
+    <Property Name="UpLoadInterval" Type="smallint" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+    <Property Name="GroupCode" Type="varchar" MaxLength="30" />
+    <Property Name="ConfigCode" Type="varchar" MaxLength="30" />
+    <Property Name="ProtocolVersion" Type="varchar" MaxLength="4" />
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="UpdateFlag" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_Config">
+    <Key>
+      <PropertyRef Name="ConfigCode" />
+    </Key>
+    <Property Name="ConfigCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ConfigName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ConfigDesc" Type="varchar" MaxLength="100" />
+    <Property Name="FlowNum" Type="smallint" />
+    <Property Name="AINum" Type="smallint" />
+    <Property Name="DINum" Type="smallint" />
+    <Property Name="IsAlert" Type="smallint" />
+    <Property Name="IsCreate" Type="smallint" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="UpdateFlag" Type="int" />
+    <Property Name="BoardInfo" Type="varchar" MaxLength="400" />
+    <Property Name="CType" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_DTU_Device">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DeviceName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Dtuid" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="DeviceBrand" Type="varchar" MaxLength="50" />
+    <Property Name="DeviceSN" Type="varchar" MaxLength="50" />
+    <Property Name="ModelCode" Type="varchar" MaxLength="50" />
+    <Property Name="DeviceParams" Type="nvarchar" MaxLength="120" />
+    <Property Name="ProduceDate" Type="datetime" />
+    <Property Name="DeviceSupplier" Type="varchar" MaxLength="50" />
+    <Property Name="Memo" Type="nvarchar" MaxLength="100" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <EntityType Name="T_DTU_FieldDesc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Dtuid" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="ColName" Type="varchar" Nullable="false" MaxLength="80" />
+    <Property Name="FieldName" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="FieldShortDesc" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="FieldDesc" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="FieldUnit" Type="varchar" MaxLength="30" />
+    <Property Name="ValueMin" Type="float" />
+    <Property Name="ValueMax" Type="float" />
+    <Property Name="Lowlimit" Type="float" />
+    <Property Name="Highlimit" Type="float" />
+    <Property Name="Lololimit" Type="float" />
+    <Property Name="Hihilimit" Type="float" />
+    <Property Name="ValueInOrOut" Type="smallint" />
+    <Property Name="IsAlert" Type="smallint" Nullable="false" />
+    <Property Name="IsCollect" Type="smallint" Nullable="false" />
+    <Property Name="IsShow" Type="smallint" Nullable="false" />
+    <Property Name="UpdateFlag" Type="int" />
+    <Property Name="OrderId" Type="smallint" Nullable="false" />
+    <Property Name="ParentId" Type="int" Nullable="false" />
+    <Property Name="KeyValues" Type="nvarchar" MaxLength="20" />
+    <Property Name="FieldType" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_DTU_Flow">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Dtuid" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="DtuidName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="FileType" Type="smallint" Nullable="false" />
+    <Property Name="FileSize" Type="int" Nullable="false" />
+    <Property Name="MadeDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateFlag" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_Group">
+    <Key>
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="GroupCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="30" />
+    <Property Name="GroupDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentCode" Type="varchar" MaxLength="30" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <EntityType Name="T_DTU_PressureLevel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PressureName" Type="varchar" MaxLength="30" />
+    <Property Name="PressureDesc" Type="nvarchar" MaxLength="30" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="UpdateFlag" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_RepairType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DTUDevice" Type="nvarchar" MaxLength="30" />
+    <Property Name="RepairDesc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_DTU_Transmit">
+    <Key>
+      <PropertyRef Name="Dtuid" />
+    </Key>
+    <Property Name="Dtuid" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="IsTransmit" Type="smallint" Nullable="false" />
+    <Property Name="TargetIP" Type="varchar" MaxLength="16" />
+    <Property Name="TargetPort" Type="int" />
+    <Property Name="TargetVersion" Type="varchar" MaxLength="4" />
+  </EntityType>
+  <EntityType Name="T_DTU_ValveEffect">
+    <Key>
+      <PropertyRef Name="ValveCode" />
+    </Key>
+    <Property Name="ValveCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ClosedTime" Type="datetime" Nullable="false" />
+    <Property Name="EffctArea" Type="nvarchar" MaxLength="50" />
+    <Property Name="EffctUserNum" Type="int" Nullable="false" />
+    <Property Name="ValveName" Type="nvarchar" MaxLength="30" />
+    <Property Name="Dtuid" Type="varchar" MaxLength="8" />
+  </EntityType>
+  <EntityType Name="T_User_Account">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="UserBalance" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+    <Property Name="CreditGrade" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <EntityType Name="T_User_AccountLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="OrderFrom" Type="smallint" Nullable="false" />
+    <Property Name="OrderId" Type="varchar" MaxLength="50" />
+    <Property Name="OrderType" Type="smallint" Nullable="false" />
+    <Property Name="ModMoney" Type="float" Nullable="false" />
+    <Property Name="OrderNum" Type="int" Nullable="false" />
+    <Property Name="Operator" Type="varchar" MaxLength="30" />
+    <Property Name="OperIP" Type="varchar" MaxLength="16" />
+    <Property Name="OperTime" Type="datetime" Nullable="false" />
+    <Property Name="OrderDesc" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="T_User_Config">
+    <Key>
+      <PropertyRef Name="CCode" />
+    </Key>
+    <Property Name="CCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ConfigName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="ConfigDesc" Type="varchar" MaxLength="100" />
+    <Property Name="SoftInterval" Type="smallint" />
+    <Property Name="IsAlert" Type="smallint" />
+    <Property Name="IsRpt" Type="smallint" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="PopCode" Type="varchar" MaxLength="100" />
+    <Property Name="UpdateFlag" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_User_Contact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="30" />
+    <Property Name="PhoneNum" Type="varchar" MaxLength="24" />
+    <Property Name="BirthDay" Type="datetime" />
+    <Property Name="GroupId" Type="int" />
+    <Property Name="CGDesc" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="T_User_ContactGroup">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="varchar" MaxLength="30" />
+    <Property Name="UserId" Type="varchar" MaxLength="30" />
+    <Property Name="GroupDescpt" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentId" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_User_Group">
+    <Key>
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="GroupCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="30" />
+    <Property Name="GroupDesc" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentCode" Type="varchar" MaxLength="30" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <EntityType Name="T_User_Info">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="TrueName" Type="nvarchar" Nullable="false" MaxLength="30" />
+    <Property Name="UserPwd" Type="varchar" MaxLength="50" />
+    <Property Name="UserPhone" Type="varchar" MaxLength="24" />
+    <Property Name="UserMail" Type="varchar" MaxLength="50" />
+    <Property Name="UserPosition" Type="varchar" MaxLength="50" />
+    <Property Name="LinkAddr" Type="nvarchar" MaxLength="100" />
+    <Property Name="RegDate" Type="datetime" Nullable="false" />
+    <Property Name="BirthDay" Type="datetime" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CCode" Type="varchar" MaxLength="30" />
+    <Property Name="BillCode" Type="varchar" MaxLength="30" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="ParentUser" Type="varchar" MaxLength="30" />
+    <Property Name="UpdateFlag" Type="int" />
+  </EntityType>
+  <EntityType Name="T_User_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="LastLogDate" Type="datetime" Nullable="false" />
+    <Property Name="LastValiTime" Type="datetime" Nullable="false" />
+    <Property Name="LastIP" Type="varchar" MaxLength="16" />
+    <Property Name="LogFrom" Type="varchar" MaxLength="30" />
+    <Property Name="ValidateKey" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="IsOnline" Type="smallint" Nullable="false" />
+    <Property Name="UpdateFlag" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_LoginLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="varchar" MaxLength="30" />
+    <Property Name="LoginFrom" Type="nvarchar" MaxLength="50" />
+    <Property Name="FromCode" Type="varchar" MaxLength="50" />
+    <Property Name="LgClient" Type="varchar" MaxLength="20" />
+    <Property Name="LgResult" Type="smallint" />
+    <Property Name="LgTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="T_User_Menu">
+    <Key>
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="MenuCode" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="MenuName" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="MenuDesc" Type="varchar" MaxLength="50" />
+    <Property Name="DomainId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ParentCode" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="OperForm" Type="varchar" MaxLength="100" />
+    <Property Name="TargetName" Type="varchar" MaxLength="20" />
+    <Property Name="NeedPermission" Type="smallint" />
+    <Property Name="IsDisplay" Type="smallint" />
+    <Property Name="IsMenu" Type="smallint" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="UpdateFlag" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_OperLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Operator" Type="varchar" MaxLength="30" />
+    <Property Name="OperatorTime" Type="datetime" />
+    <Property Name="OperType" Type="smallint" />
+    <Property Name="OperFunc" Type="nvarchar" MaxLength="50" />
+    <Property Name="OperFunCode" Type="varchar" MaxLength="50" />
+    <Property Name="OperMsg" Type="nvarchar" MaxLength="50" />
+    <Property Name="OperResult" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_User_Opinion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="PhoneNum" Type="varchar" MaxLength="30" />
+    <Property Name="SubTime" Type="datetime" Nullable="false" />
+    <Property Name="SubUserId" Type="varchar" MaxLength="30" />
+    <Property Name="SubMemo" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_Role">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="RoleCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="RoleDesc" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="smallint" />
+    <Property Name="UpdateFlag" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_RoleMenu">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="RoleCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="MenuCode" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Status" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_User_UserContact">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="ContactId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_UserDtuid">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="Dtuid" />
+    </Key>
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Dtuid" Type="varchar" Nullable="false" MaxLength="8" />
+    <Property Name="Status" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_User_UserGroup">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="GroupCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Status" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_User_UserMenu">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="MenuCode" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Status" Type="smallint" />
+  </EntityType>
+  <EntityType Name="T_User_UserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="UserId" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="RoleCode" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Status" Type="smallint" />
+  </EntityType>
+</Schema>

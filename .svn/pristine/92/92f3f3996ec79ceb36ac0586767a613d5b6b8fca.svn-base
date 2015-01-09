@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace WinfoToolSys.Models
+{
+    public class T_CompanyExt
+    {
+        public string Oper
+        {
+            set;
+            get;
+        }
+
+        public ServiceCrmGet.T_CompanyInfos CompanyInfo
+        {
+            set;
+            get;
+        }
+
+        public string Province
+        {
+            set;
+            get;
+        }
+    }
+}

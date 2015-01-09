@@ -1,0 +1,354 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.DB.Provider;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.Service
+{
+    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码、svc 和配置文件中的类名“WinfoToolServiceWrite”。
+    // 注意: 为了启动 WCF 测试客户端以测试此服务，请在解决方案资源管理器中选择 WinfoToolServiceWrite.svc 或 WinfoToolServiceWrite.svc.cs，然后开始调试。
+    public class WinfoToolServiceWrite : IWinfoToolServiceWrite
+    {
+        public string GetData(int value)
+        {
+            return string.Format("You entered: {0}", value);
+        }
+
+        #region 用户管理
+        #endregion
+
+        #region 客户管理
+        #endregion
+
+        #region 编号管理
+        #endregion
+
+        #region 站点管理
+        public bool UpdateSite(string ActiveKey, string UserId, T_DTU dtu)
+        {
+            bool rlst = false;
+            try
+            {
+                dtu.GroupCode = "aa";
+                dtu.Status = 1;
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    rlst = new DtuProvider().Update(dtu);
+                    LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), "", "用户修改了站点【(" + dtu.Dtuid + ")" + dtu.DtuidName + "】信息", 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        public bool AddSite(string ActiveKey, string UserId, T_DTU dtu)
+        {
+            bool rlst = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    new DtuProvider().Add(dtu);
+                    rlst = true;
+                    LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), "", "用户添加了站点【(" + dtu.Dtuid + ")" + dtu.DtuidName + "】信息", 1);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+        /// <summary>
+        /// 添加压力
+        /// </summary>        
+        public EmReStatus AddLevel(string ActiveKey, string UserId, T_DTU_PressureLevel model)
+        {
+            try
+            {
+                if (!WcfCommon.LoginCheck(ActiveKey))
+                    return EmReStatus.invalid;
+                int back = new DTUPressureLevelProvider().Add(model);
+                if (back > 0)
+                    return EmReStatus.success;
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), UserId, ex);
+                return EmReStatus.exception;
+            }
+            return EmReStatus.fail;
+        }
+        //生成站点编号
+        public List<string> GenerateSiteCode(string ActiveKey, string UserId, string CompanyId, int Num)
+        {
+            List<string> DtuidList = new List<string>();
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return DtuidList;
+        }
+        #endregion
+
+        public void DoWork()
+        {
+            throw new NotImplementedException();
+        }
+
+        #region 字段管理
+        //添加字段
+        public bool AddFiled(string ActiveKey, string UserId, T_DTU_FieldDesc model)
+        {
+            bool rlst = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new FieldProvider().Add(model) > 0)
+                    {
+                        rlst = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        //更改字段
+        public bool EditFiled(string ActiveKey, string UserId, T_DTU_FieldDesc model)
+        {
+            bool rlst = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    rlst = new FieldProvider().Update(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+        #endregion
+
+        #region 阀门影响管理
+
+        public bool AddInfluence(string ActiveKey, T_DTU_ValveEffect Tdv)
+        {
+            bool rlst = false;
+            try
+            {
+                new DtuValueInfluenceProvider().Add(Tdv);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        public bool UpdateInfluence(string ActiveKey, T_DTU_ValveEffect Tdv, string UserId)
+        {
+            bool rlst = false;
+            try
+            {
+                rlst = new DtuValueInfluenceProvider().Update(Tdv);
+                LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), UserId, "用户:【" + UserId + "】于：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " 更改了阀门配置:" + Tdv.ValveCode, 1);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        public bool DeleteInfluence(string ActiveKey, string ValveCode, string UserId)
+        {
+            bool rlst = false;
+            try
+            {
+                rlst = new DtuValueInfluenceProvider().Delete(ValveCode);
+                LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), UserId, "用户:【" + UserId + "】于：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " 删除了阀门配置:" + ValveCode, 1);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+        #endregion
+
+        #region 用户分组管理
+        //添加用户分组
+        public bool AddGroup(string ActiveKey, T_User_Group model)
+        {
+            bool result = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new UserGroupProvider().AddGroup(model))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+        //修改用户分组
+        public bool UpdateGroup(string ActiveKey, T_User_Group model)
+        {
+            bool result = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new UserGroupProvider().UpdateGroup(model))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+        //删除用户分组
+        public bool DeleteGroup(string ActiveKey, string groupCode)
+        {
+            bool result = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new UserGroupProvider().DeleteGroup(groupCode))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+        #endregion
+
+
+        #region 站点配置管理
+        public bool DeleteConfig(string ActiveKey, string UserId, string ConfigCode)
+        {
+            bool rlst = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    rlst = new SiteSetProvider().Delete(ConfigCode);
+                    if (rlst)
+                    {
+                        LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), UserId, "用户【" + UserId + "】,删除了配置【" + ConfigCode + "】", 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+        #endregion
+
+ 
+
+        #region 用户配置管理
+        public bool AddUserConfig(string ActiveKey, T_User_Config model)
+        {
+            bool result = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new UserSettingProvider().AddConfig(model))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+
+        public bool UpdateUserConfig(string ActiveKey, T_User_Config model)
+        {
+            bool result = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new UserSettingProvider().UpdateConfig(model))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+
+        public bool DeleteUserConfig(string ActiveKey, string CCode)
+        {
+            bool result = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new UserSettingProvider().DeleteConfig(CCode))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+
+
+        #endregion
+ 
+    }
+}

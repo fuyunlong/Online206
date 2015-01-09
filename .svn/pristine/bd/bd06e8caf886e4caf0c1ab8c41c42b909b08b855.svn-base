@@ -1,0 +1,225 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using Com.Winfotian.Model;
+
+namespace Com.Winfotian.DB.Provider
+{
+    public class DtuGroupProvider
+    {
+        public List<T_DTU_GroupEx> GetGroupByComId(string CompanyId)
+        {
+            List<T_DTU_GroupEx> list = new List<T_DTU_GroupEx>();
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("SELECT a.[GroupCode] ,a.[GroupName],a.[GroupDesc],a.[ParentCode] ,a.[Status],a.[CompanyId],a.[UpdateFlag],b.GroupName as ParentName");
+            SqlStr.Append(" FROM [Infa]..[T_DTU_Group] as a left join [Infa]..[T_DTU_Group] as b on a.ParentCode=b.GroupCode where a.CompanyId=@CompanyId ");
+            SqlParameter[] pars = { 
+                                  new SqlParameter("@CompanyId",CompanyId)
+                                  };
+            using(SqlDataReader reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, System.Data.CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if(reader != null)
+                {
+                    while(reader.Read())
+                    {
+                        var model = IDataT_DTU_GroupExReader(reader);
+                        if(model == null)
+                            continue;
+                        list.Add(model);
+                    }
+                }
+            }
+            return list;
+        }
+
+        public T_DTU_Group GetGroupDeatail(string GroupCode)
+        {
+            T_DTU_Group tg = null;
+            StringBuilder SqlStr = new StringBuilder();
+            SqlStr.Append("select * from [Infa]..[T_DTU_Group] where GroupCode=@GroupCode");
+            SqlParameter[] pars = {                               
+                                  new SqlParameter("@GroupCode",GroupCode)};
+            using(var reader = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, SqlStr.ToString(), pars))
+            {
+                if(reader != null)
+                {
+                    while(reader.Read())
+                    {
+                        tg = IDataT_DTU_GroupReader(reader);
+                    }
+                }
+            }
+            return tg;
+        }
+
+        /// <summary>
+        /// 增加一条数据
+        /// </summary>
+        public void Add(T_DTU_Group model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("insert into [Infa]..[T_DTU_Group](");
+            strSql.Append("GroupCode,GroupName,GroupDesc,ParentCode,Status,CompanyId,UpdateFlag)");
+            strSql.Append(" values (");
+            strSql.Append("@GroupCode,@GroupName,@GroupDesc,@ParentCode,@Status,@CompanyId,@UpdateFlag)");
+            SqlParameter[] parameters = {
+					new SqlParameter("@GroupCode", SqlDbType.VarChar,30),
+					new SqlParameter("@GroupName", SqlDbType.NVarChar,30),
+					new SqlParameter("@GroupDesc", SqlDbType.NVarChar,50),
+					new SqlParameter("@ParentCode", SqlDbType.VarChar,30),
+					new SqlParameter("@Status", SqlDbType.SmallInt,2),
+					new SqlParameter("@CompanyId", SqlDbType.Int,4),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4)};
+            parameters[0].Value = model.GroupCode;
+            parameters[1].Value = model.GroupName;
+            parameters[2].Value = model.GroupDesc;
+            parameters[3].Value = model.ParentCode;
+            parameters[4].Value = model.Status;
+            parameters[5].Value = model.CompanyId;
+            parameters[6].Value = model.UpdateFlag;
+            SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+        }
+        /// <summary>
+        /// 更新一条数据
+        /// </summary>
+        public bool Update(T_DTU_Group model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update [Infa]..[T_DTU_Group] set ");
+            strSql.Append("GroupName=@GroupName,");
+            strSql.Append("GroupDesc=@GroupDesc,");
+            strSql.Append("ParentCode=@ParentCode,");
+            strSql.Append("Status=@Status,");
+            strSql.Append("CompanyId=@CompanyId,");
+            strSql.Append("UpdateFlag=@UpdateFlag");
+            strSql.Append(" where GroupCode=@GroupCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@GroupName", SqlDbType.NVarChar,30),
+					new SqlParameter("@GroupDesc", SqlDbType.NVarChar,50),
+					new SqlParameter("@ParentCode", SqlDbType.VarChar,30),
+					new SqlParameter("@Status", SqlDbType.SmallInt,2),
+					new SqlParameter("@CompanyId", SqlDbType.Int,4),
+					new SqlParameter("@UpdateFlag", SqlDbType.Int,4),
+					new SqlParameter("@GroupCode", SqlDbType.VarChar,30)};
+            parameters[0].Value = model.GroupName;
+            parameters[1].Value = model.GroupDesc;
+            parameters[2].Value = model.ParentCode;
+            parameters[3].Value = model.Status;
+            parameters[4].Value = model.CompanyId;
+            parameters[5].Value = model.UpdateFlag;
+            parameters[6].Value = model.GroupCode;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if(rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 删除一条数据
+        /// </summary>
+        public bool Delete(string GroupCode)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("delete from [Infa]..[T_DTU_Group] ");
+            strSql.Append(" where GroupCode=@GroupCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@GroupCode", SqlDbType.VarChar,50)};
+            parameters[0].Value = GroupCode;
+
+            int rows = SqlHelper.DBHelper.ExecuteNonQuery(SqlHelper.DBHelper.OnlyWrite, CommandType.Text, strSql.ToString(), parameters);
+            if(rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public T_DTU_Group GetModel(string GroupCode)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 GroupCode,GroupName,GroupDesc,ParentCode,Status,CompanyId,UpdateFlag from [Infa]..[T_DTU_Group] ");
+            strSql.Append(" where GroupCode=@GroupCode ");
+            SqlParameter[] parameters = {
+					new SqlParameter("@GroupCode", SqlDbType.VarChar,50)};
+            parameters[0].Value = GroupCode;
+
+            T_DTU_Group model = null;
+            using(IDataReader dr = SqlHelper.DBHelper.ExecuteReader(SqlHelper.DBHelper.OnlyRead, CommandType.Text, strSql.ToString(), parameters))
+            {
+                if(dr.Read())
+                {
+                    model = IDataT_DTU_GroupReader(dr);
+                }
+            }
+            return model;
+        }
+
+
+        /// <summary>
+        /// T_DTU_Group 数据读取
+        /// </summary>
+        private T_DTU_Group IDataT_DTU_GroupReader(IDataReader dr)
+        {
+            T_DTU_Group model = new T_DTU_Group();
+            try
+            {
+                model.GroupCode = (dr["GroupCode"] is DBNull) ? string.Empty : dr["GroupCode"].ToString();
+                model.GroupName = (dr["GroupName"] is DBNull) ? string.Empty : dr["GroupName"].ToString();
+                model.GroupDesc = (dr["GroupDesc"] is DBNull) ? string.Empty : dr["GroupDesc"].ToString();
+                model.ParentCode = (dr["ParentCode"] is DBNull) ? string.Empty : dr["ParentCode"].ToString();
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.CompanyId = (dr["CompanyId"] is DBNull) ? 0 : Convert.ToInt32(dr["CompanyId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+            }
+            catch(Exception ex)
+            {
+                //WebLog.WSLogger.Error(ex.Message);//Please add references(log4net.dll)
+                return null;
+            }
+            return model;
+        }
+        /// <summary>
+        /// T_DTU_GroupEx 数据Model
+        /// </summary>
+        private T_DTU_GroupEx IDataT_DTU_GroupExReader(IDataReader dr)
+        {
+            T_DTU_GroupEx model = new T_DTU_GroupEx();
+            try
+            {
+                model.GroupCode = (dr["GroupCode"] is DBNull) ? string.Empty : dr["GroupCode"].ToString();
+                model.GroupName = (dr["GroupName"] is DBNull) ? string.Empty : dr["GroupName"].ToString();
+                model.GroupDesc = (dr["GroupDesc"] is DBNull) ? string.Empty : dr["GroupDesc"].ToString();
+                model.ParentCode = (dr["ParentCode"] is DBNull) ? string.Empty : dr["ParentCode"].ToString();
+                model.Status = (dr["Status"] is DBNull) ? 0 : Convert.ToInt32(dr["Status"].ToString());
+                model.CompanyId = (dr["CompanyId"] is DBNull) ? 0 : Convert.ToInt32(dr["CompanyId"].ToString());
+                model.UpdateFlag = (dr["UpdateFlag"] is DBNull) ? 0 : Convert.ToInt32(dr["UpdateFlag"].ToString());
+                model.ParentName = (dr["ParentName"] is DBNull) ? string.Empty : dr["UpdateFlag"].ToString();
+            }
+            catch(Exception ex)
+            {
+                //WebLog.WSLogger.Error(ex.Message);//Please add references(log4net.dll)
+                return null;
+            }
+            return model;
+        }
+    }
+}

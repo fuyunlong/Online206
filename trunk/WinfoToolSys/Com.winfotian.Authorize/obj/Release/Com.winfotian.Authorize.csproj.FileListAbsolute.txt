@@ -1,0 +1,8 @@
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\bin\Release\Com.winfotian.Authorize.dll.config
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\bin\Release\Com.winfotian.Authorize.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\bin\Release\Com.winfotian.Authorize.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\bin\Release\InfaCommon.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\bin\Release\Newtonsoft.Json.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\obj\Release\Com.winfotian.Authorize.dll
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\obj\Release\Com.winfotian.Authorize.pdb
+E:\project\Winfo-Tool\trunk\WinfoToolSys\Com.winfotian.Authorize\obj\Release\Com.winfotian.Authorize.csprojResolveAssemblyReference.cache

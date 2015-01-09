@@ -1,0 +1,198 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.ServiceProxy;
+using Com.Winfotian.ServiceProxy.UpdateService;
+using System.Text;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using System.Reflection;
+using System.ComponentModel;
+
+namespace WinfoToolSys.Controllers.ClientMng
+{
+    public class ConfigController : Controller
+    {
+        //
+        // GET: /Config/
+        public ActionResult ShowConfigList()
+        {
+            return View();
+        }
+
+        //查询配置信息
+        public JsonResult GetConfigByName(string configName)
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetListConfiginfo("", configName, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        //查询所有配置信息
+        public JsonResult GetConfigList()
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetCompanyConfigs("");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        //根据公司id查询配置信息
+        public JsonResult GetCompanyConfig(string CompanyId)
+        {
+            List<ServiceCrmGet.T_CompanyComfigs> list = new List<ServiceCrmGet.T_CompanyComfigs>();
+
+            try
+            {
+                list = new ServiceCrmGet.CRMSGetClient().GetCompanyConfig(CompanyId, "");
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Json(list);
+        }
+
+        //添加、详细、修改页面
+        public ActionResult ShowOper(string Oper, string ConfigId)
+        {
+            StringBuilder sb = new StringBuilder();
+            ServiceCrmGet.T_CompanyComfigs config = new ServiceCrmGet.CRMSGetClient().GetCompanyConfigID(ConfigId, "");
+
+            switch (Oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='Config.UpdateConfig()' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='Config.AddConfig()' />");
+                    break;
+                default:
+                    break;
+            }
+
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            //用户操作按钮
+            ViewBag.Button = sb.ToString();
+            return View(config);
+        }
+
+        //添加配置
+        public string Add(ServiceCrmPost.T_CompanyComfigs model)
+        {
+            string result = "false";
+
+            try
+            {
+                if (new ServiceCrmPost.CRMSPostClient().AddConfigInfo(model, ""))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+
+        //删除配置
+        public string Delete(string configId)
+        {
+            string result = "false";
+
+            try
+            {
+                if (new ServiceCrmPost.CRMSPostClient().ChangeConfigStatus(configId, 0, ""))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+
+        //修改配置
+        public string Update(ServiceCrmPost.T_CompanyComfigs model)
+        {
+            string result = "false";
+
+            try
+            {
+                if (new ServiceCrmPost.CRMSPostClient().UpdateCompanyConfig(model, ""))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return result;
+        }
+
+        // 获取描述信息
+        public static string Description(Enum en)
+        {
+            Type type = en.GetType();
+            MemberInfo[] memInfo = type.GetMember(en.ToString());
+            if (memInfo != null && memInfo.Length > 0)
+            {
+                object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (attrs != null && attrs.Length > 0)
+                {
+                    return ((DescriptionAttribute)attrs[0]).Description;
+                }
+            }
+            return en.ToString();
+        }
+
+        //取得客户端类型
+        public string GetClienType()
+        {
+            string result = string.Empty;
+            StringBuilder sb = new StringBuilder();
+            var names = Enum.GetValues(typeof(Com.Winfotian.Model.ClientType));
+            int rows = names.Length % 4 == 0 ? names.Length / 4 : names.Length / 4 + 1;
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (4 * i + j < names.Length)
+                    {
+                        result += "<option value='" + (int)names.GetValue(4 * i + j) + "'>" + Description((Com.Winfotian.Model.ClientType)names.GetValue(4 * i + j)) + "</option>";
+                    }
+                }
+            }
+            return result;
+        }
+    }
+}

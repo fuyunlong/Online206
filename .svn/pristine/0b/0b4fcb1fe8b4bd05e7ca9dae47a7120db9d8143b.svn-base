@@ -1,0 +1,89 @@
+﻿var SiteSet = {
+    //获取站点配置列表
+    GetSiteSetList: function () {
+        var configName = $("#txtConfigName").val().trim();
+        $.ajax({
+            type: "post",
+            url: "/SiteSet/GetSiteSetList",
+            data: { configName: configName },
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询配置信息失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                    html += "<tr>";
+                    html += "<td class='com_TextCenter com_w25pen'>" + data[i].ConfigName + "</td>";
+                    html += "<td class='com_TextCenter com_w25pen com_disnote'>" + data[i].ConfigDesc + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].FlowNum + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].AINum + "</td>";
+                    html += "<td class='com_TextCenter com_w10pen'>" + data[i].DINum + "</td>";
+                    html += "<td class='com_TextCenter com_w20pen'>";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置查看','38%','40%','25%','35%','SiteSetMalodor/ShowDetail?oper=Show&configId=" + data[i].ConfigCode + "')>查看|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=Common.WinTopBox('配置修改','38%','40%','25%','35%','SiteSetMalodor/ShowDetail?oper=Edit&configId=" + data[i].ConfigCode + "')>修改|</a> ";
+                    html += "<a href='javascript:void(0)' onclick=SiteSet.DeleteConfig('" + data[i].ConfigCode + "')>删除</a> ";
+                    html += "</td>";
+                    html += "</tr>";
+                }
+                $("#ConfigList tbody").html(html);
+            }
+        });
+    },
+    //更改配置
+    UpdateConfig: function () {
+        $.ajax({
+            type: "POST",
+            data: SiteSet.GetObj(),
+            url: "/SiteSet/UpdateSiteSet",
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    alert("删除配置成功");
+                }
+                else {
+                    alert("删除配置失败");
+                }
+            }
+        });
+    },
+    //删除配置
+    DeleteConfig: function (ConfigCode) {
+        $.ajax({
+            type: "POST",
+            data: { ConfigCode: ConfigCode },
+            url: "/SiteSet/DeleteConfig",
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    alert("删除配置成功");
+                }
+                else {
+                    alert("删除配置失败");
+                }
+            }
+        });
+    },
+    GetObj: function () {
+        var obj = {
+            ConfigCode: $("#ConfigCode").val(),
+            ConfigName: $("#ConfigName").val(),
+            ConfigDesc: $("#ConfigDesc").val(),
+            FlowNum: $("#FlowNum").val(),
+            AINum: $("#AINum").val(),
+            DINum: $("#DINum").val(),
+            IsAlert: $("#IsAlert").val(),
+            IsCreate: $("#IsCreate").val(),
+            Status: "1",
+            UpdateFlag: "1",
+            CType: "0"
+        };
+        return obj;
+    }
+};

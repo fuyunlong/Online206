@@ -1,0 +1,268 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+using WinfoToolSys.Pms;
+using System.Text;
+using Proxy;
+using Proxy.ServiceWinToolRead;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserGroupController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据名称查询分组信息
+        public string GetUserGroupByCompanyID(string companyId)
+        {
+            StringBuilder sb = new StringBuilder();
+            List<T_User_GroupExt> list = ServcieTool.WinToolServiceReadInstance.GetGroupListByCompanyID(PmsMng.ActiveKey, companyId);
+            if (list.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            //顶层
+            var rows = (from r in list
+                        where r.ParentCode == "0"
+                        select r).ToList();
+
+            foreach (var row in rows)
+            {
+                sb.Append("<tr isHide=" + row.ParentCode + "><td class='com_w25pen' style='padding-left:20px'>");
+                var arr = (from r in list
+                           where r.ParentCode == row.GroupCode
+                           select r).ToList();
+                if (arr.Count > 0)//有子
+                {
+                    sb.Append("<img src='/Images/tag_add.png' isHide='" + row.GroupCode + "' onclick='Group.Collapse(this)' style='padding-right:3px;margin-bottom:-3px;cursor:pointer'/>");
+                }
+                sb.Append(row.GroupName + "</td>");
+                sb.Append("<td class='com_w25pen com_TextCenter'>" + row.GroupDesc + "</td>");
+                sb.Append("<td class='com_w30pen com_TextCenter'>" + GetCompanyNameById(row.CompanyId.ToString()) + "</td>");
+                sb.Append("<td class='com_w20pen com_TextCenter'>");
+                sb.Append("<a href='javascript:void(0)' onclick=Common.WinTopBox('分组查看','38%','35%','25%','33%','UserGroup/Operation?oper=Show&configId=" + row.GroupCode + "')>查看|</a>");
+                sb.Append("<a href='javascript:void(0)' onclick=Common.WinTopBox('分组修改','38%','35%','25%','33%','UserGroup/Operation?oper=Edit&configId=" + row.GroupCode + "')>修改|</a>");
+                sb.Append("<a href='javascript:void(0)' onclick=javascript:Group.DeleteGroup('" + row.GroupCode + "')>删除</a>");
+                sb.Append("</td></tr>");
+                sb.Append(SubGroup(list, row.GroupCode, 0));
+            }
+            return sb.ToString();
+        }
+
+        //分组详细、修改、添加
+        public ActionResult Operation(string oper, string configId)
+        {
+            StringBuilder sb = new StringBuilder();
+            T_User_GroupExt model = ServcieTool.WinToolServiceReadInstance.GetGroupByCode(PmsMng.ActiveKey, configId);
+
+            switch (oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='Group.UpdateGroup();' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='Group.AddGroup();' />");
+                    break;
+                default:
+                    break;
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            ViewBag.Button = sb.ToString();
+            return View(model);
+        }
+
+        /// <summary>
+        /// 获取单个公司下所以分组(树形结构展开)
+        /// </summary>
+        /// <param name="companyId">公司Id</param>
+        /// <returns></returns>
+        public JsonResult GetGroup(string companyId)
+        {
+            if (companyId == "0" || companyId == "")
+            {
+                return Json(new List<int>());
+            }
+            var list = ServcieTool.WinToolServiceReadInstance.GetGroupListByCompanyID(PmsMng.ActiveKey, companyId);
+            if (list.Count == 0)
+            {
+                return Json(list);
+            }
+            return Json(WrapTreeGroup(list));
+        }
+
+        /// <summary>
+        /// 内部方法-递归分组子集
+        /// </summary>
+        /// <param name="originalList">原分组</param>
+        /// <param name="refModels">新分组集-output</param>
+        /// <param name="parentCode">父编号</param>
+        /// <param name="index">当前子分组层次深度</param>
+        private void SubGroup(IList<T_User_GroupExt> originalList, IList<T_User_GroupExt> refModels, string parentCode, int index)
+        {
+            ++index;
+            var arr = (from row in originalList
+                       where row.ParentCode == parentCode
+                       select row).ToList();
+            foreach (var m in arr)
+            {
+                m.GroupName = GetTreeviewMarks(index, (m.GroupCode == arr.Last().GroupCode)) + m.GroupName;
+                refModels.Add(m);
+                SubGroup(originalList, refModels, m.GroupCode, index);
+            }
+        }
+
+        /// <summary>
+        /// 生成树形结构线
+        /// </summary>
+        private string GetTreeviewMarks(int sum, bool isLast)
+        {
+            if (sum == 0)
+            {
+                return "";
+            }
+            string mark = "";
+            for (int i = 0; i < sum; i++)
+            {
+                mark += "&nbsp&nbsp";
+            }
+            if (isLast)
+            {
+                mark += "└ ";
+            }
+            else
+            {
+                mark += "├ ";
+            }
+            return mark;
+        }
+
+        // 包装树形结构分组
+        private List<T_User_GroupExt> WrapTreeGroup(IList<T_User_GroupExt> list)
+        {
+            var models = new List<T_User_GroupExt>();
+            foreach (T_User_GroupExt m in list)
+            {
+                if (m.ParentCode == "0")
+                {
+                    models.Add(m);
+                    SubGroup(list, models, m.GroupCode, 0);
+                }
+            }
+            return models;
+        }
+
+        //根据公司Id查询名称
+        public string GetCompanyNameById(string companyId)
+        {
+            string result = string.Empty;
+            Proxy.CrmServiceGet.T_CompanyInfos model = ServcieTool.CrmServiceGetInstance.GetCompanyInfoList(companyId, PmsMng.ActiveKey);
+            if (model != null)
+            {
+                result = model.CompanyName;
+            }
+            return result;
+        }
+
+        //添加分组
+        public string Add(T_User_Group model)
+        {
+            string result = "false";
+            string groupCode = "" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond;
+
+            Proxy.ServiceWinToolWrite.T_User_Group group = new Proxy.ServiceWinToolWrite.T_User_Group();
+            group.GroupCode = groupCode;
+            group.GroupName = model.GroupName;
+            group.GroupDesc = model.GroupDesc;
+            group.ParentCode = model.ParentCode;
+            group.Status = 1;
+            group.CompanyId = model.CompanyId;
+            group.UpdateFlag = 1;
+
+            if (ServcieTool.WinToolServiceWriteInstance.AddGroup("", group))
+            {
+                result = "true";
+            }
+            return result;
+        }
+
+        //修改分组
+        public string Update(T_User_Group model)
+        {
+            string result = "false";
+
+            Proxy.ServiceWinToolWrite.T_User_Group group = new Proxy.ServiceWinToolWrite.T_User_Group();
+            group.GroupCode = model.GroupCode;
+            group.GroupName = model.GroupName;
+            group.GroupDesc = model.GroupDesc;
+            group.ParentCode = model.ParentCode;
+            group.CompanyId = model.CompanyId;
+
+            if (ServcieTool.WinToolServiceWriteInstance.UpdateGroup("", group))
+            {
+                result = "true";
+            }
+            return result;
+        }
+
+        //删除分组
+        public string Delete(string groupCode)
+        {
+            string result = "false";
+            if (ServcieTool.WinToolServiceWriteInstance.DeleteGroup("", groupCode))
+            {
+                result = "true";
+            }
+            return result;
+        }
+
+        //递归查子
+        private string SubGroup(IList<T_User_GroupExt> originalList, string parentCode, int index)
+        {
+            ++index;
+            StringBuilder sb = new StringBuilder();
+            var arr = (from row in originalList
+                       where row.ParentCode == parentCode
+                       select row).ToList();
+
+            if (arr.Count > 0)//子
+            {
+                for (int i = 0; i < arr.Count; i++)
+                {
+                    sb.Append("<tr class='com_hide' isHide=" + arr[i].ParentCode + "><td class='com_w25pen' style='padding-left:" + (index * 18 + 20) + "px'>");
+                    var rr = (from r in originalList
+                              where r.ParentCode == arr[i].GroupCode
+                              select r).ToList();
+                    if (rr.Count > 0)
+                    {
+                        sb.Append("<img src='/Images/tag_add.png' isHide='" + arr[i].GroupCode + "' onclick='Group.Collapse(this)' style='padding-right:3px;margin-bottom:-3px;cursor:pointer'/>");
+                    }
+                    sb.Append(arr[i].GroupName + "</td>");
+                    sb.Append("<td class='com_w25pen com_TextCenter'>" + arr[i].GroupDesc + "</td>");
+                    sb.Append("<td class='com_w30pen com_TextCenter'>" + GetCompanyNameById(arr[i].CompanyId.ToString()) + "</td>");
+                    sb.Append("<td class='com_w20pen com_TextCenter'>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Common.WinTopBox('分组查看','38%','35%','25%','33%','UserGroup/Operation?Oper=Show&ConfigId=" + arr[i].GroupCode + "')>查看|</a>");
+                    sb.Append("<a href='javascript:void(0)' onclick=Common.WinTopBox('分组修改','38%','35%','25%','33%','UserGroup/Operation?Oper=Edit&ConfigId=" + arr[i].GroupCode + "')>修改|</a>");
+                    sb.Append("<a href='javascript:void(0)' onclick=javascript:Group.DeleteGroup('" + arr[i].GroupCode + "')>删除</a>");
+                    sb.Append("</td></tr>");
+                    sb.Append(SubGroup(originalList, arr[i].GroupCode, index));
+                }
+            }
+
+            return sb.ToString();
+        }
+    }
+}

@@ -1,0 +1,191 @@
+﻿@model Com.Winfotian.Model.T_DTU_FieldDescEX
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>客户信息</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script src="~/Scripts/Common/ui_common.js"></script>
+    <script src="~/Scripts/FieldMng/FiledMng.js"></script>
+    <script>
+        $(function () {
+            $("#OperArea").html(@Html.Raw(@ViewBag.Oper));
+            $("#FiledName").val("@Model.FieldDesc");
+            var ValueInOrOut = "@Model.ValueInOrOut";
+            for (var i = 0; i < $("#InOutType")[0].options.length; i++) {
+                if ($("#InOutType")[0].options[i].text == ValueInOrOut) {
+                    $($("#InOutType")[0].options[i]).attr("selected", "selected");
+                }
+            }
+            var FileName = "@Model.FieldName";
+            var SValue = "";
+            var FiledOrder = FileName.substr(1, 1);
+            if (FileName.indexOf("M") == 0) {
+                SValue = FileName.substr(2, FileName.length - 2);
+
+            }
+            else { SValue = FileName.substr(0, 2); }
+            for (var i = 0; i < $("#FiledName")[0].options.length; i++) {
+                if ($("#FiledName")[0].options[i].text == SValue) {
+                    $($("#FiledName")[0].options[i]).attr("selected", "selected");
+                }
+            }
+            $("#FiledOrder").val(FiledOrder);
+        });
+    </script>
+</head>
+<body>
+    <br />
+    <div>
+        <table class="ui-com-tabFrm" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td colspan="9">
+                        <div class="com_DivBor com_font10size">
+                            <font class="com_red">*说明:同一站点字段长描述不能有相同</font>
+                            <br />
+                            1、字段短描述只能为：标况累计流量、标况瞬时流量、工况累计流量、工况瞬时流量、管道温度、流量计压力、进口压力、出口压力、天然气泄漏报警，
+                    另DI根据实际情况描述   
+                            <br />
+                            2、字段描述：尽量描述管道的去向等，如：去XXX地方+短描述内容;    
+                            <br />
+                            3、进出口类型：流量计压力可以不分进出口，也可同时作为进/出口及流量计压力;   
+                            <br />
+                            4、字段高/低报警值，不启用低报警设置为-1，不启用高报警设置为9999999999999;报警逻辑：实际值是否在高低阀值区间以内
+                              (DI说明：【1】报警设置为：低报警值为-1，高报警值为1；【0】报警设置为：低报警值为0，高报警值为2)   
+                            <br />
+                            5、DI字段时，需要定义1表示的中文意义、0表示的中文意义；   
+                            <br />
+
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>站点编号</td>
+                    <td class="com_w10pen">
+                        <input type="hidden" id="FiledId" value="@Model.Id" />
+                        <input type="hidden" id="FName" value="@Model.FieldName" />
+                        <input type="hidden" id="ColName" value="@Model.ColName" />
+                        <input type="hidden" id="ParentId"  value="@Model.ParentId" />
+                        <input type="hidden" id="KeyValues" value="@Model.KeyValues" />
+                        <input type="text" disabled="disabled" class="com_w70pen" id="Dtuid"  value="@Model.Dtuid"/>
+                    </td>
+                    <td>字段名称</td>
+                    <td colspan="2">
+                        <input id="ss" id="FiledOrder" disabled="disabled" class="easyui-numberspinner com_w50pen" min="1" value="1" max="100" required="true" />
+                        <select id="FiledName" disabled="disabled">
+                            <option>全部</option>
+                            <option>QB </option>
+                            <option>Q </option>
+                            <option>VB </option>
+                            <option>V </option>
+                            <option>P </option>
+                            <option>T</option>
+                            <option>AI </option>
+                            <option>DI </option>
+                            <option>AO </option>
+                            <option>BO </option>
+                            <option>TC </option>
+                            <option>PC </option>
+                            <option>VC </option>
+                        </select>
+                    </td>
+                    <td>字段单位</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="FiledUint"  value="@Model.FieldUnit"/>
+                    </td>
+                    <td>开启采集</td>
+                    <td>是 @Html.RadioButton("IsCollect", 1, @Model.IsCollect == 1 ? true : false)
+                        否 @Html.RadioButton("IsCollect", 0, @Model.IsCollect == 0 ? true : false)
+                    </td>
+                </tr>
+                <tr>
+                    <td>短描述</td>
+                    <td>
+                        <input type="text" id="FieldShorDesc" value="@Model.FieldShortDesc"></input>
+                    </td>
+                    <td>字段描述</td>
+                    <td colspan="2">
+                        <input type="text" id="FieldDesc" class="com_w80pen"  value="@Model.FieldDesc"/>
+                    </td>
+                    <td>是否显示</td>
+                    <td>是 @Html.RadioButton("IsShow", 1, @Model.IsShow == 1 ? true : false)
+                        否 @Html.RadioButton("IsShow", 0, @Model.IsShow == 0 ? true : false)
+                    </td>
+                    <td>报警检查</td>
+                    <td>是 @Html.RadioButton("IsAlearm", 1, @Model.IsAlert == 1 ? true : false)
+                        否 @Html.RadioButton("IsAlearm", 0, @Model.IsAlert == 0 ? true : false)
+                    </td>
+                </tr>
+                <tr>
+                    <td>最小值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="ValueMin"  value="@Model.ValueMin"/>
+                    </td>
+                    <td>最大值</td>
+                    <td colspan="2">
+                        <input type="text" class="com_w70pen" id="ValueMax"  value="@Model.ValueMax"/>
+                    </td>
+                    <td>进出口类型</td>
+                    <td>
+                        <select id="InOutType">
+                            <option value="0">不分进出</option>
+                            <option value="1">进口</option>
+                            <option value="2">出口</option>
+                        </select>
+
+                    </td>
+                    <td>排序序号</td>
+                    <td>
+                        <input type="text" id="OrderId" class="com_w70pen"  value="@Model.OrderId"/>
+
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td>低报警值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="Lowlimit"  value="@Model.Lowlimit"/>
+                    </td>
+                    <td>高报警值</td>
+                    <td colspan="2">
+                        <input type="text" class="com_w70pen" id="Highlimit"  value="@Model.Highlimit"/>
+                    </td>
+                    <td>最低报警值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="Lololimit"  value="@Model.Lololimit"/>
+                    </td>
+                    <td>最高报警值</td>
+                    <td>
+                        <input type="text" class="com_w70pen" id="Hihilimit"  value="@Model.Hihilimit"/>
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>统计类型</td>
+                    <td class="com_TextCenter">
+                        <select id="CountType">
+                            <option>不统计</option>
+                            <option>平均</option>
+                            <option>累计</option>
+                            <option>示数</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="10" class="com_TextCenter" id="OperArea"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

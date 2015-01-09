@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html>
+@model Proxy.CrmServiceGet.T_CompanyComfigs
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>公司配置信息</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/Stip.css" rel="stylesheet" />
+    <script src="~/Scripts/Stip.js"></script>
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/Common/ui_common.js"></script>
+    <script src="~/Scripts/Config/Config.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var oper = "@ViewBag.Oper";
+            var clientType = "@Model.ClientType";
+
+            if (oper != null && oper != "null" && oper.length > 0) {
+                //获取客户端类型
+                CompanyConfig.GetClienType($("#ddlClienType"), function () { $("#ddlClienType").val(clientType); });
+                //详细
+                if (oper == "Show") {
+                    $(".oper").attr("disabled", "disabled");
+                }
+                //添加
+                if (oper == "Add") {
+                    $("#txtConfigName").val("");
+                    $("#txtDesc").val("");
+                    $("#txtIP").val("");
+                    $("#txtPort").val("8001");
+                    $("#txtClientNum").val("0");
+                }
+            }
+            $("#OperArea").html(@Html.Raw(ViewBag.Button));
+        });
+    </script>
+    <style type="text/css">
+        table td
+        {
+            padding-left: 10px;
+        }
+
+        .required
+        {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table class="ui-com-tabFrm">
+            <tr>
+                <td style="padding-left: 20px; width: 75px;">配置名称</td>
+                <td colspan="3">
+                    <input id="txtConfigName" type="text" class="oper" style="width:295px;" value="@Model.ConfigName" name="@Model.ConfigId" />
+                    <span class="required">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 20px; width: 75px;">配置描述</td>
+                <td colspan="3">
+                    <textarea id="txtDesc" class="oper" style="width: 291px; height: 100px; border: thin solid #2DAAE2; border-radius: 3px">@Model.ConfigDesc</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 20px; width: 75px;">IP地址</td>
+                <td style="width: 130px;">
+                    <input type="text" style="width:100px" id="txtIP"  class="oper" value="@Model.IP"/>
+                    <span class="required">*</span>
+                </td>
+                <td style="padding-left: 20px; width: 60px;">端口号</td>
+                <td>
+                    <input type="text" style="width:71px" id="txtPort" class="oper" value="@Model.Port" onkeydown="Validate.funOnlyNumber(this);" />
+                    <span class="required">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left: 20px; width: 75px;">客户端类型</td>
+                <td>
+                    <select id="ddlClienType" class="oper" style="border: thin solid #2DAAE2; width: 102px; border-radius: 3px;">
+                    </select>
+                </td>
+                <td>客户端数量</td>
+                <td>
+                    <input type="text" id="txtClientNum" style="width:71px;" class="oper" value="@Model.ClientNum" onkeydown="Validate.funOnlyNumber(this);" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="com_TextCenter" id="OperArea"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

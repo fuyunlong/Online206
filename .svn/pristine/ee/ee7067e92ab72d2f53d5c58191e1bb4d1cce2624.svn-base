@@ -1,0 +1,186 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Model;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Proxy;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class VipDeviceController : Controller
+    {
+        //重要设备管理
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //根据公司Id查询站点信息
+        public JsonResult GetDTUListByComanyId(string companyId)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            try
+            {
+                var model = ServcieTool.WinToolServiceReadInstance.GetDTUListByCompanyId(PmsMng.ActiveKey, companyId);
+                var list = DataPermission.PermisSites(PmsMng.LogUser);
+                foreach (var a in list)
+                {
+                    if (model.ContainsKey(a))
+                    {
+                        dic.Add(a, model[a]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(dic.ToList());
+        }
+
+        //不需要权限验证
+        public JsonResult GetDTUListByComanyIdV2(string companyId)
+        {
+            var model = ServcieTool.WinToolServiceReadInstance.GetDTUListByCompanyId(PmsMng.ActiveKey, companyId);
+            return Json(model.ToList());
+        }
+        //根据站点Id查询
+        public JsonResult GetVipDeviceList(string dtuId)
+        {
+            List<Proxy.ServiceWinToolRead.T_DTU_Device> list = new List<Proxy.ServiceWinToolRead.T_DTU_Device>();
+            try
+            {
+                list = ServcieTool.WinToolServiceReadInstance.GetVipDeviceList(PmsMng.ActiveKey, dtuId);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return Json(list);
+        }
+
+        //添加、详细、删除
+        public ActionResult VipDeviceDetail(string oper, string id)
+        {
+            StringBuilder sb = new StringBuilder();
+            Proxy.ServiceWinToolRead.T_DTU_Device_Ex model = null;
+            switch (oper)
+            {
+                case "Show":
+                    ViewBag.Oper = "Show";
+                    break;
+                case "Edit":
+                    ViewBag.Oper = "Edit";
+                    sb.Append("<input type='button' class='buttonVer2' value='修改' onclick='VipDevice.Update();' />");
+                    break;
+                case "Add":
+                    ViewBag.Oper = "Add";
+                    sb.Append("<input type='button' class='buttonVer2' value='添加' onclick='VipDevice.Add();' />");
+                    break;
+                default:
+                    break;
+            }
+            sb.Insert(0, "\"");
+            sb.Append("\"");
+            ViewBag.Button = sb.ToString();
+            try
+            {
+                model = ServcieTool.WinToolServiceReadInstance.GetVipDeviceExById(PmsMng.ActiveKey, id);
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return View(model);
+        }
+
+        //添加
+        public string AddDevice(T_DTU_Device model)
+        {
+            string result = "false";
+
+            Proxy.ServiceWinToolWrite.T_DTU_Device device = new Proxy.ServiceWinToolWrite.T_DTU_Device();
+            device.DeviceName = model.DeviceName;
+            device.Dtuid = model.Dtuid;
+            device.DeviceBrand = model.DeviceBrand == null ? "" : model.DeviceBrand;
+            device.DeviceSN = model.DeviceSN == null ? "" : model.DeviceSN;
+            device.ModelCode = model.ModelCode == null ? "" : model.ModelCode;
+            device.DeviceParams = model.DeviceParams == null ? "" : model.DeviceParams;
+            device.ProduceDate = model.ProduceDate;
+            device.DeviceSupplier = "";
+            device.Memo = model.Memo == null ? "" : model.Memo;
+            device.UpdateFlag = 1;
+
+            try
+            {
+                if (ServcieTool.WinToolServiceWriteInstance.AddVIPDevice(PmsMng.ActiveKey, device))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //修改
+        public string UpdateDevice(T_DTU_Device model)
+        {
+            string result = "false";
+
+            Proxy.ServiceWinToolWrite.T_DTU_Device device = new Proxy.ServiceWinToolWrite.T_DTU_Device();
+            device.Id = model.Id;
+            device.DeviceName = model.DeviceName;
+            device.Dtuid = model.Dtuid;
+            device.DeviceBrand = model.DeviceBrand == null ? "" : model.DeviceBrand;
+            device.DeviceSN = model.DeviceSN == null ? "" : model.DeviceSN;
+            device.ModelCode = model.ModelCode == null ? "" : model.ModelCode;
+            device.DeviceParams = model.DeviceParams == null ? "" : model.DeviceParams;
+            device.ProduceDate = model.ProduceDate;
+            device.DeviceSupplier = "";
+            device.Memo = model.Memo == null ? "" : model.Memo;
+            device.UpdateFlag = model.UpdateFlag;
+
+            try
+            {
+                if (ServcieTool.WinToolServiceWriteInstance.UpdateVIPDevice(PmsMng.ActiveKey, device))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+
+        //删除
+        public string DeleteDevice(string id)
+        {
+            string result = "false";
+
+            try
+            {
+                if (ServcieTool.WinToolServiceWriteInstance.DeleteVIPDevice(PmsMng.ActiveKey, Convert.ToInt32(id)))
+                {
+                    result = "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), PmsMng.LogUser, ex);
+            }
+            return result;
+        }
+    }
+}

@@ -1,0 +1,277 @@
+﻿var SiteMng = {
+    //获取分组
+    GetGroup: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val() },
+            url: "/SiteGroup/GetGroup",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "<option value='0'>全部</option>";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option value=" + data[i].GroupCode + ">" + data[i].GroupName + "</option>";
+                }
+                $("#Group").html(Str);
+            }
+        });
+    },
+
+    //获取加臭站点列表
+    SerarchOdorSite: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: "" },
+            url: "/SiteInfoMalodor/GetOdorSite",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w10pen com_TextCenter com_disnote'>" + data[i].Dtuid + "</td>";
+                    Str += "<td class='com_w25pen com_TextCenter com_disnote' title='" + data[i].DtuidName + "'>" + data[i].DtuidName + "</td><td class=' com_disnote com_TextCenter' title='" + data[i].Skidbrand + "'>" + data[i].Skidbrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].Supplier + "'>" + data[i].Supplier + "</td><td class=' com_disnote' title='" + data[i].FlowBrand + "'>" + data[i].FlowBrand + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].FlowType + "'>" + data[i].FlowType + "</td>";
+                    Str += "<td class='com_TextCenter com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('站点查看','80%','80%','SiteInfoMalodor/SiteDeatailMalodor?Oper=Show&DtuId=" + data[i].Dtuid + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('站点修改','80%','80%','SiteInfoMalodor/SiteDeatailMalodor?Oper=Edit&DtuId=" + data[i].Dtuid + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=SiteMng.DeleteSite(" + data[i].Dtuid + ")>删除|</a> ";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+
+    //修改站点信息
+    UpdateSiteInfo: function () {
+        var SiteObj = SiteMng.GetSiteObj();
+        if (SiteObj != null) {
+            $.ajax({
+                type: "POST",
+                data: SiteObj,
+                url: "/SiteInfo/UpdateSite",
+                error: function () { alert("请求失败，请稍后再试"); },
+                success: function (data) {
+                    if (data != "ok") {
+                        alert(data);
+                    }
+                    else {
+                        alert("修改成功");
+                    }
+                }
+            });
+        }
+    },
+
+    //添加站点
+    AddSite: function () {
+        var SiteObj = SiteMng.GetSiteObj();
+        if (SiteObj != null) {
+            $.ajax({
+                type: "POST",
+                data: SiteObj,
+                url: "/SiteInfo/AddSiteOper",
+                dataType: "text",
+                error: function (xhr) {
+                    Common.MsgBox("请求失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "ok") {
+                        alert("添加成功");
+                        if (confirm("是否继续配置站点信息")) {
+                            parent.parent.common.layoutTopClose();
+                        }
+                        else {
+                            parent.parent.common.layoutTopClose();
+                        }
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+            });
+        }
+    },
+
+    //添加加臭站点
+    AddSiteMaldor: function () {
+        var SiteObj = SiteMng.GetSiteObj();
+        if (SiteObj != null) {
+            $.ajax({
+                type: "POST",
+                data: SiteObj,
+                url: "/SiteInfo/AddSiteOper",
+                dataType: "text",
+                error: function (xhr) {
+                    Common.MsgBox("请求失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "ok") {
+                        alert("添加成功");
+                        if (confirm("是否继续配置站点信息")) {
+                            parent.parent.common.layoutTopClose();
+                        }
+                        else {
+                            parent.parent.common.layoutTopClose();
+                        }
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+            });
+        }
+    },
+
+    DeleteSite: function (dtuid) {
+        if (confirm("确定要删除站点？？？")) {
+            $.ajax({
+                type: "POST",
+                data: { id: dtuid + "" },
+                url: "/SiteInfo/DeleteSite",
+                dataType: "text",
+                error: function (xhr) {
+                    Common.MsgBox("请求失败,请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "1") {
+                        alert("删除成功");
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                }
+            });
+        }
+    },
+    //获取站点对象
+    GetSiteObj: function () {
+        if (!Validate.IsRequired($("#DtuidName").val())) {
+            alert("站点名称必填");
+            return null;
+        }
+        if (!Validate.IsRequired($("#Longitude").val()) || !Validate.IsRequired($("#Latitude").val())) {
+            alert("经纬度必填");
+            return null;
+        }
+        if (!Validate.IsNumber($("#Longitude").val()) || !Validate.IsNumber($("#Latitude").val())) {
+            alert("经纬度格式错误，建议用地图选点");
+            return null;
+        }
+        if (!Validate.IsRequired($("#LgPwd").val())) {
+            alert("登陆密码必填");
+            return null;
+        }
+        if (!Validate.IsRequired($("#PhoneNum").val())) {
+            alert("终端卡号必填");
+            return null;
+        }
+        if (!Validate.IsRequired($("#UpLoadInterval").val()) || !Validate.IsNumber($("#UpLoadInterval").val())) {
+            alert("上传频率必填，且为数字");
+            return null;
+        }
+        if ($("#ddlGroup").val() == "0") {
+            alert("请选择站点分组");
+            return null;
+        }
+        var SiteObj = {
+            "DtuidName": $("#DtuidName").val(),
+            "Dtuid": $("#Dtuid").val(),
+            "Supplier": $("#Supplier").val(),
+            "FlowBrand": $("#FlowBrand").val(),
+            "FlowType": $("#FlowType").val(),
+            "DtuidLocation": $("#DtuidLocation").val(),
+            "RegDate": $("#RegDate").val(),
+            "RunDate": $("#RunDate").val(),
+            "Longitude": $("#Longitude").val(),
+            "Latitude": $("#Latitude").val(),
+            "DayFrom": $("#DayFrom").val(),
+            "MonthFrom": $("#MonthFrom").val(),
+            "OrderId": $("#OrderId").val(),
+            "LgPwd": $("#LgPwd").val(),
+            "PhoneNum": $("#PhoneNum").val(),
+            "DataInterval": $("#DataInterval").val(),
+            "UpLoadInterval": $("#UpLoadInterval").val(),
+            "ConfigCode": $("#DtuConfig").val(),
+            "Skidbrand": $("#Skidbrand").val(),
+            "PressureLevel": $("#PressureLevel").val(),
+            "ProtocolVersion": $("#VerType").val(),
+            "CompanyId": $("#ddlCompany").val(),
+            "GroupCode": $("#ddlGroup").val(),
+            "Status": 1
+        };
+        return SiteObj;
+    },
+    //获取阀门影响管理列表
+    GetInfurenceList: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#ddlCompany").val(), Group: $("#ddlGroup").val(), SiteName: "" },
+            url: "/ValveInfluence/GetInfluencList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr>";
+                    Str += "<td class='com_w10pen'>" + data[i].ValveCode + "</td>";
+                    Str += "<td class='com_w25pen'>" + data[i].ValveName + "</td>";
+                    Str += "<td class='com_w12pen'>" + SiteMng.DateFormat("yyyy-MM-dd hh:mm:ss", new Date(parseInt(data[i].ClosedTime.replace("/Date(", "").replace(")/", ""), 10))) + "</td>";
+                    Str += "<td class='com_w12pen'>" + data[i].EffctArea + "</td>";
+                    Str += "<td>" + data[i].EffctUserNum + "</td>";
+                    Str += "<td class='com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','40%','ValveInfluence/InfuenceViewShow?id=" + data[i].ValveCode + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','40%','ValveInfluence/InfuenceViewEdit?id=" + data[i].ValveCode + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('删除','80%','40%','ValveInfluence/InfuenceViewDelete?id=" + data[i].ValveCode + "')>删除|</a> ";
+                    Str += "</td>";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    DateFormat: function (fmt, date) { //author: xyh
+        var o = {
+            "M+": date.getMonth() + 1,                 //月份   
+            "d+": date.getDate(),                    //日   
+            "h+": date.getHours(),                   //小时   
+            "m+": date.getMinutes(),                 //分   
+            "s+": date.getSeconds(),                 //秒   
+            "q+": Math.floor((date.getMonth() + 3) / 3), //季度   
+            "S": date.getMilliseconds()             //毫秒   
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    },
+
+    //获取站点下拉列表
+    GetSiteList: function () {
+        $.ajax({
+            type: "POST",
+            data: { Company: $("#Company").val(), Group: $("#Group").val(), SiteName: $("#SiteName").val() },
+            url: "/SiteInfo/GetSite",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option value=" + data[i].Dtuid + ">" + data[i].DtuName + "</option>";
+                }
+                $("#SiteName").html(Str);
+            }
+        });
+    }
+}

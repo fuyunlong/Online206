@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3efa9c0d-1d49-4d1d-81c7-a62859d5c6b1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:5644/WinToolService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="WinToolService.disco" MetadataType="Disco" ID="cdf696cc-e86b-41ae-bb34-3c34163b791c" SourceId="1" SourceUrl="http://localhost:5644/WinToolService.svc?disco" />
+    <MetadataFile FileName="WinToolService.xsd" MetadataType="Schema" ID="c7bde5d1-e6c3-4fef-84a8-07df1d5adeed" SourceId="1" SourceUrl="http://localhost:5644/WinToolService.svc?xsd=xsd1" />
+    <MetadataFile FileName="WinToolService.wsdl" MetadataType="Wsdl" ID="b6a1fcd2-17eb-47de-9897-9b60b9569c35" SourceId="1" SourceUrl="http://localhost:5644/WinToolService.svc?wsdl" />
+    <MetadataFile FileName="WinToolService1.xsd" MetadataType="Schema" ID="6196fc12-cfa6-4286-a687-479db9938801" SourceId="1" SourceUrl="http://localhost:5644/WinToolService.svc?xsd=xsd2" />
+    <MetadataFile FileName="WinToolService2.xsd" MetadataType="Schema" ID="11313bbd-685e-4183-a02d-b048c60d86ac" SourceId="1" SourceUrl="http://localhost:5644/WinToolService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

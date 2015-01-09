@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色详细</title>
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+      <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/SiteMng/SiteMng.js"></script>
+    <script src="~/Scripts/UserMng/UserDtu.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <script src="~/Scripts/UserMng/UserRole.js"></script>
+    
+</head>
+ <body onload="$('#loading').hide()">
+    <div>
+        <table class="ui-com-tabFrm">
+            <tbody>
+                <tr>
+                    <td>角色编号</td>
+                    <td>
+                        <input type="text" id="RoleCode" /></td>
+                    <td>角色名称</td>
+                    <td>
+                        <input type="text" id="RoleName" /></td>
+                </tr>
+                <tr>
+                    <td>角色描述</td>
+                    <td colspan="3">
+                        <textarea id="RoleDesc" style="width: 90%; height:90px;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="com_TextCenter">
+                        <input type="button" class="buttonVer2" value="添加"   onclick="UserRole.AddUserRole()"/>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  <div id="loading" style="position: absolute; height: 100%; width: 100%; filter: alpha(opacity = 40); -moz-opacity: 0.4; opacity: 0.4; background: gray url(/Images/loading.gif) center center no-repeat; z-index: 100000; top: 0px; left: 0px"></div>
+</body>
+</html>

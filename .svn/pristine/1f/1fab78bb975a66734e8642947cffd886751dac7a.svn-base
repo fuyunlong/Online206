@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>报警记录查询</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/My97DatePicker/WdatePicker.js"></script>
+    <script src="~/Scripts/DataSearch/AlertRecord.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //初始化
+            $("#tbDiv").css("height", $(window).height() * 0.87);
+            new comTab().fnInit();
+
+            //查询所有站点
+            Alert.LoadCompanys();
+
+            //时间默认值
+            var date = new Date();
+            $("#txtBeginDate").val(Common.GetCurDate(new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1, date.getHours(), date.getMinutes(), date.getSeconds())));
+            $("#txtEndDate").val(Common.GetCurDate(date));
+
+            //查询
+            $("#btnQuery").click(function () {
+                Alert.SearchRecord();
+                new comTab().fnResizeTable();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="com_TextCenter com_font13Px com_DivBorderGray">
+        所属公司&nbsp;<select id="ddlCompany" class="com_w14pen" onchange="Alert.GetGroupsByComId(this.value);"></select>
+        所属分组&nbsp;<select id="ddlGroup" class="com_w10pen" onchange="Alert.GetSiteList();"></select>
+        站点名称&nbsp;<select id="ddlSite" class="com_w10pen"></select>
+        起始时间&nbsp;<input id="txtBeginDate" class="com_w10pen" type="text" onclick="Common.SetDateCtrl();" />
+        结束时间&nbsp;<input id="txtEndDate" class="com_w10pen" type="text" onclick="Common.SetDateCtrl();" />
+        <input type="button" value="查询" class="buttonVer2" id="btnQuery" />
+        <input type="button" value="导出" class="buttonVer2" id="btnExport" />
+    </div>
+    <div>
+        <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+            <table id="RecordList" class="ui-com-tab" rules="all">
+                <thead>
+                    <tr align="left" class="panel-header">
+                        <th class="com_TextCenter com_w10pen">
+                            总警告次数
+                        </th>
+                        <th class="com_TextCenter com_w20pen">
+                            站点名称
+                        </th>
+                        <th class="com_TextCenter com_w20pen">
+                            告警简述
+                        </th>
+                        <th class="com_TextCenter com_w10pen">
+                            告警状态
+                        </th>
+                        <th class="com_TextCenter com_w15pen">
+                            最新告警时间
+                        </th>
+                        <th class="com_TextCenter com_w15pen">
+                            告警时间
+                        </th>
+                        <th class="com_TextCenter com_w10pen">
+                            当前警告次数
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="loading"></div>
+</body>
+</html>

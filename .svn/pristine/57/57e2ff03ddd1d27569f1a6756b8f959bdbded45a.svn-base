@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace WinfoToolSys.Models
+{
+    public class T_ConfigExt
+    {
+        public string Oper
+        {
+            set;
+            get;
+        }
+
+        public ServiceCrmGet.T_CompanyComfigs ConfigInfo
+        {
+            set;
+            get;
+        }
+    }
+}

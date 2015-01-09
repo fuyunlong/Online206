@@ -1,0 +1,44 @@
+﻿var SiteSet = {
+    //获取站点配置列表
+    GetSiteSetList: function () {
+        $.ajax({
+            type: "POST",
+            url: "/SiteSet/GetSiteSetList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var a in data) {
+                    Str += "";
+                    Str += "<td class='com_TextCenter com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','80%','SiteInfo/SiteSetDetail?Code=" + data[i].ConfigCode + "')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','80%','SiteInfo/SiteSetDetail?Code=" + data[i].ConfigCode + "')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=GetSiteSetList.DeleteConfig(" + data[i].ConfigCode + ")>删除</a> ";
+                    str += "</td>";
+                }
+            }
+        });
+    },
+    //删除配置
+    DeleteConfig: function (ConfigCode) {
+        $.ajax({
+            type: "POST",
+            data: { ConfigCode: ConfigCode },
+            url: "/SiteSet/DeleteConfig",
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    alert("删除配置成功");
+                }
+                else {
+                    alert("删除配置失败");
+                }
+            }
+        });
+    }
+};

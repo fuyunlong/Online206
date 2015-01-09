@@ -1,0 +1,1013 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+using Com.Winfotian.Common;
+using Com.Winfotian.DB;
+using Com.Winfotian.DB.Provider;
+using Com.Winfotian.Model;
+using Com.Winfotian.Service;
+
+namespace Com.Winfotian.Service
+{
+    // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码、svc 和配置文件中的类名“Service1”。
+    // 注意: 为了启动 WCF 测试客户端以测试此服务，请在解决方案资源管理器中选择 Service1.svc 或 Service1.svc.cs，然后开始调试。
+    public class WinfoToolServiceRead : IWinfoToolServiceRead
+    {
+        /// 获取城市信息   
+        public List<T_CityInfo> GetCityList(string ActiveKey, string Province)
+        {
+            List<T_CityInfo> Citys = new List<T_CityInfo>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    Citys = new CityInfoProvider().GetCityList(Province);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Citys;
+        }
+
+        //获取省份信息
+        public List<string> GetProvinceList(string ActiveKey)
+        {
+            List<string> Provinces = new List<string>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    Provinces = new CityInfoProvider().GetProvinceList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return Provinces;
+        }
+
+        //获取公司列表
+        public List<T_Company> GetCompanyList(string ActiveKey, string CityId, string ComName)
+        {
+            List<T_Company> list = new List<T_Company>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new CompanyProvider().GetCompanyList(CityId, ComName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        //获取配置列表
+        public List<T_Company_Config> GetConfigList(string ActiveKey, string ConfigId)
+        {
+            List<T_Company_Config> list = new List<T_Company_Config>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new ConfigProvider().GetConfigList(ConfigId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        //获取公司根据ID
+        public T_CompanyExtension GetCompanyById(string ActiveKey, string CompanyId)
+        {
+            T_CompanyExtension ComExtension = new T_CompanyExtension();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    ComExtension = new CompanyProvider().GetCompanyById(CompanyId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+
+            return ComExtension;
+        }
+
+        //获取公司配置
+        public List<int> GetCompanyConfig(string ActiveKey, string CompanyId)
+        {
+            List<int> list = new List<int>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new ConfigProvider().GetCompanyConfig(CompanyId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public List<T_Dtu_Ex> GetSite(string ActiveKey, string Company, string Group, string SiteName, bool IsOdor)
+        {
+            List<T_Dtu_Ex> DtuList = new List<T_Dtu_Ex>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    DtuList = new DtuProvider().GetSiteList(Company, Group, SiteName, IsOdor);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return DtuList;
+        }
+
+        public T_Dtu_Ex GetSiteById(string ActiveKey, string DtuId)
+        {
+            T_Dtu_Ex tde = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    tde = new DtuProvider().GetSiteById(DtuId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return tde;
+        }
+
+        public void GetClientTypeList(string ActiveKey, string TypeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T_DTU> GetSiteByCompanyIdAndGroupCode(string activeKey, string companyId, string groupCode)
+        {
+            List<T_DTU> list = new List<T_DTU>();
+            try
+            {
+                if (WcfCommon.LoginCheck(activeKey))
+                {
+                    list = new UserDTUProvider().GetSiteByCompanyIdAndGroupCode(companyId, groupCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public List<T_User_Info> GetUserListByDTUId(string ActiveKey, string DTUId)
+        {
+            List<T_User_Info> list = new List<T_User_Info>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey) && !string.IsNullOrWhiteSpace(DTUId))
+                {
+                    list = new UserDTUProvider().GetUsersByDTUId(DTUId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        #region 用户分组管理
+
+        //根据公司ID查询分组信息
+        public List<T_User_GroupExt> GetGroupListByCompanyID(string ActiveKey, string CompanyId)
+        {
+            List<T_User_GroupExt> list = new List<T_User_GroupExt>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new UserGroupProvider().GetGroupByCompanyID(CompanyId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        //根据分组编码查询分组信息
+        public T_User_GroupExt GetGroupByCode(string ActiveKey, string GroupCode)
+        {
+            T_User_GroupExt model = new T_User_GroupExt();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    model = new UserGroupProvider().GetGroupByCode(GroupCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return model;
+        }
+
+        //根据分组编号查找对应用户
+        public List<T_User_UserGroup> GetUserUserGroupList(string ActiveKey, string GroupCode)
+        {
+            List<T_User_UserGroup> list = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new UserUserGropProvider().GetUserUserGroupList(GroupCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            if (list == null)
+            {
+                list = new List<T_User_UserGroup>();
+            }
+            return list;
+        }
+
+
+        #endregion
+
+        #region 用户配置管理
+
+        public List<T_User_Config> GetUserConfigListByName(string ActiveKey, string ConfigName)
+        {
+            List<T_User_Config> list = new List<T_User_Config>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new UserSettingProvider().GetListByName(ConfigName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public List<T_User_Config> GetUserCoinfigList(string ActiveKey)
+        {
+            return new List<T_User_Config>();
+        }
+
+        public T_User_Config GetUserConfigByCode(string ActiveKey, string CCode)
+        {
+            T_User_Config model = new T_User_Config();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    model = new UserSettingProvider().GetConfigByCode(CCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return model;
+        }
+
+        #endregion
+
+        #region 字段管理
+
+        public List<T_DTU_FieldDesc> GetFiledList(string ActiveKey, string Company, string Group, string SiteName)
+        {
+            List<T_DTU_FieldDesc> list = new List<T_DTU_FieldDesc>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new FieldProvider().GetFiledList(Company, Group, SiteName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_DTU_FieldDesc GetFiledById(string ActiveKey, string Id, string FieldName)
+        {
+            T_DTU_FieldDesc obj = new T_DTU_FieldDesc();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    obj = new FieldProvider().GetFiledById(Id, FieldName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return obj;
+        }
+
+        #endregion
+
+        #region 站点
+        public T_DTU_Group GetGroupDeatail(string ActiveKey, string GroupId)
+        {
+            T_DTU_Group tg = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    tg = new DtuGroupProvider().GetGroupDeatail(GroupId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return tg;
+        }
+
+        public List<T_DTU_GroupEx> GetSiteGroupByCompanyId(string activeKey, string companyId)
+        {
+            List<T_DTU_GroupEx> list = new List<T_DTU_GroupEx>();
+            try
+            {
+                if (WcfCommon.LoginCheck(activeKey))
+                {
+                    list = new DtuGroupProvider().GetSiteGroupByCompanyId(companyId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_Dtu_Ex GetMalodorSiteById(string ActiveKey, string DtuId)
+        {
+            T_Dtu_Ex DtuObj = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    // DtuObj = new DtuProvider().GetMalodorSiteById(DtuId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return DtuObj;
+
+        }
+        #endregion
+
+        #region 配置管理
+        public List<T_DTU_Config> DtuConfigListV2(string ActiveKey)
+        {
+            List<T_DTU_Config> list = new List<T_DTU_Config>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuConfigProvider().GetDtuConfigList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public List<T_DTU_Config_Ext> DtuConfigList(string ActiveKey, string siteName, params int[] cType)
+        {
+            List<T_DTU_Config_Ext> list = new List<T_DTU_Config_Ext>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuConfigProvider().GetDtuConfigList(siteName, cType);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        #endregion
+
+        #region 压力等级
+        public List<T_DTU_PressureLevel> GetPressureLevelList(string ActiveKey, string levelName)
+        {
+            List<T_DTU_PressureLevel> list = new List<T_DTU_PressureLevel>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DTUPressureLevelProvider().GetPressureLevelList(levelName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_DTU_PressureLevel GetOnePressureLevel(string ActiveKey, string id)
+        {
+            T_DTU_PressureLevel model = new T_DTU_PressureLevel();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    model = new DTUPressureLevelProvider().GetModel(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return model;
+        }
+        #endregion
+
+        #region 协议版本
+        //获取协议列表
+        public Dictionary<string, string> GetVerList(string ActiveKey)
+        {
+
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    dic = VerHelper.GetVerList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return dic;
+        }
+        #endregion
+
+        #region 阀门影响
+        public List<T_DTU_ValveEffect> GetInfluencList(string ActiveKey, string siteId)
+        {
+            List<T_DTU_ValveEffect> list = new List<T_DTU_ValveEffect>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuValueInfluenceProvider().GetInfluencList(siteId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_DTU_ValveEffectEx GetInfluencByCode(string ActiveKey, string valveCode)
+        {
+            T_DTU_ValveEffectEx model = new T_DTU_ValveEffectEx();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    model = new DtuValueInfluenceProvider().GetExModel(valveCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return model;
+        }
+        #endregion
+
+        #region 转发配置
+        public List<T_DTU_DataTransmit> GetTransSetList(string ActiveKey, string Company)
+        {
+            List<T_DTU_DataTransmit> list = new List<T_DTU_DataTransmit>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuDataTransProvider().GetTransList(Company);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_DTU_DataTransmit GetTransById(string ActiveKey, string TransId)
+        {
+            T_DTU_DataTransmit obj = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    obj = new DtuDataTransProvider().GetTransById(TransId);
+                }
+            }
+            catch (Exception ex)
+            { LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex); }
+            return obj;
+        }
+
+        public List<string> GetTransVerList(string ActiveKey)
+        {
+            List<string> list = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuDataTransProvider().GetTransVerList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            if (list == null)
+            {
+                list = new List<string>();
+            }
+            return list;
+        }
+        #endregion
+
+        #region 站点配置
+        public List<T_DTU_Config> GetDTUConfigListByConfigName(string ActiveKey, string configName)
+        {
+            List<T_DTU_Config> list = new List<T_DTU_Config>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuConfigProvider().GetListByConfigName(configName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public List<T_DTU_Config> GetDtuMalodorListByConfigName(string ActiveKey, string configName)
+        {
+            List<T_DTU_Config> list = new List<T_DTU_Config>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuConfigProvider().GetMalodorListByConfigName(configName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_DTU_Config GetDtuConfigByCode(string ActiveKey, string conifgCode)
+        {
+            T_DTU_Config model = new T_DTU_Config();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    model = new DtuConfigProvider().GetModel(conifgCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return model;
+        }
+
+        public List<T_DTU_Config> GetDtuConfigList(string ActiveKey, string CType)
+        {
+            List<T_DTU_Config> list = new List<T_DTU_Config>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuConfigProvider().GetDtuConfigList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_DTU_Config GetDtuConfigById(string ActiveKey, string ConfigId, string CType)
+        {
+            T_DTU_Config obj = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    obj = new DtuConfigProvider().GetModel(ConfigId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return obj;
+        }
+
+        public List<T_User_Info> GetUserInfroByCompanyId(string ActiveKey, string CompanyId, string DTUId)
+        {
+            List<T_User_Info> list = new List<T_User_Info>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new UserDTUProvider().GetUsersByCompanyId(CompanyId, DTUId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+        #endregion
+
+        #region 重要设备管理
+        public List<T_DTU_Device> GetVipDeviceList(string ActiveKey, string DtuId)
+        {
+            List<T_DTU_Device> list = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new VipDtuDevice().GetVipDeviceList(DtuId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        public T_DTU_Device GetVipDeviceById(string ActiveKey, string Id)
+        {
+            T_DTU_Device device = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    device = new VipDtuDevice().GetModel(Convert.ToInt32(Id));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return device;
+        }
+
+        public T_DTU_Device_Ex GetVipDeviceExById(string ActiveKey, string Id)
+        {
+            T_DTU_Device_Ex device = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    device = new VipDtuDevice().GetExModel(Convert.ToInt32(Id));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return device;
+        }
+
+        public List<T_Dtu_Ex> GetSiteListByComId(string ActiveKey, string ComId)
+        {
+            List<T_Dtu_Ex> dtuList = new List<T_Dtu_Ex>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    dtuList = new DtuProvider().GetSiteListByComId(ComId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return dtuList;
+        }
+
+        public Dictionary<string, string> GetDTUListByCompanyId(string ActiveKey, string CompanyId)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    dic = new VipDtuDevice().GetDTUListByCompanyId(CompanyId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return dic;
+        }
+
+        #endregion
+
+        #region 心跳记录查询
+        public List<T_DTU> GetDTUList(string ActiveKey)
+        {
+            List<T_DTU> list = new List<T_DTU>();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new HeartRecordProvider().GetDTUList();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+        #endregion
+
+        #region 报警记录查询
+        public List<T_Alert_Info> GetAlertListBySiteIdAndDate(string ActiveKey, string siteId, DateTime begain, DateTime end)
+        {
+            List<T_Alert_Info> list = new List<T_Alert_Info>();
+            if (WcfCommon.LoginCheck(ActiveKey))
+            {
+                list = new AlertInfoProvider().GetListBySiteAndDate(siteId, begain, end);
+            }
+            return list;
+        }
+        #endregion
+
+        #region 站点分组管理
+        public T_DTU_GroupEx GetSiteGroupByCode(string ActiveKey, string groupCode)
+        {
+            T_DTU_GroupEx model = new T_DTU_GroupEx();
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    model = new DtuGroupProvider().GetGroupByCode(groupCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return model;
+        }
+        #endregion
+
+        #region 角色管理
+        public List<T_User_Role> GetRoleList(string ActiveKey, string RoleName)
+        {
+            List<T_User_Role> list = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    list = new DtuRoleProvider().GetRoleList(RoleName);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            if (list == null)
+            {
+                list = new List<T_User_Role>();
+            }
+            return list;
+        }
+
+        public T_User_Role GetRoleByCode(string ActiveKey, string RoleCode)
+        {
+            T_User_Role role = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    role = new DtuRoleProvider().GetModel(RoleCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            if (role == null)
+            {
+                role = new T_User_Role();
+            }
+            return role;
+        }
+
+        public bool AddRole(string ActiveKey, string User, T_User_Role role)
+        {
+            bool rlst = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    if (new DtuRoleProvider().Add(role) == 1)
+                    {
+                        rlst = true;
+                        LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), User, "添加角色" + role.RoleName, 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        public bool UpdateRole(string ActiveKey, string User, T_User_Role role)
+        {
+            bool rlst = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    rlst = new DtuRoleProvider().Update(role);
+                    if (rlst)
+                    {
+                        LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), User, "修改角色" + role.RoleName, 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+
+        public bool DelRole(string ActiveKey, string User, string RoleCode)
+        {
+            bool rlst = false;
+            try
+            {
+                if (WcfCommon.LoginCheck(ActiveKey))
+                {
+                    rlst = new DtuRoleProvider().Delete(RoleCode);
+                    if (rlst)
+                    {
+                        LogBLL.WriteOperatorLog(WinManager.GetPublicIP(), User, "删除角色" + RoleCode, 1);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rlst;
+        }
+        #endregion
+
+
+        public List<string> GetDTUByUserId(string activeKey, string userId)
+        {
+            List<string> list = new List<string>();
+            try
+            {
+                if (WcfCommon.LoginCheck(activeKey))
+                {
+                    list = new UserDTUProvider().GetDTUByUserId(userId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return list;
+        }
+
+        /// <summary>
+        /// 根据用户ID获取该用户拥有的站点列表
+        /// </summary>
+        /// <param name="activeKey"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public Dictionary<string, string> GetUserUserDtuListByUserId(string activeKey, string userId)
+        {
+            Dictionary<string, string> dic = null;
+            try
+            {
+                if (WcfCommon.LoginCheck(activeKey))
+                {
+                    dic = new UserUserDtuidProvider().GetUserUserDtuListByUserId(userId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            if (dic == null)
+            {
+                dic = new Dictionary<string, string>();
+            }
+            return dic;
+        }
+
+        public string GetUserGroupCodeByUserId(string activeKey, string UserId)
+        {
+            string rslt = "";
+            try
+            {
+                if (WcfCommon.LoginCheck(activeKey))
+                { if(!string.IsNullOrWhiteSpace(UserId))
+                  rslt=  new UserUserGropProvider().GetUserGroupCodeByUserId(UserId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rslt;
+        }
+
+        public string GetRoleByUserId(string activeKey, string UserId)
+        {
+            string rslt = "";
+            try
+            {
+                if (WcfCommon.LoginCheck(activeKey))
+                {
+                    rslt = new UserUserRoleProvider().GetRoleByUserId(UserId);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogBLL.WriteExceptionLog(WinManager.GetPublicIP(), "", ex);
+            }
+            return rslt;
+        }
+
+    }
+}

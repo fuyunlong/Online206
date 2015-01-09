@@ -1,0 +1,33 @@
+﻿var Fee = {
+    //查询用户计费
+    SerarchFee: function () {
+        var feeName = $("#txtFeeName").val().trim();
+        $.ajax({
+            type: "post",
+            url: "/UserFee/GetFeeList",
+            data: "feeName=" + feeName,
+            dataType: "json",
+            error: function (ex) {
+                Common.MsgBox("查询费用失败,请稍后再试" + ex.responseText);
+            },
+            success: function (data) {
+                var str = "";
+                for (var i = 0; i < data.length; i++) {
+                    str += "<tr><td class='com_w15pen com_TextCenter com_disnote' title='" + data[i].BillName + "'>" + data[i].BillName + "</td>";
+                    str += "<td class='com_w10pen com_TextCenter com_disnote' title='" + data[i].AlertFee + "'>" + data[i].AlertFee + "</td>";
+                    str += "<td class='com_w10pen com_TextCenter com_disnote' title='" + data[i].AlertFee + "'>" + data[i].AlertFee + "</td>";
+                    str += "<td class='com_w10pen com_TextCenter com_disnote' title='" + data[i].AlertFee + "'>" + data[i].AlertFee + "</td>";
+                    str += "<td class='com_w10pen com_TextCenter com_disnote' title='" + data[i].AlertFee + "'>" + data[i].AlertFee + "</td>";
+                    str += "<td class='com_w10pen com_TextCenter com_disnote' title='" + data[i].DayMax + "'>" + data[i].DayMaxs + "</td>";
+                    str += "<td class='com_w10pen com_disnote com_TextCenter' title='" + data[i].MonthMax + "'>" + data[i].MonthMax + "</td>";
+                    Str += "<td class='com_w10pen com_disnote com_TextCenter' title='" + data[i].OtherFee + "'>" + data[i].OtherFee + "</td>";
+                    Str += "<td class=com_TextCenter>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('公司查看','40%','80%','12%','30%','ClientInfo/ClientDetail?Oper=Show&ComId=" + data[i].CompanyID + "')>查看|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WinTopBox('公司修改','40%','80%','12%','30%','ClientInfo/ClientDetail?Oper=Edit&ComId=" + data[i].CompanyID + "')>修改|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=ClientMng.DeleteCompany(" + data[i].CompanyID + ")>删除</a>";
+                    Str += "</tr>";
+                }
+            }
+        });
+    }
+};

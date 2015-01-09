@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Winfotian.Permission.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Winfotian.Permission.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://test_pms.scadacn.com/service/PermissionWCF.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Winfotian.Permission.Model.Dto" />
+  <xs:complexType name="ArrayOfRequestInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RequestInfo" nillable="true" type="tns:RequestInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRequestInfo" nillable="true" type="tns:ArrayOfRequestInfo" />
+  <xs:complexType name="RequestInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequestInfo" nillable="true" type="tns:RequestInfo" />
+  <xs:complexType name="UserDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BillCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BirthDay" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="Dept" nillable="true" type="tns:DeptDto" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsFrmRole" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LinkAddr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentUser" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPosition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPwd" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserDto" nillable="true" type="tns:UserDto" />
+  <xs:complexType name="DeptDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeptName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeptNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmpCount" type="xs:int" />
+      <xs:element minOccurs="0" name="ParentNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeptDto" nillable="true" type="tns:DeptDto" />
+  <xs:complexType name="ArrayOfDomainInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DomainInfo" nillable="true" type="tns:DomainInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDomainInfo" nillable="true" type="tns:ArrayOfDomainInfo" />
+  <xs:complexType name="DomainInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BackUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConnString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DConnString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DomainInfo" nillable="true" type="tns:DomainInfo" />
+  <xs:complexType name="ArrayOfDataRightItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DataRightItem" nillable="true" type="tns:DataRightItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDataRightItem" nillable="true" type="tns:ArrayOfDataRightItem" />
+  <xs:complexType name="DataRightItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ColumnDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ColumnName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ColumnType" type="xs:int" />
+      <xs:element minOccurs="0" name="ColumnValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DataRightCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DataRightName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Desc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DomainId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsFrmRole" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Operator" type="xs:int" />
+      <xs:element minOccurs="0" name="RoleDataRights" nillable="true" type="tns:ArrayOfRoleDto" />
+      <xs:element minOccurs="0" name="SqlCondition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="TableDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TableName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserDataRights" nillable="true" type="tns:ArrayOfUserDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataRightItem" nillable="true" type="tns:DataRightItem" />
+  <xs:complexType name="ArrayOfRoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoleDto" nillable="true" type="tns:RoleDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoleDto" nillable="true" type="tns:ArrayOfRoleDto" />
+  <xs:complexType name="RoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DomainId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoleDto" nillable="true" type="tns:RoleDto" />
+  <xs:complexType name="ArrayOfUserDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDto" nillable="true" type="tns:UserDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserDto" nillable="true" type="tns:ArrayOfUserDto" />
+  <xs:complexType name="ArrayOfMenuInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MenuInfo" nillable="true" type="tns:MenuInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMenuInfo" nillable="true" type="tns:ArrayOfMenuInfo" />
+  <xs:complexType name="MenuInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Childs" nillable="true" type="tns:ArrayOfMenuInfo" />
+      <xs:element minOccurs="0" name="Display" type="xs:int" />
+      <xs:element minOccurs="0" name="DomainId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HasChilds" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsFrmRole" type="xs:boolean" />
+      <xs:element minOccurs="0" name="MenuCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MenuDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MenuName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NeedPermission" type="xs:int" />
+      <xs:element minOccurs="0" name="OpenForm" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoleMenuList" nillable="true" type="tns:ArrayOfRoleDto" />
+      <xs:element minOccurs="0" name="SortNum" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="Target" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TreeDepth" type="xs:int" />
+      <xs:element minOccurs="0" name="UserMenuList" nillable="true" type="tns:ArrayOfUserDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MenuInfo" nillable="true" type="tns:MenuInfo" />
+  <xs:complexType name="ClientInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:UserDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DataRightList" nillable="true" type="tns:ArrayOfDataRightItem" />
+          <xs:element minOccurs="0" name="HostName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IP" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MAC" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MenuList" nillable="true" type="tns:ArrayOfMenuInfo" />
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ResourceIDList" nillable="true" type="q1:ArrayOfstring" />
+          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Winfotian.Permission.Model.Dto" minOccurs="0" name="ResourceList" nillable="true" type="q2:ArrayOfResourceDto" />
+          <xs:element minOccurs="0" name="Token" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ClientInfo" nillable="true" type="tns:ClientInfo" />
+  <xs:complexType name="ArrayOfDeptDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeptDto" nillable="true" type="tns:DeptDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeptDto" nillable="true" type="tns:ArrayOfDeptDto" />
+</xs:schema>

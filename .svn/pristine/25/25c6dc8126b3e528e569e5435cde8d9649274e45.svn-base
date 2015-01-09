@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>客户信息管理</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>    
+    <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+    <script src="~/Scripts/ClientMng/ClientInfoMng.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //初始化
+            $("#tbDiv").css("height", $(window).height() * 0.87);
+            new comTab().fnInit();
+
+            //加载省市
+            Common.GetProvince($("#ddlProvice"), Common.GetCity($("#ddlCity"), $("#ddlProvice").val(), null));
+
+            //查询
+            $("#btnQuery").click(function () {
+                ClientMng.Serarch($("#CompanyList tbody"), $("#ddlCity").val());
+                new comTab().fnResizeTable();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="com_TextCenter com_font13Px com_DivBorderGray">
+        所属省份&nbsp;<select class="com_w15pen" id="ddlProvice" onchange="Common.GetCity($('#ddlCity'),this.value, null)"><option selected="selected">--请选择--</option></select>
+        所属地市&nbsp;<select class="com_w15pen" id="ddlCity"></select>
+        <input id="btnQuery" type="button" class="buttonVer2" value="查询" />
+        <input type="button" class="buttonVer2" value="添加" onclick="Common.WinTopBox('公司添加', '45%', '80%', '12%', '28%', 'ClientInfo/ClientDetail?oper=Add&companyId=-1')" />
+    </div>
+    <div id="tbDiv" class="com_fl com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+        <table id="CompanyList" class="ui-com-tab" rules="all">
+            <thead>
+                <tr align="left" class="panel-header">
+                    <th class="com_TextCenter com_w35pen">
+                        公司名称
+                    </th>
+                    <th class="com_TextCenter com_w10pen">
+                        联系人
+                    </th>
+                    <th class="com_TextCenter com_w10pen">
+                        联系电话
+                    </th>
+                    <th class="com_TextCenter com_w12pen">
+                        公司网址
+                    </th>
+                    <th class="com_TextCenter com_w13pen">
+                        公司邮箱
+                    </th>
+                    <th class="com_TextCenter com_w20pen">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="loading"></div>
+</body>
+</html>

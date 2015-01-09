@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>公司配置管理</title>
+        <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+        <link href="~/Style/common.css" rel="stylesheet" />
+        <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+        <script src="~/Scripts/Common/GlobalLoading.js"></script>
+        <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+        <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+        <script src="~/Scripts/Common/ui-com-table.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $("#tbDiv").css("height", $(window).height() * 0.87);
+                new comTab().fnInit();
+            });
+        </script>
+    </head>
+    <body style="margin:0;">
+        <div>
+            <div id="tbDiv" class="com_fl   com_font13Px" style="overflow-y: auto; overflow-x: hidden">
+                <table id="ComList" class="ui-com-tab" rules="all">
+                    <thead>
+                        <tr align="left" class="panel-header">
+                            <th class="com_w30pen">
+                                配置名称
+                            </th>
+                            <th class='com_w25pen'>
+                                IP地址
+                            </th>
+                            <th class='com_w20pen'>
+                                配置端口
+                            </th>
+                            <th class='com_w25pen'>
+                                操作
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var a in @ViewBag.ConfigList)
+                        {
+                            <tr>
+                                <td class="com_w30pen">
+                                    <input type=hidden value=@a.ConfigId>@a.ConfigName
+                                </td>
+                                <td class='com_w25pen'>@a.IP</td>
+                                <td class='com_w20pen'>@a.Port</td>
+                                <td class='com_w25pen'>
+                                    <a href="javascript:void(0)"  onclick=Common.WindowBox('公司修改', 0.8, 0.8, '/Config/ShowOper/Show/'+@a.ConfigId)>查看|</a>
+                                    <a href="javascript:void(0)"   onclick=Common.WindowBox('公司修改', 0.8, 0.8, '/Config/ShowOper/Edit/'+@a.ConfigId) >修改|</a>
+                                    <a href="javascript:void(0)"   onclick=Common.WindowBox('公司修改', 0.8, 0.8, '/Config/ShowOper/Del/'+@a.ConfigId) >删除</a>
+                                </td>
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="detailWindow" class="easyui-window" title="操作" modal="true" style="width: 500px; height: 300px; padding: 5px;">
+                <table border="1">
+                    <tr>
+                        <td class="com_w20pen">配置名称:</td>
+                        <td colspan="3">@Html.TextBox("ConfigName", "", new
+                                   {
+                                       @class = "com_w98pen"
+                                   })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>配置描述:</td>
+                        <td colspan="3">@Html.TextBox("ConfigDesc", "", new
+                                   {
+                                       @class = "com_w98pen"
+                                   })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>IP地址:</td>
+                        <td>@Html.TextBox("IP", "")</td>
+                        <td class="com_w20pen">端口号:</td>
+                        <td>@Html.TextBox("Port", "")</td>
+                    </tr>
+                    <tr>
+                        <td>客户端类型:</td>
+                        <td></td>
+                        <td class="com_w20pen">客户端数量:</td>
+                        <td>@Html.TextBox("ClientNum", "")</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="com_TextCenter">
+                            <input type='button' class='buttonVer2' value='添加' id='btnAddConfig' />
+                            <input type='button' class='buttonVer2' value='修改' id='btnEditConfig' />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

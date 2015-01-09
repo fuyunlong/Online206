@@ -1,0 +1,226 @@
+﻿var ClientMng = {
+    //搜索公司
+    SerarchCompany: function () {
+        var cityId = $("#ddlCity").val() || "";
+        var comName = $("#txtComName").val().trim() || "";
+        $.ajax({
+            type: "POST",
+            data: "CityId=" + cityId + "&&ComName=" + comName,
+            url: "/Company/GetComany",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("查询公司失败,请稍后再试");
+            },
+            success: function (data) {
+                var Str = "";
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<tr><td class='com_w35pen com_disnote' title='" + data[i].CompanyName + "'><input type=hidden value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</td>";
+                    Str += "<td class='com_w10pen com_TextCenter com_disnote' title='" + data[i].LinkPerson + "'>" + data[i].LinkPerson + "</td><td class='com_w10pen com_disnote com_TextCenter' title='" + data[i].MobilePhone + "'>" + data[i].MobilePhone + "</td>";
+                    Str += "<td class='com_w12pen com_disnote'  title='" + data[i].CmpWebSite + "'>" + data[i].CmpWebSite + "</td><td class='com_w12pen com_disnote' title='" + data[i].Email + "'>" + data[i].Email + "</td>";
+                    Str += "<td class=com_TextCenter>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司查看',0.8,0.8,'ClientInfo/ClientDetail/Show/" + data[i].CompanyID + "')>查看|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('公司修改',0.8,0.8,'ClientInfo/ClientDetail/Edit/" + data[i].CompanyID + "')>修改|</a>";
+                    Str += "<a href='javascript:void(0)' onclick=ClientMng.DeleteCompany(" + data[i].CompanyID + ")>删除</a>";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    //查询母公司
+    LoadParentCompany: function (parentComId) {
+        var Str = "";
+        $.ajax({
+            type: "POST",
+            data: "ParentComId=" + parentComId,
+            url: "/Company/GetParentCompanyList",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("查询母公司失败,请稍后再试");
+            },
+            success: function (data) {
+                if (data.length == 0) {
+                    Str = "<option value='0'>--无母公司--</option>";
+                }
+                else {
+                    for (var i = 0; i < data.length; i++) {
+                        Str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                    }
+                }
+                $("#ddlMonCompany").html(Str);
+            }
+        });
+    },
+    //查询所母有公司
+    GetAllParentCompany: function () {
+        var Str = "<option value='0'>--无母公司--</option>";
+        $.ajax({
+            type: "POST",
+            url: "/Company/GetComany",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("查询公司失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option value=" + data[i].CompanyID + ">" + data[i].CompanyName + "</option>";
+                }
+                $("#ddlMonCompany").append(Str);
+            }
+        });
+    },
+    //获取省份
+    GetProvince: function () {
+        var Str = "";
+        $.ajax({
+            async: false,
+            type: "POST",
+            url: "/Company/GetProvince",
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option>" + data[i] + "</option>"
+                }
+                $("#DetailProvice").append(Str);
+            }
+        });
+    },
+    //获取城市
+    GetCity: function () {
+        var Str = "";
+        var province = $('#DetailProvice').val();
+        $.ajax({
+            async: false,
+            type: "post",
+            data: "Province=" + province,
+            url: "/company/GetCity",
+            datatype: "json",
+            error: function (xhr) {
+                Common.MsgBox("加载失败，请稍后再试");
+            },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    Str += "<option value=" + data[i].CityId + ">" + data[i].CityName + "</option>"
+                }
+                $("#DetailCity").html(Str);
+            }
+        });
+    },
+    //添加公司
+    AddCompany: function () {
+        var checkeds = $("#divComCoinfig input[type=checkbox]:checked");
+        var config = [];
+        if (checkeds.length == 0) {
+            alert("请选择公司配置信息!");
+            return false;
+        }
+        $.each(checkeds, function (i, n) {
+            config.push($(n).val());
+        });
+        var model = {
+            "CompanyName": $("#txtCompanyName").val().trim(),
+            "LinkPerson": $("#txtLinkMan").val().trim(),
+            "Telphone": $("#txtPhone").val().trim(),
+            "Email": $("#txtEmail").val().trim(),
+            "FaxTel": $("#txtFax").val().trim(),
+            "CmpWebSite": $("#txtWebSite").val().trim(),
+            "CmpAddress": $("#txtAddress").val().trim(),
+            "MobilePhone": $("#txtMobile").val().trim(),
+            "Remark": $("#txtComDesc").val().trim(),
+            "ParentCompanyID": $("#ddlMonCompany").val(),
+            "CityID": $("#DetailCity").val(),
+            "CityName": $("#DetailCity option:selected").text(),
+            "Province": config.toString()//to do：用这个字段保存公司配置信息，实际添加过程没有用到这个字段
+        };
+        $.ajax({
+            type: "POST",
+            url: "/ClientInfo/Add",
+            data: model,
+            dataType: "text",
+            success: function (data) {
+                if (data == "注册成功!") {
+                    parent.window.common.layoutClose();
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert(data);
+                }
+            },
+            error: function (xhr) {
+                Common.MsgBox("添加公司失败, 请稍后再试");
+            }
+        });
+    },
+    //修改公司信息
+    UpdateCompany: function () {
+        var checkeds = $("#divComCoinfig input[type=checkbox]:checked");
+        var config = [];
+        if (checkeds.length == 0) {
+            alert("请选择公司配置信息!");
+            return false;
+        }
+        $.each(checkeds, function (i, n) {
+            config.push($(n).val());
+        });
+        var model = {
+            "CompanyID": $("#txtCompanyName").attr("name"),
+            "CompanyName": $("#txtCompanyName").val().trim(),
+            "LinkPerson": $("#txtLinkMan").val().trim(),
+            "Telphone": $("#txtPhone").val().trim(),
+            "Email": $("#txtEmail").val().trim(),
+            "FaxTel": $("#txtFax").val().trim(),
+            "CmpWebSite": $("#txtWebSite").val().trim(),
+            "CmpAddress": $("#txtAddress").val().trim(),
+            "MobilePhone": $("#txtMobile").val().trim(),
+            "Remark": $("#txtComDesc").val().trim(),
+            "ParentCompanyID": $("#ddlMonCompany").val(),
+            "CityID": $("#DetailCity").val(),
+            "CityName": $("#DetailCity option:selected").text(),
+            "Province": config.toString()//to do：用这个字段保存公司配置信息，实际添加过程没有用到这个字段
+        };
+        $.ajax({
+            type: "post",
+            url: "/ClientInfo/Update",
+            data: model,
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("修改公司失败, 请稍后再试");
+            },
+            success: function (data) {
+                if (data == "更新成功") {
+                    parent.window.common.layoutClose();
+                    $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                }
+                else {
+                    alert(data);
+                }
+            }
+        });
+    },
+    //删除公司信息
+    DeleteCompany: function (companyID) {
+        if (confirm("确定要删除吗？")) {
+            $.ajax({
+                type: "post",
+                url: "/ClientInfo/Delete",
+                data: "companyID=" + companyID,
+                dataType: "text",
+                error: function (xhr) {
+                    Common.MsgBox("删除公司失败, 请稍后再试");
+                },
+                success: function (data) {
+                    if (data == "true") {
+                        alert("删除成功!");
+                        $("#framecenter iframe", parent.document).contents().find("#btnQuery").trigger("click");
+                    }
+                    else {
+                        alert("删除失败!");
+                    }
+                }
+            });
+        }
+    }
+}

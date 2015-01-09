@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+@model Proxy.ServiceWinToolRead.T_DTU_Config
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>站点配置信息</title>
+    <link href="~/Scripts/JqEasyUI/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Style/Site.css" rel="stylesheet" />
+    <link href="~/Style/common.css" rel="stylesheet" />
+    <link href="~/Style/Stip.css" rel="stylesheet" />
+    <script src="~/Scripts/Stip.js"></script>
+    <link href="~/Style/ui-com-table.css" rel="stylesheet" />
+    <link href="~/Scripts/JqEasyUI/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/Common/GlobalLoading.js"></script>
+    <script src="~/Scripts/JqEasyUI/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/JqEasyUI/easyloader.js"></script>
+    <script src="~/Scripts/Common/Common.js"></script>
+    <script src="~/Scripts/Common/ui_common.js"></script>
+    <script src="~/Scripts/SiteMng/SiteSet.js"></script>
+    <script src="~/Scripts/Common/Validate.js"></script>
+    <script>
+        $(function () {
+            var oper = "@ViewBag.Oper";
+            var isAlert = "@Model.IsAlert";
+            var isCreate = "@Model.IsCreate";
+            if (oper != null && oper != "null" && oper.length > 0) {
+                if (oper == "Show" || oper == "Edit") {
+                    setTimeout(function () {
+                        for (var i = 0; i < $("input[type=radio][name=IsAlert]").length ; i++) {
+                            if (isAlert == $("input[type=radio][name=IsAlert]")[i].value) {
+                                $("input[type=radio][name=IsAlert]")[i].checked = true;
+                                break;
+                            }
+                        }
+                        for (var i = 0; i < $("input[type=radio][name=IsCreate]").length ; i++) {
+                            if (isCreate == $("input[type=radio][name=IsCreate]")[i].value) {
+                                $("input[type=radio][name=IsCreate]")[i].checked = true;
+                                break;
+                            }
+                        }
+                    }, 100);
+                }
+                //详细
+                if (oper == "Show") {
+                    $(".oper").attr("disabled", "disabled");
+                }
+                //添加
+                if (oper == "Add") {
+                    $("#txtConfigName").val("3流3模3开").attr("disabled", true);
+                    $("#txtDesc").val("3个流量计3个模拟量3个开关量").attr("disabled", true);
+                    $("#txtFlowNum").val("3");
+                    $("#txtAINum").val("3");
+                    $("#txtDINum").val("3");
+                    $("input[name=IsAlert][value=1]").attr("checked", "checked");
+                }
+            }
+            $("#OperArea").html(@Html.Raw(ViewBag.Button));
+        });
+    </script>
+    <style type="text/css">
+        table td
+        {
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table class="ui-com-tabFrm">
+            <tr>
+                <td>配置名称</td>
+                <td colspan="5">
+                    <input id="txtConfigName" type="text" class="oper" style="width:323px;" value="@Model.ConfigName" name="@Model.ConfigCode" />
+                </td>
+            </tr>
+            <tr>
+                <td>配置描述</td>
+                <td colspan="5">
+                    <textarea id="txtDesc" class="oper" style="width: 319px; height: 100px; border: thin solid #2DAAE2; border-radius: 3px">@Model.ConfigDesc</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 60px">流量计个数</td>
+                <td style="width: 65px">
+                    <input type="number" style="width:35px" id="txtFlowNum" class="oper" value="@Model.FlowNum" min="0" onchange="SiteSet.FlowNumChanged(this.value);" onkeydown="Validate.funOnlyNumber(this);"/>
+                </td>
+                <td style="width: 60px; padding-left: 5px;">模拟量个数</td>
+                <td style="width: 65px">
+                    <input type="number" style="width:35px" id="txtAINum" class="oper" value="@Model.AINum" min="0" onchange="SiteSet.AINumChanged(this.value);" onkeydown="Validate.funOnlyNumber(this);">
+                </td>
+                <td style="width: 60px; padding-left: 5px;">开关量个数</td>
+                <td>
+                    <input type="number" style="width:35px" id="txtDINum" class="oper" value="@Model.DINum" min="0" onchange="SiteSet.DINumChanged(this.value);" onkeydown="Validate.funOnlyNumber(this);">
+                </td>
+            </tr>
+            <tr>
+                <td>报警通知</td>
+                <td style="padding-left: 0px;">
+                    <input type="radio" name="IsAlert" class="oper" value="1" />是<input type="radio" name="IsAlert" value="0" class="oper" checked="checked" />否
+                </td>
+                <td>是否创建</td>
+                <td style="padding-left: 0px;">
+                    <input type="radio" name="IsCreate" class="oper" value="1" />是<input type="radio" name="IsCreate" value="0" class="oper" checked="checked" />否
+                </td>
+                <td colspan="2"></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="com_TextCenter" id="OperArea"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

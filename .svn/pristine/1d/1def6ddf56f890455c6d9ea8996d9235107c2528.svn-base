@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+
+namespace WinfoToolSys.Controllers.UserMng
+{
+    public class UserInfoController : Controller
+    {
+        //
+        // GET: /UserInfo/
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+
+        //获取菜单列表
+        public string LoadMenu()
+        {
+            StringBuilder Str = new StringBuilder();
+             Str.Append("   <div   class='easyui-accordion' fit='true' border='false'>");
+            
+       
+            Str.Append("<div title='站点管理'style='padding: 10px; overflow: hidden;'>");
+            Str.Append(" <p>站点信息管理</p>");
+            Str.Append("  <p>站点信息管理(加臭)</p>");
+            Str.Append("  <p>字段信息管理</p>");
+            Str.Append("  <p>字段管理(加强)</p>");
+            Str.Append("  <p>远程控制配置</p>");
+            Str.Append("  <p>数据转发配置</p>");
+            Str.Append("  <p>阀门影响配置</p>");
+            Str.Append("  <p>站点分组管理</p>");
+            Str.Append(" <p>站点配置管理</p>");
+            Str.Append("  <p>站点配置管理(加臭)</p>");
+            Str.Append(" <p>压力等级管理</p>");
+            Str.Append(" <p>流程图管理</p>");
+            Str.Append(" <p>重要设备管理</p>");
+            Str.Append(" <p>输差管理</p>");
+            Str.Append(" </div>");
+            Str.Append("<div title='客户管理' style='padding: 10px;'>");
+            Str.Append("   <p>公司配置管理</p>");
+            Str.Append("   <p> <a href='javascript:void(0)' onclick=Common.AddTab('客户信息管理','/ClientInfo/ClientInfo')>客户信息管理</a></p>");
+            Str.Append(" </div>");
+            Str.Append(" <div title='用户管理' style='padding: 10px'>");
+            Str.Append("    content3");
+            Str.Append(" </div>");
+            Str.Append(" <div title='数据查询' style='padding: 10px'>");
+            Str.Append("    content3");
+            Str.Append("  </div>");
+            Str.Append(" <div title='编号管理' style='padding: 10px'>");
+            Str.Append("     <div>编号生成</div>");
+            Str.Append(" </div>");
+            Str.Append("  <div selected='true'>");
+            Str.Append("  </div>");
+             Str.Append("   </div>");
+            return Str.ToString();
+        }
+    }
+}

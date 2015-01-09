@@ -1,0 +1,85 @@
+﻿var SiteSet = {
+    //获取站点配置列表
+    GetSiteSetList: function (IsMalodor, CType) {
+        $.ajax({
+            type: "POST",
+            url: "/SiteSet/GetSiteSetList",
+            data: {CType: CType },
+            dataType: "json",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                var Str = "";
+                for (var a in data) {
+                    Str += "<tr>";
+                    Str += "<td>" + data[a].ConfigName + "</td>";
+                    Str += "<td>" + data[a].ConfigDesc + "</td>";
+                    Str += "<td class='com_TextCenter com_w15pen'>";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('查看','80%','80%','SiteSet/SiteSetDetail?Oper=Show&ConfigCode=" + data[a].ConfigCode + "&CType=0')>查看|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=Common.WindowBox('修改','80%','80%','SiteSet/SiteSetDetail?Oper=Edit&ConfigCode=" + data[a].ConfigCode + "&CType=0')>修改|</a> ";
+                    Str += "<a href='javascript:void(0)' onclick=SiteSet.DeleteConfig(" + data[a].ConfigCode + ")>删除</a> ";
+                    Str += "</td>";
+                    Str += "</tr>";
+                }
+                $("#ComList tbody").html(Str);
+            }
+        });
+    },
+    //更改配置
+    UpdateConfig: function () {
+        $.ajax({
+            type: "POST",
+            data: SiteSet.GetObj(),
+            url: "/SiteSet/UpdateSiteSet",
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    alert("删除配置成功");
+                }
+                else {
+                    alert("删除配置失败");
+                }
+            }
+        });
+    },
+    //删除配置
+    DeleteConfig: function (ConfigCode) {
+        $.ajax({
+            type: "POST",
+            data: { ConfigCode: ConfigCode },
+            url: "/SiteSet/DeleteConfig",
+            dataType: "text",
+            error: function (xhr) {
+                Common.MsgBox("请求失败,请稍后再试" + xhr.responseText);
+            },
+            success: function (data) {
+                if (data == "true") {
+                    alert("删除配置成功");
+                }
+                else {
+                    alert("删除配置失败");
+                }
+            }
+        });
+    },
+    GetObj: function () {
+        var obj = {
+            ConfigCode: $("#ConfigCode").val(),
+            ConfigName: $("#ConfigName").val(),
+            ConfigDesc: $("#ConfigDesc").val(),
+            FlowNum: $("#FlowNum").val(),
+            AINum: $("#AINum").val(),
+            DINum: $("#DINum").val(),
+            IsAlert: $("#IsAlert").val(),
+            IsCreate: $("#IsCreate").val(),
+            Status: "1",
+            UpdateFlag: "1",
+            CType: "0"
+        };
+        return obj;
+    }
+};

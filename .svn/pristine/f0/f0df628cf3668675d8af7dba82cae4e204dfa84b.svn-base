@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Com.Winfotian.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Com.Winfotian.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:5644/WinfoToolServiceWrite.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="T_DTU">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConfigCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DataInterval" type="xs:int" />
+      <xs:element minOccurs="0" name="DayFrom" type="xs:int" />
+      <xs:element minOccurs="0" name="Dtuid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DtuidLocation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DtuidName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlowBrand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlowType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Latitude" type="xs:decimal" />
+      <xs:element minOccurs="0" name="LgPwd" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Longitude" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MonthFrom" type="xs:int" />
+      <xs:element minOccurs="0" name="OrderId" type="xs:int" />
+      <xs:element minOccurs="0" name="PhoneNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PressureLevel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProtocolVersion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RunDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Skidbrand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="Supplier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpLoadInterval" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DTU" nillable="true" type="tns:T_DTU" />
+  <xs:complexType name="T_DTU_PressureLevel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="PressureDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PressureName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DTU_PressureLevel" nillable="true" type="tns:T_DTU_PressureLevel" />
+  <xs:simpleType name="EmReStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="success">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="fail">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="error">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="noData">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="invalid">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="serverNoReply">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="logFail">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="exception">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EmReStatus" nillable="true" type="tns:EmReStatus" />
+  <xs:complexType name="T_DTU_FieldDesc">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ColName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Dtuid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FieldDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FieldName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FieldShortDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FieldType" type="xs:int" />
+      <xs:element minOccurs="0" name="FieldUnit" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Highlimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Hihilimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IsAlert" type="xs:int" />
+      <xs:element minOccurs="0" name="IsCollect" type="xs:int" />
+      <xs:element minOccurs="0" name="IsShow" type="xs:int" />
+      <xs:element minOccurs="0" name="KeyValues" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Lololimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Lowlimit" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OrderId" type="xs:int" />
+      <xs:element minOccurs="0" name="ParentId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+      <xs:element minOccurs="0" name="ValueInOrOut" type="xs:int" />
+      <xs:element minOccurs="0" name="ValueMax" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValueMin" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DTU_FieldDesc" nillable="true" type="tns:T_DTU_FieldDesc" />
+  <xs:complexType name="T_DTU_ValveEffect">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClosedTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Dtuid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EffctArea" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EffctUserNum" type="xs:int" />
+      <xs:element minOccurs="0" name="ValveCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValveName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DTU_ValveEffect" nillable="true" type="tns:T_DTU_ValveEffect" />
+  <xs:complexType name="T_User_Group">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_User_Group" nillable="true" type="tns:T_User_Group" />
+  <xs:complexType name="T_User_Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConfigDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConfigName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsAlert" type="xs:int" />
+      <xs:element minOccurs="0" name="IsRpt" type="xs:int" />
+      <xs:element minOccurs="0" name="PopCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SoftInterval" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_User_Config" nillable="true" type="tns:T_User_Config" />
+  <xs:complexType name="T_User_UserDtuid">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dtuid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_User_UserDtuid" nillable="true" type="tns:T_User_UserDtuid" />
+  <xs:complexType name="T_DTU_Config">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AINum" type="xs:int" />
+      <xs:element minOccurs="0" name="BoardInfo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CType" type="xs:int" />
+      <xs:element minOccurs="0" name="ConfigCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConfigDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConfigName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DINum" type="xs:int" />
+      <xs:element minOccurs="0" name="FlowNum" type="xs:int" />
+      <xs:element minOccurs="0" name="IsAlert" type="xs:int" />
+      <xs:element minOccurs="0" name="IsCreate" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DTU_Config" nillable="true" type="tns:T_DTU_Config" />
+  <xs:complexType name="T_DTU_Group">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompanyId" type="xs:int" />
+      <xs:element minOccurs="0" name="GroupCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupDesc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DTU_Group" nillable="true" type="tns:T_DTU_Group" />
+  <xs:complexType name="T_DTU_Device">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeviceBrand" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviceParams" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviceSN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviceSupplier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Dtuid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Memo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModelCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProduceDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateFlag" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="T_DTU_Device" nillable="true" type="tns:T_DTU_Device" />
+</xs:schema>

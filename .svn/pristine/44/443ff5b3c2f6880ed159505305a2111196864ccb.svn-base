@@ -1,0 +1,50 @@
+﻿var objShowPreLevel = {
+    oComm: parent.Common,
+    fnLoad: function () {
+        $("#OperArea").click(function (evt) {
+            var target = evt.target || evt;
+            if (target.name == "cancel")
+                parent.Common.layoutClose();
+            if (target.name == "add")
+                objShowPreLevel.fnAddPreLevel();
+        });
+    },
+    fnAddPreLevel: function () {
+        var json = { Oper: null, ConfigId: null };
+        json.Oper = PreLevelName.value;
+        json.ConfigId = PreLevelDesc.value;
+        if (!json.Oper || json.Oper.length == 0) {
+            parent.Common.MsgBox("警告！压力名称不能为空");
+            return null;
+        }
+        if (!json.ConfigId || json.ConfigId.length == 0) {
+            parent.Common.MsgBox("警告！压力描述不能为空");
+            return null;
+        }
+
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "/PreLevel/AddLevel",
+            data: json,
+            error: function (ex) { console.dir(ex); },
+            success: function (back) {
+                if (back == "True") {
+                    var call = function () {
+                        parent.Common.layoutClose();
+                        var doc = $("#framecenter iframe", parent.document);
+                        if (doc.length == 0)
+                            return;
+                        doc = doc[0].contentDocument.body;
+                        $("#LevelName", doc).val(json.Oper);
+                        $("input[name=query]", doc).click();
+                    }
+                    parent.Common.MsgBox("恭喜，添加成功！<br /><br />选择绿色√查询添加项，选择红色×继续添加", { isOk: call });
+                    return;
+                }
+                parent.Common.MsgBox("对不起，添加失败！");
+            }
+        });
+    }
+};
+window.onload = objShowPreLevel.fnLoad;

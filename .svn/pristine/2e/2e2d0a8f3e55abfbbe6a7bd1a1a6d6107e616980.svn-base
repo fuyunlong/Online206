@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Com.Winfotian.Proxy;
+using WinfoToolSys.Pms;
+using Proxy;
+using Com.Winfotian.DB;
+using Com.Winfotian.Common;
+using System.IO;
+
+namespace WinfoToolSys.Controllers.SiteMng
+{
+    public class FieldPowerController : Controller
+    {
+        //字段管理（加强）
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        //上传
+        public string UpLoadFile(HttpPostedFileBase FileData)
+        {
+            HttpPostedFileBase file = Request.Files["Filedata"];
+            return ""; ;
+        }
+    }
+}

@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InfaModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="InfaEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="T_Alert_Info" EntityType="InfaModel.T_Alert_Info" />
+    <EntitySet Name="T_BusinessSystem" EntityType="InfaModel.T_BusinessSystem" />
+    <EntitySet Name="T_CityInfo" EntityType="InfaModel.T_CityInfo" />
+    <EntitySet Name="T_Company" EntityType="InfaModel.T_Company" />
+    <EntitySet Name="T_Company_CmpConfig" EntityType="InfaModel.T_Company_CmpConfig" />
+    <EntitySet Name="T_Company_Config" EntityType="InfaModel.T_Company_Config" />
+    <EntitySet Name="T_Company_LineAction" EntityType="InfaModel.T_Company_LineAction" />
+    <EntitySet Name="T_Company_LineCondition" EntityType="InfaModel.T_Company_LineCondition" />
+    <EntitySet Name="T_Company_PipeLine" EntityType="InfaModel.T_Company_PipeLine" />
+    <EntitySet Name="T_Company_PipeLoLati" EntityType="InfaModel.T_Company_PipeLoLati" />
+    <EntitySet Name="T_Dictionary" EntityType="InfaModel.T_Dictionary" />
+    <EntitySet Name="T_DTU" EntityType="InfaModel.T_DTU" />
+    <EntitySet Name="T_DTU_Config" EntityType="InfaModel.T_DTU_Config" />
+    <EntitySet Name="T_DTU_Device" EntityType="InfaModel.T_DTU_Device" />
+    <EntitySet Name="T_DTU_FieldDesc" EntityType="InfaModel.T_DTU_FieldDesc" />
+    <EntitySet Name="T_DTU_Flow" EntityType="InfaModel.T_DTU_Flow" />
+    <EntitySet Name="T_DTU_Group" EntityType="InfaModel.T_DTU_Group" />
+    <EntitySet Name="T_DTU_PressureLevel" EntityType="InfaModel.T_DTU_PressureLevel" />
+    <EntitySet Name="T_DTU_RepairType" EntityType="InfaModel.T_DTU_RepairType" />
+    <EntitySet Name="T_DTU_Transmit" EntityType="InfaModel.T_DTU_Transmit" />
+    <EntitySet Name="T_DTU_ValveEffect" EntityType="InfaModel.T_DTU_ValveEffect" />
+    <EntitySet Name="T_User_Account" EntityType="InfaModel.T_User_Account" />
+    <EntitySet Name="T_User_AccountLog" EntityType="InfaModel.T_User_AccountLog" />
+    <EntitySet Name="T_User_Config" EntityType="InfaModel.T_User_Config" />
+    <EntitySet Name="T_User_Contact" EntityType="InfaModel.T_User_Contact" />
+    <EntitySet Name="T_User_ContactGroup" EntityType="InfaModel.T_User_ContactGroup" />
+    <EntitySet Name="T_User_Group" EntityType="InfaModel.T_User_Group" />
+    <EntitySet Name="T_User_Info" EntityType="InfaModel.T_User_Info" />
+    <EntitySet Name="T_User_Log" EntityType="InfaModel.T_User_Log" />
+    <EntitySet Name="T_User_LoginLog" EntityType="InfaModel.T_User_LoginLog" />
+    <EntitySet Name="T_User_Menu" EntityType="InfaModel.T_User_Menu" />
+    <EntitySet Name="T_User_OperLog" EntityType="InfaModel.T_User_OperLog" />
+    <EntitySet Name="T_User_Opinion" EntityType="InfaModel.T_User_Opinion" />
+    <EntitySet Name="T_User_Role" EntityType="InfaModel.T_User_Role" />
+    <EntitySet Name="T_User_RoleMenu" EntityType="InfaModel.T_User_RoleMenu" />
+    <EntitySet Name="T_User_UserContact" EntityType="InfaModel.T_User_UserContact" />
+    <EntitySet Name="T_User_UserDtuid" EntityType="InfaModel.T_User_UserDtuid" />
+    <EntitySet Name="T_User_UserGroup" EntityType="InfaModel.T_User_UserGroup" />
+    <EntitySet Name="T_User_UserMenu" EntityType="InfaModel.T_User_UserMenu" />
+    <EntitySet Name="T_User_UserRole" EntityType="InfaModel.T_User_UserRole" />
+  </EntityContainer>
+  <EntityType Name="T_Alert_Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Dtuid" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="AlertDesc" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="AlertTime" Type="DateTime" Precision="3" />
+    <Property Name="AlertLevel" Type="Int16" />
+    <Property Name="FieldName" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FieldValue" Type="Double" />
+    <Property Name="SMSContent" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="AlertType" Type="Int16" Nullable="false" />
+    <Property Name="PhoneNum" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="AlertState" Type="Int16" />
+    <Property Name="RecentTime" Type="DateTime" Precision="3" />
+    <Property Name="IsReply" Type="Int16" Nullable="false" />
+    <Property Name="IsSend" Type="Int16" Nullable="false" />
+    <Property Name="CurSendTimes" Type="Int16" />
+    <Property Name="CurAlertCount" Type="Int32" Nullable="false" />
+    <Property Name="SendTimes" Type="Int32" />
+    <Property Name="AlertCount" Type="Int32" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_BusinessSystem">
+    <Key>
+      <PropertyRef Name="BusinessSystemID" />
+    </Key>
+    <Property Name="BusinessSystemID" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="BusinessSystemName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="BusinessSystemDescribe" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="BusType" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_CityInfo">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Province" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="CityName" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneCode" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PostCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LinkPerson" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CmpTel" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CmpMobile" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+    <Property Name="CmpEmail" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="FaxTel" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CmpWebSite" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CmpAddress" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CityId" Type="Int32" Nullable="false" />
+    <Property Name="CmpDesc" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int16" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_Company_CmpConfig">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+      <PropertyRef Name="ConfigId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="ConfigId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_Company_Config">
+    <Key>
+      <PropertyRef Name="ConfigId" />
+    </Key>
+    <Property Name="ConfigId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ConfigDesc" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ClientType" Type="Int16" Nullable="false" />
+    <Property Name="ClientNum" Type="Int32" Nullable="false" />
+    <Property Name="IP" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Port" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int16" Nullable="false" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_Company_LineAction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="LineId" Type="Int32" Nullable="false" />
+    <Property Name="ReferSite" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="ReferSiteParam" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="MaxValue" Type="Double" />
+    <Property Name="MinValue" Type="Double" />
+    <Property Name="ColorEnable" Type="Int16" />
+    <Property Name="ActionColor" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="GlintEnable" Type="Int16" />
+    <Property Name="GlintColor1" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="GlintColor2" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="GlintColor3" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="RangeEnable" Type="Int16" />
+    <Property Name="RangeMin" Type="Double" />
+    <Property Name="RangeMax" Type="Double" />
+  </EntityType>
+  <EntityType Name="T_Company_LineCondition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="LineId" Type="Int32" Nullable="false" />
+    <Property Name="ActionColor" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ActionValue" Type="Double" />
+  </EntityType>
+  <EntityType Name="T_Company_PipeLine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="LineName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PipeSize" Type="Int16" Nullable="false" />
+    <Property Name="DrawType" Type="Int16" Nullable="false" />
+    <Property Name="Color" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="IsFill" Type="Int16" Nullable="false" />
+    <Property Name="FillColor" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Transparency" Type="Int16" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="LineSize" Type="Int16" />
+    <Property Name="LineType" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PressureLevel" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PipeLength" Type="Int32" />
+    <Property Name="PipeDepth" Type="Int16" />
+    <Property Name="RepairInterval" Type="Int16" />
+    <Property Name="BelongArea" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="FinishDate" Type="DateTime" Precision="3" />
+    <Property Name="Contructor" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="LinkMan" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="ProjectCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ProjectManager" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Accepter" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="IsValve" Type="Int16" />
+    <Property Name="ValveCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+    <Property Name="LineDesc" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_Company_PipeLoLati">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="LineId" Type="Int32" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Dictionary">
+    <Key>
+      <PropertyRef Name="DicKey" />
+    </Key>
+    <Property Name="DicKey" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeId" Type="Int32" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="DicName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DicDesc" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_DTU">
+    <Key>
+      <PropertyRef Name="Dtuid" />
+    </Key>
+    <Property Name="Dtuid" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="DtuidName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Skidbrand" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Supplier" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FlowBrand" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FlowType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="PressureLevel" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="DtuidLocation" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RunDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="DayFrom" Type="Int16" Nullable="false" />
+    <Property Name="MonthFrom" Type="Int16" Nullable="false" />
+    <Property Name="LgPwd" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="PhoneNum" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="DataInterval" Type="Int16" Nullable="false" />
+    <Property Name="UpLoadInterval" Type="Int16" Nullable="false" />
+    <Property Name="Status" Type="Int16" Nullable="false" />
+    <Property Name="GroupCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ConfigCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ProtocolVersion" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="UpdateFlag" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_Config">
+    <Key>
+      <PropertyRef Name="ConfigCode" />
+    </Key>
+    <Property Name="ConfigCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ConfigDesc" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="FlowNum" Type="Int16" />
+    <Property Name="AINum" Type="Int16" />
+    <Property Name="DINum" Type="Int16" />
+    <Property Name="IsAlert" Type="Int16" />
+    <Property Name="IsCreate" Type="Int16" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="UpdateFlag" Type="Int32" />
+    <Property Name="BoardInfo" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+    <Property Name="CType" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_DTU_Device">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DeviceName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Dtuid" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="DeviceBrand" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DeviceSN" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ModelCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DeviceParams" Type="String" MaxLength="120" Unicode="true" FixedLength="false" />
+    <Property Name="ProduceDate" Type="DateTime" Precision="3" />
+    <Property Name="DeviceSupplier" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Memo" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_DTU_FieldDesc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Dtuid" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="ColName" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+    <Property Name="FieldName" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FieldShortDesc" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="FieldDesc" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FieldUnit" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ValueMin" Type="Double" />
+    <Property Name="ValueMax" Type="Double" />
+    <Property Name="Lowlimit" Type="Double" />
+    <Property Name="Highlimit" Type="Double" />
+    <Property Name="Lololimit" Type="Double" />
+    <Property Name="Hihilimit" Type="Double" />
+    <Property Name="ValueInOrOut" Type="Int16" />
+    <Property Name="IsAlert" Type="Int16" Nullable="false" />
+    <Property Name="IsCollect" Type="Int16" Nullable="false" />
+    <Property Name="IsShow" Type="Int16" Nullable="false" />
+    <Property Name="UpdateFlag" Type="Int32" />
+    <Property Name="OrderId" Type="Int16" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" Nullable="false" />
+    <Property Name="KeyValues" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="FieldType" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_DTU_Flow">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Dtuid" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="DtuidName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="FileType" Type="Int16" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="MadeDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateFlag" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_Group">
+    <Key>
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="GroupCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="GroupName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="GroupDesc" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ParentCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_DTU_PressureLevel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="PressureName" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PressureDesc" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="UpdateFlag" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_RepairType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DTUDevice" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="RepairDesc" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_Transmit">
+    <Key>
+      <PropertyRef Name="Dtuid" />
+    </Key>
+    <Property Name="Dtuid" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="IsTransmit" Type="Int16" Nullable="false" />
+    <Property Name="TargetIP" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="TargetPort" Type="Int32" />
+    <Property Name="TargetVersion" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_DTU_ValveEffect">
+    <Key>
+      <PropertyRef Name="ValveCode" />
+    </Key>
+    <Property Name="ValveCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ClosedTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EffctArea" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="EffctUserNum" Type="Int32" Nullable="false" />
+    <Property Name="ValveName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Dtuid" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_User_Account">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="UserBalance" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" Nullable="false" />
+    <Property Name="CreditGrade" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_User_AccountLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="OrderFrom" Type="Int16" Nullable="false" />
+    <Property Name="OrderId" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="OrderType" Type="Int16" Nullable="false" />
+    <Property Name="ModMoney" Type="Double" Nullable="false" />
+    <Property Name="OrderNum" Type="Int32" Nullable="false" />
+    <Property Name="Operator" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="OperIP" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="OperTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OrderDesc" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_User_Config">
+    <Key>
+      <PropertyRef Name="CCode" />
+    </Key>
+    <Property Name="CCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ConfigName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ConfigDesc" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="SoftInterval" Type="Int16" />
+    <Property Name="IsAlert" Type="Int16" />
+    <Property Name="IsRpt" Type="Int16" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="PopCode" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="UpdateFlag" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_User_Contact">
+    <Key>
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="ContactId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ContactName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="PhoneNum" Type="String" MaxLength="24" Unicode="false" FixedLength="false" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="GroupId" Type="Int32" />
+    <Property Name="CGDesc" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="T_User_ContactGroup">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="GroupDescpt" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ParentId" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_User_Group">
+    <Key>
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="GroupCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="GroupName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="GroupDesc" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="ParentCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_User_Info">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="TrueName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="UserPwd" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="UserPhone" Type="String" MaxLength="24" Unicode="false" FixedLength="false" />
+    <Property Name="UserMail" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="UserPosition" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="LinkAddr" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="BillCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="ParentUser" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="UpdateFlag" Type="Int32" />
+  </EntityType>
+  <EntityType Name="T_User_Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="LastLogDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastValiTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastIP" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="LogFrom" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ValidateKey" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="IsOnline" Type="Int16" Nullable="false" />
+    <Property Name="UpdateFlag" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_LoginLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="LoginFrom" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="FromCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="LgClient" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="LgResult" Type="Int16" />
+    <Property Name="LgTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="T_User_Menu">
+    <Key>
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="MenuName" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="MenuDesc" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DomainId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ParentCode" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="OperForm" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="TargetName" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="NeedPermission" Type="Int16" />
+    <Property Name="IsDisplay" Type="Int16" />
+    <Property Name="IsMenu" Type="Int16" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="UpdateFlag" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_OperLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Operator" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="OperatorTime" Type="DateTime" Precision="3" />
+    <Property Name="OperType" Type="Int16" />
+    <Property Name="OperFunc" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="OperFunCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="OperMsg" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="OperResult" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_User_Opinion">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PhoneNum" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="SubTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SubUserId" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="SubMemo" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="State" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_Role">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="RoleDesc" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+    <Property Name="UpdateFlag" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_RoleMenu">
+    <Key>
+      <PropertyRef Name="RoleCode" />
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_User_UserContact">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ContactId" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="ContactId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_User_UserDtuid">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="Dtuid" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Dtuid" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_User_UserGroup">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="GroupCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_User_UserMenu">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="MenuCode" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="MenuCode" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+  </EntityType>
+  <EntityType Name="T_User_UserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleCode" />
+    </Key>
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Status" Type="Int16" />
+  </EntityType>
+</Schema>
